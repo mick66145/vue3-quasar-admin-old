@@ -9,16 +9,30 @@ const tokens = {
 
 const users = {
   'admin-token': {
-    roles: ['admin'],
-    introduction: 'I am a super administrator',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Super Admin',
+    id: 1,
+    name: '網站管理員',
+    account: 'admin',
+    email: 'admin@admin.com',
+    phone: null,
+    is_enable: true,
+    remark: null,
+    role: {
+      id: 1,
+      name: '管理員',
+    },
   },
   'editor-token': {
-    roles: ['editor'],
-    introduction: 'I am an editor',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: 'Normal Editor',
+    id: 2,
+    name: '網站使用者',
+    account: 'editor',
+    email: 'editor@admin.com',
+    phone: null,
+    is_enable: true,
+    remark: null,
+    role: {
+      id: 1,
+      name: '網站使用者',
+    },
   },
 }
 
@@ -45,10 +59,11 @@ export default [
     },
   },
   {
-    url: '/api/user/info',
+    url: '/api/whoami',
     method: 'get',
-    response: config => {
-      const { token } = config.query
+    response: (req, res) => {
+      const { authorization } = req.headers
+      const token = authorization.split('Bearer ')[1]
       const info = users[token]
       if (!info) {
         return {
