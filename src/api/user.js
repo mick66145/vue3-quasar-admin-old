@@ -14,11 +14,10 @@ class UserResource extends Resource {
     }).then(res => res.data)
   }
 
-  getInfo (query) {
-    return request({
-      url: `/${this.uri}/info`,
+  async whoami () {
+    return await request({
+      url: '/whoami',
       method: 'get',
-      params: query,
     }).then(res => res.data)
   }
 }
