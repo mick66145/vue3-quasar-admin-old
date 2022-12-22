@@ -26,6 +26,11 @@
     "dashboard": "Dashboard",
     "company": "公司資訊",
     "profile": "個人資訊",
-    "logout": "登出"
+    "logout": "登出",
+    "company-job": "職稱維護",
+    "user": "帳號維護"
+  },
+  "company-job": {
+    "title": "職稱維護"
   }
 }

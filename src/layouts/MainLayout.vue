@@ -98,6 +98,30 @@
               </q-item>
             </q-list>
           </q-expansion-item>
+
+          <q-expansion-item
+            icon="menu_open"
+            label="帳號管理"
+          >
+            <q-list class="q-pl-lg">
+              <q-item to="/company-job" active-class="q-item-no-link-highlighting">
+                <q-item-section avatar>
+                  <svg-icon icon="genderless-solid" class="text-blue-grey-7" size="24" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('meun.company-job') }}</q-item-label>
+                </q-item-section>
+              </q-item>
+              <q-item to="/user" active-class="q-item-no-link-highlighting">
+                <q-item-section avatar>
+                  <svg-icon icon="genderless-solid" class="text-blue-grey-7" size="24" />
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label>{{ $t('meun.user') }}</q-item-label>
+                </q-item-section>
+              </q-item>
+            </q-list>
+          </q-expansion-item>
         </q-list>
       </q-scroll-area>
       <div class="q-px-md q-py-sm" style="border-top: 1px solid #ddd;" />

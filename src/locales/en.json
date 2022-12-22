@@ -26,6 +26,11 @@
     "dashboard": "Dashboard",
     "company": "Company",
     "profile": "Profile",
-    "logout": "Logout"
+    "logout": "Logout",
+    "company-job": "CompanyJob",
+    "user": "User"
+  },
+  "company-job": {
+    "title": "CompanyJob"
   }
 }

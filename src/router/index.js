@@ -5,6 +5,7 @@ import MainLayout from '@/layouts/MainLayout.vue'
 
 /* Router Modules */
 import companyRouter from './modules/company'
+import companyJobRouter from './modules/company-job'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,7 +44,7 @@ const router = createRouter({
           path: 'dashboard',
           component: () => import('@/views/dashboard/Dashboard.vue'),
           name: 'Dashboard',
-          meta: { title: 'dashboard', icon: 'dashboard', affix: true },
+          meta: { title: 'dashboard', icon: 'dashboard' },
         },
       ],
     },
@@ -57,11 +58,12 @@ const router = createRouter({
           path: '',
           component: () => import('@/views/profile/Profile.vue'),
           name: 'Profile',
-          meta: { title: 'profile', affix: true },
+          meta: { title: 'profile' },
         },
       ],
     },
     companyRouter,
+    companyJobRouter,
   ],
 })
 
