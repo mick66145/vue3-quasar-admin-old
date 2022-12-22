@@ -1,0 +1,31 @@
+{
+  "g": {
+    "btn": {
+      "edit": "編輯",
+      "add": "新增",
+      "delete": "刪除",
+      "cancel": "取消",
+      "save": "儲存",
+      "confirm": "確認"
+    },
+    "dialog": {
+      "default-title": "標題"
+    }
+  },
+  "login": {
+    "title": "系統登入",
+    "btn": {
+      "login": "登入"
+    },
+    "loginForm": {
+      "password": "密碼",
+      "account": "帳號"
+    }
+  },
+  "meun": {
+    "dashboard": "Dashboard",
+    "company": "公司資訊",
+    "profile": "個人資訊",
+    "logout": "登出"
+  }
+}

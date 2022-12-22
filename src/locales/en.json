@@ -1,0 +1,31 @@
+{
+  "g": {
+    "btn": {
+      "edit": "edit",
+      "add": "add",
+      "delete": "delete",
+      "cancel": "cancel",
+      "save": "save",
+      "confirm": "OK"
+    },
+    "dialog": {
+      "default-title": "title"
+    }
+  },
+  "login": {
+    "title": "Log in",
+    "btn": {
+      "login": "Login"
+    },
+    "loginForm": {
+      "account": "account",
+      "password": "password"
+    }
+  },
+  "meun": {
+    "dashboard": "Dashboard",
+    "company": "Company",
+    "profile": "Profile",
+    "logout": "Logout"
+  }
+}
