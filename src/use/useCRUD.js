@@ -20,7 +20,7 @@ export default function useCRUD ({
   deleteFail = '刪除失敗',
 
 }) {
-  const { notify } = useNotify()
+  const { notify, notifyAPIError } = useNotify()
 
   const reqCreate = useAsyncState(createFetch, {}, { immediate: false })
   const reqRead = useAsyncState(readFetch, {}, { immediate: false })
@@ -32,6 +32,8 @@ export default function useCRUD ({
   const callCreateFetch = async (payload) => {
     const res = await reqCreate.execute(0, payload)
     if (reqCreate.error.value) {
+      const message = reqUpdate.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqCreate.error.value]
     } else {
       notify({ message: createSuccess, type: 'positive' })
@@ -43,6 +45,8 @@ export default function useCRUD ({
     console.log('🚀 ~ callReadFetch ~ payload', id, payload)
     const res = await reqRead.execute(0, id, payload)
     if (reqRead.error.value) {
+      const message = reqUpdate.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqRead.error.value]
     } else {
       return [res, null]
@@ -53,6 +57,8 @@ export default function useCRUD ({
     const res = await reqUpdate.execute(0, id, payload)
     console.log('🚀 ~ callUpdateFetch ~ res', res)
     if (reqUpdate.error.value) {
+      const message = reqUpdate.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqUpdate.error.value]
     } else {
       notify({ message: updateSuccess, type: 'positive' })
@@ -64,6 +70,8 @@ export default function useCRUD ({
     const res = await reqDelete.execute(0, id)
     console.log('🚀 ~ callDeleteFetch ~ res', res)
     if (reqDelete.error.value) {
+      const message = reqUpdate.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqDelete.error.value]
     } else {
       notify({ message: deleteSuccess, type: 'positive' })
