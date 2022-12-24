@@ -32,5 +32,8 @@
   },
   "company-job": {
     "title": "CompanyJob"
+  },
+  "user": {
+    "title": "User"
   }
 }

@@ -6,6 +6,7 @@ import MainLayout from '@/layouts/MainLayout.vue'
 /* Router Modules */
 import companyRouter from './modules/company'
 import companyJobRouter from './modules/company-job'
+import userRouter from './modules/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -64,6 +65,7 @@ const router = createRouter({
     },
     companyRouter,
     companyJobRouter,
+    userRouter,
   ],
 })
 

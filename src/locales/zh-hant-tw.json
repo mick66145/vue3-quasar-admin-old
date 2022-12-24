@@ -32,5 +32,8 @@
   },
   "company-job": {
     "title": "職稱維護"
+  },
+  "user": {
+    "title": "帳號維護"
   }
 }
