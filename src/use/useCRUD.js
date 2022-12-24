@@ -19,6 +19,10 @@ export default function useCRUD ({
   deleteSuccess = '刪除成功',
   deleteFail = '刪除失敗',
 
+  readListFetch,
+  readListSuccess = '讀取列表成功',
+  readListFail = '讀取列表失敗',
+
 }) {
   const { notify, notifyAPIError } = useNotify()
 
@@ -26,13 +30,14 @@ export default function useCRUD ({
   const reqRead = useAsyncState(readFetch, {}, { immediate: false })
   const reqUpdate = useAsyncState(updateFetch, {}, { immediate: false })
   const reqDelete = useAsyncState(deleteFetch, {}, { immediate: false })
+  const reqReadList = useAsyncState(readListFetch, {}, { immediate: false })
 
   const form = ref()
 
   const callCreateFetch = async (payload) => {
     const res = await reqCreate.execute(0, payload)
     if (reqCreate.error.value) {
-      const message = reqUpdate.error.value.response.data.message
+      const message = reqCreate.error.value.response.data.message
       notifyAPIError({ message })
       return [null, reqCreate.error.value]
     } else {
@@ -45,7 +50,7 @@ export default function useCRUD ({
     console.log('🚀 ~ callReadFetch ~ payload', id, payload)
     const res = await reqRead.execute(0, id, payload)
     if (reqRead.error.value) {
-      const message = reqUpdate.error.value.response.data.message
+      const message = reqRead.error.value.response.data.message
       notifyAPIError({ message })
       return [null, reqRead.error.value]
     } else {
@@ -70,12 +75,24 @@ export default function useCRUD ({
     const res = await reqDelete.execute(0, id)
     console.log('🚀 ~ callDeleteFetch ~ res', res)
     if (reqDelete.error.value) {
-      const message = reqUpdate.error.value.response.data.message
+      const message = reqDelete.error.value.response.data.message
       notifyAPIError({ message })
       return [null, reqDelete.error.value]
     } else {
       notify({ message: deleteSuccess, type: 'positive' })
       return [res || true, null]
+    }
+  }
+
+  const callReadListFetch = async (payload = null) => {
+    console.log('🚀 ~ callReadListFetch ~ payload', payload)
+    const res = await reqReadList.execute(0, payload)
+    if (reqReadList.error.value) {
+      const message = reqReadList.error.value.response.data.message
+      notifyAPIError({ message })
+      return [null, reqReadList.error.value]
+    } else {
+      return [res, null]
     }
   }
 
@@ -85,5 +102,6 @@ export default function useCRUD ({
     callReadFetch,
     callUpdateFetch,
     callDeleteFetch,
+    callReadListFetch,
   }
 }
