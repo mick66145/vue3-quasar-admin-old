@@ -19,11 +19,15 @@ class CompanyJobResource extends Resource {
           return companyJobObj
         })
         const { list, meta } = res.data
-        const { count, total } = meta.pagination
-        return {
-          list: list,
-          total: total,
-          count: count,
+        if (meta?.pagination) {
+          const { count, total } = meta.pagination
+          return {
+            list: list,
+            total: total,
+            count: count,
+          }
+        } else {
+          return { list: list }
         }
       },
       )
