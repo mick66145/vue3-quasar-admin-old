@@ -40,6 +40,15 @@ class Resource {
     }).then(res => res.data)
   }
 
+  put (id, params) {
+    const url = !id ? `/${this.uri}` : `/${this.uri}/${id}`
+    return request({
+      url: url,
+      method: 'put',
+      data: params,
+    })
+  }
+
   delete (id) {
     return request({
       url: `/${this.uri}/${id}`,
