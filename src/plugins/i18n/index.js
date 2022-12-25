@@ -30,8 +30,7 @@ export const i18n = createI18n({
   silentTranslationWarn: true,
   silentFallbackWarn: true,
 })
-console.log({ ...messages.en, ...vxeTableEn })
-console.log(messages)
+
 export default {
   install (app) {
     app.use(i18n)
