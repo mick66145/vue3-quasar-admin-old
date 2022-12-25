@@ -2,7 +2,9 @@ import { createI18n } from 'vue-i18n'
 import Cookies from 'js-cookie'
 import messages from '@intlify/vite-plugin-vue-i18n/messages'
 import quasarEnLocale from 'quasar/lang/en-Us'
-import quasarZhTwTwLocale from 'quasar/lang/zh-TW'
+import quasarZhTwLocale from 'quasar/lang/zh-TW'
+import vxeTableEn from 'vxe-table/lib/locale/lang/en-US'
+import vxeTableZhTw from 'vxe-table/lib/locale/lang/zh-TW'
 
 // locale value 要 kebab case
 export const locales = {
@@ -10,16 +12,8 @@ export const locales = {
   tw: 'zh-hant-tw',
 }
 
-// const messages = {
-//   zhTw: {
-//     ...zhTwLocale,
-//     ...quasarZhTwTwLocale,
-//   },
-//   en: {
-//     ...esLocale,
-//     ...quasarEnLocale,
-//   },
-// }
+messages.en = { ...messages.en, ...vxeTableEn }
+messages['zh-hant-tw'] = { ...messages['zh-hant-tw'], ...vxeTableZhTw }
 
 export function getLanguage () {
   const chooseLanguage = Cookies.get('language')
@@ -36,7 +30,8 @@ export const i18n = createI18n({
   silentTranslationWarn: true,
   silentFallbackWarn: true,
 })
-
+console.log({ ...messages.en, ...vxeTableEn })
+console.log(messages)
 export default {
   install (app) {
     app.use(i18n)
