@@ -18,9 +18,7 @@ import GlobalComponents from './components'
 import 'virtual:svg-icons-register'
 
 // vxe-table
-import 'xe-utils'
-import VXETable from 'vxe-table'
-import '@/styles/vender/vxe-table.scss'
+import vxeTable from '@/plugins/vxe-table'
 
 import editor from '@/plugins/editor'
 
@@ -50,7 +48,7 @@ app.use(router)
 app.use(GlobalComponents)
 
 app.use(useDayjs)
-app.use(VXETable)
+app.use(vxeTable)
 app.use(editor)
 app.use(i18n)
 app.use(useVuelidate)
