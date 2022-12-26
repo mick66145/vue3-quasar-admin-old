@@ -3,6 +3,8 @@ import axios from 'axios'
 import { useUser } from '@/stores/user'
 import { getToken } from '@/utils/auth'
 import useNotify from '@/use/useNotify'
+import { useAsyncState } from '@vueuse/core'
+import router from '@/router'
 
 export const handleError = (error) => {
   const { response } = error
@@ -19,6 +21,21 @@ export const handleError = (error) => {
     // maybe Program have some problem
     return Promise.reject(error)
   }
+}
+
+export const handleAuthError = async (error) => {
+  const { status } = error.response
+  const store = useUser()
+  if (status !== 401) return Promise.reject(error)
+  const reqLogout = useAsyncState(store.logout
+    , {}, { immediate: false })
+  await reqLogout.execute(0)
+    .then(() => {
+      const path = window.location.pathname + window.location.search
+      router.replace({ name: 'Login', query: { redirect: path.includes('/login') ? undefined : path } })
+      router.push(`/login?redirect=${router.fullPath}`)
+    })
+  return Promise.reject(error)
 }
 
 // create an axios instance
@@ -51,6 +68,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => response,
   handleError,
+)
+
+service.interceptors.response.use(
+  response => response,
+  handleAuthError,
 )
 
 export default service
