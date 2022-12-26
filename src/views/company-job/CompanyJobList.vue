@@ -2,6 +2,15 @@
   <q-page class="q-pa-lg">
     <page-header>
       {{ $t('company-job.title') }}
+      <template #action>
+        <q-btn
+          class="shadow-1"
+          icon="add_circle"
+          color="primary"
+          :label="$t('g.btn.add')"
+          to="/company-job/create"
+        />
+      </template>
     </page-header>
 
     <q-card class="shadow-7 q-pa-lg">
@@ -41,6 +50,14 @@
         />
         <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 150">
           <template #default="{ row }">
+            <q-btn
+              class="shadow-1 q-mr-xs"
+              outline
+              rounded
+              color="primary"
+              :label="$t('g.btn.edit')"
+              :to="'/company-job/edit/' + row.id"
+            />
             <q-btn
               class="shadow-1 q-mr-xs"
               outline

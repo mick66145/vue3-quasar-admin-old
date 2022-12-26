@@ -9,6 +9,7 @@ class CompanyJob extends Base {
   setInit (obj) {
     this.id = obj.id
     this.name = obj.name
+    this.parent_job = obj.parent_job
   }
 }
 export default CompanyJob
