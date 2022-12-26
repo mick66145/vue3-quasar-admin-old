@@ -1,5 +1,5 @@
 <template>
-  <q-dialog v-model="observeValue" @show="onShow" @hide="onHide">
+  <q-dialog v-model="observeValue" :persistent="persistent" @show="onShow" @hide="onHide">
     <q-card>
       <q-card-section class="row items-center dialog-header">
         <slot name="title">
@@ -23,15 +23,15 @@
             v-close-popup
             class="shadow-1 q-mr-xs"
             outline
-            color="primary"
-            label="取消"
+            :color="cancelButtonColor"
+            :label="cancelButtonText"
             padding="sm 2.5em"
             @click="onCancel"
           />
           <q-btn
             class="shadow-1"
-            color="primary"
-            label="儲存"
+            :color="confirmButtonColor"
+            :label="confirmButtonText"
             padding="sm 2.5em"
             @click="onSave"
           />
@@ -48,6 +48,11 @@ export default defineComponent({
   props: {
     modelValue: { type: Boolean, default: false },
     title: { type: String, default: '標題' },
+    cancelButtonText: { type: String, default: '關閉' },
+    cancelButtonColor: { type: String, default: 'primary' },
+    confirmButtonText: { type: String, default: '儲存' },
+    confirmButtonColor: { type: String, default: 'primary' },
+    persistent: { type: Boolean, default: false },
   },
   emits: ['save', 'cancel', 'show', 'hide'],
   setup (props, { emit }) {
@@ -86,7 +91,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .q-card {
   .q-dialog-body {
-    @apply min-h-25rem max-h-40em;
+    @apply min-h-27rem max-h-40em;
   }
 }
 </style>
