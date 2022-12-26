@@ -24,12 +24,17 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      try {
-        await store.whoami()
+      const hasRoles = store.role
+      if (hasRoles) {
         next()
-      } catch (error) {
-        next(`/login?redirect=${to.path}`)
-        NProgress.done()
+      } else {
+        try {
+          await store.whoami()
+          next({ ...to, replace: true })
+        } catch (error) {
+          next(`/login?redirect=${to.path}`)
+          NProgress.done()
+        }
       }
     }
   } else {
