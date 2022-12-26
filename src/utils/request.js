@@ -4,7 +4,7 @@ import { useUser } from '@/stores/user'
 import { getToken } from '@/utils/auth'
 import useNotify from '@/use/useNotify'
 import { useAsyncState } from '@vueuse/core'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 export const handleError = (error) => {
   const { response } = error
@@ -31,6 +31,7 @@ export const handleAuthError = async (error) => {
     , {}, { immediate: false })
   await reqLogout.execute(0)
     .then(() => {
+      const router = useRouter()
       const path = window.location.pathname + window.location.search
       router.replace({ name: 'Login', query: { redirect: path.includes('/login') ? undefined : path } })
       router.push(`/login?redirect=${router.fullPath}`)
