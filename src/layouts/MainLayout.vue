@@ -90,7 +90,7 @@
             <q-list class="q-pl-lg">
               <q-item to="/company" active-class="q-item-no-link-highlighting">
                 <q-item-section avatar>
-                  <q-icon name="business" />
+                  <svg-icon icon="genderless-solid" class="text-blue-grey-7" size="24" />
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>{{ $t('meun.company') }}</q-item-label>
