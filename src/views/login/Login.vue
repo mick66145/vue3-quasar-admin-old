@@ -59,7 +59,7 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const store = useUser()
-    const { notify } = useNotify()
+    const { notify, notifyAPIError } = useNotify()
     const reqLogin = useAsyncState(store.login
       , {}, { immediate: false })
 
@@ -79,10 +79,13 @@ export default defineComponent({
           if (success) {
             const payload = { ...formData }
             await reqLogin.execute(0, payload)
-              .then(() => {
-                notify({ message: '登入成功', type: 'positive' })
-                router.push({ path: redirect.value || '/', query: otherQuery.value })
-              })
+            if (reqLogin.error.value) {
+              const message = reqLogin.error.value.response.data.message
+              notifyAPIError({ message })
+            } else {
+              notify({ message: '登入成功', type: 'positive' })
+              router.push({ path: redirect.value || '/', query: otherQuery.value })
+            }
           }
         })
     }
