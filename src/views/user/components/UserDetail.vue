@@ -15,6 +15,7 @@
                 label="帳號 *"
                 placeholder="請輸入帳號"
                 :rules="[$rules.required('帳號必填')]"
+                :disable="mode==='edit'"
               />
             </div>
             <div v-if="mode==='create'" class="col-xs-12 col-sm-6 col-md-6">
@@ -93,7 +94,6 @@ import UserResource from '@/api/user'
 import RoleResource from '@/api/role'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
-import { asyncComputed } from '@vueuse/core'
 
 const userResource = new UserResource()
 const roleResource = new RoleResource()
