@@ -23,7 +23,7 @@
                 :label="$t('login.loginForm.account')"
                 lazy-rules
                 :rules="[
-                  $rules.required('Account is required'),
+                  $rules.required('帳號必填'),
                 ]"
               />
 
@@ -32,7 +32,7 @@
                 :label="$t('login.loginForm.password')"
                 lazy-rules
                 :rules="[
-                  $rules.required('Password is required'),
+                  $rules.required('密碼必填'),
                 ]"
                 @keyup.enter="handleLogin"
               />
