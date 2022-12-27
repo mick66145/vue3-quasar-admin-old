@@ -1,22 +1,24 @@
 <template>
   <q-footer class="bg-white" reveal elevated>
     <div class="row items-center justify-between q-px-lg q-py-md">
-      <div />
-      <div>
-        <q-btn
-          class="shadow-1 q-mr-md q-px-xl"
-          outline
-          color="primary"
-          :label="$t('g.btn.cancel')"
-          @click="onCancel"
-        />
-        <q-btn
-          class="shadow-1 q-px-xl"
-          color="primary"
-          :label="$t('g.btn.save')"
-          @click="onSave"
-        />
-      </div>
+      <slot name="footer">
+        <div />
+        <div>
+          <q-btn
+            class="shadow-1 q-mr-md q-px-xl"
+            outline
+            color="primary"
+            :label="$t('g.btn.cancel')"
+            @click="onCancel"
+          />
+          <q-btn
+            class="shadow-1 q-px-xl"
+            color="primary"
+            :label="$t('g.btn.save')"
+            @click="onSave"
+          />
+        </div>
+      </slot>
     </div>
   </q-footer>
 </template>
