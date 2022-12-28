@@ -11,6 +11,7 @@ import InputImageUpload from './form/InputImageUpload.vue'
 import InputImage from './form/InputImage.vue'
 import LangSelect from './LangSelect.vue'
 import MessageDialog from './MessageDialog.vue'
+import ScShadow from './shadow/ScShadow.vue'
 export default {
   install (app) {
     app.component('SvgIcon', SvgIcon)
@@ -26,5 +27,6 @@ export default {
     app.component('InputImage', InputImage)
     app.component('LangSelect', LangSelect)
     app.component('MessageDialog', MessageDialog)
+    app.component('ScShadow', ScShadow)
   },
 }
