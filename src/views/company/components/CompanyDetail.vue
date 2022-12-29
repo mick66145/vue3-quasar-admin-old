@@ -141,7 +141,6 @@
 </template>
 
 <script>
-import FixedFooter from '@/components/FixedFooter.vue'
 import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import CompanyResource from '@/api/company'
@@ -151,9 +150,6 @@ import useGoBack from '@/use/useGoBack'
 const companyResource = new CompanyResource()
 
 export default defineComponent({
-  components: {
-    FixedFooter,
-  },
   props: {
     mode: { type: String, requred: true },
   },

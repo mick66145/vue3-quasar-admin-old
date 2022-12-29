@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import FixedFooter from '@/components/FixedFooter.vue'
+
 import { defineComponent, ref, toRefs, watchEffect, onMounted } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import UserResource from '@/api/user'
@@ -99,9 +99,6 @@ const userResource = new UserResource()
 const roleResource = new RoleResource()
 
 export default defineComponent({
-  components: {
-    FixedFooter,
-  },
   props: {
     mode: { type: String, requred: true },
   },
