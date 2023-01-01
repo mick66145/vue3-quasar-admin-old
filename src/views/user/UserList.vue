@@ -130,10 +130,11 @@ export default defineComponent({
       await callReadListFetch({ ...search })
     }
 
-    const { search, data, total, onChangePage, onChangeFilter } = useDataTable(
-      filter,
-      refreshFetch,
-    )
+    const { search, data, total, onChangePage, onChangeFilter } = useDataTable({
+      searchParames: filter,
+      localStorageKey: 'dashboardUserDataTable',
+      callback: refreshFetch,
+    })
     const { messageDelete } = useMessageDialog()
     const { callReadListFetch, callDeleteFetch } = useCRUD({
       deleteFetch: delFetch,

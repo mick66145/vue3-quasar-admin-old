@@ -138,10 +138,11 @@ export default defineComponent({
     // use
     const { execute: getDataList } = useAsyncState(fetchData, {}, { immediate: false })
 
-    const { search, data, total, onChangePage, onChangeFilter } = useDataTable(
-      filter,
-      refreshFetch,
-    )
+    const { search, data, total, onChangePage, onChangeFilter } = useDataTable({
+      searchParames: filter,
+      localStorageKey: 'dashboardCompanyDataTable',
+      callback: refreshFetch,
+    })
     const { messageDelete } = useMessageDialog()
     const { callDeleteFetch } = useCRUD({
       deleteFetch: delFetch,

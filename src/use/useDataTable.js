@@ -1,19 +1,30 @@
-import { useDataTableStore } from '@/stores/dataTable'
 import { reactive, ref } from 'vue-demi'
+import useLocalStorage from './useLocalStorage'
 
-export default function useDataTable (searchParames = {}, callback = () => {}) {
-  const store = useDataTableStore()
-
-  for (const [key, value] of Object.entries(searchParames)) {
-    !store.search[key] && (store.search[key] = value)
+export default function useDataTable ({ searchParames = {}, localStorageKey = 'dataTable', callback = () => {} }) {
+  const { setLocalStorage, getLocalStorage } = useLocalStorage()
+  let localStorage = getLocalStorage(localStorageKey)
+  if (!localStorage) {
+    const localStorageObj = {
+      search: {
+        page: 1,
+        page_size: 10,
+        keyword: null,
+      },
+    }
+    setLocalStorage(localStorageKey, localStorageObj)
+    localStorage = getLocalStorage(localStorageKey)
   }
-
-  const search = reactive(store.search)
-  const data = ref(store.data)
-  const total = ref(store.total)
+  for (const [key, value] of Object.entries(searchParames)) {
+    !localStorage.search[key] && (localStorage.search[key] = value)
+  }
+  const search = reactive(localStorage.search)
+  const data = ref([])
+  const total = ref(0)
 
   const onChangePage = (page) => {
     search.page = page
+    setLocalStorage(localStorageKey, { search })
     if (callback && typeof (callback) === 'function') {
       callback()
     }
@@ -21,6 +32,7 @@ export default function useDataTable (searchParames = {}, callback = () => {}) {
 
   const onChangeFilter = () => {
     search.page = 1
+    setLocalStorage(localStorageKey, { search })
     if (callback && typeof (callback) === 'function') {
       callback()
     }
@@ -28,6 +40,7 @@ export default function useDataTable (searchParames = {}, callback = () => {}) {
 
   const onReset = () => {
     search.page = 1
+    setLocalStorage(localStorageKey, { search })
     if (callback && typeof (callback) === 'function') {
       callback()
     }
