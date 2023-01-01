@@ -3,7 +3,7 @@
     :label="label"
     :clearable="false"
     :placeholder="placeholder"
-    :modelValue="`${dateRange.from} - ${dateRange.to}`"
+    :modelValue="dateRangeValue"
     @focus="show = true"
   >
     <template v-slot:prepend>
@@ -18,7 +18,7 @@
       transition-hide="scale"
       context-menu
     >
-      <div style="width: 100px;">
+      <!-- <div style="width: 100px;">
         <div class="q-mt-md">
           <q-btn
             v-for="({ text,onClick }, index) in pickerOptions.shortcuts"
@@ -29,8 +29,8 @@
             @click="onClick"
           />
         </div>
-      </div>
-      <q-date ref="datePicker" v-model="dateRange" range @range-end="show = false">
+      </div> -->
+      <q-date ref="datePicker" v-model="observeValue" range @range-end="show = false">
         <div class="row items-center justify-end">
           <q-btn v-close-popup label="Close" color="primary" flat />
         </div>
@@ -42,13 +42,11 @@
 <script>
 import $dayjs from '@/plugins/dayjs'
 import { useVModel } from '@vueuse/core'
-import { defineComponent, ref } from 'vue-demi'
+import { defineComponent, ref, computed } from 'vue-demi'
 export default defineComponent({
   props: {
     modelValue: { type: String },
     label: { type: String },
-    startDate: { type: [Date, String], default: () => $dayjs().format('YYYY-MM-DD') },
-    endDate: { type: [Date, String], default: () => $dayjs().format('YYYY-MM-DD') },
     placeholder: { type: String, default: '請選擇開始日期至結束日期' },
   },
   emits: ['update:modelValue'],
@@ -57,7 +55,6 @@ export default defineComponent({
     const datePicker = ref()
     const show = ref(false)
     const observeValue = useVModel(props, 'modelValue', emit)
-    const dateRange = ref({ from: props.startDate, to: props.endDate })
     const pickerOptions = {
       shortcuts: [
         {
@@ -65,9 +62,7 @@ export default defineComponent({
           onClick () {
             const start = $dayjs().format('YYYY-MM-DD')
             const end = $dayjs().format('YYYY-MM-DD')
-            // dateRange.value = { from: start, to: end }
             datePicker.value.setEditingRange(start, end)
-            // console.log(datePicker.setCalendarTo(start, end))
           },
         },
         {
@@ -89,13 +84,7 @@ export default defineComponent({
               month: end.month() + 1,
               day: end.date(),
             }
-
-            // dateRange.value = { from: start.format('YYYY-MM-DD'), to: end.format('YYYY-MM-DD') }
             datePicker.value.setEditingRange({ from: startObj, to: endObj })
-            console.log(datePicker.value)
-            console.log(dateRange.value)
-            // dateRange.value = { from: start.format('YYYY-MM-DD'), to: end.format('YYYY-MM-DD') }
-            // show.value = false
           },
         },
         {
@@ -106,7 +95,7 @@ export default defineComponent({
             start.setTime(
               start.getTime() - 3600 * 1000 * 24 * 30,
             )
-            dateRange.value = { from: $dayjs(start).format('YYYY-MM-DD'), to: end }
+            observeValue.value = { from: $dayjs(start).format('YYYY-MM-DD'), to: end }
           },
         },
         {
@@ -117,17 +106,22 @@ export default defineComponent({
             start.setTime(
               start.getTime() - 3600 * 1000 * 24 * 365,
             )
-            dateRange.value = { from: $dayjs(start).format('YYYY-MM-DD'), to: end }
+            observeValue.value = { from: $dayjs(start).format('YYYY-MM-DD'), to: end }
           },
         },
       ],
     }
 
+    // computed
+    const dateRangeValue = computed(() => {
+      return observeValue.value ? `${observeValue.value?.from} - ${observeValue.value?.to}` : ''
+    })
+
     return {
       datePicker,
       show,
       observeValue,
-      dateRange,
+      dateRangeValue,
       pickerOptions,
     }
   },
