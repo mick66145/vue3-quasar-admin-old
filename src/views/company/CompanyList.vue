@@ -83,7 +83,6 @@
 <script>
 import CompanyResource from '@/api/company'
 import { defineComponent, ref, reactive, onMounted } from 'vue-demi'
-import { useAsyncState } from '@vueuse/core'
 import useCRUD from '@/use/useCRUD'
 import useDataTable from '@/use/useDataTable'
 import useMessageDialog from '@/use/useMessageDialog'
@@ -95,6 +94,7 @@ export default defineComponent({
     // data
     const filter = reactive({
       keyword: null,
+      orderby: 'id:desc',
     })
     const tableFields = ref([
       { title: '公司名稱', field: 'name', min_width: '130' },
@@ -128,20 +128,19 @@ export default defineComponent({
     }
 
     const refreshFetch = async () => {
-      await getDataList(0, { ...search })
+      await getDataList({ ...search })
     }
 
     // use
-    const { execute: getDataList } = useAsyncState(fetchData, {}, { immediate: false })
-
     const { search, data, total, onChangePage, onChangeFilter } = useDataTable({
       searchParames: filter,
       localStorageKey: 'dashboardCompanyDataTable',
       callback: refreshFetch,
     })
     const { messageDelete } = useMessageDialog()
-    const { callDeleteFetch } = useCRUD({
+    const { callDeleteFetch, callReadListFetch: getDataList } = useCRUD({
       deleteFetch: delFetch,
+      readListFetch: fetchData,
     })
 
     // mounted

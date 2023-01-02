@@ -92,6 +92,7 @@ export default defineComponent({
     // data
     const filter = reactive({
       keyword: null,
+      orderby: 'id:desc',
     })
 
     const tableFields = ref([
