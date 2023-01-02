@@ -6,6 +6,8 @@
     :clearable="clearable"
     :outlined="outlined"
     :use-input="useInput"
+    :use-chips="useChips"
+    :map-options="mapOptions"
     :input-debounce="inputDebounce"
     :transition-show="transitionShow"
     :transition-hide="transitionHide"
@@ -88,6 +90,8 @@ export default defineComponent({
     clearable: { type: Boolean, default: true },
     outlined: { type: Boolean, default: true },
     useInput: { type: Boolean, default: true },
+    useChips: { type: Boolean, default: true },
+    mapOptions: { type: Boolean, default: true },
     inputDebounce: { type: Number, default: 0 },
     transitionShow: { type: String, default: 'scale' },
     transitionHide: { type: String, default: 'scale' },

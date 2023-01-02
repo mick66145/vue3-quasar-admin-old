@@ -5,6 +5,7 @@
     :clearable="clearable"
     :outlined="outlined"
     :use-input="useInput"
+    :map-options="mapOptions"
     :hide-selected="hideSelected"
     :fill-input="fillInput"
     :input-debounce="inputDebounce"
@@ -89,6 +90,7 @@ export default defineComponent({
     clearable: { type: Boolean, default: true },
     outlined: { type: Boolean, default: true },
     useInput: { type: Boolean, default: true },
+    mapOptions: { type: Boolean, default: true },
     hideSelected: { type: Boolean, default: true },
     fillInput: { type: Boolean, default: true },
     inputDebounce: { type: Number, default: 0 },
