@@ -81,7 +81,6 @@
 </template>
 
 <script>
-import Pagination from '@/components/Pagination.vue'
 import CompanyResource from '@/api/company'
 import { defineComponent, ref, reactive, onMounted } from 'vue-demi'
 import { useAsyncState } from '@vueuse/core'
@@ -92,9 +91,6 @@ import useMessageDialog from '@/use/useMessageDialog'
 const companyResource = new CompanyResource()
 
 export default defineComponent({
-  components: {
-    Pagination,
-  },
   setup () {
     // data
     const filter = reactive({

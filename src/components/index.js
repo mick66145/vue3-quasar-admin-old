@@ -16,6 +16,7 @@ import LangSelect from './LangSelect.vue'
 import MessageDialog from './MessageDialog.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
+import Pagination from './Pagination.vue'
 export default {
   install (app) {
     app.component('SvgIcon', SvgIcon)
@@ -36,5 +37,6 @@ export default {
     app.component('MessageDialog', MessageDialog)
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
+    app.component('Pagination', Pagination)
   },
 }

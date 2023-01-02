@@ -79,7 +79,6 @@
 </template>
 
 <script>
-import Pagination from '@/components/Pagination.vue'
 import UserResource from '@/api/user'
 import { defineComponent, ref, reactive, onMounted } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
@@ -89,9 +88,6 @@ import useMessageDialog from '@/use/useMessageDialog'
 const userResource = new UserResource()
 
 export default defineComponent({
-  components: {
-    Pagination,
-  },
   setup () {
     // data
     const filter = reactive({
