@@ -96,7 +96,7 @@ export default defineComponent({
     transitionShow: { type: String, default: 'scale' },
     transitionHide: { type: String, default: 'scale' },
     optionLabel: { type: String, default: 'name' },
-    optionValue: { type: [String, Number, Object] },
+    optionValue: { type: String, default: 'id' },
   },
   emits: [
     'update:modelValue',
@@ -111,7 +111,7 @@ export default defineComponent({
       })
     }
     const optionValueFn = (item) => {
-      return props.optionValue ? item[props.optionValue] : item
+      return item[props.optionValue] ? item[props.optionValue] : item
     }
     const optionLabelFn = (item) => {
       return item[props.optionLabel] ? item[props.optionLabel] : item
