@@ -12,6 +12,7 @@ import InputImage from './form/InputImage.vue'
 import InputOptionGroup from './form/InputOptionGroup.vue'
 import InputDateRange from './form/InputDateRange.vue'
 import InputToggle from './form/InputToggle.vue'
+import InputSearch from './form/InputSearch.vue'
 import LangSelect from './LangSelect.vue'
 import MessageDialog from './MessageDialog.vue'
 import ScShadow from './shadow/ScShadow.vue'
@@ -33,6 +34,7 @@ export default {
     app.component('InputOptionGroup', InputOptionGroup)
     app.component('InputDateRange', InputDateRange)
     app.component('InputToggle', InputToggle)
+    app.component('InputSearch', InputSearch)
     app.component('LangSelect', LangSelect)
     app.component('MessageDialog', MessageDialog)
     app.component('ScShadow', ScShadow)

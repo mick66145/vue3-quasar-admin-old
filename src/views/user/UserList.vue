@@ -16,17 +16,12 @@
     <q-card class="shadow-7 q-pa-lg">
       <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs">
         <div class="col-md-3 col-xs-12">
-          <input-text
+          <input-search
             v-model="search.keyword"
             class="full-width"
             dense
-            placeholder="請輸入搜尋文字"
             @update:modelValue="onChangeFilter"
-          >
-            <template v-slot:append>
-              <q-icon name="search" />
-            </template>
-          </input-text>
+          />
         </div>
       </div>
 
