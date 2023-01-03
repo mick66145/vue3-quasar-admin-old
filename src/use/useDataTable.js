@@ -1,7 +1,7 @@
 import { reactive, ref } from 'vue-demi'
 import useLocalStorage from './useLocalStorage'
 
-export default function useDataTable ({ searchParames = {}, localStorageKey = 'dataTable', callback = () => {} }) {
+export default function useDataTable ({ searchParames = {}, localStorageKey = 'dashboardDataTable', callback = () => {} }) {
   const { setLocalStorage, getLocalStorage } = useLocalStorage()
   let localStorage = getLocalStorage(localStorageKey)
   if (!localStorage) {
@@ -9,7 +9,6 @@ export default function useDataTable ({ searchParames = {}, localStorageKey = 'd
       search: {
         page: 1,
         page_size: 10,
-        keyword: null,
       },
     }
     setLocalStorage(localStorageKey, localStorageObj)
@@ -17,7 +16,9 @@ export default function useDataTable ({ searchParames = {}, localStorageKey = 'd
   }
   for (const [key, value] of Object.entries(searchParames)) {
     !localStorage.search[key] && (localStorage.search[key] = value)
+    key === 'page_size' && (localStorage.search[key] = value)
   }
+  setLocalStorage(localStorageKey, localStorage)
   const search = reactive(localStorage.search)
   const data = ref([])
   const total = ref(0)
