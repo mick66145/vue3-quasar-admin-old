@@ -1,27 +1,29 @@
 <template>
-  <q-uploader
-    ref="uploader"
-    color="white"
-    text-color="black"
-    flat
-    :accept="accept"
-    @added="onFile"
-  >
-    <template #header="scope">
-      <div class="q-gutter-xs" @click="scope.upload">
-        <div>
+  <div>
+    <q-uploader
+      ref="uploader"
+      color="white"
+      text-color="black"
+      flat
+      :accept="accept"
+      @added="onFile"
+    >
+      <template #header="scope">
+        <div @click="scope.upload">
           <q-uploader-add-trigger />
         </div>
-        <img v-if="imgSrc" class="w-full" :src="imgSrc" alt="">
-        <div v-else class="flex-center row column">
-          <svg-icon color="gray" icon="cloud-arrow-up" class="cursor-pointer" size="56" />
-          <div class="q-uploader__title">將檔案拖放到此處或點擊上傳</div>
+        <div>
+          <img v-if="imgSrc" class="w-full" :src="imgSrc" alt="">
+          <div v-else class="flex-center row column">
+            <svg-icon color="gray" icon="cloud-arrow-up" class="cursor-pointer" size="56" />
+            <div class="q-uploader__title">將檔案拖放到此處或點擊上傳</div>
+          </div>
         </div>
-      </div>
-    </template>
-  </q-uploader>
-  <div class="q-field__bottom">
-    請上傳 JPG 或 PNG 格式圖片，檔案大小為 2MB。
+      </template>
+    </q-uploader>
+    <div class="q-field__bottom">
+      請上傳 JPG 或 PNG 格式圖片，檔案大小為 2MB。
+    </div>
   </div>
 </template>
 
@@ -62,7 +64,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .q-uploader {
-  @apply cursor-pointer w-full;
+  @apply cursor-pointer max-h-none w-full;
 
   border: dashed 2px #d3d3d4;
 

@@ -87,14 +87,13 @@ export default defineComponent({
     const showCropper = ref(false)
     const state = reactive({
       alt: '',
-      caption: '',
+      title: '',
       image: '',
     })
 
     // computed
     const observeValue = computed({
       get () {
-        // if (typeof props.modelValue === 'string') return { filename: props.modelValue }
         return props.modelValue
       },
       set (value) {
@@ -103,22 +102,20 @@ export default defineComponent({
     })
 
     const preview = computed(() => {
-      const { blobURL, filename } = observeValue.value || {}
+      const { blobURL, url, filename } = observeValue.value || {}
       if (blobURL) return blobURL
-
+      if (url) return url
       return getImageSrc({ filename, size: '200x' })
     })
 
     const uploadPreview = computed(() => {
-      const { blobURL, filename } = state.image || {}
+      const { blobURL, url, filename } = state.image || {}
       if (blobURL) return blobURL
-
+      if (url) return url
       return getImageSrc({ filename, size: '200x' })
     })
-
     // use
     const { getImageSrc } = useImgStorage()
-
     // methods
     const onFile = (fileObj) => {
       const { file, base64 } = fileObj
@@ -154,8 +151,8 @@ export default defineComponent({
     }
 
     const onSave = () => {
-      const { image, alt, caption } = state
-      observeValue.value = { ...image, alt, caption }
+      const { image, alt, title } = state
+      observeValue.value = { ...image, alt, title }
       showDialog.value = false
     }
 
