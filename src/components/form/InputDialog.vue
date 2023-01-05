@@ -1,12 +1,19 @@
 <template>
   <q-dialog v-model="observeValue" :persistent="persistent" @show="onShow" @hide="onHide">
-    <q-card>
+    <q-card :class="sizeClass">
       <q-card-section class="row items-center dialog-header">
         <slot name="title">
           <div class="text-h6">{{ title }}</div>
         </slot>
         <q-space />
-        <q-btn v-close-popup icon="close" flat round dense />
+        <q-btn
+          v-close-popup
+          icon="close"
+          flat
+          round
+          dense
+          @click="onCancel"
+        />
       </q-card-section>
 
       <q-separator />
@@ -43,7 +50,7 @@
 
 <script>
 import { useVModel } from '@vueuse/core'
-import { defineComponent } from 'vue-demi'
+import { defineComponent, computed } from 'vue-demi'
 export default defineComponent({
   props: {
     modelValue: { type: Boolean, default: false },
@@ -53,11 +60,23 @@ export default defineComponent({
     confirmButtonText: { type: String, default: '儲存' },
     confirmButtonColor: { type: String, default: 'primary' },
     persistent: { type: Boolean, default: false },
+    size: { type: String },
   },
-  emits: ['save', 'cancel', 'show', 'hide'],
+  emits: ['update:modelValue', 'save', 'cancel', 'show', 'hide'],
   setup (props, { emit }) {
     // data
     const observeValue = useVModel(props, 'modelValue', emit)
+
+    const sizeClass = computed(() => {
+      switch (props.size) {
+      case 'small':
+        return 'w-25rem'
+      case 'medium':
+        return 'w-30rem'
+      default:
+        return 'w-full'
+      }
+    })
 
     // methods
     const onSave = () => {
@@ -78,6 +97,7 @@ export default defineComponent({
 
     return {
       observeValue,
+      sizeClass,
       onSave,
       onCancel,
       onShow,
@@ -91,7 +111,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .q-card {
   .q-dialog-body {
-    @apply min-h-27rem max-h-40em;
+    @apply max-h-40em;
   }
 }
 </style>
