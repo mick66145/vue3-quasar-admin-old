@@ -1,6 +1,7 @@
-import { ref, watchEffect } from 'vue-demi'
+import { ref } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
-
+import useQuickState from '@/use/useQuickState'
+import mapKeys from 'lodash-es/mapKeys'
 export default function useDialog ({
   formData,
   createFetch,
@@ -26,13 +27,21 @@ export default function useDialog ({
 }) {
   // data
   const form = ref()
-  const data = ref(formData)
+  const data = useQuickState(formData)
   const id = ref(null)
   const isShowDialog = ref(false)
 
   // methods
-  const showDialog = (row = null) => {
-    id.value = row?.id
+  const showDialog = async (row = null) => {
+    if (row?.id) {
+      id.value = row?.id
+      const [res, error] = await callReadFetch(id.value)
+      if (res) {
+        mapKeys(data.state, (_, key) => {
+          data.state[key] = res[key] === undefined ? '' : res[key]
+        })
+      }
+    }
     isShowDialog.value = true
   }
   const hideDialog = () => {
@@ -41,7 +50,7 @@ export default function useDialog ({
   const save = async () => {
     return await form.value.validate().then(async (success) => {
       if (success) {
-        const payload = { ...data.value }
+        const payload = { ...data.state }
         const urlObj = {
           creat: () => { return callCreateFetch({ ...payload }) },
           edit: () => {
@@ -59,16 +68,15 @@ export default function useDialog ({
 
   // use
   const { callCreateFetch, callReadFetch, callUpdateFetch, callReadListFetch } = useCRUD({
-    readFetch: readFetch,
-    createFetch: createFetch,
-    updateFetch: updateFetch,
-    readListFetch: readListFetch,
-  })
-
-  watchEffect(async () => {
-    if (!id.value) return
-    const [res, error] = await callReadFetch(id.value)
-    data.value = res
+    readFetch,
+    createFetch,
+    updateFetch,
+    readListFetch,
+    createSuccess,
+    readSuccess,
+    updateSuccess,
+    deleteSuccess,
+    readListSuccess,
   })
 
   return {
