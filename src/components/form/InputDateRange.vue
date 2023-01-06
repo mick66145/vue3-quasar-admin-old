@@ -3,7 +3,7 @@
     :label="label"
     :clearable="false"
     :placeholder="placeholder"
-    :modelValue="dateRangeValue"
+    :modelValue="observeValue"
     @focus="show = true"
   >
     <template v-slot:prepend>
@@ -30,7 +30,7 @@
           />
         </div>
       </div> -->
-      <q-date ref="datePicker" v-model="observeValue" range @range-end="show = false">
+      <q-date ref="datePicker" v-model="dateRangeValue" range @range-end="show = false">
         <div class="row items-center justify-end">
           <q-btn v-close-popup label="Close" color="primary" flat />
         </div>
@@ -41,11 +41,10 @@
 
 <script>
 import $dayjs from '@/plugins/dayjs'
-import { useVModel } from '@vueuse/core'
 import { defineComponent, ref, computed } from 'vue-demi'
 export default defineComponent({
   props: {
-    modelValue: { type: String },
+    modelValue: { type: [String, Object] },
     label: { type: String },
     placeholder: { type: String, default: '請選擇開始日期至結束日期' },
   },
@@ -54,7 +53,6 @@ export default defineComponent({
     // data
     const datePicker = ref()
     const show = ref(false)
-    const observeValue = useVModel(props, 'modelValue', emit)
     const pickerOptions = {
       shortcuts: [
         {
@@ -113,8 +111,22 @@ export default defineComponent({
     }
 
     // computed
-    const dateRangeValue = computed(() => {
-      return observeValue.value ? `${observeValue.value?.from} - ${observeValue.value?.to}` : ''
+    const observeValue = computed(() => {
+      return props.modelValue ? `${props.modelValue?.from} - ${props.modelValue?.to}` : ''
+    })
+
+    const dateRangeValue = computed({
+      get () {
+        return props.modelValue?.from === props.modelValue?.to ? props.modelValue?.from : props.modelValue
+      },
+      set (value) {
+        const dateRangeValuePrototype = Object.prototype.toString.call(value)
+        if (dateRangeValuePrototype === '[object String]') {
+          emit('update:modelValue', { from: value, to: value })
+        } else {
+          emit('update:modelValue', value)
+        }
+      },
     })
 
     return {
