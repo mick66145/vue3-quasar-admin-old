@@ -6,7 +6,7 @@ const companyJobRouter = {
   name: 'CompanyJob',
   component: MainLayout,
   meta: {
-    title: 'companyJob',
+    title: '職稱維護',
   },
   redirect: { name: 'CompanyJobList' },
   children: [

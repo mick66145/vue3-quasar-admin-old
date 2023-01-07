@@ -6,7 +6,7 @@ const userRouter = {
   name: 'user',
   component: MainLayout,
   meta: {
-    title: 'user',
+    title: '帳號維護',
   },
   redirect: { name: 'UserList' },
   children: [
@@ -14,7 +14,7 @@ const userRouter = {
       path: '',
       component: () => import('@/views/user/UserList.vue'),
       name: 'UserList',
-      meta: { title: 'user' },
+      meta: { title: '帳號維護' },
     },
     {
       path: 'create',
