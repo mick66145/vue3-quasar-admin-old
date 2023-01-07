@@ -135,18 +135,11 @@
 
 <script>
 import { defineComponent, ref } from 'vue-demi'
-import { useRouter } from 'vue-router'
-import { useAsyncState } from '@vueuse/core'
-import { useUser } from '@/stores/user'
+import useLogout from '@/use/useLogout'
 
 export default defineComponent({
   name: 'MainLayout',
   setup () {
-    const router = useRouter()
-    const store = useUser()
-    const reqLogout = useAsyncState(store.logout
-      , {}, { immediate: false })
-
     // data
     const leftDrawerOpen = ref(false)
 
@@ -155,11 +148,11 @@ export default defineComponent({
       leftDrawerOpen.value = !leftDrawerOpen.value
     }
     const logout = async () => {
-      await reqLogout.execute(0)
-        .then(() => {
-          router.push(`/login?redirect=${router.fullPath}`)
-        })
+      resetStore()
     }
+
+    // use
+    const { resetStore } = useLogout()
 
     return {
       leftDrawerOpen,

@@ -50,12 +50,9 @@ export const useUser = defineStore({
     },
 
     logout () {
-      return new Promise((resolve, reject) => {
-        this.token = ''
-        this.roles = []
-        removeToken()
-        resolve()
-      })
+      this.token = ''
+      removeToken()
+      this.$reset()
     },
 
     setToken (token) {

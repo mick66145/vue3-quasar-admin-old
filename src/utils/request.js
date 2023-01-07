@@ -3,8 +3,7 @@ import axios from 'axios'
 import { useUser } from '@/stores/user'
 import { getToken } from '@/utils/auth'
 import useNotify from '@/use/useNotify'
-import { useAsyncState } from '@vueuse/core'
-import { useRouter } from 'vue-router'
+import useLogout from '@/use/useLogout'
 
 export const handleError = (error) => {
   const { response } = error
@@ -25,17 +24,9 @@ export const handleError = (error) => {
 
 export const handleAuthError = async (error) => {
   const { status } = error.response
-  const store = useUser()
   if (status !== 401) return Promise.reject(error)
-  const reqLogout = useAsyncState(store.logout
-    , {}, { immediate: false })
-  await reqLogout.execute(0)
-    .then(() => {
-      const router = useRouter()
-      const path = window.location.pathname + window.location.search
-      router.replace({ name: 'Login', query: { redirect: path.includes('/login') ? undefined : path } })
-      router.push(`/login?redirect=${router.fullPath}`)
-    })
+  const { resetStore } = useLogout()
+  resetStore()
   return Promise.reject(error)
 }
 
