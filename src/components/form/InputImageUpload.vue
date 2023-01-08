@@ -57,7 +57,7 @@ export default defineComponent({
       const file = files[0]
       const fileType = file.type
       console.log('🚀 ~ onFile ~ fileType', fileType)
-      if (!props.accept.includes(fileType)) return notify({ message: '檔案格式不支援', type: 'negative' })
+      if (!props.accept.includes(fileType)) return notify({ message: '圖片格式錯誤', type: 'negative' })
       reader.readAsDataURL(file)
       reader.onload = (event) => {
         emit('on-file', { file: file, base64: event.target.result })
@@ -67,8 +67,8 @@ export default defineComponent({
       const file = rejectedEntries[0].file
       const fileType = file.type
       const size = file.size
-      if (!props.accept.includes(fileType)) return notify({ message: '檔案格式不支援', type: 'negative' })
-      if (size > props.maxFileSize) return notify({ message: '超過可上傳檔案大小', type: 'negative' })
+      if (!props.accept.includes(fileType)) return notify({ message: '圖片格式錯誤', type: 'negative' })
+      if (size > props.maxFileSize) return notify({ message: '圖片大小超過可上傳大小', type: 'negative' })
     }
 
     return {
