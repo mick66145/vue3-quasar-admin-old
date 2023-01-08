@@ -28,12 +28,16 @@
     "profile": "Profile",
     "logout": "Logout",
     "company-job": "CompanyJob",
-    "user": "User"
+    "user": "User",
+    "role": "Role"
   },
   "company-job": {
     "title": "CompanyJob"
   },
   "user": {
     "title": "User"
+  },
+  "role": {
+    "title": "Role"
   }
 }

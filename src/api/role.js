@@ -32,6 +32,20 @@ class RoleResource extends Resource {
       },
       )
   }
+
+  async get (id, query) {
+    return await request({
+      url: `/${this.uri}/${id}`,
+      method: 'get',
+      params: query,
+    }).then(res => res.data)
+      .then(res => {
+        const roleObj = new Role({
+          ...res.data,
+        })
+        return roleObj
+      })
+  }
 }
 
 export default RoleResource

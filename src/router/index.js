@@ -7,7 +7,7 @@ import MainLayout from '@/layouts/MainLayout.vue'
 import companyRouter from './modules/company'
 import companyJobRouter from './modules/company-job'
 import userRouter from './modules/user'
-
+import roleRouter from './modules/role'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -66,6 +66,7 @@ const router = createRouter({
     companyRouter,
     companyJobRouter,
     userRouter,
+    roleRouter,
   ],
 })
 

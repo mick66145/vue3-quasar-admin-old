@@ -66,6 +66,18 @@
                 <q-item-label>{{ $t("meun.company-job") }}</q-item-label>
               </q-item-section>
             </q-item>
+            <q-item to="/role" active-class="q-item-no-link-highlighting">
+              <q-item-section avatar>
+                <svg-icon
+                  icon="genderless-solid"
+                  class="text-blue-grey-7"
+                  size="24"
+                />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>{{ $t("meun.role") }}</q-item-label>
+              </q-item-section>
+            </q-item>
             <q-item to="/user" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
                 <svg-icon

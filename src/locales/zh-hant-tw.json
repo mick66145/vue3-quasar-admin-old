@@ -28,12 +28,16 @@
     "profile": "個人資訊",
     "logout": "登出",
     "company-job": "職稱維護",
-    "user": "帳號維護"
+    "user": "帳號維護",
+    "role": "權限維護"
   },
   "company-job": {
     "title": "職稱維護"
   },
   "user": {
     "title": "帳號維護"
+  },
+  "role": {
+    "title": "權限維護"
   }
 }
