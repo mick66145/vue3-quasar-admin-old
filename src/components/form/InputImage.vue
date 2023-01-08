@@ -5,7 +5,7 @@
     class="h-full full-width"
   >
     <template #control>
-      <div class="input-image">
+      <div class="mt-1rem input-image">
         <div class="cursor-pointer flex min-h-34 items-center justify-center" @click="showDialog = true">
           <img v-if="preview" class="w-full transform scale-98" :src="preview" alt="">
           <q-icon v-else name="add" size="2em" />
@@ -18,7 +18,12 @@
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <q-item>
                   <q-item-section>
-                    <input-image-upload class="full-width" :img-src="uploadPreview" @on-file="onFile" />
+                    <input-image-upload
+                      ref="imageUpload"
+                      class="full-width"
+                      :img-src="uploadPreview"
+                      @on-file="onFile"
+                    />
                   </q-item-section>
                 </q-item>
               </div>
@@ -80,6 +85,7 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup (props, { emit }) {
     // data
+    const imageUpload = ref()
     const cropper = ref()
     const showDialog = ref(false)
     let tempRaw = null // 存放圖片原始資料(type, name)
@@ -122,6 +128,7 @@ export default defineComponent({
       tempCropper.value = base64
       tempRaw = file
       showCropper.value = true
+      imageUpload.value.removeQueuedFiles()
     }
 
     const onCopper = async () => {
@@ -163,6 +170,7 @@ export default defineComponent({
     }
 
     return {
+      imageUpload,
       cropper,
       showDialog,
       tempRaw,
@@ -189,13 +197,4 @@ export default defineComponent({
 
   background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%' fill='none' stroke='%23aaaaaa' stroke-width='5' stroke-dasharray='9%2c 18' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
-
-.q-field {
-  &:deep(.q-field__inner) {
-    .q-field__control-container {
-      @apply pt-36px;
-    }
-  }
-}
-
 </style>
