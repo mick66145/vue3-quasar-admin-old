@@ -26,12 +26,15 @@
       </div>
 
       <vxe-table
+        ref="dataTable"
         class="q-mb-md"
         auto-resize
         round
         stripe
         :row-config="{ isHover: true }"
         :data="data"
+        :sort-config="{ trigger: 'cell',remote:true}"
+        @sort-change="OnChangeSort"
       >
         <vxe-column
           v-for="{ field, title, min_width } in tableFields"
@@ -75,9 +78,9 @@
 
 <script>
 import UserResource from '@/api/user'
-import { defineComponent, ref, reactive, onMounted } from 'vue-demi'
+import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
-import useDataTable from '@/use/useDataTable'
+import useVxeServerDataTable from '@/use/useVxeServerDataTable'
 import useMessageDialog from '@/use/useMessageDialog'
 
 const userResource = new UserResource()
@@ -122,9 +125,13 @@ export default defineComponent({
       await callReadListFetch({ ...search })
     }
 
-    const { search, data, total, onChangePage, onChangeFilter } = useDataTable({
+    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort } = useVxeServerDataTable({
       searchParames: filter,
-      localStorageKey: 'dashboardUserDataTable',
+      sortParames: [{
+        field: 'id',
+        order: 'desc',
+      }],
+      sessionStorageKey: 'dashboardUserServerDataTable',
       callback: refreshFetch,
     })
     const { messageDelete } = useMessageDialog()
@@ -133,12 +140,8 @@ export default defineComponent({
       readListFetch: fetchData,
     })
 
-    // mounted
-    onMounted(() => {
-      refreshFetch()
-    })
-
     return {
+      dataTable,
       tableFields,
       filter,
       data,
@@ -146,6 +149,7 @@ export default defineComponent({
       search,
       onChangePage,
       onChangeFilter,
+      OnChangeSort,
       onDelete,
     }
   },

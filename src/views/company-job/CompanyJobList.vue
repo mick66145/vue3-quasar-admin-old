@@ -26,12 +26,15 @@
       </div>
 
       <vxe-table
+        ref="dataTable"
         class="q-mb-md"
         auto-resize
         round
         stripe
         :row-config="{ isHover: true }"
         :data="data"
+        :sort-config="{ trigger: 'cell',remote:true}"
+        @sort-change="OnChangeSort"
       >
         <vxe-column
           v-for="{ field, title, min_width } in tableFields"
@@ -75,9 +78,9 @@
 
 <script>
 import CompanyJobResource from '@/api/company-job'
-import { defineComponent, ref, reactive, onMounted } from 'vue-demi'
+import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
-import useDataTable from '@/use/useDataTable'
+import useVxeServerDataTable from '@/use/useVxeServerDataTable'
 import useMessageDialog from '@/use/useMessageDialog'
 
 const companyJobResource = new CompanyJobResource()
@@ -87,7 +90,6 @@ export default defineComponent({
     // data
     const filter = reactive({
       keyword: null,
-      orderby: 'id:desc',
     })
     const tableFields = ref([
       { title: '職稱', field: 'name', min_width: '130' },
@@ -120,9 +122,13 @@ export default defineComponent({
       await getDataList({ ...search })
     }
 
-    const { search, data, total, onChangePage, onChangeFilter } = useDataTable({
+    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort } = useVxeServerDataTable({
       searchParames: filter,
-      localStorageKey: 'dashboardCompanyJobDataTable',
+      sortParames: [{
+        field: 'id',
+        order: 'desc',
+      }],
+      sessionStorageKey: 'dashboardCompanyJobServerDataTable',
       callback: refreshFetch,
     })
     const { messageDelete } = useMessageDialog()
@@ -131,12 +137,8 @@ export default defineComponent({
       readListFetch: fetchData,
     })
 
-    // mounted
-    onMounted(() => {
-      refreshFetch()
-    })
-
     return {
+      dataTable,
       tableFields,
       filter,
       data,
@@ -144,6 +146,7 @@ export default defineComponent({
       search,
       onChangePage,
       onChangeFilter,
+      OnChangeSort,
       onDelete,
     }
   },
