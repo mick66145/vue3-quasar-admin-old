@@ -6,7 +6,8 @@
       "delete": "刪除",
       "cancel": "取消",
       "save": "儲存",
-      "confirm": "確認"
+      "confirm": "確認",
+      "go-back": "返回"
     },
     "dialog": {
       "default-title": "標題"

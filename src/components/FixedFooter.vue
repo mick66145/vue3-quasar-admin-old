@@ -8,7 +8,7 @@
             class="shadow-1 q-mr-md q-px-xl"
             outline
             color="primary"
-            :label="$t('g.btn.cancel')"
+            :label="$t('g.btn.go-back')"
             @click="onCancel"
           />
           <q-btn

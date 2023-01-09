@@ -6,7 +6,8 @@
       "delete": "delete",
       "cancel": "cancel",
       "save": "save",
-      "confirm": "OK"
+      "confirm": "OK",
+      "go-back": "goBack"
     },
     "dialog": {
       "default-title": "title"
