@@ -44,7 +44,7 @@
           sortable
           :min-width="$q.screen.lt.sm ? min_width : 'auto'"
         />
-        <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 150">
+        <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 240">
           <template #default="{ row }">
             <q-btn
               class="shadow-1 q-mr-xs"
@@ -61,6 +61,14 @@
               color="red"
               :label="$t('g.btn.delete')"
               @click="onDelete(row)"
+            />
+            <q-btn
+              class="shadow-1 q-mr-xs"
+              outline
+              rounded
+              color="black"
+              :label="$t('g.btn.reset-password')"
+              @click="onResetPassword(row)"
             />
           </template>
         </vxe-column>
@@ -110,6 +118,10 @@ export default defineComponent({
       return await userResource.delete(id)
     }
 
+    const resetPasswordFetch = async (id) => {
+      return await userResource.resetPassword(id)
+    }
+
     const onDelete = async (row) => {
       const res = await messageDelete({ title: '刪除', message: '確認刪除人員？' })
       if (!res) return
@@ -117,6 +129,13 @@ export default defineComponent({
       if (delRes) {
         search.page = 1
         refreshFetch()
+      }
+    }
+
+    const onResetPassword = async (row) => {
+      const [res, error] = await callResetPasswordFetch(row.id)
+      if (res) {
+        await messageAlert({ title: '重置密碼成功', message: `密碼變更為 : ${res.data.password}` })
       }
     }
 
@@ -133,8 +152,10 @@ export default defineComponent({
       sessionStorageKey: 'dashboardUserServerDataTable',
       callback: refreshFetch,
     })
-    const { messageDelete } = useMessageDialog()
-    const { callReadListFetch, callDeleteFetch } = useCRUD({
+    const { messageAlert, messageDelete } = useMessageDialog()
+
+    const { callCreateFetch: callResetPasswordFetch, callReadListFetch, callDeleteFetch } = useCRUD({
+      createFetch: resetPasswordFetch,
       deleteFetch: delFetch,
       readListFetch: fetchData,
     })
@@ -150,6 +171,7 @@ export default defineComponent({
       onChangeFilter,
       OnChangeSort,
       onDelete,
+      onResetPassword,
     }
   },
 })

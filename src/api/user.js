@@ -55,6 +55,13 @@ class UserResource extends Resource {
     }).then(res => res.data)
   }
 
+  async resetPassword (id) {
+    return await request({
+      url: `/${this.uri}/${id}/reset_password`,
+      method: 'post',
+    }).then(res => res.data)
+  }
+
   async whoami () {
     return await request({
       url: '/whoami',

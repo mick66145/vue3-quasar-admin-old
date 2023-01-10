@@ -6,8 +6,9 @@
       "delete": "delete",
       "cancel": "cancel",
       "save": "save",
-      "confirm": "OK",
-      "go-back": "goBack"
+      "confirm": "ok",
+      "go-back": "goBack",
+      "reset-password": "resetPassword"
     },
     "dialog": {
       "default-title": "title"
