@@ -68,6 +68,14 @@ class UserResource extends Resource {
       method: 'get',
     }).then(res => res.data)
   }
+
+  async profile (params) {
+    return request({
+      url: '/profile',
+      method: 'patch',
+      data: params,
+    })
+  }
 }
 
 export default UserResource

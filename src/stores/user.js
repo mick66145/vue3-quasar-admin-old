@@ -8,10 +8,7 @@ export const useUser = defineStore({
   id: 'user',
   state: () => ({
     token: getToken(),
-    account: '',
-    email: '',
-    phone: '',
-    role: '',
+    info: '',
   }),
   actions: {
 
@@ -32,21 +29,16 @@ export const useUser = defineStore({
             if (!data) {
               reject(new Error('Verification failed, please Login again.'))
             }
-            const { role, name, account, email, phone } = data
-            // roles must be a non-empty array
-            if (!role || role.length <= 0) {
-              reject(new Error('getInfo: roles must be a non-null array!'))
-            }
-            this.name = name
-            this.account = account
-            this.email = email
-            this.phone = phone
-            this.role = role
+            this.info = { ...data }
             resolve(data)
           }).catch(error => {
             reject(error)
           })
       })
+    },
+
+    profile (payload) {
+      return userResource.profile(payload)
     },
 
     logout () {
