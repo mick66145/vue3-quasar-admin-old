@@ -31,7 +31,8 @@
     "logout": "登出",
     "company-job": "職稱維護",
     "user": "帳號維護",
-    "role": "權限維護"
+    "role": "權限維護",
+    "system-log": "操作紀錄"
   },
   "company-job": {
     "title": "職稱維護"
@@ -41,5 +42,8 @@
   },
   "role": {
     "title": "權限維護"
+  },
+  "system-log": {
+    "title": "操作紀錄"
   }
 }

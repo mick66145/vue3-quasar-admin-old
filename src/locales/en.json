@@ -31,7 +31,8 @@
     "logout": "Logout",
     "company-job": "CompanyJob",
     "user": "User",
-    "role": "Role"
+    "role": "Role",
+    "system-log": "SystemLog"
   },
   "company-job": {
     "title": "CompanyJob"
@@ -41,5 +42,8 @@
   },
   "role": {
     "title": "Role"
+  },
+  "system-log": {
+    "title": "SystemLog"
   }
 }
