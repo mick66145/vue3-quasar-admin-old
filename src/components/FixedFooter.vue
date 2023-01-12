@@ -1,24 +1,25 @@
 <template>
   <q-footer class="bg-white" reveal elevated>
     <div class="row items-center justify-between q-px-lg q-py-md">
-      <slot name="footer">
-        <div />
-        <div>
-          <q-btn
-            class="shadow-1 q-mr-md q-px-xl"
-            outline
-            color="primary"
-            :label="$t('g.btn.go-back')"
-            @click="onCancel"
-          />
-          <q-btn
-            class="shadow-1 q-px-xl"
-            color="primary"
-            :label="$t('g.btn.save')"
-            @click="onSave"
-          />
-        </div>
-      </slot>
+      <div />
+      <div>
+        <q-btn
+          v-if="showCancel"
+          class="shadow-1 q-mr-md q-px-xl"
+          outline
+          :color="cancelButtonColor"
+          :label="$t('g.btn.go-back')"
+          @click="onCancel"
+        />
+        <slot name="button" />
+        <q-btn
+          v-if="showSave"
+          class="shadow-1 q-px-xl"
+          :color="confirmButtonColor"
+          :label="confirmButtonText"
+          @click="onSave"
+        />
+      </div>
     </div>
   </q-footer>
 </template>
@@ -29,8 +30,14 @@ import useGoBack from '@/use/useGoBack'
 
 export default defineComponent({
   props: {
+    cancelButtonColor: { type: String, default: 'primary' },
+    cancelButtonText: { type: String, default: '返回' },
+    confirmButtonColor: { type: String, default: 'primary' },
+    confirmButtonText: { type: String, default: '儲存' },
     goBackRoute: { type: String, default: '' },
     autoBack: { type: Boolean, default: true },
+    showCancel: { type: Boolean, default: true },
+    showSave: { type: Boolean, default: true },
   },
   emits: ['cancel', 'save'],
   setup (props, { emit }) {
