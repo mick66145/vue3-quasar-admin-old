@@ -14,6 +14,7 @@
     :option-label="optionLabelFn"
     :option-value="optionValueFn"
     @filter="filterFn"
+    @clear="clearFn"
   >
     <template v-if="$slots.default" #default>
       <slot name="default" />
@@ -111,6 +112,9 @@ export default defineComponent({
         filterOptions.value = selectMatchItem(props.options, needle)
       })
     }
+    const clearFn = (val) => {
+      observeValue.value = ''
+    }
     const optionValueFn = (item) => {
       return item[props.optionValue] ? item[props.optionValue] : item
     }
@@ -121,6 +125,7 @@ export default defineComponent({
       observeValue,
       filterOptions,
       filterFn,
+      clearFn,
       optionValueFn,
       optionLabelFn,
       emit,
