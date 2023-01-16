@@ -62,6 +62,15 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
               <input-select
+                v-model="formData.company_job"
+                :options="companyJobList"
+                class="full-width"
+                label="職稱"
+                placeholder="請選擇職稱"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+              <input-select
                 v-model="formData.role"
                 :options="roleList"
                 class="full-width"
@@ -89,14 +98,17 @@
 <script>
 
 import { defineComponent, ref, toRefs, watchEffect, onMounted } from 'vue-demi'
+import { User } from '@/class'
 import { useRoute } from 'vue-router'
 import UserResource from '@/api/user'
 import RoleResource from '@/api/role'
+import CompanyJobResource from '@/api/company-job'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
 
 const userResource = new UserResource()
 const roleResource = new RoleResource()
+const companyJobResource = new CompanyJobResource()
 
 export default defineComponent({
   props: {
@@ -106,21 +118,17 @@ export default defineComponent({
     // data
     const { mode } = toRefs(props)
     const route = useRoute()
-    const formData = ref({
-      account: '',
-      password: '',
-      name: '',
-      email: '',
-      remark: '',
-      role: '',
-    })
+    const formData = ref(new User())
     const roleList = ref([])
+    const companyJobList = ref([])
+
     const fallBack = { name: 'UserList' }
     const id = route.params.id || null
 
     // mounted
     onMounted(async () => {
       await callRoleListFetch()
+      await callCompanyJobListFetch()
     })
 
     // methods
@@ -139,6 +147,14 @@ export default defineComponent({
         roleList.value = res.list
       })
     }
+
+    const fetchCompanyJobData = async (payload) => {
+      return await companyJobResource.list(payload).then((res) => {
+        companyJobList.value = []
+        companyJobList.value = res.list
+      })
+    }
+
     const onSubmit = async () => {
       form.value.validate().then(async (success) => {
         if (success) {
@@ -162,8 +178,13 @@ export default defineComponent({
       createFetch: createFetch,
       updateFetch: updateFetch,
     })
+    // role
     const { callReadListFetch: callRoleListFetch } = useCRUD({
       readListFetch: fetchRoleData,
+    })
+    // role
+    const { callReadListFetch: callCompanyJobListFetch } = useCRUD({
+      readListFetch: fetchCompanyJobData,
     })
 
     // watch
@@ -177,6 +198,7 @@ export default defineComponent({
       formData,
       form,
       roleList,
+      companyJobList,
       onSubmit,
     }
   },
