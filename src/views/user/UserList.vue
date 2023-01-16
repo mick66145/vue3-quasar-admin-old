@@ -25,15 +25,10 @@
         </div>
       </div>
 
-      <vxe-table
+      <vxe-server-table
         ref="dataTable"
         class="q-mb-md"
-        auto-resize
-        round
-        stripe
-        :row-config="{ isHover: true }"
         :data="data"
-        :sort-config="{ trigger: 'cell',remote:true}"
         @sort-change="OnChangeSort"
       >
         <vxe-column
@@ -72,7 +67,7 @@
             />
           </template>
         </vxe-column>
-      </vxe-table>
+      </vxe-server-table>
 
       <pagination
         v-if="total > 0"

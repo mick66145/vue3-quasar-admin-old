@@ -18,6 +18,7 @@ import MessageDialog from './MessageDialog.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
 import Pagination from './Pagination.vue'
+import VxeServerTable from './VxeServerTable.vue'
 export default {
   install (app) {
     app.component('SvgIcon', SvgIcon)
@@ -40,5 +41,6 @@ export default {
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
     app.component('Pagination', Pagination)
+    app.component('VxeServerTable', VxeServerTable)
   },
 }
