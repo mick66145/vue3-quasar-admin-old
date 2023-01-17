@@ -72,6 +72,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .q-input {
-  @apply pb-10px;
+  @apply py-10px;
 }
 </style>

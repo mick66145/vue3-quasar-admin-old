@@ -135,4 +135,7 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.q-select {
+  @apply py-10px;
+}
 </style>
