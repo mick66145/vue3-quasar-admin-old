@@ -58,6 +58,9 @@ export default function useServerDataTable ({
   }
 
   const onReset = () => {
+    for (const [key, value] of Object.entries(searchParames)) {
+      search[key] = value
+    }
     search.page = 1
     setSessionStorage(sessionStorageKey, { search })
     if (callback && typeof (callback) === 'function') {
