@@ -39,12 +39,12 @@
 </template>
 
 <script>
-import SystemLogResource from '@/api/system-log'
+import SystemResource from '@/api/system'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
 import useVxeServerDataTable from '@/use/useVxeServerDataTable'
 
-const systemLogResource = new SystemLogResource()
+const systemResource = new SystemResource()
 
 export default defineComponent({
   setup () {
@@ -53,16 +53,16 @@ export default defineComponent({
       keyword: null,
     })
     const tableFields = ref([
-      { title: '操作人員', field: 'name', min_width: '130' },
-      { title: '帳號', field: 'user.name', min_width: '130' },
+      { title: '操作人員', field: 'user.name', min_width: '130' },
+      { title: '帳號', field: 'user.account', min_width: '130' },
       { title: '操作日期', field: 'created_at', min_width: '130' },
-      { title: '操作描述', field: 'describe', min_width: '130' },
-      { title: 'IP位置', field: 'ip', min_width: '130' },
+      { title: '操作描述', field: 'description', min_width: '130' },
+      { title: 'IP位置', field: 'sourceip', min_width: '130' },
     ])
 
     // methods
     const fetchData = async (payload) => {
-      return await systemLogResource.list(payload).then((res) => {
+      return await systemResource.recordLoglist(payload).then((res) => {
         data.value = []
         data.value = res.list
         total.value = res.total

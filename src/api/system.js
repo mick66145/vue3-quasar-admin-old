@@ -1,21 +1,21 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { SystemLog } from '@/class'
+import { SystemRecordLog } from '@/class'
 
-class SystemLogResource extends Resource {
+class SystemResource extends Resource {
   constructor () {
-    super('system_log')
+    super('system')
   }
 
-  async list (query) {
+  async recordLoglist (query) {
     return await request({
-      url: `/${this.uri}`,
+      url: `/${this.uri}/record_log`,
       method: 'get',
       params: query,
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const systemLogObj = new SystemLog(element)
+          const systemLogObj = new SystemRecordLog(element)
           return systemLogObj
         })
         const { list, meta } = res.data
@@ -32,20 +32,6 @@ class SystemLogResource extends Resource {
       },
       )
   }
-
-  async get (id, query) {
-    return await request({
-      url: `/${this.uri}/${id}`,
-      method: 'get',
-      params: query,
-    }).then(res => res.data)
-      .then(res => {
-        const systemLogObj = new SystemLog({
-          ...res.data,
-        })
-        return systemLogObj
-      })
-  }
 }
 
-export default SystemLogResource
+export default SystemResource

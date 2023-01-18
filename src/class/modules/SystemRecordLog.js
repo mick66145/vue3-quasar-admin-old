@@ -1,6 +1,6 @@
 import Base from './Base'
 import { convertDateTime } from '@/utils/data-convert'
-class SystemLog extends Base {
+class SystemRecordLog extends Base {
   constructor (obj) {
     super();
     (obj) && (this.setInit(obj))
@@ -9,10 +9,9 @@ class SystemLog extends Base {
   setInit (obj) {
     this.id = obj.id
     this.created_at = convertDateTime(obj.created_at)
-    this.name = obj.name
     this.user = obj.user
-    this.describe = obj.describe
-    this.ip = obj.ip
+    this.description = obj.description
+    this.sourceip = obj.sourceip
   }
 }
-export default SystemLog
+export default SystemRecordLog
