@@ -1,9 +1,8 @@
 <template>
-  <div class="rounded-borders">
-    {{ label }}
+  <div class="rounded-borders py-10px">
+    <label>{{ label }}</label>
     <q-option-group
       v-model="observeValue"
-      class="pb-6px"
       :options="options"
       :color="color"
       :inline="inline"
