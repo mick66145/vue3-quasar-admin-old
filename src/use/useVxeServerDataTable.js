@@ -19,6 +19,7 @@ export default function useVxeServerDataTable ({
   const data = ref([])
   const total = ref(0)
   const sort = ref([])
+  const unSessionStorageParamesField = unSessionStorageParames.map((item) => item.field)
 
   // methods
 
@@ -50,18 +51,22 @@ export default function useVxeServerDataTable ({
       callback()
     }
   }
-  const onReset = () => {
+  const onReset = async () => {
+    for (const [key, value] of Object.entries(searchParames)) {
+      search[key] = value
+    }
     search.page = 1
-    setSessionStorage(sessionStorageKey, { search })
+    search.orderby = sortParames.map((item) => `${item.field}:${item.order}`).join(',')
+    sort.value = sortParames
+    setSessionStorage(sessionStorageKey, { search, sort: sort.value })
     if (callback && typeof (callback) === 'function') {
-      callback()
+      await callback()
+      dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
     }
   }
 
   // mounted
   onMounted(async () => {
-    const unSessionStorageParamesField = unSessionStorageParames.map((item) => item.field)
-
     if (!sessionStorage) {
       const sessionStorageObj = {
         search: {
