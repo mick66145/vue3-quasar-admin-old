@@ -4,7 +4,8 @@ import mapKeys from 'lodash-es/mapKeys'
 
 export default function useVxeServerDataTable ({
   searchParames = {},
-  sortParames = [],
+  sortParames = [], // [{field:string,order:true|false}]
+  unSessionStorageParames = [], // [{field:string}]
   sessionStorageKey = 'dashboardVxeServerDataTable',
   callback = () => {},
 }) {
@@ -59,30 +60,37 @@ export default function useVxeServerDataTable ({
 
   // mounted
   onMounted(async () => {
+    const unSessionStorageParamesField = unSessionStorageParames.map((item) => item.field)
+
     if (!sessionStorage) {
       const sessionStorageObj = {
         search: {
           page: 1,
           page_size: 10,
+          orderby: sortParames.map((item) => `${item.field}:${item.order}`).join(','),
         },
-        sort: [],
+        sort: sortParames,
       }
       setSessionStorage(sessionStorageKey, sessionStorageObj)
       sessionStorage = getSessionStorage(sessionStorageKey)
     }
-    for (const [key, value] of Object.entries(searchParames)) {
-      !sessionStorage.search[key] && (sessionStorage.search[key] = value)
-      key === 'page_size' && (sessionStorage.search[key] = value)
-    }
-    if (!sessionStorage.search.orderby) {
-      sessionStorage.search.orderby = sortParames.map((item) => `${item.field}:${item.order}`).join(',')
-      sessionStorage.sort = sortParames
-    }
-    sort.value = sessionStorage.sort ? sessionStorage.sort : sortParames
+
     mapKeys(sessionStorage.search, (_, key) => {
       search[key] = sessionStorage.search[key]
     })
+
+    sort.value = sessionStorage.sort
+
+    for (const [key, value] of Object.entries(searchParames)) {
+      (!sessionStorage.search[key] && !unSessionStorageParamesField.includes(key)) && (search[key] = value)
+    }
+
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
+
+    for (const [key, value] of Object.entries(searchParames)) {
+      (unSessionStorageParamesField.includes(key)) && (search[key] = value)
+    }
+
     if (callback && typeof (callback) === 'function') {
       await callback()
       dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
