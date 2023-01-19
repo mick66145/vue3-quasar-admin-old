@@ -9,6 +9,7 @@ export const useUser = defineStore({
   state: () => ({
     token: getToken(),
     info: '',
+    permissionList: [],
   }),
   actions: {
 
@@ -31,6 +32,19 @@ export const useUser = defineStore({
             }
             this.info = { ...data }
             resolve(data)
+          }).catch(error => {
+            reject(error)
+          })
+      })
+    },
+
+    permission () {
+      return new Promise((resolve, reject) => {
+        userResource.permission()
+          .then(res => {
+            const { list } = res
+            this.permissionList = list
+            resolve()
           }).catch(error => {
             reject(error)
           })

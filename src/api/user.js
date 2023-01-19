@@ -69,6 +69,28 @@ class UserResource extends Resource {
     }).then(res => res.data)
   }
 
+  async permission () {
+    return await request({
+      url: '/whoami/permission',
+      method: 'get',
+    }).then(res => res.data)
+      .then(res => {
+        const { list, meta } = res.data
+        if (meta?.pagination) {
+          const { count, total } = meta.pagination
+          return {
+            list: list,
+            total: total,
+            count: count,
+          }
+        } else {
+          return {
+            list: list,
+          }
+        }
+      })
+  }
+
   async profile (params) {
     return request({
       url: '/profile',

@@ -26,6 +26,7 @@ import '@/styles/index.scss'
 
 import i18n from '@/plugins/i18n'
 import { useVuelidate } from '@/plugins/vuelidate'
+import permission from '@/directive/permission'
 import './permission'
 
 import { setupProdMockServer } from '../server/mock'
@@ -52,4 +53,5 @@ app.use(editor)
 app.use(i18n)
 app.use(vxeTable)
 app.use(useVuelidate)
+app.use(permission)
 app.mount('#app')

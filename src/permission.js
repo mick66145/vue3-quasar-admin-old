@@ -31,6 +31,7 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           await store.whoami()
+          await store.permission()
           next({ ...to, replace: true })
         } catch (error) {
           next(`/login?redirect=${to.path}`)
