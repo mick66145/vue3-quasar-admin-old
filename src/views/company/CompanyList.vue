@@ -29,7 +29,10 @@
         ref="dataTable"
         class="q-mb-md"
         :data="data"
+        :total="total"
+        :current="search.page"
         @sort-change="OnChangeSort"
+        @update:current="onChangePage"
       >
         <vxe-column
           v-for="{ field, title, min_width } in tableFields"

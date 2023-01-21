@@ -29,7 +29,10 @@
         ref="dataTable"
         class="q-mb-md"
         :data="data"
+        :total="total"
+        :current="search.page"
         @sort-change="OnChangeSort"
+        @update:current="onChangePage"
       >
         <vxe-column
           v-for="{ field, title, min_width } in tableFields"
@@ -60,13 +63,6 @@
           </template>
         </vxe-column>
       </vxe-server-table>
-
-      <pagination
-        v-if="total > 0"
-        :total="total"
-        :current="search.page"
-        @update:current="onChangePage"
-      />
     </q-card>
   </q-page>
 </template>
