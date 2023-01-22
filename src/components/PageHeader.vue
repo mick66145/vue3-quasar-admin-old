@@ -2,7 +2,7 @@
   <div class="row page-header items-center justify-between q-mb-md">
     <div class="flex items-center">
       <SvgIcon v-if="showPrev" icon="arrow-left" class="cursor-pointer" size="24" @click="onPrev" />
-      <h1 class="page-title">
+      <h1 class="page-title" :class="showPrev && 'cursor-pointer'" @click="onPrev">
         <slot />
       </h1>
     </div>
@@ -25,14 +25,16 @@ export default defineComponent({
     const router = useRouter()
 
     const onPrev = () => {
-      emit('click:prev')
-      if (props.goBackRoute) {
-        return router.push(props.goBackRoute)
+      if (props.showPrev) {
+        emit('click:prev')
+        if (props.goBackRoute) {
+          return router.push(props.goBackRoute)
+        }
+        if (window.history.length === 2 && !window.history.state.back) {
+          return router.replace('/')
+        }
+        router.go(-1)
       }
-      if (window.history.length === 2 && !window.history.state.back) {
-        return router.replace('/')
-      }
-      router.go(-1)
     }
 
     return {
