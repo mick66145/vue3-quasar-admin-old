@@ -3,11 +3,7 @@
     <page-header>
       {{ $t('user.title') }}
       <template #action>
-        <q-btn
-          class="shadow-1"
-          icon="add_circle"
-          color="primary"
-          :label="$t('g.btn.add')"
+        <add-button
           to="/user/create"
         />
       </template>
@@ -44,20 +40,12 @@
         />
         <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 240">
           <template #default="{ row }">
-            <q-btn
-              class="shadow-1 q-mr-xs"
-              outline
-              rounded
-              color="primary"
-              :label="$t('g.btn.edit')"
+            <edit-button
+              class="q-mr-xs"
               :to="'/user/edit/' + row.id"
             />
-            <q-btn
-              class="shadow-1 q-mr-xs"
-              outline
-              rounded
-              color="red"
-              :label="$t('g.btn.delete')"
+            <delete-button
+              class="q-mr-xs"
               @click="onDelete(row)"
             />
             <q-btn
