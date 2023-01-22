@@ -2,10 +2,14 @@
   <q-layout view="lHh Lpr lFf">
     <app-header />
     <app-sidebar />
-    <q-page-container class="bg-indigo-1">
-      <transition name="slide-fade">
-        <router-view />
-      </transition>
+    <q-page-container class="bg-indigo-1 !<md:pb-16">
+      <router-view v-slot="{ Component,route }">
+        <transition name="slide-fade">
+          <div :key="route">
+            <component :is="Component" :key="route" />
+          </div>
+        </transition>
+      </router-view>
     </q-page-container>
     <app-footer />
   </q-layout>

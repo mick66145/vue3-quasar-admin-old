@@ -1,5 +1,5 @@
 <template>
-  <q-footer class="bg-white" reveal elevated>
+  <div class="fixed-footer">
     <div class="row items-center justify-between q-px-lg q-py-md">
       <div />
       <div>
@@ -21,7 +21,8 @@
         />
       </div>
     </div>
-  </q-footer>
+    <div class="q-layout__shadow absolute-full overflow-hidden no-pointer-events" />
+  </div>
 </template>
 
 <script>
@@ -59,4 +60,18 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.fixed-footer {
+  @apply bg-white w-full ;
+  @apply right-0 bottom-0 z-200 fixed;
+
+  box-shadow: 0 0 10px 2px rgb(0 0 0 / 4%), 0 0 10px rgb(0 0 0 / 4%);
+
+  .q-layout__shadow {
+    @apply -top-10px;
+
+    &::after {
+      @apply top-10px;
+    }
+  }
+}
 </style>
