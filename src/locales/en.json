@@ -8,7 +8,9 @@
       "save": "save",
       "confirm": "ok",
       "go-back": "goBack",
-      "reset-password": "resetPassword"
+      "reset-password": "resetPassword",
+      "reset": "reset",
+      "view": "view"
     },
     "dialog": {
       "default-title": "title"
