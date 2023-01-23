@@ -1,8 +1,10 @@
 import UserResource from '@/api/user'
+import AuthResource from '@/api/auth'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { defineStore } from 'pinia'
 
 const userResource = new UserResource()
+const authResource = new AuthResource()
 
 export const useUser = defineStore({
   id: 'user',
@@ -14,7 +16,7 @@ export const useUser = defineStore({
   actions: {
 
     login (payload) {
-      return userResource.login(payload)
+      return authResource.login(payload)
         .then(res => {
           const { data } = res
           this.setToken(data.token)

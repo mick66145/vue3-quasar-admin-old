@@ -47,14 +47,6 @@ class UserResource extends Resource {
       })
   }
 
-  async login (params) {
-    return await request({
-      url: `/${this.uri}/login`,
-      method: 'post',
-      data: params,
-    }).then(res => res.data)
-  }
-
   async resetPassword (id) {
     return await request({
       url: `/${this.uri}/${id}/reset_password`,

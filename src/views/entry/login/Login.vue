@@ -17,7 +17,7 @@
           </q-card-section>
 
           <q-card-section>
-            <q-form ref="loginForm" class="q-gutter-md">
+            <q-form ref="form" class="q-gutter-md">
               <input-text
                 v-model="formData.account"
                 :label="$t('login.loginForm.account')"
@@ -51,20 +51,15 @@
 <script>
 import { defineComponent, ref, reactive, watch } from 'vue-demi'
 import { useRouter } from 'vue-router'
-import { useAsyncState } from '@vueuse/core'
 import { useUser } from '@/stores/user'
-import useNotify from '@/use/useNotify'
+import useCRUD from '@/use/useCRUD'
 
 export default defineComponent({
   setup () {
     const router = useRouter()
     const store = useUser()
-    const { notify, notifyAPIError } = useNotify()
-    const reqLogin = useAsyncState(store.login
-      , {}, { immediate: false })
 
     // data
-    const loginForm = ref(null)
     const formData = reactive({
       account: '',
       password: '',
@@ -73,23 +68,9 @@ export default defineComponent({
     const otherQuery = ref({})
 
     // methods
-    const handleLogin = () => {
-      loginForm.value.validate()
-        .then(async success => {
-          if (success) {
-            const payload = { ...formData }
-            await reqLogin.execute(0, payload)
-            if (reqLogin.error.value) {
-              const message = reqLogin.error.value.response.data.message
-              notifyAPIError({ message })
-            } else {
-              notify({ message: '登入成功', type: 'positive' })
-              router.push({ path: redirect.value || '/', query: otherQuery.value })
-            }
-          }
-        })
+    const createFetch = async (payload) => {
+      return await store.login(payload)
     }
-
     const getOtherQuery = (query) => {
       return Object.keys(query).reduce((acc, cur) => {
         if (cur !== 'redirect') {
@@ -98,6 +79,24 @@ export default defineComponent({
         return acc
       }, {})
     }
+    const handleLogin = () => {
+      form.value.validate().then(async (success) => {
+        if (success) {
+          const payload = { ...formData }
+          const urlObj = {
+            login: () => { return callCreateFetch({ ...payload }) },
+          }
+          const [res, error] = await urlObj.login()
+          if (res) router.push({ path: redirect.value || '/', query: otherQuery.value })
+        }
+      })
+    }
+
+    // use
+    const { form, callCreateFetch } = useCRUD({
+      createSuccess: '登入成功',
+      createFetch: createFetch,
+    })
 
     // watch
     watch(() => router, () => {
@@ -109,7 +108,7 @@ export default defineComponent({
     })
 
     return {
-      loginForm,
+      form,
       formData,
       redirect,
       otherQuery,
