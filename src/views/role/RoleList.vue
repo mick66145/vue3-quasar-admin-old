@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import RoleResource from '@/api/role'
+import { RoleResource } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
 import useVxeServerDataTable from '@/use/useVxeServerDataTable'

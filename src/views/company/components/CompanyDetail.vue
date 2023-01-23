@@ -143,7 +143,7 @@
 <script>
 import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import CompanyResource from '@/api/company'
+import { CompanyResource } from '@/api'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
 

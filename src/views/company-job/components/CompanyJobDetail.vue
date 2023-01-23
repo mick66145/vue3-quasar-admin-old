@@ -28,7 +28,7 @@
 <script>
 import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import CompanyJobResource from '@/api/company-job'
+import { CompanyJobResource } from '@/api'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
 

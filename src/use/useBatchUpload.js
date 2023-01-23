@@ -1,5 +1,5 @@
 
-import FileResource from '@/api/file'
+import { FileResource } from '@/api'
 import reduce from 'lodash-es/reduce'
 
 const fileResource = new FileResource()

@@ -1,5 +1,4 @@
-import UserResource from '@/api/user'
-import AuthResource from '@/api/auth'
+import { UserResource, AuthResource } from '@/api'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { defineStore } from 'pinia'
 
