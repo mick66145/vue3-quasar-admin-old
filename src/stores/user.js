@@ -57,14 +57,28 @@ export const useUser = defineStore({
     },
 
     logout () {
-      this.token = ''
-      removeToken()
-      this.$reset()
+      /* 如果有登出的api就使用以下註解 */
+      // return new Promise((resolve, reject) => {
+      //   return authResource.logout().then(res => {
+      //     this.clear()
+      //     resolve()
+      //   })
+      //     .catch(error => {
+      //       reject(error)
+      //     })
+      // })
+      this.clear()
     },
 
     setToken (token) {
       setToken(token)
       this.token = token
+    },
+
+    clear () {
+      this.token = ''
+      removeToken()
+      this.$reset()
     },
   },
 

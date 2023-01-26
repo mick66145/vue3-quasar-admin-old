@@ -13,6 +13,13 @@ class AuthResource extends Resource {
       data: params,
     }).then(res => res.data)
   }
+
+  async logout () {
+    return await request({
+      url: `/${this.uri}/logout`,
+      method: 'post',
+    })
+  }
 }
 
 export default AuthResource
