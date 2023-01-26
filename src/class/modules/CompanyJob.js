@@ -1,6 +1,12 @@
 import Base from './Base'
 
 class CompanyJob extends Base {
+
+  //api欄位
+  id = "";
+  name = "";
+  parent_job = "";
+  
   constructor (obj) {
     super();
     (obj) && (this.setInit(obj))

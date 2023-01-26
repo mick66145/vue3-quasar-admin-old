@@ -1,12 +1,20 @@
 import Base from './Base'
 import { convertDateTime } from '@/utils/data-convert'
 class SystemRecordLog extends Base {
-  constructor (obj) {
+
+  //api欄位
+  id = "";
+  created_at = "";
+  user = "";
+  description = "";
+  sourceip = "";
+  
+  constructor(obj) {
     super();
     (obj) && (this.setInit(obj))
   }
 
-  setInit (obj) {
+  setInit(obj) {
     this.id = obj.id
     this.created_at = convertDateTime(obj.created_at)
     this.user = obj.user

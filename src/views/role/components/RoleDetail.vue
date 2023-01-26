@@ -29,6 +29,7 @@
 import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import { RoleResource } from '@/api'
+import { Role } from '@/class'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
 
@@ -42,10 +43,7 @@ export default defineComponent({
     // data
     const { mode } = toRefs(props)
     const route = useRoute()
-    const formData = ref({
-      name: '',
-      menus: [],
-    })
+    const formData = ref(new Role())
 
     const fallBack = { name: 'RoleList' }
     const id = route.params.id || null

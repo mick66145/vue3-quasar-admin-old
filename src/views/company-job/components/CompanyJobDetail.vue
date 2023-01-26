@@ -29,6 +29,7 @@
 import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import { CompanyJobResource } from '@/api'
+import { CompanyJob } from '@/class'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
 
@@ -42,9 +43,7 @@ export default defineComponent({
     // data
     const { mode } = toRefs(props)
     const route = useRoute()
-    const formData = ref({
-      name: '',
-    })
+    const formData = ref(new CompanyJob())
 
     const fallBack = { name: 'CompanyJobList' }
     const id = route.params.id || null
