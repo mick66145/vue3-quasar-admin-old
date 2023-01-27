@@ -29,13 +29,25 @@ export default function useDialog ({
   const form = ref()
   const data = useQuickState(formData)
   const id = ref(null)
+  const mode = ref() // create、edit、delete
   const isShowDialog = ref(false)
 
   // methods
-  const showDialog = async (row = null) => {
-    if (row?.id) {
-      id.value = row?.id
-      const [res, error] = await callReadFetch(id.value)
+  const showDialog = async ({
+    id: dataId = null,
+    data: rowData = null,
+    mode: dialogMode = 'create',
+    callRead = false,
+  }) => {
+    id.value = dataId
+    mode.value = dialogMode
+    if (rowData) {
+      mapKeys(data.state, (_, key) => {
+        data.state[key] = rowData[key] === undefined ? '' : rowData[key]
+      })
+    }
+    if (callRead) {
+      const [res, error] = await callReadFetch(dataId)
       if (res) {
         mapKeys(data.state, (_, key) => {
           data.state[key] = res[key] === undefined ? '' : res[key]
@@ -52,12 +64,29 @@ export default function useDialog ({
       if (success) {
         const payload = { ...data.state }
         const urlObj = {
-          creat: () => { return callCreateFetch({ ...payload }) },
+          create: () => {
+            if (id.value) {
+              return callCreateFetch(id.value, { ...payload })
+            } else {
+              return callCreateFetch({ ...payload })
+            }
+          },
           edit: () => {
-            return callUpdateFetch(id.value, { ...payload })
+            if (id.value) {
+              return callUpdateFetch(id.value, { ...payload })
+            } else {
+              return callUpdateFetch({ ...payload })
+            }
+          },
+          delete: () => {
+            if (id.value) {
+              return callDeleteFetch(id.value, { ...payload })
+            } else {
+              return callDeleteFetch({ ...payload })
+            }
           },
         }
-        const [res, error] = !id.value ? await urlObj.creat() : await urlObj.edit()
+        const [res, error] = await urlObj[mode.value]()
         hideDialog()
         return [res, error]
       } else {
@@ -67,10 +96,11 @@ export default function useDialog ({
   }
 
   // use
-  const { callCreateFetch, callReadFetch, callUpdateFetch, callReadListFetch } = useCRUD({
+  const { callCreateFetch, callReadFetch, callUpdateFetch, callDeleteFetch, callReadListFetch } = useCRUD({
     readFetch,
     createFetch,
     updateFetch,
+    deleteFetch,
     readListFetch,
     createSuccess,
     readSuccess,
@@ -81,6 +111,7 @@ export default function useDialog ({
 
   return {
     form,
+    mode,
     data,
     isShowDialog,
     showDialog,
