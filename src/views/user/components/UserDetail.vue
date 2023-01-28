@@ -79,12 +79,10 @@
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-              <input-text
+              <input-textarea
                 v-model="formData.remark"
                 class="full-width"
                 label="備註"
-                placeholder="請輸入備註"
-                type="textarea"
               />
             </div>
           </div>
