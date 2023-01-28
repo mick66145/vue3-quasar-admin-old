@@ -158,12 +158,12 @@ export default defineComponent({
         if (success) {
           const payload = { ...formData.value }
           const urlObj = {
-            creat: () => { return callCreateFetch({ ...payload }) },
+            create: () => { return callCreateFetch({ ...payload }) },
             edit: () => {
               return callUpdateFetch(id, { ...payload })
             },
           }
-          const [res, error] = mode.value === 'create' ? await urlObj.creat() : await urlObj.edit()
+          const [res, error] = mode.value === 'create' ? await urlObj.create() : await urlObj.edit()
           if (res) goBack()
         }
       })
