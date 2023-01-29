@@ -26,6 +26,7 @@ import MessageDialog from './MessageDialog.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
 import Pagination from './Pagination.vue'
+import VxeClientTable from './VxeClientTable.vue'
 import VxeServerTable from './VxeServerTable.vue'
 export default {
   install (app) {
@@ -57,6 +58,7 @@ export default {
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
     app.component('Pagination', Pagination)
+    app.component('VxeClientTable', VxeClientTable)
     app.component('VxeServerTable', VxeServerTable)
   },
 }
