@@ -17,6 +17,7 @@ import InputToggle from './form/InputToggle.vue'
 import InputSearch from './form/InputSearch.vue'
 import InputTextarea from './form/InputTextarea.vue'
 import InputCheckbox from './form/InputCheckbox.vue'
+import InputTime from './form/InputTime.vue'
 import BaseButton from './button/BaseButton.vue'
 import AddButton from './button/AddButton.vue'
 import DeleteButton from './button/DeleteButton.vue'
@@ -51,6 +52,7 @@ export default {
     app.component('InputSearch', InputSearch)
     app.component('InputTextarea', InputTextarea)
     app.component('InputCheckbox', InputCheckbox)
+    app.component('InputTime', InputTime)
     app.component('BaseButton', BaseButton)
     app.component('AddButton', AddButton)
     app.component('DeleteButton', DeleteButton)
