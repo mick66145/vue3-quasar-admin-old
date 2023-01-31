@@ -1,4 +1,5 @@
 import Base from './Base'
+import BasePermission from './base/BasePermission';
 import { convertDateTime } from '@/utils/data-convert'
 class Role extends Base {
 
@@ -6,18 +7,19 @@ class Role extends Base {
   id = "";
   created_at = "";
   name = "";
-  menus = [];
+  permissions = [];
 
   constructor(obj) {
     super();
-    (obj) && (this.setInit(obj))
-  }
-
-  setInit(obj) {
-    this.id = obj.id
-    this.created_at = convertDateTime(obj.created_at)
-    this.name = obj.name
-    this.menus = obj.menus
+    if (obj) {
+      this.id = obj?.id
+      this.created_at = convertDateTime(obj?.created_at)
+      this.name = obj?.name
+      this.permissions = [...obj?.permissions].map(element => {
+        const permissionObj = new BasePermission(element)
+        return permissionObj
+      })
+    }
   }
 }
 export default Role

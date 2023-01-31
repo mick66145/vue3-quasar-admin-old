@@ -2,10 +2,10 @@
   <q-page class="q-pa-lg">
     <page-header showPrev>權限詳情</page-header>
     <q-card class="shadow-7 q-pa-lg">
-      <q-card-section>
-        <div class="text-h6 card-title">權限資訊</div>
-      </q-card-section>
-      <q-card-section>
+      <card-header>
+        權限資訊
+      </card-header>
+      <card-body>
         <q-form ref="form">
           <div class="row q-col-gutter-x-md q-col-gutter-y-md">
             <div class="col-xs-12 col-sm-6 col-md-6">
@@ -19,21 +19,62 @@
             </div>
           </div>
         </q-form>
-      </q-card-section>
+      </card-body>
+    </q-card>
+    <q-card class="mt-4 shadow-7 q-pa-lg">
+      <card-header>
+        權限設定
+      </card-header>
+      <card-body>
+        <q-card
+          v-for="menuPermissionItem in menuPermissionList"
+          :key="menuPermissionItem"
+          class="shadow-0 permissions-card"
+          bordered
+        >
+          <q-card-section class="bg-gray-100">
+            <div class="text-h6">{{ menuPermissionItem.name }}</div>
+          </q-card-section>
+          <q-card-section vertical class="p-0">
+            <div v-for="(childItem,index) in menuPermissionItem.childs" :key="childItem">
+              <div class="p-4 row items-center">
+                <span class="h-full col-md-2 col-sm-3 permissions-title ">
+                  {{ childItem.name }}
+                </span>
+                <div
+                  v-for="permissionItem in childItem.permissions"
+                  :key="permissionItem"
+                  class="flex col-md-2 col-sm-3"
+                >
+                  <input-checkbox
+                    v-model="permissionItem.is_active"
+                    :label="permissionItem.display_name"
+                    :val="permissionItem"
+                  />
+                </div>
+              </div>
+              <q-separator v-show="menuPermissionItem.childs.length - 1 !== index" class="w-full" />
+            </div>
+          </q-card-section>
+        </q-card>
+      </card-body>
     </q-card>
   </q-page>
   <fixed-footer @save="onSubmit" />
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
+import { defineComponent, ref, toRefs, onMounted } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import { RoleResource } from '@/api'
+import { RoleResource, MenuPermissionResource } from '@/api'
 import { Role } from '@/class'
+import { breadthFirstSearch } from '@/utils/tree'
 import useCRUD from '@/use/useCRUD'
 import useGoBack from '@/use/useGoBack'
+import _ from 'lodash-es'
 
 const roleResource = new RoleResource()
+const menuPermissionResource = new MenuPermissionResource()
 
 export default defineComponent({
   props: {
@@ -44,9 +85,24 @@ export default defineComponent({
     const { mode } = toRefs(props)
     const route = useRoute()
     const formData = ref(new Role())
-
-    const fallBack = { name: 'RoleList' }
+    const menuPermissionList = ref([])
+    const permissionsIdList = ref([])
     const id = route.params.id || null
+
+    // mounted
+    onMounted(async () => {
+      await callMenuPermissionListFetch()
+      if (id) {
+        const [res, error] = await callReadFetch(id)
+        formData.value = res
+        permissionsIdList.value = _(res.permissions).map('id').value()
+        breadthFirstSearch(menuPermissionList.value, node => {
+          node.permissions.forEach(element => {
+            (permissionsIdList.value.includes(element.id)) && (element.is_active = true)
+          })
+        })
+      }
+    })
 
     // methods
     const readFetch = async (id, payload) => {
@@ -58,11 +114,22 @@ export default defineComponent({
     const updateFetch = async (id, payload) => {
       return await roleResource.patch(id, payload)
     }
-
+    const fetchMenuPermissionData = async () => {
+      return await menuPermissionResource.list().then((res) => {
+        menuPermissionList.value = []
+        menuPermissionList.value = res.list
+      })
+    }
     const onSubmit = async () => {
       form.value.validate().then(async (success) => {
         if (success) {
           const payload = { ...formData.value }
+          payload.permissions = []
+          breadthFirstSearch(menuPermissionList.value, node => {
+            node.permissions.forEach(element => {
+              (element.is_active) && (payload.permissions.push(element))
+            })
+          })
           const urlObj = {
             create: () => { return callCreateFetch({ ...payload }) },
             edit: () => {
@@ -76,23 +143,21 @@ export default defineComponent({
     }
 
     // use
-    const { goBack } = useGoBack({ fallBack })
+    const { goBack } = useGoBack()
     const { form, callReadFetch, callCreateFetch, callUpdateFetch } = useCRUD({
       readFetch: readFetch,
       createFetch: createFetch,
       updateFetch: updateFetch,
     })
-
-    // watch
-    watchEffect(async () => {
-      if (!id) return
-      const [res, error] = await callReadFetch(id)
-      formData.value = res
+    // role
+    const { callReadListFetch: callMenuPermissionListFetch } = useCRUD({
+      readListFetch: fetchMenuPermissionData,
     })
 
     return {
-      formData,
       form,
+      formData,
+      menuPermissionList,
       onSubmit,
     }
   },
@@ -100,14 +165,11 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.card-title {
-  @apply p-l-11px;
+.permissions-card {
+  @apply mb-4;
 
-  &::before {
-    @apply content-[""];
-    @apply top-[calc(50%_-_12px)] left-4 absolute;
-    @apply h-28px w-3px ;
-    @apply bg-primary;
+  .permissions-title {
+    @apply m-0 pl-3  self-center;
   }
 }
 </style>
