@@ -4,10 +4,10 @@
       個人資料
     </page-header>
     <q-card class="shadow-7 q-pa-lg">
-      <q-card-section>
-        <div class="text-h6 card-title">帳號資訊</div>
-      </q-card-section>
-      <q-card-section>
+      <card-header>
+        帳號資訊
+      </card-header>
+      <card-body>
         <q-form ref="form">
           <div class="row q-col-gutter-x-md q-col-gutter-y-md">
             <div class="col-xs-12 col-sm-6 col-md-6">
@@ -51,7 +51,7 @@
             </div>
           </div>
         </q-form>
-      </q-card-section>
+      </card-body>
     </q-card>
   </q-page>
   <fixed-footer @save="onSubmit" />
@@ -105,14 +105,5 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.card-title {
-  @apply p-l-11px;
 
-  &::before {
-    @apply content-[""];
-    @apply top-[calc(50%_-_12px)] left-4 absolute;
-    @apply h-28px w-3px ;
-    @apply bg-primary;
-  }
-}
 </style>
