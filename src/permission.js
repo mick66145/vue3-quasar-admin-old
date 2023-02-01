@@ -1,8 +1,9 @@
-import router from './router'
+import router, { addRoutes } from './router'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import { useUser } from '@/stores/user'
+import { usePermission } from '@/stores/permission'
 import getPageTitle from './utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -18,6 +19,7 @@ router.beforeEach(async (to, from, next) => {
 
   // determine whether the user has logged in
   const store = useUser()
+  const storePermission = usePermission()
   const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
@@ -32,6 +34,8 @@ router.beforeEach(async (to, from, next) => {
         try {
           await store.whoami()
           await store.permission()
+          const accessRoutes = await storePermission.generateRoutes({ roles: [], permissions: store.permissionList })
+          addRoutes(accessRoutes, {})
           next({ ...to, replace: true })
         } catch (error) {
           next(`/login?redirect=${to.path}`)

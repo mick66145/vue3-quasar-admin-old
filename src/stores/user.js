@@ -43,7 +43,7 @@ export const useUser = defineStore({
         this.userResource.permission()
           .then(res => {
             const { list } = res
-            this.permissionList = list
+            this.permissionList = list.map(permission => { return permission.name })
             resolve()
           }).catch(error => {
             reject(error)
