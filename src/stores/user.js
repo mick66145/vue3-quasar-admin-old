@@ -2,20 +2,19 @@ import { UserResource, AuthResource } from '@/api'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { defineStore } from 'pinia'
 
-const userResource = new UserResource()
-const authResource = new AuthResource()
-
 export const useUser = defineStore({
   id: 'user',
   state: () => ({
     token: getToken(),
     info: '',
     permissionList: [],
+    userResource: new UserResource(),
+    authResource: new AuthResource(),
   }),
   actions: {
 
     login (payload) {
-      return authResource.login(payload)
+      return this.authResource.login(payload)
         .then(res => {
           const { data } = res
           this.setToken(data.token)
@@ -25,7 +24,7 @@ export const useUser = defineStore({
 
     whoami () {
       return new Promise((resolve, reject) => {
-        userResource.whoami()
+        this.userResource.whoami()
           .then(res => {
             const { data } = res
             if (!data) {
@@ -41,7 +40,7 @@ export const useUser = defineStore({
 
     permission () {
       return new Promise((resolve, reject) => {
-        userResource.permission()
+        this.userResource.permission()
           .then(res => {
             const { list } = res
             this.permissionList = list
@@ -53,7 +52,7 @@ export const useUser = defineStore({
     },
 
     profile (payload) {
-      return userResource.profile(payload)
+      return this.userResource.profile(payload)
     },
 
     logout () {
