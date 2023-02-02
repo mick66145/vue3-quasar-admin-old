@@ -1,7 +1,8 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <app-header />
-    <app-sidebar />
+    <!-- <app-sidebar /> -->
+    <sidebar />
     <q-page-container class="bg-indigo-1 !pb-16">
       <router-view v-slot="{ Component,route }">
         <transition name="slide-fade">
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import { AppHeader, AppSidebar, AppFooter } from './components'
+import { AppHeader, AppSidebar, AppFooter, Sidebar } from './components'
 import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
@@ -25,6 +26,7 @@ export default defineComponent({
     AppHeader,
     AppSidebar,
     AppFooter,
+    Sidebar,
   },
   setup () {
     return {

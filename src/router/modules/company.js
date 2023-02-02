@@ -7,20 +7,21 @@ const companyRouter = {
   component: MainLayout,
   meta: {
     title: '公司維護',
+    slug: 'link',
   },
   redirect: { name: 'CompanyList' },
   children: [
     {
-      path: '',
+      path: 'list',
       component: () => import('@/views/company/CompanyList.vue'),
       name: 'CompanyList',
-      meta: { title: '公司維護', icon: '', affix: true },
+      meta: { title: '公司維護', icon: 'fas fa-genderless', affix: true },
     },
     {
       path: 'create',
       component: () => import('@/views/company/CompanyCreate.vue'),
       name: 'CompanyCreate',
-      meta: { title: '公司詳情', icon: '' },
+      meta: { title: '公司詳情' },
       hidden: true,
     },
     {
