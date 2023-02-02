@@ -1,6 +1,6 @@
 /* eslint-disable node/no-path-concat */
 import { fileURLToPath, URL } from 'url'
-import path, { resolve } from 'path'
+import path, { resolve } from 'path-browserify'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
@@ -9,7 +9,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import WindiCSS from 'vite-plugin-windicss'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import stylelint from 'vite-plugin-stylelint'
-
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
 
 const fs = require('fs')
@@ -73,6 +72,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
+      path: 'path-browserify',
     },
   },
   rollupOptions: {

@@ -40,6 +40,9 @@ export const constantRoutes = [
     path: '/',
     component: MainLayout,
     redirect: '/dashboard',
+    meta: {
+      slug: 'link',
+    },
     children: [
       {
         path: 'dashboard',
@@ -66,11 +69,41 @@ export const constantRoutes = [
 ]
 
 export const asyncRoutes = [
-  companyRouter,
-  companyJobRouter,
-  userRouter,
-  roleRouter,
-  systemLogRouter,
+  {
+    path: '/',
+    meta: {
+      title: '人員管理',
+      icon: 'menu_open',
+      slug: 'dropdown',
+    },
+    children: [
+      companyRouter,
+    ],
+  },
+  {
+    path: '/',
+    meta: {
+      title: '帳號管理',
+      icon: 'menu_open',
+      slug: 'dropdown',
+    },
+    children: [
+      companyJobRouter,
+      roleRouter,
+      userRouter,
+    ],
+  },
+  {
+    path: '/',
+    meta: {
+      title: '系統紀錄',
+      icon: 'menu_open',
+      slug: 'dropdown',
+    },
+    children: [
+      systemLogRouter,
+    ],
+  },
 ]
 
 const router = createRouter({

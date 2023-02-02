@@ -7,15 +7,16 @@ const roleRouter = {
   component: MainLayout,
   meta: {
     title: '權限維護',
+    slug: 'link',
     permissions: ['view role'],
   },
   redirect: { name: 'RoleList' },
   children: [
     {
-      path: '',
+      path: 'list',
       component: () => import('@/views/role/RoleList.vue'),
       name: 'RoleList',
-      meta: { title: '權限維護', permissions: ['view role'] },
+      meta: { title: '權限維護', icon: 'fas fa-genderless', permissions: ['view role'] },
     },
     {
       path: 'create',

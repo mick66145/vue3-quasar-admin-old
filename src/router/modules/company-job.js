@@ -7,15 +7,16 @@ const companyJobRouter = {
   component: MainLayout,
   meta: {
     title: '職稱維護',
+    slug: 'link',
     permissions: ['view company_job'],
   },
   redirect: { name: 'CompanyJobList' },
   children: [
     {
-      path: '',
+      path: 'list',
       component: () => import('@/views/company-job/CompanyJobList.vue'),
       name: 'CompanyJobList',
-      meta: { title: '職稱維護', permissions: ['view company_job'] },
+      meta: { title: '職稱維護', icon: 'fas fa-genderless', permissions: ['view company_job'] },
     },
     {
       path: 'create',
