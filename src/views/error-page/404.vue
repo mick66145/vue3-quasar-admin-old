@@ -44,35 +44,27 @@ export default defineComponent({})
 <style lang="scss" scoped>
 .wscn-http404-container {
   transform: translate(-50%, -50%);
-  position: absolute;
-  top: 40%;
-  left: 50%;
+
+  @apply top-2/5 left-1/2 absolute;
 }
 
 .wscn-http404 {
-  position: relative;
-  width: 1200px;
-  padding: 0 50px;
-  overflow: hidden;
+  @apply py-0 px-50px w-1200px relative overflow-hidden;
 
   .pic-404 {
-    position: relative;
-    float: left;
-    width: 600px;
-    overflow: hidden;
+    @apply w-600px relative float-left overflow-hidden;
 
     &__parent {
-      width: 100%;
+      @apply w-full;
     }
 
     &__child {
-      position: absolute;
+      @apply absolute;
 
       &.left {
-        width: 80px;
-        top: 17px;
-        left: 220px;
-        opacity: 0;
+        @apply top-17px left-220px w-80px;
+        @apply opacity-0;
+
         animation-name: cloudLeft;
         animation-duration: 2s;
         animation-timing-function: linear;
@@ -81,10 +73,9 @@ export default defineComponent({})
       }
 
       &.mid {
-        width: 46px;
-        top: 10px;
-        left: 420px;
-        opacity: 0;
+        @apply top-10px left-420px w-46px;
+        @apply opacity-0;
+
         animation-name: cloudMid;
         animation-duration: 2s;
         animation-timing-function: linear;
@@ -93,10 +84,9 @@ export default defineComponent({})
       }
 
       &.right {
-        width: 62px;
-        top: 100px;
-        left: 500px;
-        opacity: 0;
+        @apply top-100px left-500px w-62px;
+        @apply opacity-0;
+
         animation-name: cloudRight;
         animation-duration: 2s;
         animation-timing-function: linear;
@@ -106,110 +96,77 @@ export default defineComponent({})
 
       @keyframes cloudLeft {
         0% {
-          top: 17px;
-          left: 220px;
-          opacity: 0;
+          @apply opacity-0 top-17px left-220px;
         }
 
         20% {
-          top: 33px;
-          left: 188px;
-          opacity: 1;
+          @apply opacity-100 top-33px left-188px;
         }
 
         80% {
-          top: 81px;
-          left: 92px;
-          opacity: 1;
+          @apply opacity-100 top-81px left-92px;
         }
 
         100% {
-          top: 97px;
-          left: 60px;
-          opacity: 0;
+          @apply opacity-0 top-97px left-60px;
         }
       }
 
       @keyframes cloudMid {
         0% {
-          top: 10px;
-          left: 420px;
-          opacity: 0;
+          @apply opacity-0 top-10px left-420px;
         }
 
         20% {
-          top: 40px;
-          left: 360px;
-          opacity: 1;
+          @apply opacity-100 top-40px left-360px;
         }
 
         70% {
-          top: 130px;
-          left: 180px;
-          opacity: 1;
+          @apply opacity-100 top-130px left-180px;
         }
 
         100% {
-          top: 160px;
-          left: 120px;
-          opacity: 0;
+          @apply opacity-0 top-160px left-120px;
         }
       }
 
       @keyframes cloudRight {
         0% {
-          top: 100px;
-          left: 500px;
-          opacity: 0;
+          @apply opacity-0 top-100px left-500px;
         }
 
         20% {
-          top: 120px;
-          left: 460px;
-          opacity: 1;
+          @apply opacity-100 top-120px left-460px;
         }
 
         80% {
-          top: 180px;
-          left: 340px;
-          opacity: 1;
+          @apply opacity-100 top-180px left-340px;
         }
 
         100% {
-          top: 200px;
-          left: 300px;
-          opacity: 0;
+          @apply opacity-0 top-200px left-300px;
         }
       }
     }
   }
 
   .bullshit {
-    position: relative;
-    float: left;
-    width: 300px;
-    padding: 30px 0;
-    overflow: hidden;
+    @apply relative float-left overflow-hidden;
+    @apply py-30px px-0 w-300px;
 
     &__oops {
-      font-size: 32px;
-      font-weight: bold;
-      line-height: 40px;
-      color: #1482f0;
-      opacity: 0;
-      margin-bottom: 20px;
+      @apply font-bold text-32px leading-40px;
+      @apply mb-20px opacity-0 text-blue-500;
+
       animation-name: slideUp;
       animation-duration: 0.5s;
       animation-fill-mode: forwards;
     }
 
     &__headline {
-      font-size: 20px;
-      line-height: 24px;
-      color: #222;
-      font-weight: bold;
-      opacity: 0;
-      margin-bottom: 10px;
+      @apply font-bold text-20px leading-24px;
+      @apply mb-10px opacity-0 text-slate-900;
+
       animation-name: slideUp;
       animation-duration: 0.5s;
       animation-delay: 0.1s;
@@ -217,11 +174,9 @@ export default defineComponent({})
     }
 
     &__info {
-      font-size: 13px;
-      line-height: 21px;
-      color: grey;
-      opacity: 0;
-      margin-bottom: 30px;
+      @apply text-13px leading-21px ;
+      @apply mb-30px opacity-0 text-gray-400;
+
       animation-name: slideUp;
       animation-duration: 0.5s;
       animation-delay: 0.2s;
@@ -229,18 +184,11 @@ export default defineComponent({})
     }
 
     &__return-home {
-      display: block;
-      float: left;
-      width: 110px;
-      height: 36px;
-      background: #1482f0;
-      border-radius: 100px;
-      text-align: center;
-      color: #fff;
-      opacity: 0;
-      font-size: 14px;
-      line-height: 36px;
-      cursor: pointer;
+      @apply h-36px w-110px block float-left;
+      @apply bg-blue-500 rounded-100px opacity-0;
+      @apply text-white text-center text-14px leading-36px;
+      @apply cursor-pointer;
+
       animation-name: slideUp;
       animation-duration: 0.5s;
       animation-delay: 0.3s;
@@ -250,12 +198,14 @@ export default defineComponent({})
     @keyframes slideUp {
       0% {
         transform: translateY(60px);
-        opacity: 0;
+
+        @apply opacity-0;
       }
 
       100% {
         transform: translateY(0);
-        opacity: 1;
+
+        @apply opacity-100;
       }
     }
   }
