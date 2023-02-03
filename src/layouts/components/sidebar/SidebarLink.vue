@@ -2,7 +2,6 @@
 <template>
   <q-item
     :to="to"
-    active-class="q-item-no-link-highlighting"
   >
     <q-item-section avatar>
       <q-icon :name="icon" size="2rem" />

@@ -71,6 +71,8 @@ export const constantRoutes = [
 export const asyncRoutes = [
   {
     path: '/',
+    group: ['/company'],
+    groupName: 'first',
     meta: {
       title: '人員管理',
       icon: 'menu_open',
@@ -82,6 +84,8 @@ export const asyncRoutes = [
   },
   {
     path: '/',
+    group: ['/company-job', '/role', '/user'],
+    groupName: 'first',
     meta: {
       title: '帳號管理',
       icon: 'menu_open',
@@ -95,6 +99,8 @@ export const asyncRoutes = [
   },
   {
     path: '/',
+    group: ['/system-log'],
+    groupName: 'first',
     meta: {
       title: '系統紀錄',
       icon: 'menu_open',
