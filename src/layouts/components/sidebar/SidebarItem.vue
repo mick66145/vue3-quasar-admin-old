@@ -2,6 +2,7 @@
   <div v-if="!item.hidden && item.children && !onlyOneChild?.noShowingChildren">
     <template v-if="onlyOneChild && !item.alwaysShow">
       <sidebar-link
+        :key="onlyOneChild.path"
         :to="resolvePath(onlyOneChild.path)"
         :title="onlyOneChild.meta.title"
         :icon="onlyOneChild.meta.icon"
@@ -11,6 +12,7 @@
 
     <q-expansion-item
       v-else
+      :key="item.groupName"
       v-model="open"
       :group="item.groupName"
       :icon="item.meta.icon"
@@ -31,6 +33,7 @@
         />
         <sidebar-link
           v-else
+          :key="childItem.path"
           :to="resolvePath(childItem.path)"
           :title="childItem.meta.title"
           :icon="childItem.meta.icon"
@@ -46,6 +49,7 @@ import SidebarLink from './SidebarLink.vue'
 import path from 'path'
 import { defineComponent, ref, toRefs, computed, onMounted, watch } from 'vue-demi'
 import { useRoute } from 'vue-router'
+import { selectMatchItem } from '@/utils/filter'
 import useEventsBus from '@/use/useEventsBus'
 
 export default defineComponent({
@@ -100,19 +104,19 @@ export default defineComponent({
     // mounted
     onMounted(async () => {
       onclick(buildActiveItem(route.path))
-      const currentItem = bus.value.get('activeItem')
-      if (currentItem) {
-        changeActiveHeaderStyle(currentItem[0])
-      }
     })
 
     // methods
     const onclick = (nodeData) => {
       busEmit('activeItem', nodeData)
+      const currentItem = bus.value.get('activeItem')
+      if (currentItem) {
+        changeActiveHeaderStyle(currentItem[0])
+      }
     }
     const activeItem = (currentItem) => {
       active.value = item.value.to === currentItem.to
-      open.value = item.value.group ? item.value.group.includes(currentItem.group) : false
+      open.value = item.value.group ? item.value.group.filter(groupItem => selectMatchItem([currentItem.group], groupItem).length > 0).length > 0 : false
     }
     const buildActiveItem = (path) => {
       if (!path || path === '/') {
@@ -123,9 +127,10 @@ export default defineComponent({
     }
     const changeActiveHeaderStyle = (currentItem) => {
       activeItem(currentItem)
-      const isGroup = currentItem.group && item.value.group && item.value.group.includes(currentItem.group)
+      const isGroup = currentItem.group && item.value.group && item.value.group.filter(groupItem => selectMatchItem([currentItem.group], groupItem).length > 0).length > 0
       if (!isGroup) {
-        headerClassActive.value = {}
+        headerClassActive.value = ''
+        expandIconClassActive.value = ''
         return
       }
       headerClassActive.value = activeHeaderClass.value ? activeHeaderClass.value : headerClassDefault.value

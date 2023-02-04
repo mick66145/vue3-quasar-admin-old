@@ -1,7 +1,9 @@
 
 <template>
   <q-item
+    v-ripple
     :to="to"
+    clickable
   >
     <q-item-section avatar>
       <q-icon :name="icon" size="2rem" />
