@@ -37,13 +37,6 @@
                 <q-item-section>{{ $t('meun.profile') }}</q-item-section>
               </q-item>
 
-              <q-item
-                to="/"
-                clickable
-              >
-                <q-item-section>{{ $t('meun.dashboard') }}</q-item-section>
-              </q-item>
-
               <q-separator />
               <q-item clickable>
                 <q-item-section @click="logout">{{ $t('meun.logout') }}</q-item-section>
