@@ -134,6 +134,8 @@ export default defineComponent({
     const onCopper = async () => {
       const { canvas } = await cropper.value.getResult()
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, tempRaw.type))
+      const base64 = canvas.toDataURL(tempRaw.type)
+
       const file = new File(
         [blob],
         tempRaw.name,
@@ -143,6 +145,7 @@ export default defineComponent({
       state.image = {
         blobURL: URL.createObjectURL(blob),
         raw: file,
+        base64: base64,
       }
 
       showCropper.value = false
