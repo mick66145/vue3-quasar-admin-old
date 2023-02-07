@@ -9,6 +9,7 @@
       stripe
       :row-config="{ isHover: true }"
       :data="data"
+      :max-height="maxHeight"
       :sort-config="{ trigger: 'cell'}"
       :show-footer="showFooter"
       :footer-span-method="footerSpanMethod"
@@ -39,6 +40,7 @@ export default defineComponent({
     showFooter: { type: Boolean, default: false },
     footerSpanMethod: { type: Function },
     footerMethod: { type: Function },
+    maxHeight: { type: String },
   },
   emits: ['checkbox-all', 'checkbox-change', 'update:current'],
   setup (props, { emit }) {
