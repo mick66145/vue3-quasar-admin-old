@@ -1,5 +1,5 @@
 import { useAsyncState } from '@vueuse/core'
-import { ref } from 'vue-demi'
+import { ref, computed } from 'vue-demi'
 import useNotify from './useNotify'
 
 export default function useCRUD ({
@@ -96,8 +96,11 @@ export default function useCRUD ({
     }
   }
 
+  const isLoading = computed(() => reqCreate.isLoading.value || reqRead.isLoading.value || reqUpdate.isLoading.value || reqDelete.isLoading.value || reqReadList.isLoading.value)
+
   return {
     form,
+    isLoading,
     callCreateFetch,
     callReadFetch,
     callUpdateFetch,
