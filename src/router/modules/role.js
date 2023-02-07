@@ -13,7 +13,7 @@ const roleRouter = {
   redirect: { name: 'RoleList' },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/role/RoleList.vue'),
       name: 'RoleList',
       meta: { title: '權限維護', icon: 'fas fa-genderless', permissions: ['view role'] },

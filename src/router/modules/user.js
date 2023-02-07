@@ -13,7 +13,7 @@ const userRouter = {
   redirect: { name: 'UserList' },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/user/UserList.vue'),
       name: 'UserList',
       meta: { title: '帳號維護', icon: 'fas fa-genderless', permissions: ['view user'] },

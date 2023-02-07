@@ -13,7 +13,7 @@ const companyJobRouter = {
   redirect: { name: 'CompanyJobList' },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/company-job/CompanyJobList.vue'),
       name: 'CompanyJobList',
       meta: { title: '職稱維護', icon: 'fas fa-genderless', permissions: ['view company_job'] },

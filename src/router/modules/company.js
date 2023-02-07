@@ -12,7 +12,7 @@ const companyRouter = {
   redirect: { name: 'CompanyList' },
   children: [
     {
-      path: 'list',
+      path: '',
       component: () => import('@/views/company/CompanyList.vue'),
       name: 'CompanyList',
       meta: { title: '公司維護', icon: 'fas fa-genderless', affix: true },
