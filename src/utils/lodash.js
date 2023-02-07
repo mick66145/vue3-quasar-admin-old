@@ -12,7 +12,7 @@ export const nest = (seq, keys) => {
 /**
 * @param {Array} list 所有數據
 * @param {Array} values 篩選數據
-* @param {string} mapKey 需要查詢的數據的鍵值
+* @param {string} mapKey map欄位
 */
 export const filterIncludesMapBy = (list, values, mapKey) => {
   const mapList = _(values).map(mapKey).value()
@@ -24,7 +24,7 @@ export const filterIncludesMapBy = (list, values, mapKey) => {
 /**
 * @param {Array} list 所有數據
 * @param {Array} values map數據
-* @param {string} mapKey 需要查詢的數據的鍵值
+* @param {string} mapKey map欄位
 */
 export const mapListValueByList = (list, values, mapKey) => {
   return _(list).map((mapItem) => {
@@ -34,4 +34,12 @@ export const mapListValueByList = (list, values, mapKey) => {
     })
     return mapItem
   }).value()
+}
+
+/**
+* @param {Array} list 所有數據
+* @param {string} groupKey group欄位
+*/
+export const groupBy = (list, groupKey) => {
+  return _(list).chain().groupBy(groupKey).value()
 }
