@@ -149,7 +149,7 @@ export default defineComponent({
     }
     const selectMonth = (date) => {
       const month = date.getMonth() + 1 < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1
-      emit('update:modelValue', `${date.getFullYear()}/${month}`)
+      emit('update:modelValue', `${date.getFullYear()}-${month}`)
     }
 
     // watch

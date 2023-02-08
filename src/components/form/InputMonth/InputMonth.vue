@@ -50,7 +50,7 @@ export default defineComponent({
   props: {
     modelValue: { type: [String, Number, Date, null] },
     label: { type: String },
-    placeholder: { type: String, default: '年/月' },
+    placeholder: { type: String, default: '年-月' },
     color: { type: String, default: 'primary' },
     locale: { type: String },
     min: { type: String },
