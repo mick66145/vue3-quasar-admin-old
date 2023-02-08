@@ -58,7 +58,7 @@ export const useUser = defineStore({
     logout () {
       /* 如果有登出的api就使用以下註解 */
       // return new Promise((resolve, reject) => {
-      //   return authResource.logout().then(res => {
+      //   return this.authResource.logout().then(res => {
       //     this.clear()
       //     resolve()
       //   })
