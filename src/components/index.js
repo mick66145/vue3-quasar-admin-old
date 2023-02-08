@@ -19,6 +19,7 @@ import InputTextarea from './form/InputTextarea.vue'
 import InputCheckbox from './form/InputCheckbox.vue'
 import InputTime from './form/InputTime.vue'
 import InputNumber from './form/InputNumber.vue'
+import InputMonth from './form/InputMonth/InputMonth.vue'
 import BaseButton from './button/BaseButton.vue'
 import AddButton from './button/AddButton.vue'
 import DeleteButton from './button/DeleteButton.vue'
@@ -55,6 +56,7 @@ export default {
     app.component('InputCheckbox', InputCheckbox)
     app.component('InputTime', InputTime)
     app.component('InputNumber', InputNumber)
+    app.component('InputMonth', InputMonth)
     app.component('BaseButton', BaseButton)
     app.component('AddButton', AddButton)
     app.component('DeleteButton', DeleteButton)
