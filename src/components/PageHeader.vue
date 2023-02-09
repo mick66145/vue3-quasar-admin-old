@@ -2,7 +2,7 @@
   <div class="row page-header items-center justify-between q-mb-md">
     <div class="flex items-center">
       <SvgIcon v-if="showPrev" icon="arrow-left" class="cursor-pointer" size="24" @click="onPrev" />
-      <h1 class="page-title" :class="showPrev && 'cursor-pointer'" @click="onPrev">
+      <h1 class="flex-center row page-title" :class="showPrev && 'cursor-pointer'" @click="onPrev">
         <slot />
       </h1>
     </div>
