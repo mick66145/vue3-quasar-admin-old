@@ -23,6 +23,18 @@ export const filterIncludesMapBy = (list, values, mapKey) => {
 
 /**
 * @param {Array} list 所有數據
+* @param {Array} values 篩選數據
+* @param {string} mapKey map欄位
+*/
+export const filterNotIncludesMapBy = (list, values, mapKey) => {
+  const mapList = _(values).map(mapKey).value()
+  return _(list).filter((item) => {
+    return !mapList.includes(item[mapKey])
+  }).value()
+}
+
+/**
+* @param {Array} list 所有數據
 * @param {Array} values map數據
 * @param {string} mapKey map欄位
 */
