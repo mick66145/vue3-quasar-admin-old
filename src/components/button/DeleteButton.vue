@@ -1,7 +1,7 @@
 <template>
   <base-button
-    outline
-    rounded
+    :outline="outline"
+    :rounded="rounded"
     color="red"
     :label="buttonLabel"
   />
@@ -13,6 +13,8 @@ import { useI18n } from 'vue-i18n'
 export default defineComponent({
   props: {
     label: { type: String },
+    outline: { type: Boolean, default: true },
+    rounded: { type: Boolean, default: true },
   },
   setup (props) {
     // data
