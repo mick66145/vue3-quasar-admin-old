@@ -1,11 +1,7 @@
 import { createApp } from 'vue'
-import { Quasar, Notify } from 'quasar'
 import { createPinia } from 'pinia'
 
-// quasar
-import 'quasar/src/css/index.sass'
-import '@quasar/extras/material-icons/material-icons.css'
-import '@quasar/extras/fontawesome-v5/fontawesome-v5.css'
+import quasar from '@/plugins/quasar'
 
 // windi
 import 'virtual:windi.css'
@@ -36,14 +32,7 @@ if (import.meta.env === 'development') {
 }
 
 const app = createApp(App)
-app.use(Quasar, {
-  plugins: {
-    Notify,
-  },
-  config: {
-    notify: {},
-  },
-})
+app.use(quasar)
 app.use(createPinia())
 app.use(router)
 app.use(GlobalComponents)
