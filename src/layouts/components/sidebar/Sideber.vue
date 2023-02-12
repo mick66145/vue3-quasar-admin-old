@@ -6,20 +6,14 @@
     :width="260"
     class="bg-white shadow-7 text-blue-grey-7"
   >
-    <q-img
-      class="h-150px absolute-top"
-      src="https://cdn.quasar.dev/img/material.png"
+    <q-item-label
+      header
+      class="text-center text-h6 header-title"
     >
-      <div class="bg-transparent absolute-bottom">
-        <q-avatar size="56px" class="q-mb-sm">
-          <img src="https://cdn.quasar.dev/img/boy-avatar.png">
-        </q-avatar>
-        <div class="text-weight-bold">Razvan Stoenescu</div>
-        <div>@rstoenescu</div>
-      </div>
-    </q-img>
+      Dashboard Base
+    </q-item-label>
     <q-scroll-area
-      class="h-[calc(95%_-_150px)] mt-150px"
+      class="h-[calc(95%_-_50px)]"
       style="border-right: 1px solid #ddd;"
     >
       <q-list>
@@ -31,7 +25,8 @@
         />
       </q-list>
     </q-scroll-area>
-    <div class="q-px-md q-py-sm" style="border-top: 1px solid #ddd;" />
+    <q-separator />
+    <div class="q-px-md q-py-sm" />
   </q-drawer>
 </template>
 

@@ -21,7 +21,7 @@
             @click="$q.fullscreen.toggle()"
           /> -->
         <lang-select />
-        <q-item class="text-right">
+        <q-item class="text-right px-1">
           <q-item-section>
             <q-item-label>{{ userInfo.name }}</q-item-label>
             <q-item-label caption lines="1">{{ userInfo.email }}</q-item-label>
