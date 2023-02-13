@@ -21,50 +21,22 @@
             @click="$q.fullscreen.toggle()"
           /> -->
         <lang-select />
-        <q-item class="text-right px-1">
-          <q-item-section>
-            <q-item-label>{{ userInfo.name }}</q-item-label>
-            <q-item-label caption lines="1">{{ userInfo.email }}</q-item-label>
-          </q-item-section>
-          <q-item-section avatar>
-            <q-avatar>
-              <q-btn round flat>
-                <q-avatar size="44px">
-                  <img src="https://cdn.quasar.dev/img/avatar4.jpg">
-                </q-avatar>
-                <q-menu
-                  transition-show="scale"
-                  transition-hide="scale"
-                >
-                  <q-list class="min-w-100px">
-                    <q-item
-                      to="/profile"
-                      clickable
-                    >
-                      <q-item-section>{{ $t('meun.profile') }}</q-item-section>
-                    </q-item>
-
-                    <q-separator />
-                    <q-item clickable>
-                      <q-item-section @click="logout">{{ $t('meun.logout') }}</q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-menu>
-              </q-btn>
-            </q-avatar>
-          </q-item-section>
-        </q-item>
+        <user-info-item />
       </div>
     </q-toolbar>
   </q-header>
 </template>
 
 <script>
+import UserInfoItem from './UserInfoItem.vue'
 import { defineComponent, reactive } from 'vue-demi'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
 import useLogout from '@/use/useLogout'
 export default defineComponent({
+  components: {
+    UserInfoItem,
+  },
   setup (props, { emit }) {
     // data
     const storeApp = useApp()
