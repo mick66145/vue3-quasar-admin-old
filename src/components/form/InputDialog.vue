@@ -1,14 +1,14 @@
 <template>
   <q-dialog v-model="observeValue" :persistent="persistent" @show="onShow" @hide="onHide">
     <q-card :class="sizeClass">
-      <q-card-section class="row items-center dialog-header">
+      <q-card-section class="bg-primary text-white row items-center dialog-header">
         <slot name="title">
           <div class="text-h6">{{ title }}</div>
         </slot>
         <q-space />
         <q-btn
           v-close-popup
-          icon="close"
+          icon="far fa-times-circle"
           flat
           round
           dense
