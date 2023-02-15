@@ -12,7 +12,7 @@
           </q-card-section>
           <q-card-section>
             <div class="text-center q-pt-lg">
-              <div class="col text-h4 ellipsis">{{ $t('g.system.system-name') }}</div>
+              <div class="col text-h5 ellipsis">{{ $t('g.system.system-name') }}</div>
               <div class="col text-h6 ellipsis">{{ $t('entry.login.title') }}</div>
             </div>
           </q-card-section>
