@@ -51,5 +51,24 @@
   },
   "system-log": {
     "title": "操作紀錄"
+  },
+  "entry": {
+    "register": {
+      "title": "系統註冊",
+      "btn": {
+        "register": "註冊"
+      }
+    },
+    "login": {
+      "title": "系統登入",
+      "btn": {
+        "forget-password": "忘記密碼",
+        "login": "登入"
+      },
+      "loginForm": {
+        "password": "密碼",
+        "account": "帳號"
+      }
+    }
   }
 }

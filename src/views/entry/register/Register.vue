@@ -13,32 +13,33 @@
           <q-card-section>
             <div class="text-center q-pt-lg">
               <div class="col text-h4 ellipsis">{{ $t('g.system.system-name') }}</div>
-              <div class="col text-h6 ellipsis">{{ $t('entry.login.title') }}</div>
+              <div class="col text-h6 ellipsis">{{ $t('entry.register.title') }}</div>
             </div>
           </q-card-section>
           <q-card-section>
             <q-form ref="form" class="q-gutter-md">
               <input-text
                 v-model="formData.account"
-                :label="$t('entry.login.loginForm.account')"
+                :label="$t('login.loginForm.account')"
                 lazy-rules
                 :rules="[
                   $rules.required('帳號必填'),
                 ]"
               />
+
               <input-password
                 v-model="formData.password"
-                :label="$t('entry.login.loginForm.password')"
+                :label="$t('login.loginForm.password')"
                 lazy-rules
                 :rules="[
                   $rules.required('密碼必填'),
                 ]"
-                @keyup.enter="handleLogin"
+                @keyup.enter="handleRegister"
               />
+
               <div>
-                <base-button class="w-full q-mb-md" :label="$t('entry.login.btn.login')" @click.prevent="handleLogin" />
-                <base-button class="text-white w-full q-mb-md" color="black" :label="$t('entry.login.btn.forget-password')" @click.prevent="handleLogin" />
-                <div class="text-center">還沒有帳號嗎? <span><router-link class="text-primary no-underline" to="/register">立即註冊</router-link></span></div>
+                <base-button class="w-full q-mb-md" :label="$t('entry.register.btn.register')" @click.prevent="handleRegister" />
+                <div class="text-center"><router-link class="text-black no-underline" to="/login">返回登入</router-link></div>
               </div>
             </q-form>
           </q-card-section>
@@ -49,7 +50,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, reactive, watch } from 'vue-demi'
+import { defineComponent, reactive } from 'vue-demi'
 import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
 import useCRUD from '@/use/useCRUD'
@@ -64,56 +65,34 @@ export default defineComponent({
       account: '',
       password: '',
     })
-    const redirect = ref(undefined)
-    const otherQuery = ref({})
 
     // methods
     const createFetch = async (payload) => {
-      return await store.login(payload)
+      return await store.register(payload)
     }
-    const getOtherQuery = (query) => {
-      return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== 'redirect') {
-          acc[cur] = query[cur]
-        }
-        return acc
-      }, {})
-    }
-    const handleLogin = () => {
+    const handleRegister = () => {
       form.value.validate().then(async (success) => {
         if (success) {
           const payload = { ...formData }
           const urlObj = {
-            login: () => { return callCreateFetch({ ...payload }) },
+            register: () => { return callCreateFetch({ ...payload }) },
           }
-          const [res, error] = await urlObj.login()
-          if (res) router.push({ path: redirect.value || '/', query: otherQuery.value })
+          const [res, error] = await urlObj.register()
+          if (res) router.push('/login')
         }
       })
     }
 
     // use
     const { form, callCreateFetch } = useCRUD({
-      createSuccess: '登入成功',
+      createSuccess: '註冊成功',
       createFetch: createFetch,
-    })
-
-    // watch
-    watch(() => router, () => {
-      const query = router.query
-      if (query) {
-        redirect.value = query.redirect
-        otherQuery.value = getOtherQuery(query)
-      }
     })
 
     return {
       form,
       formData,
-      redirect,
-      otherQuery,
-      getOtherQuery,
-      handleLogin,
+      handleRegister,
     }
   },
 })

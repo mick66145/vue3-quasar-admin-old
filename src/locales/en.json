@@ -51,5 +51,24 @@
   },
   "system-log": {
     "title": "SystemLog"
+  },
+  "entry": {
+    "register": {
+      "title": "Register",
+      "btn": {
+        "register": "Register"
+      }
+    },
+    "login": {
+      "title": "LogIn",
+      "btn": {
+        "forget-password": "ForgetPassword",
+        "login": "Login"
+      },
+      "loginForm": {
+        "account": "account",
+        "password": "password"
+      }
+    }
   }
 }

@@ -14,6 +14,14 @@ class AuthResource extends Resource {
     }).then(res => res.data)
   }
 
+  async register (params) {
+    return await request({
+      url: `/${this.uri}/register`,
+      method: 'post',
+      data: params,
+    }).then(res => res.data)
+  }
+
   async logout () {
     return await request({
       url: `/${this.uri}/logout`,
