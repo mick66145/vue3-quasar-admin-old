@@ -22,6 +22,14 @@ class AuthResource extends Resource {
     }).then(res => res.data)
   }
 
+  async forgetPassword (params) {
+    return await request({
+      url: `/${this.uri}/forget_password`,
+      method: 'post',
+      data: params,
+    }).then(res => res.data)
+  }
+
   async logout () {
     return await request({
       url: `/${this.uri}/logout`,

@@ -37,7 +37,7 @@
               />
               <div>
                 <base-button class="w-full q-mb-md" :label="$t('entry.login.btn.login')" @click.prevent="handleLogin" />
-                <base-button class="text-white w-full q-mb-md" color="black" :label="$t('entry.login.btn.forget-password')" @click.prevent="handleLogin" />
+                <base-button class="text-white w-full q-mb-md" color="black" :label="$t('entry.login.btn.forget-password')" @click.prevent="showDialog({mode:'create'})" />
                 <div class="text-center">還沒有帳號嗎? <span><router-link class="text-primary no-underline" to="/register">立即註冊</router-link></span></div>
               </div>
             </q-form>
@@ -46,20 +46,25 @@
       </q-page>
     </q-page-container>
   </q-layout>
+  <forget-password-dialog ref="dialog" />
 </template>
 
 <script>
+import ForgetPasswordDialog from './components/ForgetPasswordDialog.vue'
 import { defineComponent, ref, reactive, watch } from 'vue-demi'
 import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
 import useCRUD from '@/use/useCRUD'
 
 export default defineComponent({
+  components: {
+    ForgetPasswordDialog,
+  },
   setup () {
+    // data
     const router = useRouter()
     const store = useUser()
-
-    // data
+    const dialog = ref()
     const formData = reactive({
       account: '',
       password: '',
@@ -78,6 +83,9 @@ export default defineComponent({
         }
         return acc
       }, {})
+    }
+    const showDialog = ({ data, mode }) => {
+      dialog.value.showDialog({ data, mode })
     }
     const handleLogin = () => {
       form.value.validate().then(async (success) => {
@@ -108,11 +116,13 @@ export default defineComponent({
     })
 
     return {
+      dialog,
       form,
       formData,
       redirect,
       otherQuery,
       getOtherQuery,
+      showDialog,
       handleLogin,
     }
   },
