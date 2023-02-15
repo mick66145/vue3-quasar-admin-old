@@ -14,12 +14,16 @@
     },
     "dialog": {
       "default-title": "標題"
+    },
+    "system": {
+      "system-name": "DashBoard Base"
     }
   },
   "login": {
     "title": "系統登入",
     "btn": {
-      "login": "登入"
+      "login": "登入",
+      "forget-password": "忘記密碼"
     },
     "loginForm": {
       "password": "密碼",

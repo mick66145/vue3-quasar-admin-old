@@ -14,12 +14,16 @@
     },
     "dialog": {
       "default-title": "title"
+    },
+    "system": {
+      "system-name": "DashBoard Base"
     }
   },
   "login": {
     "title": "Log in",
     "btn": {
-      "login": "Login"
+      "login": "Login",
+      "forget-password": "ForgetPassword"
     },
     "loginForm": {
       "account": "account",

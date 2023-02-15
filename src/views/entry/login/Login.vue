@@ -3,7 +3,7 @@
     <q-page-container>
       <q-page class="bg-image flex flex-center">
         <q-card
-          :style="$q.screen.lt.sm ? { width: '80%' } : { width: '30%' }"
+          class="w-3/10 <sm:w-4/5 <md:w-3/5 "
         >
           <q-card-section>
             <q-avatar size="103px" class="shadow-10 absolute-center">
@@ -12,10 +12,10 @@
           </q-card-section>
           <q-card-section>
             <div class="text-center q-pt-lg">
+              <div class="col text-h4 ellipsis">{{ $t('g.system.system-name') }}</div>
               <div class="col text-h6 ellipsis">{{ $t('login.title') }}</div>
             </div>
           </q-card-section>
-
           <q-card-section>
             <q-form ref="form" class="q-gutter-md">
               <input-text
@@ -37,8 +37,10 @@
                 @keyup.enter="handleLogin"
               />
 
-              <div class="text-right">
-                <q-btn :label="$t('login.btn.login')" type="button" color="primary" @click.prevent="handleLogin" />
+              <div>
+                <base-button class="w-full q-mb-md" :label="$t('login.btn.login')" @click.prevent="handleLogin" />
+                <base-button class="text-white w-full q-mb-md" color="black" :label="$t('login.btn.forget-password')" @click.prevent="handleLogin" />
+                <div class="text-center">還沒有帳號嗎? <span class="cursor-pointer text-primary">立即註冊</span></div>
               </div>
             </q-form>
           </q-card-section>
