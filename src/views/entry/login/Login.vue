@@ -37,8 +37,8 @@
               />
               <div>
                 <base-button class="w-full q-mb-md" :label="$t('entry.login.btn.login')" @click.prevent="handleLogin" />
-                <base-button class="text-white w-full q-mb-md" color="black" :label="$t('entry.login.btn.forget-password')" @click.prevent="showDialog({mode:'create'})" />
-                <div class="text-center">還沒有帳號嗎? <span><router-link class="text-primary no-underline" to="/register">立即註冊</router-link></span></div>
+                <base-button v-if="isShow.forgetPassword" class="text-white w-full q-mb-md" color="black" :label="$t('entry.login.btn.forget-password')" @click.prevent="showDialog({mode:'create'})" />
+                <div v-if="isShow.register" class="text-center">還沒有帳號嗎? <span><router-link class="text-primary no-underline" to="/register">立即註冊</router-link></span></div>
               </div>
             </q-form>
           </q-card-section>
@@ -71,6 +71,10 @@ export default defineComponent({
     })
     const redirect = ref(undefined)
     const otherQuery = ref({})
+    const isShow = reactive({
+      forgetPassword: false,
+      register: false,
+    })
 
     // methods
     const createFetch = async (payload) => {
@@ -121,6 +125,7 @@ export default defineComponent({
       formData,
       redirect,
       otherQuery,
+      isShow,
       getOtherQuery,
       showDialog,
       handleLogin,
