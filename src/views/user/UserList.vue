@@ -38,24 +38,26 @@
           sortable
           :min-width="$q.screen.lt.sm ? min_width : 'auto'"
         />
-        <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 240">
+        <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 120 : 240">
           <template #default="{ row }">
-            <edit-button
-              class="q-mr-xs"
-              :to="'/user/edit/' + row.id"
-            />
-            <delete-button
-              class="q-mr-xs"
-              @click="onDelete(row)"
-            />
-            <q-btn
-              class="shadow-1 q-mr-xs"
-              outline
-              rounded
-              color="black"
-              :label="$t('g.btn.reset-password')"
-              @click="onResetPassword(row)"
-            />
+            <div class="flex-center row">
+              <edit-button
+                class="q-mr-xs q-mb-xs"
+                :to="'/user/edit/' + row.id"
+              />
+              <delete-button
+                class="q-mr-xs q-mb-xs"
+                @click="onDelete(row)"
+              />
+              <base-button
+                class="q-mr-xs q-mb-xs"
+                outline
+                rounded
+                color="black"
+                :label="$t('g.btn.reset-password')"
+                @click="onResetPassword(row)"
+              />
+            </div>
           </template>
         </vxe-column>
       </vxe-server-table>

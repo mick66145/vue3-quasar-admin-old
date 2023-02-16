@@ -40,14 +40,16 @@
         />
         <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 150">
           <template #default="{ row }">
-            <edit-button
-              class="q-mr-xs"
-              :to="'/role/edit/' + row.id"
-            />
-            <delete-button
-              class="q-mr-xs"
-              @click="onDelete(row)"
-            />
+            <div class="flex-center row">
+              <edit-button
+                class="q-mr-xs q-mb-xs"
+                :to="'/role/edit/' + row.id"
+              />
+              <delete-button
+                class="q-mr-xs q-mb-xs"
+                @click="onDelete(row)"
+              />
+            </div>
           </template>
         </vxe-column>
       </vxe-server-table>
