@@ -1,12 +1,15 @@
 
 import { FileResource } from '@/api'
+import { useApp } from '@/stores/app'
 import reduce from 'lodash-es/reduce'
 
 const fileResource = new FileResource()
 export default function useBatchUpload () {
   const batchUpload = async (payload) => {
+    const storeApp = useApp()
     const resUpload = {}
     const errors = []
+    storeApp.isLoading = true
     await reduce(payload, async (req, value, key) => {
       if (req) await req
       return new Promise(resolve => {
@@ -32,6 +35,7 @@ export default function useBatchUpload () {
         }
       })
     }, Promise.resolve())
+    storeApp.isLoading = false
     return [resUpload, errors]
   }
   return {
