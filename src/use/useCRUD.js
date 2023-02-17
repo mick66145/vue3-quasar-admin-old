@@ -1,6 +1,7 @@
 import { useAsyncState } from '@vueuse/core'
 import { ref, computed } from 'vue-demi'
 import useNotify from './useNotify'
+import { useApp } from '@/stores/app'
 
 export default function useCRUD ({
   createFetch,
@@ -25,7 +26,7 @@ export default function useCRUD ({
 
 }) {
   const { notify, notifyAPIError } = useNotify()
-
+  const storeApp = useApp()
   const reqCreate = useAsyncState(createFetch, {}, { immediate: false })
   const reqRead = useAsyncState(readFetch, {}, { immediate: false })
   const reqUpdate = useAsyncState(updateFetch, {}, { immediate: false })
@@ -35,51 +36,63 @@ export default function useCRUD ({
   const form = ref()
 
   const callCreateFetch = async (id = null, payload) => {
+    storeApp.isLoading = true
     const res = await reqCreate.execute(0, id, payload)
     if (reqCreate.error.value) {
       const message = reqCreate.error.value.response.data.message
+      storeApp.isLoading = false
       notifyAPIError({ message })
       return [null, reqCreate.error.value]
     } else {
       notify({ message: createSuccess, type: 'positive' })
+      storeApp.isLoading = false
       return [res, null]
     }
   }
 
   const callReadFetch = async (id, payload = null) => {
+    storeApp.isLoading = true
     console.log('🚀 ~ callReadFetch ~ payload', id, payload)
     const res = await reqRead.execute(0, id, payload)
     if (reqRead.error.value) {
       const message = reqRead.error.value.response.data.message
       notifyAPIError({ message })
+      storeApp.isLoading = false
       return [null, reqRead.error.value]
     } else {
+      storeApp.isLoading = false
       return [res, null]
     }
   }
 
   const callUpdateFetch = async (id, payload = null) => {
+    storeApp.isLoading = true
     const res = await reqUpdate.execute(0, id, payload)
     console.log('🚀 ~ callUpdateFetch ~ res', res)
     if (reqUpdate.error.value) {
       const message = reqUpdate.error.value.response.data.message
       notifyAPIError({ message })
+      storeApp.isLoading = false
       return [null, reqUpdate.error.value]
     } else {
       notify({ message: updateSuccess, type: 'positive' })
+      storeApp.isLoading = false
       return [res || true, null]
     }
   }
 
   const callDeleteFetch = async (id) => {
+    storeApp.isLoading = true
     const res = await reqDelete.execute(0, id)
     console.log('🚀 ~ callDeleteFetch ~ res', res)
     if (reqDelete.error.value) {
       const message = reqDelete.error.value.response.data.message
       notifyAPIError({ message })
+      storeApp.isLoading = false
       return [null, reqDelete.error.value]
     } else {
       notify({ message: deleteSuccess, type: 'positive' })
+      storeApp.isLoading = false
       return [res || true, null]
     }
   }

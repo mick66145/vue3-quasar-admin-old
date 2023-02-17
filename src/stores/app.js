@@ -10,6 +10,7 @@ export const useApp = defineStore({
       withoutAnimation: false,
     },
     language: getLanguage(),
+    isLoading: false,
   }),
   actions: {
     setLanguage (language) {
