@@ -30,6 +30,14 @@ class AuthResource extends Resource {
     }).then(res => res.data)
   }
 
+  async getVerifyCode (params) {
+    return await request({
+      url: `/${this.uri}/get-signup-verify-code`,
+      method: 'post',
+      data: params,
+    }).then(res => res.data)
+  }
+
   async logout () {
     return await request({
       url: `/${this.uri}/logout`,

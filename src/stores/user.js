@@ -42,6 +42,17 @@ export const useUser = defineStore({
       })
     },
 
+    getVerifyCode (payload) {
+      /* 如果有註冊的api就使用以下註解 */
+      // return this.authResource.getVerifyCode(payload)
+      //   .then(res => {
+      //     return res
+      //   })
+      return new Promise((resolve) => {
+        resolve(true)
+      })
+    },
+
     whoami () {
       return new Promise((resolve, reject) => {
         this.userResource.whoami()
