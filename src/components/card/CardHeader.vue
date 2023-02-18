@@ -1,5 +1,5 @@
 <template>
-  <q-card-section class="mb-4 pb-0">
+  <q-card-section>
     <div class="row items-center justify-between">
       <div class="flex items-center">
         <div class="text-h6 card-title">

@@ -1,5 +1,5 @@
 <template>
-  <q-card-section class="pt-0">
+  <q-card-section>
     <slot />
   </q-card-section>
 </template>
