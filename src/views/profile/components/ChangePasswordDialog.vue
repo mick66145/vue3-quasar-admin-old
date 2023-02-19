@@ -39,7 +39,7 @@
               placeholder="請輸入確認新密碼"
               :rules="[
                 $rules.required('確認新密碼必填'),
-                $rules.sameAs(data.state.password,'與新密碼不相符')
+                $rules.sameAs(data.state.new_password,'與新密碼不相符')
               ]"
             />
           </q-item>
