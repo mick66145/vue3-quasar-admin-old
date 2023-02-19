@@ -1,4 +1,4 @@
-import { Quasar, Notify } from 'quasar'
+import { Quasar, Notify, Loading } from 'quasar'
 
 import '@quasar/quasar-ui-qcalendar/src/QCalendarVariables.sass'
 import '@quasar/quasar-ui-qcalendar/src/QCalendarTransitions.sass'
@@ -13,6 +13,7 @@ export default {
     app.use(Quasar, {
       plugins: {
         Notify,
+        Loading,
       },
       config: {
         notify: {},
