@@ -90,6 +90,14 @@ class UserResource extends Resource {
       data: params,
     })
   }
+
+  async changePassword (params) {
+    return request({
+      url: `/${this.uri}/change_password`,
+      method: 'post',
+      data: params,
+    })
+  }
 }
 
 export default UserResource

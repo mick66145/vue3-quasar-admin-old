@@ -86,6 +86,10 @@ export const useUser = defineStore({
       return this.userResource.profile(payload)
     },
 
+    changePassword (payload) {
+      return this.userResource.changePassword(payload)
+    },
+
     logout () {
       /* 如果有登出的api就使用以下註解 */
       // return new Promise((resolve, reject) => {
