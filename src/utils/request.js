@@ -30,6 +30,10 @@ export const handleAuthError = async (error) => {
   return Promise.reject(error)
 }
 
+export const handleResponse = async (response) => {
+  return Promise.resolve(response)
+}
+
 // create an axios instance
 const service = axios.create({
   baseURL: `${Configuration('backendHost')}`, // url = base url + request url
@@ -58,12 +62,12 @@ service.interceptors.request.use(
 )
 
 service.interceptors.response.use(
-  response => response,
+  handleResponse,
   handleError,
 )
 
 service.interceptors.response.use(
-  response => response,
+  handleResponse,
   handleAuthError,
 )
 
