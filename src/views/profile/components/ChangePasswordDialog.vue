@@ -53,6 +53,7 @@
 import { defineComponent } from 'vue-demi'
 import { useUser } from '@/stores/user'
 import useDialog from '@/use/useDialog'
+import useLogout from '@/use/useLogout'
 
 export default defineComponent({
   emits: ['save'],
@@ -66,7 +67,9 @@ export default defineComponent({
     }
     const onSave = async () => {
       const [res, error] = await save()
-      if (res) emit('save')
+      if (res) {
+        resetStore()
+      }
     }
     const onHide = () => {
       data.reset()
@@ -82,6 +85,8 @@ export default defineComponent({
       createSuccess: '修改密碼成功',
       createFetch: createFetch,
     })
+    // use
+    const { resetStore } = useLogout()
 
     return {
       form,
