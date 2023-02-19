@@ -1,15 +1,17 @@
 <template>
   <q-card-section>
-    <div class="row items-center justify-between">
-      <div class="flex items-center">
-        <div class="text-h6 card-title">
-          <slot />
+    <slot name="header">
+      <div class="row items-center justify-between">
+        <div class="flex items-center">
+          <div class="text-h6 card-title">
+            <slot />
+          </div>
+        </div>
+        <div v-if="$slots.action">
+          <slot name="action" />
         </div>
       </div>
-      <div v-if="$slots.action">
-        <slot name="action" />
-      </div>
-    </div>
+    </slot>
   </q-card-section>
 </template>
 
