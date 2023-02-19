@@ -39,8 +39,8 @@ export default function useCRUD ({
     storeApp.isLoading = true
     const res = await reqCreate.execute(0, id, payload)
     if (reqCreate.error.value) {
-      const message = reqCreate.error.value.response.data.message
       storeApp.isLoading = false
+      const message = reqCreate.error.value || reqCreate.error.value.response.data.message
       notifyAPIError({ message })
       return [null, reqCreate.error.value]
     } else {
@@ -55,9 +55,9 @@ export default function useCRUD ({
     console.log('🚀 ~ callReadFetch ~ payload', id, payload)
     const res = await reqRead.execute(0, id, payload)
     if (reqRead.error.value) {
-      const message = reqRead.error.value.response.data.message
-      notifyAPIError({ message })
       storeApp.isLoading = false
+      const message = reqRead.error.value || reqRead.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqRead.error.value]
     } else {
       storeApp.isLoading = false
@@ -70,9 +70,9 @@ export default function useCRUD ({
     const res = await reqUpdate.execute(0, id, payload)
     console.log('🚀 ~ callUpdateFetch ~ res', res)
     if (reqUpdate.error.value) {
-      const message = reqUpdate.error.value.response.data.message
-      notifyAPIError({ message })
       storeApp.isLoading = false
+      const message = reqUpdate.error.value || reqUpdate.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqUpdate.error.value]
     } else {
       notify({ message: updateSuccess, type: 'positive' })
@@ -86,9 +86,9 @@ export default function useCRUD ({
     const res = await reqDelete.execute(0, id)
     console.log('🚀 ~ callDeleteFetch ~ res', res)
     if (reqDelete.error.value) {
-      const message = reqDelete.error.value.response.data.message
-      notifyAPIError({ message })
       storeApp.isLoading = false
+      const message = reqDelete.error.value || reqDelete.error.value.response.data.message
+      notifyAPIError({ message })
       return [null, reqDelete.error.value]
     } else {
       notify({ message: deleteSuccess, type: 'positive' })
@@ -101,7 +101,7 @@ export default function useCRUD ({
     console.log('🚀 ~ callReadListFetch ~ payload', payload)
     const res = await reqReadList.execute(0, id, payload)
     if (reqReadList.error.value) {
-      const message = reqReadList.error.value.response.data.message
+      const message = reqReadList.error.value || reqReadList.error.value.response.data.message
       notifyAPIError({ message })
       return [null, reqReadList.error.value]
     } else {
