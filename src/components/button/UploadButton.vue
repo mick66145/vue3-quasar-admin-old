@@ -33,7 +33,10 @@ export default defineComponent({
     icon: { type: String },
     outline: { type: Boolean, default: false },
     rounded: { type: Boolean, default: true },
-    accept: { type: String, default: 'image/png, image/jpeg, image/jpg' },
+    accept: {
+      type: String,
+      default: 'image/*, .csv,.xls,.xlsx, .doc,.docx,.pdf',
+    },
     maxFileSize: { type: Number, default: 5120000 },
   },
   emits: ['on-file'],
