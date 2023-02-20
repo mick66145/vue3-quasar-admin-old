@@ -26,17 +26,18 @@
 
       <q-card-actions class="q-dialog-footer" align="right">
         <slot name="footer" class="text-primary">
-          <q-btn
+          <base-button
+            v-if="showCancel"
             v-close-popup
-            class="shadow-1 q-mr-xs"
+            class="q-mr-xs"
             outline
             :color="cancelButtonColor"
             :label="cancelButtonText"
             padding="sm 2.5em"
             @click="onCancel"
           />
-          <q-btn
-            class="shadow-1"
+          <base-button
+            v-if="showSave"
             :color="confirmButtonColor"
             :label="confirmButtonText"
             padding="sm 2.5em"
@@ -61,6 +62,8 @@ export default defineComponent({
     confirmButtonColor: { type: String, default: 'primary' },
     persistent: { type: Boolean, default: false },
     size: { type: String },
+    showCancel: { type: Boolean, default: true },
+    showSave: { type: Boolean, default: true },
   },
   emits: ['update:modelValue', 'save', 'cancel', 'show', 'hide'],
   setup (props, { emit }) {
