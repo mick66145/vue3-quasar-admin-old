@@ -23,7 +23,7 @@
         no-refocus
         no-focus
       >
-        <q-date v-model="observeValue" @update:modelValue="show = false">
+        <q-date v-model="observeValue">
           <div class="row items-center justify-end">
             <q-btn v-close-popup label="Close" color="primary" flat />
           </div>
