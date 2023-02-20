@@ -46,7 +46,7 @@
 
 <script>
 import PreviewDialog from './components/PreviewDialog.vue'
-import { defineComponent, computed, reactive, ref } from 'vue-demi'
+import { defineComponent, computed, ref } from 'vue-demi'
 import useImgStorage from '@/use/useImgStorage'
 
 export default defineComponent({
@@ -63,7 +63,6 @@ export default defineComponent({
     // data
     const dialog = ref()
     const imageUpload = ref()
-    const fileList = reactive([])
 
     // computed
     const observeValue = computed({
@@ -101,7 +100,7 @@ export default defineComponent({
       dialog.value.showDialog({ data: item })
     }
     const onDelete = (index) => {
-      fileList.splice(index, 1)
+      observeValue.value.splice(index, 1)
     }
 
     // use
@@ -110,7 +109,6 @@ export default defineComponent({
     return {
       dialog,
       imageUpload,
-      fileList,
       observeValue,
       preview,
       onFile,
