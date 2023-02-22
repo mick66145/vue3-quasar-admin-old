@@ -40,7 +40,7 @@ export default function useCRUD ({
     const res = await reqCreate.execute(0, id, payload)
     if (reqCreate.error.value) {
       storeApp.isLoading = false
-      const message = reqCreate.error.value || reqCreate.error.value.response.data.message
+      const message = reqCreate.error.value.response.data.message || reqCreate.error.value
       notifyAPIError({ message })
       return [null, reqCreate.error.value]
     } else {
@@ -56,7 +56,7 @@ export default function useCRUD ({
     const res = await reqRead.execute(0, id, payload)
     if (reqRead.error.value) {
       storeApp.isLoading = false
-      const message = reqRead.error.value || reqRead.error.value.response.data.message
+      const message = reqRead.error.value.response.data.message || reqRead.error.value
       notifyAPIError({ message })
       return [null, reqRead.error.value]
     } else {
@@ -71,7 +71,7 @@ export default function useCRUD ({
     console.log('🚀 ~ callUpdateFetch ~ res', res)
     if (reqUpdate.error.value) {
       storeApp.isLoading = false
-      const message = reqUpdate.error.value || reqUpdate.error.value.response.data.message
+      const message = reqUpdate.error.value.response.data.message || reqUpdate.error.value
       notifyAPIError({ message })
       return [null, reqUpdate.error.value]
     } else {
@@ -87,7 +87,7 @@ export default function useCRUD ({
     console.log('🚀 ~ callDeleteFetch ~ res', res)
     if (reqDelete.error.value) {
       storeApp.isLoading = false
-      const message = reqDelete.error.value || reqDelete.error.value.response.data.message
+      const message = reqDelete.error.value.response.data.message || reqDelete.error.value
       notifyAPIError({ message })
       return [null, reqDelete.error.value]
     } else {
@@ -101,7 +101,7 @@ export default function useCRUD ({
     console.log('🚀 ~ callReadListFetch ~ payload', payload)
     const res = await reqReadList.execute(0, id, payload)
     if (reqReadList.error.value) {
-      const message = reqReadList.error.value || reqReadList.error.value.response.data.message
+      const message = reqReadList.error.value.response.data.message || reqReadList.error.value
       notifyAPIError({ message })
       return [null, reqReadList.error.value]
     } else {
