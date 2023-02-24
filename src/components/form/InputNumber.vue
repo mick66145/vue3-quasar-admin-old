@@ -76,7 +76,7 @@ export default defineComponent({
           emit('update:modelValue', 0)
           return
         }
-        emit('update:modelValue', value)
+        emit('update:modelValue', +value)
       },
     })
 
