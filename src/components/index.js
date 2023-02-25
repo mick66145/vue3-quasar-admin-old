@@ -27,6 +27,7 @@ import EditButton from './button/EditButton.vue'
 import ResetButton from './button/ResetButton.vue'
 import ViewButton from './button/ViewButton.vue'
 import UploadButton from './button/UploadButton.vue'
+import BaseImage from './image/BaseImage.vue'
 import LangSelect from './LangSelect.vue'
 import MessageDialog from './MessageDialog.vue'
 import ScShadow from './shadow/ScShadow.vue'
@@ -66,6 +67,7 @@ export default {
     app.component('ResetButton', ResetButton)
     app.component('ViewButton', ViewButton)
     app.component('UploadButton', UploadButton)
+    app.component('BaseImage', BaseImage)
     app.component('LangSelect', LangSelect)
     app.component('MessageDialog', MessageDialog)
     app.component('ScShadow', ScShadow)
