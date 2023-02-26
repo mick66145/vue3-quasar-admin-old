@@ -2,7 +2,6 @@
   <q-img
     loading="lazy"
     spinner-color="white"
-    style="height: 150px; width: 150px;"
     :src="src"
     :ratio="ratio"
     :alt="alt"
@@ -25,8 +24,8 @@ export default defineComponent({
     src: { type: String },
     ratio: { type: Number, default: 1 },
     alt: { type: String, default: '' },
-    height: { type: String, default: '150px' },
-    width: { type: String, default: '150px' },
+    height: { type: String, default: '100%' },
+    width: { type: String, default: '100%' },
   },
   setup () {
     return {
