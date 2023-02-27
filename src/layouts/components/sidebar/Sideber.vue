@@ -10,7 +10,7 @@
       header
       class="text-center text-h6 header-title"
     >
-      Dashboard Base
+      {{ $t('g.system.system-name') }}
     </q-item-label>
     <q-scroll-area
       class="h-[calc(95%_-_50px)]"
