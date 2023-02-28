@@ -40,18 +40,16 @@
         @on-file="onFile"
       />
     </div>
-    <preview-dialog ref="dialog" />
+    <image-preview-dialog ref="dialog" />
   </div>
 </template>
 
 <script>
-import PreviewDialog from './components/PreviewDialog.vue'
 import { defineComponent, computed, ref } from 'vue-demi'
 import useImgStorage from '@/use/useImgStorage'
 
 export default defineComponent({
   components: {
-    PreviewDialog,
   },
   props: {
     modelValue: { type: Array, default () { return [] } },
