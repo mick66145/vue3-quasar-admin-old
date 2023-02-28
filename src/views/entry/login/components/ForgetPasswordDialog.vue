@@ -15,16 +15,12 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
           <q-item>
-            <input-text
+            <input-email
               v-model="data.state.email"
-              type="email"
               class="full-width"
               label="Email *"
               placeholder="請輸入Email"
-              :rules="[
-                $rules.required('Email必填'),
-                $rules.email('必須是email格式')
-              ]"
+              :rules="[$rules.required('Email必填')]"
             />
           </q-item>
         </div>

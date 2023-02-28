@@ -88,9 +88,8 @@
               />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-9">
-              <input-text
+              <input-email
                 v-model="formData.email"
-                type="email"
                 class="full-width"
                 label="Email"
               />

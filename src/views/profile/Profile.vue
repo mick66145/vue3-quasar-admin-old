@@ -30,16 +30,12 @@
               />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
-              <input-text
+              <input-email
                 v-model="formData.email"
                 class="full-width"
                 label="Email *"
-                type="email"
                 placeholder="請輸入Email"
-                :rules="[
-                  $rules.required('Email必填'),
-                  $rules.email('必須是email格式')
-                ]"
+                :rules="[$rules.required('Email必填')]"
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -68,7 +64,7 @@ export default defineComponent({
   setup () {
     // data
     const store = useUser()
-    const formData = reactive(store.info)
+    const formData = reactive({ ...store.info })
 
     // methods
     const updateFetch = async (payload) => {
