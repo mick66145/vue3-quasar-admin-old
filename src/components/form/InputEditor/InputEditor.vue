@@ -10,7 +10,7 @@
       :modules="modules"
       :options="options"
     />
-    <input-dialog
+    <base-dialog
       v-model="showDialog"
       title="上傳圖片："
       @save="onSave"
@@ -51,7 +51,7 @@
           </div>
         </div>
       </q-form>
-    </input-dialog>
+    </base-dialog>
   </div>
 </template>
 

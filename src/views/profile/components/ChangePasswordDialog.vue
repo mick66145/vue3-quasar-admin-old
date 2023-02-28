@@ -1,5 +1,5 @@
 <template>
-  <input-dialog
+  <base-dialog
     v-model="isShowDialog"
     title="修改密碼"
     confirmButtonText="送出"
@@ -46,7 +46,7 @@
         </div>
       </div>
     </q-form>
-  </input-dialog>
+  </base-dialog>
 </template>
 
 <script>

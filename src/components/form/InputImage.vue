@@ -12,7 +12,7 @@
         </div>
 
         <!-- ANCHOR 上傳 -->
-        <input-dialog v-model="showDialog" title="上傳圖片 : " @show="onOpen" @save="onSave" @cancel="onCancelCopper">
+        <base-dialog v-model="showDialog" title="上傳圖片 : " @show="onOpen" @save="onSave" @cancel="onCancelCopper">
           <q-form ref="form">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12">
@@ -52,15 +52,15 @@
               </div>
             </div>
           </q-form>
-        </input-dialog>
+        </base-dialog>
 
-        <input-dialog v-model="showCropper" title="裁切圖片 : " @save="onCopper" @cancel="onCancelCopper">
+        <base-dialog v-model="showCropper" title="裁切圖片 : " @save="onCopper" @cancel="onCancelCopper">
           <image-cropper
             ref="cropper"
             :source="tempCropper"
             :aspect-ratio="aspect"
           />
-        </input-dialog>
+        </base-dialog>
       </div>
     </template>
   </q-field>
