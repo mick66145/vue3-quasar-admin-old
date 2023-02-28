@@ -29,8 +29,10 @@ import ResetButton from './button/ResetButton.vue'
 import ViewButton from './button/ViewButton.vue'
 import UploadButton from './button/UploadButton.vue'
 import BaseImage from './image/BaseImage.vue'
+import BaseDialog from './dialog/BaseDialog.vue'
+import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
+import MessageDialog from './dialog/MessageDialog.vue'
 import LangSelect from './LangSelect.vue'
-import MessageDialog from './MessageDialog.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
 import Pagination from './Pagination.vue'
@@ -70,8 +72,10 @@ export default {
     app.component('ViewButton', ViewButton)
     app.component('UploadButton', UploadButton)
     app.component('BaseImage', BaseImage)
-    app.component('LangSelect', LangSelect)
+    app.component('BaseDialog', BaseDialog)
+    app.component('ImagePreviewDialog', ImagePreviewDialog)
     app.component('MessageDialog', MessageDialog)
+    app.component('LangSelect', LangSelect)
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
     app.component('Pagination', Pagination)
