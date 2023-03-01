@@ -23,7 +23,7 @@
         no-refocus
         no-focus
       >
-        <q-date v-model="observeValue">
+        <q-date v-model="observeValue" :options="options">
           <div class="row items-center justify-end">
             <q-btn v-close-popup label="Close" color="primary" flat />
           </div>
@@ -41,6 +41,7 @@ export default defineComponent({
     modelValue: { type: String },
     label: { type: String },
     placeholder: { type: String, default: '年/月/日' },
+    options: { type: Array },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
