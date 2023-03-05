@@ -98,8 +98,14 @@ export const vuelidate = {
   dayjIsBefore (locator, message = false, format = 'YYYY-MM-DD') {
     return (val) => dayjs(val, format).isBefore(dayjs(locator, format)) || message
   },
+  dayjIsSameOrBefore (locator, message = false, format = 'YYYY-MM-DD') {
+    return (val) => dayjs(val, format).isSameOrBefore(dayjs(locator, format)) || message
+  },
   dayjIsAfter (locator, message = false, format = 'YYYY-MM-DD') {
     return (val) => dayjs(val, format).isAfter(dayjs(locator, format)) || message
+  },
+  dayjIsSameOrAfter (locator, message = false, format = 'YYYY-MM-DD') {
+    return (val) => dayjs(val, format).isSameOrAfter(dayjs(locator, format)) || message
   },
 }
 
