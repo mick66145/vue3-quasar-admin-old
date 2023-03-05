@@ -131,7 +131,7 @@ export default defineComponent({
       const d = date ? new Date(date) : new Date()
       d.setDate(1)
       d.setHours(0, 0, 0, 0)
-      return d
+      return isNaN(d) ? new Date() : d
     }
     const currentMonth = () => {
       return cleanDate()
