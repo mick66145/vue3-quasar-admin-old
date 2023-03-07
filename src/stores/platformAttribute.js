@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
 import { PlatformAttributeResource } from '@/api'
+import { defineStore } from 'pinia'
 
 export const usePlatformAttribute = defineStore({
   id: 'platformAttribute',

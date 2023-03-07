@@ -4,6 +4,7 @@ import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import { useUser } from '@/stores/user'
 import { usePermission } from '@/stores/permission'
+import { usePlatformAttribute } from '@/stores/platformAttribute'
 import getPageTitle from './utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
@@ -20,6 +21,8 @@ router.beforeEach(async (to, from, next) => {
   // determine whether the user has logged in
   const store = useUser()
   const storePermission = usePermission()
+  const storePlatformAttribute = usePlatformAttribute()
+  storePlatformAttribute.getPlatformAttribute()
   const hasToken = getToken()
   if (hasToken) {
     if (to.path === '/login') {
