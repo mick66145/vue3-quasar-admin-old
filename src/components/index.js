@@ -27,6 +27,7 @@ import EditButton from './button/EditButton.vue'
 import ResetButton from './button/ResetButton.vue'
 import ViewButton from './button/ViewButton.vue'
 import UploadButton from './button/UploadButton.vue'
+import DownloadButton from './button/DownloadButton.vue'
 import BaseImage from './image/BaseImage.vue'
 import BaseDialog from './dialog/BaseDialog.vue'
 import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
@@ -69,6 +70,7 @@ export default {
     app.component('ResetButton', ResetButton)
     app.component('ViewButton', ViewButton)
     app.component('UploadButton', UploadButton)
+    app.component('DownloadButton', DownloadButton)
     app.component('BaseImage', BaseImage)
     app.component('BaseDialog', BaseDialog)
     app.component('ImagePreviewDialog', ImagePreviewDialog)

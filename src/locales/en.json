@@ -10,7 +10,8 @@
       "go-back": "goBack",
       "reset-password": "resetPassword",
       "reset": "reset",
-      "view": "view"
+      "view": "view",
+      "dowload": "Dowload"
     },
     "dialog": {
       "default-title": "title"
