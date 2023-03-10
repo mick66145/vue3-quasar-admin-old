@@ -14,6 +14,7 @@
       :show-footer="showFooter"
       :footer-span-method="footerSpanMethod"
       :footer-method="footerMethod"
+      :checkbox-config="checkboxConfig"
       @sort-change="onChangeSort"
       @checkbox-all="onCheckboxAll"
       @checkbox-change="onCheckboxChange"
@@ -41,6 +42,7 @@ export default defineComponent({
     showFooter: { type: Boolean, default: false },
     footerSpanMethod: { type: Function },
     footerMethod: { type: Function },
+    checkboxConfig: { type: Object }, // { labelField:'', checkMethod:({row}), visibleMethod:({row})}
     maxHeight: { type: Number },
   },
   emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current'],
