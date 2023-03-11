@@ -22,8 +22,11 @@ router.beforeEach(async (to, from, next) => {
   const store = useUser()
   const storePermission = usePermission()
   const storePlatformAttribute = usePlatformAttribute()
-  storePlatformAttribute.getPlatformAttribute()
   const hasToken = getToken()
+  const hasPlatformAttribute = storePlatformAttribute.platformAttribute
+  if (!hasPlatformAttribute) {
+    await storePlatformAttribute.getPlatformAttribute()
+  }
   if (hasToken) {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
