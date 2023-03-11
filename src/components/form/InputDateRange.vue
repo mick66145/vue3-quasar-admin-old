@@ -36,7 +36,7 @@
           />
         </div>
       </div> -->
-        <q-date ref="datePicker" v-model="dateRangeValue" range>
+        <q-date ref="datePicker" v-model="dateRangeValue" :options="options" range>
           <div class="row items-center justify-end">
             <q-btn v-close-popup label="Close" color="primary" flat />
           </div>
@@ -54,6 +54,7 @@ export default defineComponent({
     modelValue: { type: [String, Object] },
     label: { type: String },
     placeholder: { type: String, default: '請選擇開始日期至結束日期' },
+    options: { type: Array },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
@@ -153,7 +154,7 @@ export default defineComponent({
       evt?.relatedTarget.parentElement.className.includes('q-date__arrow') ||
       evt?.relatedTarget.className.includes('q-btn--no-uppercase') ||
       evt?.relatedTarget.className.includes('q-btn--round') ||
-      evt?.relatedTarget.className.includes('q-btn-item')
+      evt?.relatedTarget.className.includes('q-btn--dense')
       ) {
         inputDateRange.value.focus()
       } else {
