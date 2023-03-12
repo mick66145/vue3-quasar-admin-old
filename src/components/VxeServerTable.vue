@@ -7,14 +7,14 @@
       auto-resize
       round
       stripe
-      :row-config="{ isHover: true }"
+      :row-config="observeRowConfig"
       :data="data"
       :max-height="maxHeight"
-      :sort-config="{ trigger: 'cell',remote:true}"
+      :sort-config="{ trigger: 'cell', remote: true }"
       :show-footer="showFooter"
       :footer-span-method="footerSpanMethod"
       :footer-method="footerMethod"
-      :checkbox-config="checkboxConfig"
+      :checkbox-config="observeCheckboxConfig"
       @sort-change="onChangeSort"
       @checkbox-all="onCheckboxAll"
       @checkbox-change="onCheckboxChange"
@@ -31,18 +31,24 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue-demi'
-
+import { defineComponent, ref, computed } from 'vue-demi'
+import mapKeys from 'lodash-es/mapKeys'
 export default defineComponent({
   props: {
-    data: { type: Array, default () { return [] } },
+    data: {
+      type: Array,
+      default () {
+        return []
+      },
+    },
     total: { type: Number, default: 0 },
     current: { type: Number, default: 1 },
     showPagination: { type: Boolean, default: true },
     showFooter: { type: Boolean, default: false },
     footerSpanMethod: { type: Function },
     footerMethod: { type: Function },
-    checkboxConfig: { type: Object }, // { labelField:'', checkMethod:({row}), visibleMethod:({row})}
+    checkboxConfig: { type: Object },
+    rowConfig: { type: Object },
     maxHeight: { type: Number },
   },
   emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current'],
@@ -50,6 +56,28 @@ export default defineComponent({
     // data
     const dataTable = ref()
     const refreshKey = ref(0)
+
+    // computed
+    const observeCheckboxConfig = computed(() => {
+      const config = {
+        reserve: true,
+        trigger: 'row',
+      }
+      mapKeys(props.checkboxConfig, (_, key) => {
+        config[key] = props.checkboxConfig[key]
+      })
+      return config
+    })
+    const observeRowConfig = computed(() => {
+      const config = {
+        keyField: 'id',
+        isHover: true,
+      }
+      mapKeys(props.rowConfig, (_, key) => {
+        config[key] = props.rowConfig[key]
+      })
+      return config
+    })
 
     // methods
     const sort = (item) => {
@@ -64,6 +92,14 @@ export default defineComponent({
     const getCheckboxRecords = () => {
       return dataTable.value.getCheckboxRecords()
     }
+    const getCheckboxReserveRecords = () => {
+      return dataTable.value.getCheckboxReserveRecords()
+    }
+    const getAllCheckboxRecords = () => {
+      return dataTable.value
+        .getCheckboxReserveRecords()
+        .concat(dataTable.value.getCheckboxRecords())
+    }
     const setCheckboxRow = (rows, checked) => {
       return dataTable.value.setCheckboxRow(rows, checked)
     }
@@ -74,10 +110,31 @@ export default defineComponent({
       return dataTable.value.setAllCheckboxRow(checked)
     }
     const clearCheckboxRow = () => {
-      return dataTable.value.clearCheckboxRow()
+      dataTable.value.clearCheckboxRow()
     }
-    const onChangeSort = ({ column, property, order, sortBy, sortList, $event }) => {
-      emit('sort-change', { column, property, order, sortBy, sortList, $event })
+    const clearCheckboxReserve = () => {
+      dataTable.value.clearCheckboxReserve()
+    }
+    const clearAllCheckboxRow = () => {
+      dataTable.value.clearCheckboxRow()
+      dataTable.value.clearCheckboxReserve()
+    }
+    const onChangeSort = ({
+      column,
+      property,
+      order,
+      sortBy,
+      sortList,
+      $event,
+    }) => {
+      emit('sort-change', {
+        column,
+        property,
+        order,
+        sortBy,
+        sortList,
+        $event,
+      })
     }
     const onCheckboxAll = ({ checked }) => {
       emit('checkbox-all', { checked })
@@ -92,14 +149,20 @@ export default defineComponent({
     return {
       dataTable,
       refreshKey,
+      observeCheckboxConfig,
+      observeRowConfig,
       sort,
       refresh,
       updateFooter,
       getCheckboxRecords,
+      getCheckboxReserveRecords,
+      getAllCheckboxRecords,
       setCheckboxRow,
       toggleCheckboxRow,
       setAllCheckboxRow,
       clearCheckboxRow,
+      clearCheckboxReserve,
+      clearAllCheckboxRow,
       onChangeSort,
       onCheckboxAll,
       onCheckboxChange,
