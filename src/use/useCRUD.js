@@ -7,22 +7,32 @@ export default function useCRUD ({
   createFetch,
   createSuccess = '新增成功',
   createFail = '新增失敗',
+  isShowCreateSuccess = true,
+  isShowCreateFail = true,
 
   readFetch,
   readSuccess = '讀取成功',
   readFail = '讀取失敗',
+  isShowReadSuccess = true,
+  isShowReadFail = true,
 
   updateFetch,
   updateSuccess = '編輯成功',
   updateFail = '編輯失敗',
+  isShowUpdateSuccess = true,
+  isShowUpdateFail = true,
 
   deleteFetch,
   deleteSuccess = '刪除成功',
   deleteFail = '刪除失敗',
+  isShowDeleteSuccess = true,
+  isShowDeleteFail = true,
 
   readListFetch,
   readListSuccess = '讀取列表成功',
   readListFail = '讀取列表失敗',
+  isShowReadListSuccess = true,
+  isShowReadListFail = true,
 
 }) {
   const { notify, notifyAPIError } = useNotify()
@@ -41,10 +51,10 @@ export default function useCRUD ({
     if (reqCreate.error.value) {
       storeApp.isLoading = false
       const message = reqCreate.error.value.response.data.message || reqCreate.error.value
-      notifyAPIError({ message })
+      isShowCreateFail && notifyAPIError({ message })
       return [null, reqCreate.error.value]
     } else {
-      notify({ message: createSuccess, type: 'positive' })
+      isShowCreateSuccess && notify({ message: createSuccess, type: 'positive' })
       storeApp.isLoading = false
       return [res, null]
     }
@@ -57,7 +67,7 @@ export default function useCRUD ({
     if (reqRead.error.value) {
       storeApp.isLoading = false
       const message = reqRead.error.value.response.data.message || reqRead.error.value
-      notifyAPIError({ message })
+      isShowReadFail && notifyAPIError({ message })
       return [null, reqRead.error.value]
     } else {
       storeApp.isLoading = false
@@ -72,10 +82,10 @@ export default function useCRUD ({
     if (reqUpdate.error.value) {
       storeApp.isLoading = false
       const message = reqUpdate.error.value.response.data.message || reqUpdate.error.value
-      notifyAPIError({ message })
+      isShowUpdateFail && notifyAPIError({ message })
       return [null, reqUpdate.error.value]
     } else {
-      notify({ message: updateSuccess, type: 'positive' })
+      isShowUpdateSuccess && notify({ message: updateSuccess, type: 'positive' })
       storeApp.isLoading = false
       return [res || true, null]
     }
@@ -88,10 +98,10 @@ export default function useCRUD ({
     if (reqDelete.error.value) {
       storeApp.isLoading = false
       const message = reqDelete.error.value.response.data.message || reqDelete.error.value
-      notifyAPIError({ message })
+      isShowDeleteFail && notifyAPIError({ message })
       return [null, reqDelete.error.value]
     } else {
-      notify({ message: deleteSuccess, type: 'positive' })
+      isShowDeleteSuccess && notify({ message: deleteSuccess, type: 'positive' })
       storeApp.isLoading = false
       return [res || true, null]
     }
@@ -102,7 +112,7 @@ export default function useCRUD ({
     const res = await reqReadList.execute(0, id, payload)
     if (reqReadList.error.value) {
       const message = reqReadList.error.value.response.data.message || reqReadList.error.value
-      notifyAPIError({ message })
+      isShowReadListFail && notifyAPIError({ message })
       return [null, reqReadList.error.value]
     } else {
       return [res, null]
