@@ -56,7 +56,7 @@ export default function useCRUD ({
     } else {
       isShowCreateSuccess && notify({ message: createSuccess, type: 'positive' })
       storeApp.isLoading = false
-      return [res, null]
+      return [res || true, null]
     }
   }
 
