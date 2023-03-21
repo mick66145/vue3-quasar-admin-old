@@ -4,7 +4,7 @@ export default {
   mounted (el, binding, vnode, prevNode) {
     const store = useUser()
     const { value } = binding
-    const permissions = store.permissionList.map((item) => item.name)
+    const permissions = store.permissionList
     if (value && value instanceof Array && value.length > 0) {
       const requiredPermissions = value
       const hasPermission = permissions.some(permission => {
