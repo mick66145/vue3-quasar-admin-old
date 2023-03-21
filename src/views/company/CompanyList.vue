@@ -4,6 +4,7 @@
       Company
       <template #action>
         <add-button
+          v-permission="['create company']"
           to="/company/create"
         />
       </template>
@@ -42,10 +43,12 @@
           <template #default="{ row }">
             <div class="flex-center row">
               <edit-button
+                v-permission="['update company']"
                 class="q-mr-xs q-mb-xs"
                 :to="'/company/edit/' + row.id"
               />
               <delete-button
+                v-permission="['delete company']"
                 class="q-mr-xs q-mb-xs"
                 @click="onDelete(row)"
               />

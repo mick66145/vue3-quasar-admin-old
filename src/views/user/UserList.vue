@@ -4,6 +4,7 @@
       {{ $t('user.title') }}
       <template #action>
         <add-button
+          v-permission="['create user']"
           to="/user/create"
         />
       </template>
@@ -42,10 +43,12 @@
           <template #default="{ row }">
             <div class="flex-center row">
               <edit-button
+                v-permission="['update user']"
                 class="q-mr-xs q-mb-xs"
                 :to="'/user/edit/' + row.id"
               />
               <delete-button
+                v-permission="['delete user']"
                 class="q-mr-xs q-mb-xs"
                 @click="onDelete(row)"
               />

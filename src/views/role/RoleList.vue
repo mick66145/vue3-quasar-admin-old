@@ -4,6 +4,7 @@
       {{ $t('role.title') }}
       <template #action>
         <add-button
+          v-permission="['create role']"
           to="/role/create"
         />
       </template>
@@ -42,10 +43,12 @@
           <template #default="{ row }">
             <div class="flex-center row">
               <edit-button
+                v-permission="['update role']"
                 class="q-mr-xs q-mb-xs"
                 :to="'/role/edit/' + row.id"
               />
               <delete-button
+                v-permission="['delete role']"
                 class="q-mr-xs q-mb-xs"
                 @click="onDelete(row)"
               />

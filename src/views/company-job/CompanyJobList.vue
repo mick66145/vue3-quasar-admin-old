@@ -4,6 +4,7 @@
       {{ $t('company-job.title') }}
       <template #action>
         <add-button
+          v-permission="['create company_job']"
           to="/company-job/create"
         />
       </template>
@@ -42,10 +43,12 @@
           <template #default="{ row }">
             <div class="flex-center row">
               <edit-button
+                v-permission="['update company_job']"
                 class="q-mr-xs q-mb-xs"
                 :to="'/company-job/edit/' + row.id"
               />
               <delete-button
+                v-permission="['delete company_job']"
                 class="q-mr-xs q-mb-xs"
                 @click="onDelete(row)"
               />
