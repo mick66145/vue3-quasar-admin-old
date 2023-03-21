@@ -13,7 +13,7 @@ import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
   props: {
-    label: { type: String, default: '我是連結' },
+    label: { type: String, default: '' },
     color: { type: String, default: 'blue' },
     size: { type: String, default: '16px' },
   },
