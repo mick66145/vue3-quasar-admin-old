@@ -39,7 +39,7 @@ import FixedFooter from './FixedFooter.vue'
 import Pagination from './Pagination.vue'
 import VxeClientTable from './VxeClientTable.vue'
 import VxeServerTable from './VxeServerTable.vue'
-import Calendar from './Calendar.vue'
+import Calendar from './calendar/Calendar.vue'
 export default {
   install (app) {
     app.component('SvgIcon', SvgIcon)
