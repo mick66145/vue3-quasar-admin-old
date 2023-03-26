@@ -47,6 +47,7 @@
 <script>
 import { defineComponent, computed, ref } from 'vue-demi'
 import useImgStorage from '@/use/useImgStorage'
+import useMessageDialog from '@/use/useMessageDialog'
 
 export default defineComponent({
   components: {
@@ -97,11 +98,14 @@ export default defineComponent({
     const onPreview = (item) => {
       dialog.value.showDialog({ data: item })
     }
-    const onDelete = (index) => {
+    const onDelete = async (index) => {
+      const res = await messageDelete({ title: '刪除', message: '確認刪除？' })
+      if (!res) return
       observeValue.value.splice(index, 1)
     }
 
     // use
+    const { messageDelete } = useMessageDialog()
     const { getImageSrc } = useImgStorage()
 
     return {
