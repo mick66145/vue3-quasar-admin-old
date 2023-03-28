@@ -1,13 +1,26 @@
 <template>
   <div class="flex items-center justify-left">
-    <span>
+    <span class="q-mr-sm">
       共 {{ total }} 項
+    </span>
+    <span v-if="showPageSize">
+      <input-select
+        v-model="pageSize"
+        class="w-95px pagination-select"
+        dense
+        emit-value
+        option-label="label"
+        option-value="value"
+        :clearable="false"
+        :options="pageSizeOptions"
+        @update:modelValue="changePageSize"
+      />
     </span>
     <q-pagination
       v-model="observeCurrent"
       boundary-links
       :max="maxSize"
-      :max-pages="6"
+      :max-pages="4"
       :boundary-numbers="false"
       icon-first="keyboard_double_arrow_left"
       icon-last="keyboard_double_arrow_right"
@@ -15,10 +28,11 @@
     />
     <div>
       <span>前往</span>
-      <q-input
+      <input-text
         v-model.lazy="toPage"
-        outlined
-        class="pagination-input"
+        class="w-55px pagination-input"
+        dense
+        :clearable="false"
         @change="changeToPage"
         @keyup.enter="changeToPage"
       />
@@ -26,7 +40,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { scrollTo } from '@/utils/scroll-to'
 import { useVModel } from '@vueuse/core'
@@ -37,21 +50,25 @@ export default defineComponent({
     current: { type: Number, default: 1 },
     limit: { type: Number, default: 10 },
     total: { type: Number, default: 0 },
-    autoScroll: {
-      type: Boolean,
-      default: true,
-    },
+    autoScroll: { type: Boolean, default: true },
+    showPageSize: { type: Boolean, default: false },
   },
-  emits: ['update:current'],
+  emits: ['update:current', 'update:pageSize'],
   setup (props, { emit }) {
     // data
     const toPage = ref(props.current)
     const observeCurrent = useVModel(props, 'current', emit)
+    const pageSize = ref(props.limit)
+    const pageSizeOptions = ref([
+      { label: '10 / 頁', value: 10 },
+      { label: '25 / 頁', value: 25 },
+      { label: '50 / 頁', value: 50 },
+    ])
 
     // computed
     const maxSize = computed(() => {
       const total = +props.total
-      const limit = +props.limit
+      const limit = +pageSize.value
       return Math.ceil(+(total / limit))
     })
 
@@ -77,17 +94,26 @@ export default defineComponent({
         scrollTo(0, 800)
       }
     }
+    const changePageSize = () => {
+      emit('update:pageSize', pageSize.value)
+    }
 
     // watch
     watch(() => props.current, (newValue) => {
       toPage.value = newValue
+    })
+    watch(() => props.limit, (newValue) => {
+      pageSize.value = newValue
     })
 
     return {
       toPage,
       observeCurrent,
       maxSize,
+      pageSize,
+      pageSizeOptions,
       changeToPage,
+      changePageSize,
       handleCurrentChange,
     }
   },
@@ -96,8 +122,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.pagination-input {
-  @apply w-55px;
+.pagination-input,
+.pagination-select {
   @apply my-0 mx-3px;
   @apply inline-block;
 
@@ -105,8 +131,18 @@ export default defineComponent({
     @apply h-32px;
 
     .q-field__control {
-      @apply h-32px;
+      @apply h-32px min-h-0px;
     }
+  }
+}
+
+:deep {
+  .q-btn--flat.q-btn--rectangle {
+    min-width: 2rem !important;
+  }
+
+  .q-btn--standard.q-btn--rectangle {
+    min-width: 2rem !important;
   }
 }
 </style>
