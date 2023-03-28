@@ -53,6 +53,7 @@
                 @click="onDelete(row)"
               />
               <base-button
+                v-permission="['update user']"
                 class="q-mr-xs q-mb-xs"
                 outline
                 rounded
