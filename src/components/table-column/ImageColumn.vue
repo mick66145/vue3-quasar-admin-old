@@ -22,7 +22,7 @@ export default defineComponent({
     field: { type: String },
     title: { type: String },
     sortable: { type: Boolean, default: false },
-    width: { type: Number, default: 200 },
+    width: { type: [Number, String], default: 200 },
   },
   setup () {
     return {

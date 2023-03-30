@@ -1,22 +1,24 @@
 <template>
-  <q-img
-    loading="lazy"
-    spinner-color="white"
-    :src="src"
-    :ratio="ratio"
-    :alt="alt"
-    :height="height"
-    :width="width"
-    :class="preview && 'cursor-pointer'"
-    @click="onPreview"
-  >
-    <template #error>
-      <div class="bg-dark flex flex-center text-white absolute-full">
-        載入失敗
-      </div>
-    </template>
-  </q-img>
-  <image-preview-dialog ref="dialog" />
+  <span>
+    <q-img
+      loading="lazy"
+      spinner-color="white"
+      :src="src"
+      :ratio="ratio"
+      :alt="alt"
+      :height="height"
+      :width="width"
+      :class="preview && 'cursor-pointer'"
+      @click="onPreview"
+    >
+      <template #error>
+        <div class="bg-dark flex flex-center text-white absolute-full">
+          載入失敗
+        </div>
+      </template>
+    </q-img>
+    <image-preview-dialog ref="dialog" />
+  </span>
 </template>
 
 <script>
