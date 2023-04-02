@@ -6,6 +6,7 @@ import { useUser } from '@/stores/user'
 import { usePermission } from '@/stores/permission'
 import { usePlatformAttribute } from '@/stores/platformAttribute'
 import getPageTitle from './utils/get-page-title'
+import useLogout from '@/use/useLogout'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -22,6 +23,7 @@ router.beforeEach(async (to, from, next) => {
   const store = useUser()
   const storePermission = usePermission()
   const storePlatformAttribute = usePlatformAttribute()
+  const { resetStore } = useLogout()
   const hasToken = getToken()
   const hasPlatformAttribute = storePlatformAttribute.platformAttribute
   if (!hasPlatformAttribute) {
@@ -44,6 +46,7 @@ router.beforeEach(async (to, from, next) => {
           addRoutes(accessRoutes, {})
           next({ ...to, replace: true })
         } catch (error) {
+          resetStore()
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }
