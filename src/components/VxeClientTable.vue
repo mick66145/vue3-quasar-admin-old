@@ -25,6 +25,7 @@
         v-if="total > 0 && showPagination"
         :total="total"
         :current="current"
+        :auto-scroll="false"
         @update:current="OnUpdateCurrent"
       />
     </div>
