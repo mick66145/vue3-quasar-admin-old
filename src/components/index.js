@@ -34,6 +34,7 @@ import BaseTabs from './tabs/BaseTabs.vue'
 import BaseDialog from './dialog/BaseDialog.vue'
 import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
 import MessageDialog from './dialog/MessageDialog.vue'
+import SkeletonTable from './skeleton/SkeletonTable.vue'
 import LangSelect from './LangSelect.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
@@ -79,6 +80,7 @@ export default {
     app.component('BaseDialog', BaseDialog)
     app.component('ImagePreviewDialog', ImagePreviewDialog)
     app.component('MessageDialog', MessageDialog)
+    app.component('SkeletonTable', SkeletonTable)
     app.component('LangSelect', LangSelect)
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)

@@ -1,37 +1,41 @@
 <template>
   <div>
-    <vxe-table
-      ref="dataTable"
-      :key="refreshKey"
-      class="q-mb-md"
-      auto-resize
-      round
-      stripe
-      :row-config="observeRowConfig"
-      :data="data"
-      :max-height="maxHeight"
-      :sort-config="{ trigger: 'cell', remote: true }"
-      :show-footer="showFooter"
-      :footer-span-method="footerSpanMethod"
-      :footer-method="footerMethod"
-      :checkbox-config="observeCheckboxConfig"
-      @sort-change="onChangeSort"
-      @checkbox-all="onCheckboxAll"
-      @checkbox-change="onCheckboxChange"
-    >
-      <slot />
-    </vxe-table>
-    <pagination
-      v-if="total > 0 && showPagination"
-      :total="total"
-      :current="current"
-      @update:current="onUpdateCurrent"
-    />
+    <div v-show="!isReading">
+      <vxe-table
+        ref="dataTable"
+        :key="refreshKey"
+        class="q-mb-md"
+        auto-resize
+        round
+        stripe
+        :row-config="observeRowConfig"
+        :data="data"
+        :max-height="maxHeight"
+        :sort-config="{ trigger: 'cell', remote: true }"
+        :show-footer="showFooter"
+        :footer-span-method="footerSpanMethod"
+        :footer-method="footerMethod"
+        :checkbox-config="observeCheckboxConfig"
+        @sort-change="onChangeSort"
+        @checkbox-all="onCheckboxAll"
+        @checkbox-change="onCheckboxChange"
+      >
+        <slot />
+      </vxe-table>
+      <pagination
+        v-if="total > 0 && showPagination"
+        :total="total"
+        :current="current"
+        @update:current="onUpdateCurrent"
+      />
+    </div>
+    <skeleton-table v-if="isReading" />
   </div>
 </template>
 
 <script>
 import { defineComponent, ref, computed } from 'vue-demi'
+import { useApp } from '@/stores/app'
 import mapKeys from 'lodash-es/mapKeys'
 export default defineComponent({
   props: {
@@ -54,10 +58,14 @@ export default defineComponent({
   emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current'],
   setup (props, { emit }) {
     // data
+    const storeApp = useApp()
     const dataTable = ref()
     const refreshKey = ref(0)
 
     // computed
+    const isReading = computed(() => {
+      return storeApp.isReading
+    })
     const observeCheckboxConfig = computed(() => {
       const config = {
         reserve: true,
@@ -151,6 +159,7 @@ export default defineComponent({
       refreshKey,
       observeCheckboxConfig,
       observeRowConfig,
+      isReading,
       sort,
       refresh,
       updateFooter,

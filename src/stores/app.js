@@ -11,6 +11,7 @@ export const useApp = defineStore({
     },
     language: getLanguage(),
     isLoading: false,
+    isReading: false,
   }),
   actions: {
     setLanguage (language) {

@@ -1,37 +1,40 @@
 <template>
   <div>
-    <vxe-table
-      ref="dataTable"
-      :key="refreshKey"
-      class="q-mb-md"
-      auto-resize
-      round
-      stripe
-      :row-config="{ isHover: true }"
-      :data="data"
-      :max-height="maxHeight"
-      :sort-config="{ trigger: 'cell'}"
-      :show-footer="showFooter"
-      :footer-span-method="footerSpanMethod"
-      :footer-method="footerMethod"
-      :checkbox-config="checkboxConfig"
-      @checkbox-all="onCheckboxAll"
-      @checkbox-change="onCheckboxChange"
-    >
-      <slot />
-    </vxe-table>
-    <pagination
-      v-if="total > 0 && showPagination"
-      :total="total"
-      :current="current"
-      @update:current="OnUpdateCurrent"
-    />
+    <div v-show="!isReading">
+      <vxe-table
+        ref="dataTable"
+        :key="refreshKey"
+        class="q-mb-md"
+        auto-resize
+        round
+        stripe
+        :row-config="{ isHover: true }"
+        :data="data"
+        :max-height="maxHeight"
+        :sort-config="{ trigger: 'cell'}"
+        :show-footer="showFooter"
+        :footer-span-method="footerSpanMethod"
+        :footer-method="footerMethod"
+        :checkbox-config="checkboxConfig"
+        @checkbox-all="onCheckboxAll"
+        @checkbox-change="onCheckboxChange"
+      >
+        <slot />
+      </vxe-table>
+      <pagination
+        v-if="total > 0 && showPagination"
+        :total="total"
+        :current="current"
+        @update:current="OnUpdateCurrent"
+      />
+    </div>
+    <skeleton-table v-if="isReading" />
   </div>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue-demi'
-
+import { defineComponent, ref, computed } from 'vue-demi'
+import { useApp } from '@/stores/app'
 export default defineComponent({
   props: {
     data: { type: Array, default () { return [] } },
@@ -47,8 +50,14 @@ export default defineComponent({
   emits: ['checkbox-all', 'checkbox-change', 'update:current'],
   setup (props, { emit }) {
     // data
+    const storeApp = useApp()
     const dataTable = ref()
     const refreshKey = ref(0)
+
+    // computed
+    const isReading = computed(() => {
+      return storeApp.isReading
+    })
 
     // methods
     const refresh = () => {
@@ -87,6 +96,7 @@ export default defineComponent({
     return {
       dataTable,
       refreshKey,
+      isReading,
       refresh,
       updateFooter,
       getCheckboxRecords,
