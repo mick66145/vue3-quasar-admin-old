@@ -1,7 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <app-header />
-    <!-- <app-sidebar /> -->
     <sidebar />
     <q-page-container class="bg-indigo-1 !pb-16">
       <router-view v-slot="{ Component,route }">
@@ -10,6 +9,7 @@
             <component :is="Component" :key="route" />
           </div>
         </transition>
+        <back-top />
       </router-view>
     </q-page-container>
     <app-footer />
@@ -17,20 +17,19 @@
 </template>
 
 <script>
-import { AppHeader, AppSidebar, AppFooter, Sidebar } from './components'
+import { AppHeader, AppFooter, Sidebar, BackTop } from './components'
 import { defineComponent } from 'vue-demi'
 
 export default defineComponent({
   name: 'MainLayout',
   components: {
     AppHeader,
-    AppSidebar,
     AppFooter,
     Sidebar,
+    BackTop,
   },
   setup () {
-    return {
-    }
+    return {}
   },
 })
 </script>
