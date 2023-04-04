@@ -30,6 +30,7 @@ import UploadButton from './button/UploadButton.vue'
 import DownloadButton from './button/DownloadButton.vue'
 import BaseImage from './image/BaseImage.vue'
 import BaseLink from './link/BaseLink.vue'
+import BaseTabs from './tabs/BaseTabs.vue'
 import BaseDialog from './dialog/BaseDialog.vue'
 import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
 import MessageDialog from './dialog/MessageDialog.vue'
@@ -74,6 +75,7 @@ export default {
     app.component('DownloadButton', DownloadButton)
     app.component('BaseImage', BaseImage)
     app.component('BaseLink', BaseLink)
+    app.component('BaseTabs', BaseTabs)
     app.component('BaseDialog', BaseDialog)
     app.component('ImagePreviewDialog', ImagePreviewDialog)
     app.component('MessageDialog', MessageDialog)
