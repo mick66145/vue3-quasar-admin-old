@@ -35,6 +35,8 @@ import BaseDialog from './dialog/BaseDialog.vue'
 import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
 import MessageDialog from './dialog/MessageDialog.vue'
 import SkeletonTable from './skeleton/SkeletonTable.vue'
+import ImageUploader from './uploader/ImageUploader.vue'
+import FileUploader from './uploader/FileUploader.vue'
 import LangSelect from './LangSelect.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
@@ -42,6 +44,7 @@ import Pagination from './Pagination.vue'
 import VxeClientTable from './VxeClientTable.vue'
 import VxeServerTable from './VxeServerTable.vue'
 import Calendar from './calendar/Calendar.vue'
+import FileList from './FileList.vue'
 export default {
   install (app) {
     app.component('SvgIcon', SvgIcon)
@@ -81,6 +84,8 @@ export default {
     app.component('ImagePreviewDialog', ImagePreviewDialog)
     app.component('MessageDialog', MessageDialog)
     app.component('SkeletonTable', SkeletonTable)
+    app.component('ImageUploader', ImageUploader)
+    app.component('FileUploader', FileUploader)
     app.component('LangSelect', LangSelect)
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
@@ -88,5 +93,6 @@ export default {
     app.component('VxeClientTable', VxeClientTable)
     app.component('VxeServerTable', VxeServerTable)
     app.component('Calendar', Calendar)
+    app.component('FileList', FileList)
   },
 }
