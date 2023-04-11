@@ -95,7 +95,10 @@ export default defineComponent({
     }
 
     const refreshFetch = async () => {
-      await getDataList({ ...search })
+      const filter = { ...search }
+      filter.start_date = filter.date_range?.from ? filter.date_range.from : null
+      filter.end_date = filter.date_range?.to ? filter.date_range.to : null
+      await getDataList({ ...filter })
     }
 
     const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort } = useVxeServerDataTable({
