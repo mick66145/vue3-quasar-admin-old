@@ -105,7 +105,7 @@ export const asyncRoutes = [
   },
   {
     path: '/',
-    group: ['/system-log'],
+    group: ['/system-log', '/mail-log'],
     groupName: 'first',
     meta: {
       title: '系統紀錄',
