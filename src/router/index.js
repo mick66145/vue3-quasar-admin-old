@@ -9,6 +9,7 @@ import companyJobRouter from './modules/company-job'
 import userRouter from './modules/user'
 import roleRouter from './modules/role'
 import systemLogRouter from './modules/system-log'
+import mailLogRouter from './modules/mail-log'
 
 export const constantRoutes = [
   {
@@ -113,6 +114,7 @@ export const asyncRoutes = [
     },
     children: [
       systemLogRouter,
+      mailLogRouter,
     ],
   },
 ]

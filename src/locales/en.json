@@ -71,5 +71,8 @@
         "password": "password"
       }
     }
+  },
+  "mail-log": {
+    "title": "MailLog"
   }
 }
