@@ -53,14 +53,27 @@
           :field="field"
           :title="title"
           sortable
-          :min-width="$q.screen.lt.sm ? min_width : 'auto'"
+          :min-width="min_width"
         />
+        <vxe-column title="操作" fixed="right" width="85">
+          <template #default="{ row }">
+            <div class="flex-center row">
+              <view-button
+                v-permission="['view mail_log']"
+                class="q-mr-xs q-mb-xs"
+                @click="showDialog({ id:row.id, mode:'edit', callRead:true })"
+              />
+            </div>
+          </template>
+        </vxe-column>
       </vxe-server-table>
     </q-card>
+    <mail-log-dialog ref="dialog" />
   </q-page>
 </template>
 
 <script>
+import MailLogDialog from './components/MailLogDialog.vue'
 import { MailLogResource } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
@@ -69,19 +82,22 @@ import useVxeServerDataTable from '@/use/useVxeServerDataTable'
 const mailLogResource = new MailLogResource()
 
 export default defineComponent({
+  components: {
+    MailLogDialog,
+  },
   setup () {
     // data
+    const dialog = ref()
     const filter = reactive({
       keyword: null,
     })
     const tableFields = ref([
       { title: '寄送日期', field: 'send_datetime', min_width: '130' },
-      { title: '寄件人信箱', field: 'from', min_width: '130' },
+      { title: '寄件人信箱', field: 'from', min_width: '200' },
       { title: '收件人信箱', field: 'to', min_width: '130' },
       { title: '副本信箱', field: 'cc', min_width: '130' },
       { title: '密件副本信箱', field: 'bcc', min_width: '130' },
-      { title: '信件主旨', field: 'subject', min_width: '130' },
-      { title: '摘要', field: 'content', min_width: '130' },
+      { title: '信件主旨', field: 'subject', min_width: '200' },
       { title: '狀態', field: 'state_text', min_width: '130' },
     ])
 
@@ -93,15 +109,17 @@ export default defineComponent({
         total.value = res.total
       })
     }
-
     const refreshFetch = async () => {
       const filter = { ...search }
       filter.start_date = filter.date_range?.from ? filter.date_range.from : null
       filter.end_date = filter.date_range?.to ? filter.date_range.to : null
       await getDataList({ ...filter })
     }
+    const showDialog = ({ id, mode, callRead }) => {
+      dialog.value.showDialog({ id, mode, callRead })
+    }
 
-    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort } = useVxeServerDataTable({
+    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort, onReset } = useVxeServerDataTable({
       searchParames: filter,
       sortParames: [{
         field: 'id',
@@ -116,6 +134,7 @@ export default defineComponent({
     })
 
     return {
+      dialog,
       dataTable,
       tableFields,
       filter,
@@ -125,6 +144,8 @@ export default defineComponent({
       onChangePage,
       onChangeFilter,
       OnChangeSort,
+      onReset,
+      showDialog,
     }
   },
 })

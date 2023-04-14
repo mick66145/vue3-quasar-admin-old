@@ -32,6 +32,20 @@ class MailLogResource extends Resource {
       },
       )
   }
+
+  async get (id, query) {
+    return await request({
+      url: `/${this.uri}/${id}`,
+      method: 'get',
+      params: query,
+    }).then(res => res.data)
+      .then(res => {
+        const mailLogObj = new MailLog({
+          ...res.data,
+        })
+        return mailLogObj
+      })
+  }
 }
 
 export default MailLogResource
