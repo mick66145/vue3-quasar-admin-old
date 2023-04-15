@@ -36,7 +36,14 @@
           />
         </div>
       </div> -->
-        <q-date ref="datePicker" v-model="dateRangeValue" :options="options" range>
+        <q-date
+          ref="datePicker"
+          v-model="dateRangeValue"
+          :title="!observeValue && ' '"
+          :subtitle="!observeValue && ' '"
+          :options="options"
+          range
+        >
           <div class="row items-center justify-end">
             <q-btn v-close-popup label="Close" color="primary" flat />
           </div>
