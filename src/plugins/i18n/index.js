@@ -12,8 +12,8 @@ export const locales = {
   tw: 'zh-hant-tw',
 }
 
-messages.en = { ...messages.en, ...vxeTableEn }
-messages['zh-hant-tw'] = { ...messages['zh-hant-tw'], ...vxeTableZhTw }
+messages.en = { ...messages.en, ...vxeTableEn, ...quasarEnLocale }
+messages['zh-hant-tw'] = { ...messages['zh-hant-tw'], ...vxeTableZhTw, ...quasarZhTwLocale }
 
 export function getLanguage () {
   const chooseLanguage = Cookies.get('language')

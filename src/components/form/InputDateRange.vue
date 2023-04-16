@@ -39,9 +39,10 @@
         <q-date
           ref="datePicker"
           v-model="dateRangeValue"
-          :title="!observeValue && ' '"
-          :subtitle="!observeValue && ' '"
+          :title="dateTitle"
+          :subtitle="dateSubtitle"
           :options="options"
+          :locale="locale"
           range
         >
           <div class="row items-center justify-end">
@@ -56,6 +57,8 @@
 <script>
 import $dayjs from '@/plugins/dayjs'
 import { defineComponent, ref, computed } from 'vue-demi'
+import { useI18n } from 'vue-i18n'
+import { useApp } from '@/stores/app'
 export default defineComponent({
   props: {
     modelValue: { type: [String, Object] },
@@ -66,6 +69,8 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup (props, { emit }) {
     // data
+    const { messages } = useI18n()
+    const store = useApp()
     const inputDateRange = ref()
     const datePicker = ref()
     const show = ref(false)
@@ -143,6 +148,22 @@ export default defineComponent({
         }
       },
     })
+    const locale = computed(() => {
+      const message = messages.value[store.language]
+      return {
+        days: message.date.days,
+        daysShort: message.date.daysShort,
+        months: message.date.months,
+        monthsShort: message.date.monthsShort,
+        firstDayOfWeek: message.date.firstDayOfWeek,
+      }
+    })
+    const dateTitle = computed(() => {
+      return !observeValue.value ? ' ' : ''
+    })
+    const dateSubtitle = computed(() => {
+      return !observeValue.value ? ' ' : ''
+    })
 
     // methods
     const showPopup = (isShow) => {
@@ -179,6 +200,9 @@ export default defineComponent({
       observeValue,
       dateRangeValue,
       pickerOptions,
+      locale,
+      dateTitle,
+      dateSubtitle,
       focus,
       blur,
       clearFn,

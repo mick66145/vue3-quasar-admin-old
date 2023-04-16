@@ -25,9 +25,10 @@
       >
         <q-date
           v-model="observeValue"
-          :title="!observeValue && ' '"
-          :subtitle="!observeValue && ' '"
+          :title="dateTitle"
+          :subtitle="dateSubtitle"
           :options="options"
+          :locale="locale"
         >
           <div class="row items-center justify-end">
             <q-btn v-close-popup label="Close" color="primary" flat />
@@ -40,7 +41,9 @@
 
 <script>
 import { useVModel } from '@vueuse/core'
-import { defineComponent, ref } from 'vue-demi'
+import { defineComponent, ref, computed } from 'vue-demi'
+import { useI18n } from 'vue-i18n'
+import { useApp } from '@/stores/app'
 export default defineComponent({
   props: {
     modelValue: { type: String },
@@ -51,9 +54,29 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup (props, { emit }) {
     // data
+    const { messages } = useI18n()
+    const store = useApp()
     const inputData = ref()
     const show = ref(false)
     const observeValue = useVModel(props, 'modelValue', emit)
+
+    // computed
+    const locale = computed(() => {
+      const message = messages.value[store.language]
+      return {
+        days: message.date.days,
+        daysShort: message.date.daysShort,
+        months: message.date.months,
+        monthsShort: message.date.monthsShort,
+        firstDayOfWeek: message.date.firstDayOfWeek,
+      }
+    })
+    const dateTitle = computed(() => {
+      return !observeValue.value ? ' ' : ''
+    })
+    const dateSubtitle = computed(() => {
+      return !observeValue.value ? ' ' : ''
+    })
 
     // methods
     const showPopup = (isShow) => {
@@ -84,6 +107,9 @@ export default defineComponent({
       inputData,
       show,
       observeValue,
+      locale,
+      dateTitle,
+      dateSubtitle,
       showPopup,
       focus,
       blur,
