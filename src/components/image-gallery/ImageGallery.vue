@@ -22,6 +22,7 @@
                   @click="onPreview(fileItem)"
                 />
                 <q-icon
+                  v-if="!disable"
                   name="fas fa-solid fa-trash-can"
                   size="1.75rem"
                   @click="onDelete(fileIndex)"
@@ -34,9 +35,10 @@
     </div>
 
     <div class="col-md-3 col-sm-4 col-xs-12">
-      <input-image-upload
+      <image-uploader
         ref="imageUpload"
         class="full-width"
+        :disable="disable"
         @on-file="onFile"
       />
     </div>
@@ -56,6 +58,7 @@ export default defineComponent({
     modelValue: { type: Array, default () { return [] } },
     accept: { type: String, default: 'image/png, image/jpeg, image/jpg' },
     aspect: { type: Number },
+    disable: { type: Boolean, defalut: false },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {

@@ -2,6 +2,7 @@
   <base-uploader
     :accept="accept"
     :max-file-size="maxFileSize"
+    :disable="disable"
     @added="onFile"
     @rejected="onRejected"
   >
@@ -22,6 +23,7 @@ export default defineComponent({
   props: {
     accept: { type: String },
     maxFileSize: { type: Number, default: 2048000 },
+    disable: { type: Boolean, defalut: false },
   },
   emits: ['onFile'],
   setup (props, { emit }) {

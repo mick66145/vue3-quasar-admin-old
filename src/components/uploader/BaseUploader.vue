@@ -8,6 +8,7 @@
       :accept="accept"
       :multiple="multiple"
       :max-file-size="maxFileSize"
+      :disable="disable"
       @added="onAdded"
       @rejected="onRejected"
     >
@@ -42,6 +43,7 @@ export default defineComponent({
     imgSrc: { type: String },
     maxFileSize: { type: Number },
     multiple: { type: Boolean },
+    disable: { type: Boolean, defalut: false },
   },
   emits: ['rejected', 'added'],
   setup (props, { emit }) {
