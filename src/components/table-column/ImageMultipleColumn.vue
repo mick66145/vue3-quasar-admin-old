@@ -13,6 +13,7 @@
         :src="getValueByPath(imageItem,imageField)"
         :width="imageWidth"
         :height="imageHeight"
+        :use-authorization="useAuthorization"
       />
     </template>
   </vxe-column>
@@ -31,6 +32,7 @@ export default defineComponent({
     width: { type: [Number, String], default: 200 },
     imageWidth: { type: String },
     imageHeight: { type: String },
+    useAuthorization: { type: Boolean, default: false },
   },
   setup () {
     return {

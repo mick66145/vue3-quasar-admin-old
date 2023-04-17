@@ -3,7 +3,7 @@
     <q-img
       loading="lazy"
       spinner-color="white"
-      :src="src"
+      :src="observeSrc"
       :ratio="ratio"
       :alt="alt"
       :height="height"
@@ -23,7 +23,8 @@
 
 <script>
 import { defineComponent, ref } from 'vue-demi'
-
+import { getToken } from '@/utils/auth'
+import { asyncComputed } from '@vueuse/core'
 export default defineComponent({
   props: {
     src: { type: String },
@@ -32,22 +33,49 @@ export default defineComponent({
     height: { type: String, default: '100%' },
     width: { type: String, default: '100%' },
     preview: { type: Boolean, default: true },
+    useAuthorization: { type: Boolean, default: false },
   },
   setup (props) {
     // data
     const dialog = ref()
+    const observeSrc = asyncComputed(
+      async () => {
+        if (props.useAuthorization) {
+          const src = props.src
+          const options = {
+            headers: {
+              Authorization: `Bearer ${getToken()}`,
+            },
+          }
+          const getFile = (fileSrc, fileOptions) => {
+            return new Promise((resolve) => {
+              fetch(fileSrc, fileOptions)
+                .then((res) => res.blob())
+                .then((blob) => {
+                  resolve(URL.createObjectURL(blob))
+                })
+            })
+          }
+          return await getFile(src, options)
+        } else {
+          return props.src
+        }
+      },
+      null,
+    )
 
     const onPreview = () => {
-      dialog.value.showDialog({ data: { image: { url: props.src } } })
+      if (props.preview) {
+        dialog.value.showDialog({ data: { image: { url: observeSrc.value } } })
+      }
     }
     return {
       dialog,
+      observeSrc,
       onPreview,
     }
   },
 })
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

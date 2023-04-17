@@ -8,6 +8,7 @@
     <template #default="{ row }">
       <base-image
         :src="getValueByPath(row,field)"
+        :use-authorization="useAuthorization"
       />
     </template>
   </vxe-column>
@@ -23,6 +24,7 @@ export default defineComponent({
     title: { type: String },
     sortable: { type: Boolean, default: false },
     width: { type: [Number, String], default: 200 },
+    useAuthorization: { type: Boolean, default: false },
   },
   setup () {
     return {
