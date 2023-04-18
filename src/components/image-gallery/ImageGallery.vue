@@ -7,11 +7,11 @@
     >
       <div class="input-image">
         <div>
-          <img
+          <base-image
             v-if="preview(fileItem)"
             class="object-cover h-202px w-full transform scale-98"
             :src="preview(fileItem)"
-          >
+          />
           <span class="input-image-upload-actions">
             <div class="flex flex-center h-full">
               <div class="flex-center w-full row">

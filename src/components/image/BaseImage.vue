@@ -24,6 +24,7 @@
 <script>
 import { defineComponent, ref } from 'vue-demi'
 import { getToken } from '@/utils/auth'
+import { fetchBlobData } from '@/utils/blob'
 import { asyncComputed } from '@vueuse/core'
 export default defineComponent({
   props: {
@@ -47,16 +48,7 @@ export default defineComponent({
               Authorization: `Bearer ${getToken()}`,
             },
           }
-          const getFile = (fileSrc, fileOptions) => {
-            return new Promise((resolve) => {
-              fetch(fileSrc, fileOptions)
-                .then((res) => res.blob())
-                .then((blob) => {
-                  resolve(URL.createObjectURL(blob))
-                })
-            })
-          }
-          return await getFile(src, options)
+          return await fetchBlobData(src, options)
         } else {
           return props.src
         }
