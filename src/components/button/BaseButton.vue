@@ -7,6 +7,7 @@
     :label="label"
     :icon="icon"
     :loading="isLoading"
+    :size="size"
   >
     <slot />
     <template #loading>
@@ -26,6 +27,7 @@ export default defineComponent({
     icon: { type: String },
     outline: { type: Boolean, default: false },
     rounded: { type: Boolean, default: false },
+    size: { type: String, default: 'sm' },
   },
   setup () {
     // data
