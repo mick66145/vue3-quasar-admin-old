@@ -49,7 +49,7 @@ export default defineComponent({
   @apply min-h-10;
 
   .page-title {
-    @apply font-700 my-0 text-2xl;
+    @apply font-700 my-0 text-xl;
   }
 }
 </style>
