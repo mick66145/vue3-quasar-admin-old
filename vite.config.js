@@ -68,6 +68,10 @@ export default defineConfig({
     ...https(),
     cors: true,
     port: 3000,
+    host: true,
+    hmr: {
+      port: 3000,
+    },
   },
   resolve: {
     alias: {
