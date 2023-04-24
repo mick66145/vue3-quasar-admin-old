@@ -6,7 +6,7 @@
 
     <q-card class="shadow-7">
       <card-body>
-        <div class="row items-center justify-between q-mb-md q-col-gutter-x-md q-col-gutter-y-md">
+        <div class="row q-mb-sm items-center justify-between q-col-gutter-x-md q-col-gutter-y-md">
           <div class="col-md-10 col-sm-9 col-xs-12 ">
             <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
               <div class="col-md-3 col-sm-6 col-xs-12">
