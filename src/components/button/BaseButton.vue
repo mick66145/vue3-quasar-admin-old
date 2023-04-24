@@ -27,7 +27,7 @@ export default defineComponent({
     icon: { type: String },
     outline: { type: Boolean, default: false },
     rounded: { type: Boolean, default: false },
-    size: { type: String, default: 'sm' },
+    size: { type: String, default: 'md' },
   },
   setup () {
     // data
