@@ -4,36 +4,27 @@
       {{ $t('system-log.title') }}
     </page-header>
 
-    <q-card class="shadow-7 q-pa-lg">
-      <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs" />
-
-      <vxe-table
-        ref="dataTable"
-        class="q-mb-md"
-        auto-resize
-        round
-        stripe
-        :row-config="{ isHover: true }"
-        :data="data"
-        :sort-config="{ trigger: 'cell'}"
-        @sort-change="OnChangeSort"
-      >
-        <vxe-column
-          v-for="{ field, title, min_width } in tableFields"
-          :key="field"
-          :field="field"
-          :title="title"
-          sortable
-          :min-width="$q.screen.lt.sm ? min_width : 'auto'"
-        />
-      </vxe-table>
-
-      <pagination
-        v-if="total > 0"
-        :total="total"
-        :current="search.page"
-        @update:current="onChangePage"
-      />
+    <q-card class="shadow-7">
+      <card-body>
+        <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs" />
+        <vxe-server-table
+          ref="dataTable"
+          :data="data"
+          :total="total"
+          :current="search.page"
+          @sort-change="OnChangeSort"
+          @update:current="onChangePage"
+        >
+          <vxe-column
+            v-for="{ field, title, min_width } in tableFields"
+            :key="field"
+            :field="field"
+            :title="title"
+            sortable
+            :min-width="min_width"
+          />
+        </vxe-server-table>
+      </card-body>
     </q-card>
   </q-page>
 </template>

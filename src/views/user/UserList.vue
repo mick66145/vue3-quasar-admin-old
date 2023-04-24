@@ -10,61 +10,61 @@
       </template>
     </page-header>
 
-    <q-card class="shadow-7 q-pa-lg">
-      <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs">
-        <div class="col-md-3 col-xs-12">
-          <input-search
-            v-model="search.keyword"
-            class="full-width"
-            dense
-            @update:modelValue="onChangeFilter"
-          />
+    <q-card class="shadow-7">
+      <card-body>
+        <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs">
+          <div class="col-md-3 col-xs-12">
+            <input-search
+              v-model="search.keyword"
+              class="full-width"
+              dense
+              @update:modelValue="onChangeFilter"
+            />
+          </div>
         </div>
-      </div>
-
-      <vxe-server-table
-        ref="dataTable"
-        class="q-mb-md"
-        :data="data"
-        :total="total"
-        :current="search.page"
-        @sort-change="OnChangeSort"
-        @update:current="onChangePage"
-      >
-        <vxe-column
-          v-for="{ field, title, min_width } in tableFields"
-          :key="field"
-          :field="field"
-          :title="title"
-          sortable
-          :min-width="$q.screen.lt.sm ? min_width : 'auto'"
-        />
-        <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 120 : 240">
-          <template #default="{ row }">
-            <div class="flex-center row">
-              <edit-button
-                v-permission="['update user']"
-                class="q-mr-xs q-mb-xs"
-                :to="'/user/edit/' + row.id"
-              />
-              <delete-button
-                v-permission="['delete user']"
-                class="q-mr-xs q-mb-xs"
-                @click="onDelete(row)"
-              />
-              <base-button
-                v-permission="['update user']"
-                class="q-mr-xs q-mb-xs"
-                outline
-                rounded
-                color="black"
-                :label="$t('g.btn.reset-password')"
-                @click="onResetPassword(row)"
-              />
-            </div>
-          </template>
-        </vxe-column>
-      </vxe-server-table>
+        <vxe-server-table
+          ref="dataTable"
+          :data="data"
+          :total="total"
+          :current="search.page"
+          @sort-change="OnChangeSort"
+          @update:current="onChangePage"
+        >
+          <vxe-column
+            v-for="{ field, title, min_width } in tableFields"
+            :key="field"
+            :field="field"
+            :title="title"
+            sortable
+            :min-width="$q.screen.lt.sm ? min_width : 'auto'"
+          />
+          <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 120 : 240">
+            <template #default="{ row }">
+              <div class="flex-center row">
+                <edit-button
+                  v-permission="['update user']"
+                  class="q-mr-xs q-mb-xs"
+                  :to="'/user/edit/' + row.id"
+                />
+                <delete-button
+                  v-permission="['delete user']"
+                  class="q-mr-xs q-mb-xs"
+                  @click="onDelete(row)"
+                />
+                <base-button
+                  v-permission="['update user']"
+                  class="q-mr-xs q-mb-xs"
+                  outline
+                  rounded
+                  color="black"
+                  :label="$t('g.btn.reset-password')"
+                  @click="onResetPassword(row)"
+                />
+              </div>
+            </template>
+          </vxe-column>
+        </vxe-server-table>
+      </card-body>
     </q-card>
   </q-page>
 </template>

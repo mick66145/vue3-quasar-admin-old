@@ -4,7 +4,7 @@
       <vxe-table
         ref="dataTable"
         :key="refreshKey"
-        class="q-mb-md"
+        class="q-mb-sm"
         auto-resize
         round
         stripe
