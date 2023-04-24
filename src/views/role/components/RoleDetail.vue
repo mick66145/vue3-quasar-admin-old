@@ -1,64 +1,72 @@
 <template>
   <q-page class="q-pa-lg">
     <page-header showPrev>權限詳情</page-header>
-    <q-card class="shadow-7 q-pa-lg">
-      <card-header>
-        權限資訊
-      </card-header>
-      <card-body>
-        <q-form ref="form">
-          <div class="row q-col-gutter-x-md q-col-gutter-y-md">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-              <input-text
-                v-model="formData.name"
-                class="full-width"
-                label="權限群組名稱*"
-                placeholder="請輸入權限群組名稱"
-                :rules="[$rules.required('權限群組名稱必填')]"
-              />
-            </div>
-          </div>
-        </q-form>
-      </card-body>
-    </q-card>
-    <q-card class="mt-4 shadow-7 q-pa-lg">
-      <card-header>
-        權限設定
-      </card-header>
-      <card-body>
-        <q-card
-          v-for="menuPermissionItem in menuPermissionList"
-          :key="menuPermissionItem"
-          class="shadow-0 permissions-card"
-          bordered
-        >
-          <q-card-section class="bg-gray-100">
-            <div class="text-h6">{{ menuPermissionItem.name }}</div>
-          </q-card-section>
-          <q-card-section vertical class="p-0">
-            <div v-for="(childItem,index) in menuPermissionItem.childs" :key="childItem">
-              <div class="p-4 row items-center">
-                <span class="h-full col-md-2 col-sm-3 permissions-title ">
-                  {{ childItem.name }}
-                </span>
-                <div
-                  v-for="permissionItem in childItem.permissions"
-                  :key="permissionItem"
-                  class="flex col-md-2 col-sm-3"
-                >
-                  <input-checkbox
-                    v-model="permissionItem.is_active"
-                    :label="permissionItem.display_name"
-                    :val="permissionItem"
+    <q-form ref="form">
+      <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+        <div class="col-12">
+          <q-card class="shadow-7">
+            <card-header>
+              權限資訊
+            </card-header>
+            <card-body class="q-pt-none">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                  <input-text
+                    v-model="formData.name"
+                    class="full-width"
+                    label="權限群組名稱*"
+                    placeholder="請輸入權限群組名稱"
+                    :rules="[$rules.required('權限群組名稱必填')]"
                   />
                 </div>
               </div>
-              <q-separator v-show="menuPermissionItem.childs.length - 1 !== index" class="w-full" />
-            </div>
-          </q-card-section>
-        </q-card>
-      </card-body>
-    </q-card>
+            </card-body>
+          </q-card>
+        </div>
+        <div class="col-12">
+          <q-card class="shadow-7">
+            <card-header>
+              權限設定
+            </card-header>
+            <card-body class="q-pt-none">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+                <div v-for="menuPermissionItem in menuPermissionList" :key="menuPermissionItem" class="col-12">
+                  <q-card
+                    class="shadow-0 permissions-card"
+                    bordered
+                  >
+                    <q-card-section class="bg-gray-100">
+                      <div class="text-h6">{{ menuPermissionItem.name }}</div>
+                    </q-card-section>
+                    <q-card-section vertical class="p-0">
+                      <div v-for="(childItem,index) in menuPermissionItem.childs" :key="childItem">
+                        <div class="p-2 row items-center">
+                          <span class="h-full col-md-2 col-sm-3 permissions-title ">
+                            {{ childItem.name }}
+                          </span>
+                          <div
+                            v-for="permissionItem in childItem.permissions"
+                            :key="permissionItem"
+                            class="flex col-md-2 col-sm-3"
+                          >
+                            <input-checkbox
+                              v-model="permissionItem.is_active"
+                              :label="permissionItem.display_name"
+                              :val="permissionItem"
+                            />
+                          </div>
+                        </div>
+                        <q-separator v-show="menuPermissionItem.childs.length - 1 !== index" class="w-full" />
+                      </div>
+                    </q-card-section>
+                  </q-card>
+                </div>
+              </div>
+            </card-body>
+          </q-card>
+        </div>
+      </div>
+    </q-form>
   </q-page>
   <fixed-footer @save="onSubmit" />
 </template>

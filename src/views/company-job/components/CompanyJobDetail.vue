@@ -1,11 +1,11 @@
 <template>
   <q-page class="q-pa-lg">
     <page-header showPrev> 職稱詳情 </page-header>
-    <q-card class="shadow-7 q-pa-lg">
+    <q-card class="shadow-7">
       <card-header>
         職稱資訊
       </card-header>
-      <card-body>
+      <card-body class="q-pt-none">
         <q-form ref="form">
           <div class="row q-col-gutter-x-md q-col-gutter-y-md">
             <div class="col-xs-12 col-sm-6 col-md-6">
