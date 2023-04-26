@@ -8,6 +8,7 @@ import companyRouter from './modules/company'
 import companyJobRouter from './modules/company-job'
 import userRouter from './modules/user'
 import roleRouter from './modules/role'
+import mailinfoRouter from './modules/mailinfo'
 import systemLogRouter from './modules/system-log'
 import mailLogRouter from './modules/mail-log'
 
@@ -77,7 +78,7 @@ export const constantRoutes = [
 export const asyncRoutes = [
   {
     path: '/',
-    group: ['/company'],
+    group: ['/company', '/mailinfo'],
     groupName: 'first',
     meta: {
       title: '人員管理',
@@ -86,6 +87,7 @@ export const asyncRoutes = [
     },
     children: [
       companyRouter,
+      mailinfoRouter,
     ],
   },
   {
