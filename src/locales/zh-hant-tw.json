@@ -74,5 +74,8 @@
   },
   "mail-log": {
     "title": "信件紀錄"
+  },
+  "mailinfo": {
+    "title": "信件維護"
   }
 }
