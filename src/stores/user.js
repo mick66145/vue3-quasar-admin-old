@@ -1,4 +1,4 @@
-import { UserResource, AuthResource } from '@/api'
+import { UserResource, AuthResource, MeResource } from '@/api'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { defineStore } from 'pinia'
 
@@ -10,6 +10,7 @@ export const useUser = defineStore({
     permissionList: [],
     userResource: new UserResource(),
     authResource: new AuthResource(),
+    meResource: new MeResource(),
   }),
   actions: {
 
@@ -55,7 +56,7 @@ export const useUser = defineStore({
 
     whoami () {
       return new Promise((resolve, reject) => {
-        this.userResource.whoami()
+        this.meResource.me()
           .then(res => {
             const { data } = res
             if (!data) {
@@ -71,7 +72,7 @@ export const useUser = defineStore({
 
     permission () {
       return new Promise((resolve, reject) => {
-        this.userResource.permission()
+        this.meResource.permission()
           .then(res => {
             const { list } = res
             this.permissionList = list.map(permission => { return permission.name })
@@ -83,11 +84,11 @@ export const useUser = defineStore({
     },
 
     profile (payload) {
-      return this.userResource.profile(payload)
+      return this.meResource.profile(payload)
     },
 
     changePassword (payload) {
-      return this.userResource.changePassword(payload)
+      return this.meResource.changePassword(payload)
     },
 
     logout () {

@@ -3,7 +3,7 @@ import request from '@/utils/request'
 
 class AuthResource extends Resource {
   constructor () {
-    super('user')
+    super('auth')
   }
 
   async login (params) {

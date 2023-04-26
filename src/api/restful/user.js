@@ -53,51 +53,6 @@ class UserResource extends Resource {
       method: 'post',
     }).then(res => res.data)
   }
-
-  async whoami () {
-    return await request({
-      url: '/whoami',
-      method: 'get',
-    }).then(res => res.data)
-  }
-
-  async permission () {
-    return await request({
-      url: '/whoami/permission',
-      method: 'get',
-    }).then(res => res.data)
-      .then(res => {
-        const { list, meta } = res.data
-        if (meta?.pagination) {
-          const { count, total } = meta.pagination
-          return {
-            list: list,
-            total: total,
-            count: count,
-          }
-        } else {
-          return {
-            list: list,
-          }
-        }
-      })
-  }
-
-  async profile (params) {
-    return request({
-      url: '/profile',
-      method: 'patch',
-      data: params,
-    })
-  }
-
-  async changePassword (params) {
-    return request({
-      url: `/${this.uri}/change_password`,
-      method: 'post',
-      data: params,
-    })
-  }
 }
 
 export default UserResource
