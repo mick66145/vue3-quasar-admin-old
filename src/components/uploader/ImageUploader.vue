@@ -8,7 +8,7 @@
     @rejected="onRejected"
   >
     <template #upload-bottom>
-      請上傳 JPG 或 PNG 格式圖片，檔案大小為 2MB。
+      請上傳 JPG 或 PNG 格式圖片，檔案大小為 {{ maxFileSize/1024000 }}MB。
     </template>
   </base-uploader>
 </template>

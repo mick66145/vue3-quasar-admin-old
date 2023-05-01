@@ -7,7 +7,7 @@
     @rejected="onRejected"
   >
     <template #upload-bottom>
-      檔案大小為 2MB。
+      檔案大小為 {{ maxFileSize/1024000 }}MB。
     </template>
   </base-uploader>
 </template>
