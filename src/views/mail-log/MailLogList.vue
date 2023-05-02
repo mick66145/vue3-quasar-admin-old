@@ -54,10 +54,10 @@
             sortable
             :min-width="min_width"
           />
-          <vxe-column title="操作" fixed="right" width="85">
+          <vxe-column title="操作" fixed="right" width="57">
             <template #default="{ row }">
               <div class="flex-center row">
-                <view-button
+                <view-icon-button
                   v-permission="['view mail_log']"
                   class="q-mr-xs q-mb-xs"
                   @click="showDialog({ id:row.id, mode:'edit', callRead:true })"

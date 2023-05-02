@@ -33,10 +33,10 @@
             sortable
             :min-width="$q.screen.lt.sm ? min_width : 'auto'"
           />
-          <vxe-column title="操作" fixed="right" width="85">
+          <vxe-column title="操作" fixed="right" width="57">
             <template #default="{ row }">
               <div class="flex-center row">
-                <edit-button
+                <edit-icon-button
                   class="q-mr-xs q-mb-xs"
                   :to="`/mailinfo/edit/${row.id}`"
                 />

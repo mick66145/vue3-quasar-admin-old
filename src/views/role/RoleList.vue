@@ -38,15 +38,15 @@
             sortable
             :min-width="$q.screen.lt.sm ? min_width : 'auto'"
           />
-          <vxe-column title="操作" fixed="right" :width="$q.screen.lt.sm ? 85 : 150">
+          <vxe-column title="操作" fixed="right" width="115">
             <template #default="{ row }">
               <div class="flex-center row">
-                <edit-button
+                <edit-icon-button
                   v-permission="['update role']"
                   class="q-mr-xs q-mb-xs"
                   :to="'/role/edit/' + row.id"
                 />
-                <delete-button
+                <delete-icon-button
                   v-permission="['delete role']"
                   class="q-mr-xs q-mb-xs"
                   @click="onDelete(row)"
