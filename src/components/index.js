@@ -28,6 +28,10 @@ import ResetButton from './button/ResetButton.vue'
 import ViewButton from './button/ViewButton.vue'
 import UploadButton from './button/UploadButton.vue'
 import DownloadButton from './button/DownloadButton.vue'
+import BaseIconButton from './button/BaseIconButton.vue'
+import EditIconButton from './button/EditIconButton.vue'
+import DeleteIconButton from './button/DeleteIconButton.vue'
+import ViewIconButton from './button/ViewIconButton.vue'
 import BaseImage from './image/BaseImage.vue'
 import BaseLink from './link/BaseLink.vue'
 import BaseTabs from './tabs/BaseTabs.vue'
@@ -37,6 +41,7 @@ import MessageDialog from './dialog/MessageDialog.vue'
 import SkeletonTable from './skeleton/SkeletonTable.vue'
 import ImageUploader from './uploader/ImageUploader.vue'
 import FileUploader from './uploader/FileUploader.vue'
+import BaseTooltip from './tooltip/BaseTooltip.vue'
 import LangSelect from './LangSelect.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
@@ -77,6 +82,10 @@ export default {
     app.component('ViewButton', ViewButton)
     app.component('UploadButton', UploadButton)
     app.component('DownloadButton', DownloadButton)
+    app.component('BaseIconButton', BaseIconButton)
+    app.component('EditIconButton', EditIconButton)
+    app.component('DeleteIconButton', DeleteIconButton)
+    app.component('ViewIconButton', ViewIconButton)
     app.component('BaseImage', BaseImage)
     app.component('BaseLink', BaseLink)
     app.component('BaseTabs', BaseTabs)
@@ -86,6 +95,7 @@ export default {
     app.component('SkeletonTable', SkeletonTable)
     app.component('ImageUploader', ImageUploader)
     app.component('FileUploader', FileUploader)
+    app.component('BaseTooltip', BaseTooltip)
     app.component('LangSelect', LangSelect)
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
