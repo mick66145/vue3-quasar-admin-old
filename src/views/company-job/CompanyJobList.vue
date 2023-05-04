@@ -5,7 +5,7 @@
       <template #action>
         <add-button
           v-permission="['create company_job']"
-          to="/company-job/create"
+          @click="showDialog({})"
         />
       </template>
     </page-header>
@@ -44,7 +44,7 @@
                 <edit-icon-button
                   v-permission="['update company_job']"
                   class="q-mr-xs q-mb-xs"
-                  :to="'/company-job/edit/' + row.id"
+                  @click="showDialog({ id:row.id, mode:'edit', callRead:true })"
                 />
                 <delete-icon-button
                   v-permission="['delete company_job']"
@@ -57,10 +57,12 @@
         </vxe-server-table>
       </card-body>
     </q-card>
+    <company-job-dialog ref="dialog" @save="refreshFetch" />
   </q-page>
 </template>
 
 <script>
+import CompanyJobDialog from './components/CompanyJobDialog.vue'
 import { CompanyJobResource } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/use/useCRUD'
@@ -70,6 +72,9 @@ import useMessageDialog from '@/use/useMessageDialog'
 const companyJobResource = new CompanyJobResource()
 
 export default defineComponent({
+  components: {
+    CompanyJobDialog,
+  },
   setup () {
     // data
     const filter = reactive({
@@ -78,6 +83,7 @@ export default defineComponent({
     const tableFields = ref([
       { title: '職稱', field: 'name', min_width: '130' },
     ])
+    const dialog = ref()
 
     // methods
     const fetchData = async (payload) => {
@@ -101,6 +107,9 @@ export default defineComponent({
         refreshFetch()
       }
     }
+    const showDialog = ({ id, mode, callRead }) => {
+      dialog.value.showDialog({ id, mode, callRead })
+    }
 
     const refreshFetch = async () => {
       await getDataList({ ...search })
@@ -123,6 +132,7 @@ export default defineComponent({
 
     return {
       dataTable,
+      dialog,
       tableFields,
       filter,
       data,
@@ -132,6 +142,8 @@ export default defineComponent({
       onChangeFilter,
       OnChangeSort,
       onDelete,
+      showDialog,
+      refreshFetch,
     }
   },
 })
