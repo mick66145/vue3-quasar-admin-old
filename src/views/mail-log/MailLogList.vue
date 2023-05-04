@@ -6,36 +6,28 @@
 
     <q-card class="shadow-7">
       <card-body>
-        <div class="row q-mb-sm items-center justify-between q-col-gutter-x-md q-col-gutter-y-md">
-          <div class="col-md-10 col-sm-9 col-xs-12 ">
-            <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <input-date-range
-                  v-model="search.date_range"
-                  class="full-width"
-                  dense
-                  @update:modelValue="onChangeFilter"
-                />
-              </div>
-              <div class="col-md-3 col-sm-6 col-xs-12">
-                <input-search
-                  v-model="search.keyword"
-                  class="full-width"
-                  dense
-                  @update:modelValue="onChangeFilter"
-                />
-              </div>
-            </div>
+        <div class="row q-mb-sm items-center q-col-gutter-x-md q-col-gutter-y-xs">
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <input-date-range
+              v-model="search.date_range"
+              class="full-width"
+              dense
+              @update:modelValue="onChangeFilter"
+            />
           </div>
-          <div class="col-md-2 col-sm-3 col-xs-12">
-            <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
-              <div class="col-12">
-                <reset-button
-                  class="w-full"
-                  @click="onReset"
-                />
-              </div>
-            </div>
+          <div class="col-md-5 col-sm-5 col-xs-12">
+            <input-search
+              v-model="search.keyword"
+              class="full-width"
+              dense
+              @update:modelValue="onChangeFilter"
+            />
+          </div>
+          <div class="col-md-2 col-sm-2 col-xs-12">
+            <reset-button
+              class="w-full"
+              @click="onReset"
+            />
           </div>
         </div>
         <vxe-server-table

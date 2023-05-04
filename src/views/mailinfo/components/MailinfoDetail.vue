@@ -11,7 +11,7 @@
               信件資訊
             </card-header>
             <card-body class="q-pt-none">
-              <div class="flex-center row q-col-gutter-x-md q-col-gutter-y-md">
+              <div class="flex-center row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-12 col-md-6">
                   <input-text
                     v-model="formData.subject"
@@ -71,7 +71,7 @@
               信件內文
             </card-header>
             <card-body class="q-pt-none">
-              <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-xs-12 col-sm-12 col-md-12">
                   <input-editor
                     v-model="formData.content_json"

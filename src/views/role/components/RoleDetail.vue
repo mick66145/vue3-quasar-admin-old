@@ -9,7 +9,7 @@
               權限資訊
             </card-header>
             <card-body class="q-pt-none">
-              <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                   <input-text
                     v-model="formData.name"
@@ -29,7 +29,7 @@
               權限設定
             </card-header>
             <card-body class="q-pt-none">
-              <div class="row q-col-gutter-x-md q-col-gutter-y-md">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div v-for="menuPermissionItem in menuPermissionList" :key="menuPermissionItem" class="col-12">
                   <q-card
                     class="shadow-0 permissions-card"
