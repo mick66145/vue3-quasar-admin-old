@@ -5,6 +5,7 @@ import { getToken } from '@/utils/auth' // get token from cookie
 import { useUser } from '@/stores/user'
 import { usePermission } from '@/stores/permission'
 import { usePlatformAttribute } from '@/stores/platformAttribute'
+import { i18n } from '@/plugins/i18n'
 import getPageTitle from './utils/get-page-title'
 import useLogout from '@/use/useLogout'
 
@@ -17,7 +18,7 @@ router.beforeEach(async (to, from, next) => {
   NProgress.start()
 
   // set page title
-  document.title = getPageTitle(to.meta.title)
+  document.title = getPageTitle(to.meta.title ? i18n.global.t(to.meta.title || 'g.system-system-name', to.params.lang) : '')
 
   // determine whether the user has logged in
   const store = useUser()

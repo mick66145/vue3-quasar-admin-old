@@ -24,7 +24,7 @@
 
 <script>
 import { defineComponent, ref, computed, toRefs } from 'vue-demi'
-import { useI18n } from 'vue-i18n'
+import { i18n } from '@/plugins/i18n'
 import useNotify from '@/use/useNotify'
 
 export default defineComponent({
@@ -44,14 +44,13 @@ export default defineComponent({
     const { notify } = useNotify()
 
     // data
-    const { t } = useI18n()
     const { label } = toRefs(props)
     const uploader = ref()
     const reader = new FileReader()
 
     // computed
     const buttonLabel = computed(() => {
-      return label.value ? label.value : t('g.btn.add')
+      return label.value ? label.value : i18n.global.t('g.btn.add')
     })
 
     // methods

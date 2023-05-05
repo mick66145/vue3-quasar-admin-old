@@ -51,7 +51,7 @@
 <script>
 import { useVModel } from '@vueuse/core'
 import { defineComponent, computed, toRefs } from 'vue-demi'
-import { useI18n } from 'vue-i18n'
+import { i18n } from '@/plugins/i18n'
 export default defineComponent({
   props: {
     modelValue: { type: Boolean, default: false },
@@ -68,7 +68,6 @@ export default defineComponent({
   emits: ['update:modelValue', 'save', 'cancel', 'show', 'hide'],
   setup (props, { emit }) {
     // data
-    const { t } = useI18n()
     const observeValue = useVModel(props, 'modelValue', emit)
     const { cancelButtonText, confirmButtonText } = toRefs(props)
 
@@ -84,10 +83,10 @@ export default defineComponent({
       }
     })
     const cancelButtonLabel = computed(() => {
-      return cancelButtonText.value ? cancelButtonText.value : t('g.btn.cancel')
+      return cancelButtonText.value ? cancelButtonText.value : i18n.global.t('g.btn.cancel')
     })
     const confirmButtonLabel = computed(() => {
-      return confirmButtonText.value ? confirmButtonText.value : t('g.btn.save')
+      return confirmButtonText.value ? confirmButtonText.value : i18n.global.t('g.btn.save')
     })
 
     // methods

@@ -26,7 +26,7 @@
 
 <script>
 import { defineComponent, computed, toRefs } from 'vue-demi'
-import { useI18n } from 'vue-i18n'
+import { i18n } from '@/plugins/i18n'
 import useGoBack from '@/use/useGoBack'
 
 export default defineComponent({
@@ -43,15 +43,14 @@ export default defineComponent({
   emits: ['cancel', 'save'],
   setup (props, { emit }) {
     // data
-    const { t } = useI18n()
     const { cancelButtonText, confirmButtonText } = toRefs(props)
 
     // computed
     const cancelButtonLabel = computed(() => {
-      return cancelButtonText.value ? cancelButtonText.value : t('g.btn.go-back')
+      return cancelButtonText.value ? cancelButtonText.value : i18n.global.t('g.btn.go-back')
     })
     const confirmButtonLabel = computed(() => {
-      return confirmButtonText.value ? confirmButtonText.value : t('g.btn.save')
+      return confirmButtonText.value ? confirmButtonText.value : i18n.global.t('g.btn.save')
     })
 
     // methods
