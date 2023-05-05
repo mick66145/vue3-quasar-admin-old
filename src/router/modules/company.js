@@ -6,7 +6,7 @@ const companyRouter = {
   name: 'Company',
   component: MainLayout,
   meta: {
-    title: '公司維護',
+    title: 'company.title',
     slug: 'link',
   },
   redirect: { name: 'CompanyList' },
@@ -15,7 +15,7 @@ const companyRouter = {
       path: '',
       component: () => import('@/views/company/CompanyList.vue'),
       name: 'CompanyList',
-      meta: { title: '公司維護', icon: 'fas fa-genderless', affix: true },
+      meta: { title: 'company.title', icon: 'fas fa-genderless', affix: true },
     },
     {
       path: 'create',

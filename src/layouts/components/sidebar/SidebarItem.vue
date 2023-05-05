@@ -4,7 +4,7 @@
       <sidebar-link
         :key="onlyOneChild.path"
         :to="resolvePath(onlyOneChild.path)"
-        :title="onlyOneChild.meta.title"
+        :title="$t(onlyOneChild.meta.title)"
         :icon="onlyOneChild.meta.icon"
         @click="onclick(onlyOneChild)"
       />
@@ -16,7 +16,7 @@
       v-model="open"
       :group="item.groupName"
       :icon="item.meta.icon"
-      :label="item.meta.title"
+      :label="$t(item.meta.title)"
       :header-class="headerClassActive"
       :expand-icon-class="expandIconClassActive"
     >
@@ -35,7 +35,7 @@
           v-else
           :key="childItem.path"
           :to="resolvePath(childItem.path)"
-          :title="childItem.meta.title"
+          :title="$t(childItem.meta.title)"
           :icon="childItem.meta.icon"
           @click="onclick(childItem)"
         />

@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-lg">
     <page-header>
-      Company
+      {{ $t('company.title') }}
       <template #action>
         <add-button
           v-permission="['create company']"

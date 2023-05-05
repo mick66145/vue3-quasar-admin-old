@@ -37,7 +37,7 @@
     "profile": "Profile",
     "logout": "Logout",
     "company-job": "CompanyJob",
-    "user": "User",
+    "user-manage": "UserManage",
     "role": "Role",
     "system-log": "SystemLog"
   },
@@ -77,5 +77,11 @@
   },
   "mailinfo": {
     "title": "Mailinfo"
+  },
+  "company": {
+    "title": "Company"
+  },
+  "operate-log": {
+    "title": "OperateLog"
   }
 }

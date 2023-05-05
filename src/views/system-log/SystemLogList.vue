@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-lg">
     <page-header>
-      {{ $t('system-log.title') }}
+      {{ $t('operate-log.title') }}
     </page-header>
 
     <q-card class="shadow-7">

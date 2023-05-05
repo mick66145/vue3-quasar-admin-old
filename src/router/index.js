@@ -95,7 +95,7 @@ export const asyncRoutes = [
     group: ['/company-job', '/role', '/user'],
     groupName: 'first',
     meta: {
-      title: '帳號管理',
+      title: 'meun.user-manage',
       icon: 'menu_open',
       slug: 'dropdown',
     },
@@ -110,7 +110,7 @@ export const asyncRoutes = [
     group: ['/system-log', '/mail-log'],
     groupName: 'first',
     meta: {
-      title: '系統紀錄',
+      title: 'meun.system-log',
       icon: 'menu_open',
       slug: 'dropdown',
     },

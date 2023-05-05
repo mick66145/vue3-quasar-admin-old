@@ -6,7 +6,7 @@ const mailinfoRouter = {
   name: 'Mailinfo',
   component: MainLayout,
   meta: {
-    title: '信件維護',
+    title: 'mailinfo.title',
     slug: 'link',
   },
   redirect: { name: 'MailinfoList' },
@@ -15,7 +15,7 @@ const mailinfoRouter = {
       path: '',
       component: () => import('@/views/mailinfo/MailinfoList.vue'),
       name: 'MailinfoList',
-      meta: { title: '信件維護', icon: 'fas fa-genderless', affix: true },
+      meta: { title: 'mailinfo.title', icon: 'fas fa-genderless', affix: true },
     },
     {
       path: 'edit/:id(\\d+)',

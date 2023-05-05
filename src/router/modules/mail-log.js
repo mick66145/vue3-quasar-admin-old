@@ -5,7 +5,7 @@ const mailLogRouter = {
   path: '/mail-log',
   component: MainLayout,
   meta: {
-    title: '信件紀錄',
+    title: 'mail-log.title',
     slug: 'link',
     permissions: ['view mail_log'],
   },
@@ -15,7 +15,7 @@ const mailLogRouter = {
       path: '',
       component: () => import('@/views/mail-log/MailLogList.vue'),
       name: 'MailLogList',
-      meta: { title: '信件紀錄', icon: 'fas fa-genderless', permissions: ['view mail_log'] },
+      meta: { title: 'mail-log.title', icon: 'fas fa-genderless', permissions: ['view mail_log'] },
     },
   ],
 }

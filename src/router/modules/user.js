@@ -6,7 +6,7 @@ const userRouter = {
   name: 'user',
   component: MainLayout,
   meta: {
-    title: '帳號維護',
+    title: 'user.title',
     slug: 'link',
     permissions: ['view user'],
   },
@@ -16,7 +16,7 @@ const userRouter = {
       path: '',
       component: () => import('@/views/user/UserList.vue'),
       name: 'UserList',
-      meta: { title: '帳號維護', icon: 'fas fa-genderless', permissions: ['view user'] },
+      meta: { title: 'user.title', icon: 'fas fa-genderless', permissions: ['view user'] },
     },
     {
       path: 'create',

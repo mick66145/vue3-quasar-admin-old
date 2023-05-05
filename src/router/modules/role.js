@@ -6,7 +6,7 @@ const roleRouter = {
   name: 'Role',
   component: MainLayout,
   meta: {
-    title: '權限維護',
+    title: 'role.title',
     slug: 'link',
     permissions: ['view role'],
   },
@@ -16,7 +16,7 @@ const roleRouter = {
       path: '',
       component: () => import('@/views/role/RoleList.vue'),
       name: 'RoleList',
-      meta: { title: '權限維護', icon: 'fas fa-genderless', permissions: ['view role'] },
+      meta: { title: 'role.title', icon: 'fas fa-genderless', permissions: ['view role'] },
     },
     {
       path: 'create',
