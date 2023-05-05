@@ -3,20 +3,19 @@
     <div class="row items-center justify-between q-px-lg q-py-md">
       <div />
       <div>
-        <base-button
+        <cancel-button
           v-if="showCancel"
           class="q-mr-md q-px-xl q-mb-xs"
-          outline
           :color="cancelButtonColor"
-          :label="$t('g.btn.go-back')"
+          :label="cancelButtonLabel"
           @click="onCancel"
         />
         <slot name="button" />
-        <base-button
+        <confirm-button
           v-if="showSave"
           class="q-px-xl q-mb-xs"
           :color="confirmButtonColor"
-          :label="confirmButtonText"
+          :label="confirmButtonLabel"
           @click="onSave"
         />
       </div>
@@ -26,17 +25,16 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue-demi'
+import { defineComponent, computed, toRefs } from 'vue-demi'
+import { useI18n } from 'vue-i18n'
 import useGoBack from '@/use/useGoBack'
-import BaseButton from './button/BaseButton.vue'
 
 export default defineComponent({
-  components: { BaseButton },
   props: {
     cancelButtonColor: { type: String, default: 'primary' },
-    cancelButtonText: { type: String, default: '返回' },
+    cancelButtonText: { type: String },
     confirmButtonColor: { type: String, default: 'primary' },
-    confirmButtonText: { type: String, default: '儲存' },
+    confirmButtonText: { type: String },
     goBackRoute: { type: String, default: '' },
     autoBack: { type: Boolean, default: true },
     showCancel: { type: Boolean, default: true },
@@ -44,6 +42,19 @@ export default defineComponent({
   },
   emits: ['cancel', 'save'],
   setup (props, { emit }) {
+    // data
+    const { t } = useI18n()
+    const { cancelButtonText, confirmButtonText } = toRefs(props)
+
+    // computed
+    const cancelButtonLabel = computed(() => {
+      return cancelButtonText.value ? cancelButtonText.value : t('g.btn.go-back')
+    })
+    const confirmButtonLabel = computed(() => {
+      return confirmButtonText.value ? confirmButtonText.value : t('g.btn.save')
+    })
+
+    // methods
     const { goBack } = useGoBack({ autoBack: props.autoBack, fallBack: props.goBackRoute })
     const onCancel = () => {
       emit('cancel')
@@ -54,6 +65,8 @@ export default defineComponent({
     }
 
     return {
+      cancelButtonLabel,
+      confirmButtonLabel,
       onCancel,
       onSave,
     }

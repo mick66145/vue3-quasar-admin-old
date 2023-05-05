@@ -26,20 +26,19 @@
 
       <q-card-actions class="q-dialog-footer" align="right">
         <slot name="footer" class="text-primary">
-          <base-button
+          <cancel-button
             v-if="showCancel"
             v-close-popup
             class="q-mr-xs"
-            outline
             :color="cancelButtonColor"
-            :label="cancelButtonText"
+            :label="cancelButtonLabel"
             padding="sm 2.5em"
             @click="onCancel"
           />
-          <base-button
+          <confirm-button
             v-if="showSave"
             :color="confirmButtonColor"
-            :label="confirmButtonText"
+            :label="confirmButtonLabel"
             padding="sm 2.5em"
             @click="onSave"
           />
@@ -51,14 +50,15 @@
 
 <script>
 import { useVModel } from '@vueuse/core'
-import { defineComponent, computed } from 'vue-demi'
+import { defineComponent, computed, toRefs } from 'vue-demi'
+import { useI18n } from 'vue-i18n'
 export default defineComponent({
   props: {
     modelValue: { type: Boolean, default: false },
     title: { type: String, default: '標題' },
-    cancelButtonText: { type: String, default: '關閉' },
+    cancelButtonText: { type: String },
     cancelButtonColor: { type: String, default: 'primary' },
-    confirmButtonText: { type: String, default: '儲存' },
+    confirmButtonText: { type: String },
     confirmButtonColor: { type: String, default: 'primary' },
     persistent: { type: Boolean, default: false },
     size: { type: String },
@@ -68,8 +68,11 @@ export default defineComponent({
   emits: ['update:modelValue', 'save', 'cancel', 'show', 'hide'],
   setup (props, { emit }) {
     // data
+    const { t } = useI18n()
     const observeValue = useVModel(props, 'modelValue', emit)
+    const { cancelButtonText, confirmButtonText } = toRefs(props)
 
+    // computed
     const sizeClass = computed(() => {
       switch (props.size) {
       case 'small':
@@ -79,6 +82,12 @@ export default defineComponent({
       default:
         return 'w-full'
       }
+    })
+    const cancelButtonLabel = computed(() => {
+      return cancelButtonText.value ? cancelButtonText.value : t('g.btn.cancel')
+    })
+    const confirmButtonLabel = computed(() => {
+      return confirmButtonText.value ? confirmButtonText.value : t('g.btn.save')
     })
 
     // methods
@@ -101,6 +110,8 @@ export default defineComponent({
     return {
       observeValue,
       sizeClass,
+      cancelButtonLabel,
+      confirmButtonLabel,
       onSave,
       onCancel,
       onShow,

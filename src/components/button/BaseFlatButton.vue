@@ -1,16 +1,12 @@
 <template>
   <q-btn
     no-caps
-    class="shadow-1"
-    :outline="outline"
-    :rounded="rounded"
+    :flat="flat"
     :color="color"
-    :label="label"
-    :icon="icon"
     :loading="isLoading"
     :size="size"
+    :label="label"
   >
-    <slot />
     <template #loading>
       <q-spinner-hourglass size="0.75em" />
     </template>
@@ -23,11 +19,9 @@ import { useApp } from '@/stores/app'
 
 export default defineComponent({
   props: {
-    label: { type: String, default: '' },
+    label: { type: String },
     color: { type: String, default: 'primary' },
-    icon: { type: String },
-    outline: { type: Boolean, default: false },
-    rounded: { type: Boolean, default: false },
+    flat: { type: Boolean, default: true },
     size: { type: String, default: 'md' },
   },
   setup () {

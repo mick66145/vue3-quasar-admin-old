@@ -27,11 +27,14 @@ import EditButton from './button/EditButton.vue'
 import ResetButton from './button/ResetButton.vue'
 import ViewButton from './button/ViewButton.vue'
 import UploadButton from './button/UploadButton.vue'
+import ConfirmButton from './button/ConfirmButton.vue'
+import CancelButton from './button/CancelButton.vue'
 import DownloadButton from './button/DownloadButton.vue'
 import BaseIconButton from './button/BaseIconButton.vue'
 import EditIconButton from './button/EditIconButton.vue'
 import DeleteIconButton from './button/DeleteIconButton.vue'
 import ViewIconButton from './button/ViewIconButton.vue'
+import BaseFlatButton from './button/BaseFlatButton.vue'
 import BaseImage from './image/BaseImage.vue'
 import BaseLink from './link/BaseLink.vue'
 import BaseTabs from './tabs/BaseTabs.vue'
@@ -81,11 +84,14 @@ export default {
     app.component('ResetButton', ResetButton)
     app.component('ViewButton', ViewButton)
     app.component('UploadButton', UploadButton)
+    app.component('ConfirmButton', ConfirmButton)
+    app.component('CancelButton', CancelButton)
     app.component('DownloadButton', DownloadButton)
     app.component('BaseIconButton', BaseIconButton)
     app.component('EditIconButton', EditIconButton)
     app.component('DeleteIconButton', DeleteIconButton)
     app.component('ViewIconButton', ViewIconButton)
+    app.component('BaseFlatButton', BaseFlatButton)
     app.component('BaseImage', BaseImage)
     app.component('BaseLink', BaseLink)
     app.component('BaseTabs', BaseTabs)

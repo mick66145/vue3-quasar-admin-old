@@ -1,20 +1,20 @@
 {
   "g": {
     "btn": {
-      "edit": "edit",
-      "add": "add",
-      "delete": "delete",
-      "cancel": "cancel",
-      "save": "save",
-      "confirm": "ok",
-      "go-back": "goBack",
-      "reset-password": "resetPassword",
-      "reset": "reset",
-      "view": "view",
+      "edit": "Edit",
+      "add": "Add",
+      "delete": "Delete",
+      "cancel": "Cancel",
+      "save": "Save",
+      "confirm": "Confirm",
+      "go-back": "GoBack",
+      "reset-password": "ResetPassword",
+      "reset": "Reset",
+      "view": "View",
       "dowload": "Dowload"
     },
     "dialog": {
-      "default-title": "title"
+      "default-title": "Title"
     },
     "system": {
       "system-name": "DashBoard Base"
@@ -27,8 +27,8 @@
       "forget-password": "ForgetPassword"
     },
     "loginForm": {
-      "account": "account",
-      "password": "password"
+      "account": "Account",
+      "password": "Password"
     }
   },
   "meun": {
@@ -67,8 +67,8 @@
         "login": "Login"
       },
       "loginForm": {
-        "account": "account",
-        "password": "password"
+        "account": "Account",
+        "password": "Password"
       }
     }
   },
