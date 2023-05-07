@@ -28,7 +28,7 @@ const https = () => {
   }
 }
 
-const localMockEnabled = process.env.USE_LOCAL_MOCK || true
+const localMockEnabled = process.env.USE_LOCAL_MOCK || false
 const prodMockEnabled = process.env.USE_PROD_MOCK || false
 
 // https://vitejs.dev/config/
