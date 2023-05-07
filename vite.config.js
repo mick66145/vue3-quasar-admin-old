@@ -10,6 +10,7 @@ import WindiCSS from 'vite-plugin-windicss'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import stylelint from 'vite-plugin-stylelint'
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import { VitePWA } from 'vite-plugin-pwa'
 
 const fs = require('fs')
 
@@ -68,6 +69,36 @@ export default defineConfig(({ command, mode }) => {
       }),
       quasar({
         sassVariables: 'src/styles/abstracts/quasar-variables.scss',
+      }),
+      VitePWA({
+        includeAssets: ['favicon.svg'],
+        manifest: false,
+        registerType: 'autoUpdate',
+        workbox: {
+          runtimeCaching: [
+            {
+              urlPattern: /someInterface/i, // 接口存儲此處填寫你想存儲的接口正則匹配
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'interface-cache',
+              },
+            },
+            {
+              urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts靜態資源保存
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'js-css-cache',
+              },
+            },
+            {
+              urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 圖片存檔
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'image-cache',
+              },
+            },
+          ],
+        },
       }),
     ],
     test: {
