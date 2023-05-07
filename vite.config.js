@@ -28,9 +28,6 @@ const https = () => {
   }
 }
 
-const localMockEnabled = process.env.USE_LOCAL_MOCK || false
-const prodMockEnabled = process.env.USE_PROD_MOCK || false
-
 // https://vitejs.dev/config/
 const root = process.cwd()
 export default defineConfig(({ command, mode }) => {
@@ -48,8 +45,8 @@ export default defineConfig(({ command, mode }) => {
       }),
       viteMockServe({
         mockPath: './server/mock',
-        localEnabled: localMockEnabled, // 開發打包開關
-        prodEnabled: prodMockEnabled, // 生產打包開關
+        localEnabled: env.VITE_USE_LOCAL_MOCK || false, // 開發打包開關
+        prodEnabled: env.VITE_USE_PROD_MOCK || false, // 生產打包開關
         injectCode: 'setupProdMockServer()',
         logger: false, // 是否在控制台顯示請求日誌
         supportTs: false,
