@@ -16,6 +16,7 @@ import vxeTable from '@/plugins/vxe-table'
 import editor from '@/plugins/editor'
 import i18n from '@/plugins/i18n'
 import { useVuelidate } from '@/plugins/vuelidate'
+import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 import '@/styles/index.scss'
 
@@ -30,7 +31,7 @@ import { setupProdMockServer } from '../server/mock'
 if (import.meta.env === 'development') {
   setupProdMockServer()
 }
-
+useRegisterSW()
 const app = createApp(App)
 app.use(quasar)
 app.use(createPinia())
