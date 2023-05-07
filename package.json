@@ -62,6 +62,7 @@
     "xe-utils": "^3.5.7"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^17.6.3",
     "@intlify/vite-plugin-vue-i18n": "^3.4.0",
     "@quasar/vite-plugin": "^1.2.3",
     "@sientech/eslint-config-frontend": "^2.0.0",
