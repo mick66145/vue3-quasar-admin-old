@@ -22,11 +22,16 @@
     "cert": "mkcert -key-file localhost-key.pem -cert-file localhost.pem localhost $(ipconfig getifaddr en0)",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "lint:rule": "eslint --print-config path::String",
+    "lint:eslint": "eslint --fix --ext .js,.ts,.vue ./src",
+    "lint:format": "prettier --write --loglevel warn \"src/**/*.{js,ts,json,tsx,css,less,vue,html,md}\"",
+    "lint:style": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
+    "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
     "release": "standard-version -t ''",
     "dev:mock": "cross-env USE_LOCAL_MOCK=true vite",
     "build:mock": "cross-env USE_PROD_MOCK=true vite build",
     "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@quasar/extras": "^1.15.5",
@@ -88,6 +93,8 @@
     "vite-plugin-svg-icons": "^2.0.1",
     "vite-plugin-windicss": "^1.8.4",
     "vitest": "^0.25.1",
-    "windicss": "^3.5.4"
+    "windicss": "^3.5.4",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.1"
   }
 }
