@@ -10,23 +10,8 @@ import WindiCSS from 'vite-plugin-windicss'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import stylelint from 'vite-plugin-stylelint'
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import mkcert from 'vite-plugin-mkcert'
 import { VitePWA } from 'vite-plugin-pwa'
-
-const fs = require('fs')
-
-const https = () => {
-  const useHttps = (process.env.npm_lifecycle_event || '').includes(':https')
-  const keyPem = `${__dirname}/localhost-key.pem`
-  const certPem = `${__dirname}/localhost.pem`
-  if (!useHttps) return {}
-  if (!fs.existsSync(keyPem) || !fs.existsSync(certPem)) return {}
-  return {
-    https: {
-      key: fs.readFileSync(keyPem),
-      cert: fs.readFileSync(certPem),
-    },
-  }
-}
 
 // https://vitejs.dev/config/
 const root = process.cwd()
@@ -54,6 +39,7 @@ export default defineConfig(({ command, mode }) => {
       vueJsx(),
       WindiCSS(),
       stylelint(),
+      mkcert(),
       createSvgIconsPlugin({
       // Specify the icon folder to be cached
         iconDirs: [path.resolve(process.cwd(), 'src/icons')],
@@ -102,7 +88,7 @@ export default defineConfig(({ command, mode }) => {
       environment: 'happy-dom',
     },
     server: {
-      ...https(),
+      https: false,
       cors: true,
       port: 3000,
       host: true,
