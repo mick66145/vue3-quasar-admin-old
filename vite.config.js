@@ -9,7 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import WindiCSS from 'vite-plugin-windicss'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import stylelint from 'vite-plugin-stylelint'
-import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 import mkcert from 'vite-plugin-mkcert'
 import { VitePWA } from 'vite-plugin-pwa'
 
@@ -46,7 +46,7 @@ export default defineConfig(({ command, mode }) => {
         // Specify symbolId format
         symbolId: 'icon-[name]',
       }),
-      vueI18n({
+      VueI18nPlugin({
         compositionOnly: false,
         include: path.resolve(__dirname, 'src/locales/**'),
       }),
