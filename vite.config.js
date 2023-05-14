@@ -15,6 +15,53 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vitejs.dev/config/
 const root = process.cwd()
+const pwaOptions = {
+  includeAssets: ['favicon.svg'],
+  injectRegister: 'auto',
+  manifest: {
+    name: 'DashBoard-Base-App', // 應用程式名稱
+    short_name: 'DashBoard-Base', // 應用程式簡稱
+    start_url: '/', // 啟動頁面 URL
+    display: 'standalone', // 顯示模式
+    background_color: '#ffffff', // 背景顏色
+    theme_color: '#000000', // 主題顏色
+    icons: [
+      {
+        src: 'pwa-192x192.png', // <== don't add slash, for testing
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: '/pwa-512x512.png', // <== don't remove slash, for testing
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
+  },
+  registerType: 'autoUpdate',
+  workbox: {
+    cleanupOutdatedCaches: true, // 清理舊的快取
+    skipWaiting: true, // 當新 Service Worker 可用時立即接管
+    clientsClaim: true, // 立即控制所有打開的客戶端
+    sourcemap: true, // 生成 sourcemap
+    runtimeCaching: [
+      {
+        urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts靜態資源保存
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'js-css-cache',
+        },
+      },
+      {
+        urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 圖片存檔
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'image-cache',
+        },
+      },
+    ],
+  },
+}
 export default defineConfig(({ command, mode }) => {
   let env = {}
   const isBuild = command === 'build'
@@ -53,36 +100,7 @@ export default defineConfig(({ command, mode }) => {
       quasar({
         sassVariables: 'src/styles/abstracts/quasar-variables.scss',
       }),
-      VitePWA({
-        includeAssets: ['favicon.svg'],
-        manifest: false,
-        registerType: 'autoUpdate',
-        workbox: {
-          runtimeCaching: [
-            {
-              urlPattern: /someInterface/i, // 接口存儲此處填寫你想存儲的接口正則匹配
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'interface-cache',
-              },
-            },
-            {
-              urlPattern: /(.*?)\.(js|css|ts)/, // js /css /ts靜態資源保存
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'js-css-cache',
-              },
-            },
-            {
-              urlPattern: /(.*?)\.(png|jpe?g|svg|gif|bmp|psd|tiff|tga|eps)/, // 圖片存檔
-              handler: 'CacheFirst',
-              options: {
-                cacheName: 'image-cache',
-              },
-            },
-          ],
-        },
-      }),
+      VitePWA(pwaOptions),
     ],
     test: {
       environment: 'happy-dom',
