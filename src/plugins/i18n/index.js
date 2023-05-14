@@ -1,7 +1,7 @@
 import { createI18n } from 'vue-i18n'
 import Cookies from 'js-cookie'
 import messages from '@intlify/unplugin-vue-i18n/messages'
-import quasarEnLocale from 'quasar/lang/en-Us'
+import quasarEnLocale from 'quasar/lang/en-US'
 import quasarZhTwLocale from 'quasar/lang/zh-TW'
 import vxeTableEn from 'vxe-table/lib/locale/lang/en-US'
 import vxeTableZhTw from 'vxe-table/lib/locale/lang/zh-TW'
