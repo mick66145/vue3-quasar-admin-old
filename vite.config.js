@@ -1,6 +1,6 @@
 /* eslint-disable node/no-path-concat */
 import { fileURLToPath, URL } from 'url'
-import path, { resolve } from 'path-browserify'
+import path, { resolve, dirname } from 'path-browserify'
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
@@ -95,7 +95,8 @@ export default defineConfig(({ command, mode }) => {
       }),
       VueI18nPlugin({
         compositionOnly: false,
-        include: path.resolve(__dirname, 'src/locales/**'),
+        runtimeOnly: false,
+        include: resolve(dirname(fileURLToPath(import.meta.url)), './src/locales/**'),
       }),
       quasar({
         sassVariables: 'src/styles/abstracts/quasar-variables.scss',
