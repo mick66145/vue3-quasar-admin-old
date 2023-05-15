@@ -5,23 +5,33 @@
     :size="size"
     :color="color"
     :label="label"
+    :class="observeClass"
+    @click.stop
   />
 </template>
 
 <script>
-import { defineComponent } from 'vue-demi'
+import { defineComponent, computed } from 'vue-demi'
 
 export default defineComponent({
   props: {
     label: { type: String, default: '' },
-    color: { type: String, default: 'blue' },
-    size: { type: String, default: '16px' },
+    color: { type: String, default: 'primary' },
+    size: { type: String },
+    underline: { type: Boolean, default: true },
   },
-  setup () {
+  setup (props) {
+    const observeClass = computed(() => {
+      return {
+        underline: props.underline,
+      }
+    })
     return {
+      observeClass,
     }
   },
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>
