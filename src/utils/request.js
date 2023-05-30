@@ -1,9 +1,40 @@
+/* eslint-disable no-unused-expressions */
 import Configuration from '@/configuration'
 import axios from 'axios'
+import qs from 'qs'
 import { useUser } from '@/stores/user'
 import { getToken } from '@/utils/auth'
 import useNotify from '@/use/useNotify'
 import useLogout from '@/use/useLogout'
+
+const defaultRequestInterceptors = (config) => {
+  const storeUser = useUser()
+  if (config.method === 'post' && (config.headers)['Content-Type'] === 'application/x-www-form-urlencoded') {
+    config.data = qs.stringify(config.data)
+  }
+  if (config.method === 'get' && config.params) {
+    let url = config.url
+    url += '?'
+    const keys = Object.keys(config.params)
+    for (const key of keys) {
+      if (config.params[key] !== undefined && config.params[key] !== null) {
+        url += `${key}=${encodeURIComponent(config.params[key])}&`
+      }
+    }
+    url = url.substring(0, url.length - 1)
+    config.params = {}
+    config.url = url
+  }
+  if (storeUser.token) {
+    config.headers['X-Token'] = getToken()
+    config.headers.Authorization = `Bearer ${getToken()}`
+  }
+  return config
+};
+(error) => {
+  console.log(error)
+  Promise.reject(error)
+}
 
 export const handleError = (error) => {
   const { response } = error
@@ -42,24 +73,7 @@ const service = axios.create({
 })
 
 // request interceptor
-service.interceptors.request.use(
-  config => {
-    // do something before request is sent
-    const storeUser = useUser()
-    if (storeUser.token) {
-      // let each request carry token
-      // ['X-Token'] is a custom headers key
-      // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
-      config.headers.Authorization = `Bearer ${getToken()}`
-    }
-    return config
-  },
-  error => {
-    // do something with request error
-    return Promise.reject(error)
-  },
-)
+service.interceptors.request.use(defaultRequestInterceptors)
 
 service.interceptors.response.use(
   handleResponse,
