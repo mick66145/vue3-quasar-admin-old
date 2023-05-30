@@ -45,6 +45,10 @@ import BaseDialog from './dialog/BaseDialog.vue'
 import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
 import MessageDialog from './dialog/MessageDialog.vue'
 import SkeletonTable from './skeleton/SkeletonTable.vue'
+import SkeletonTextItem from './skeleton/SkeletonTextItem.vue'
+import SkeletonImageTextItem from './skeleton/SkeletonImageTextItem.vue'
+import SkeletonTextList from './skeleton/SkeletonTextList.vue'
+import SkeletonImageTextList from './skeleton/SkeletonImageTextList.vue'
 import ImageUploader from './uploader/ImageUploader.vue'
 import FileUploader from './uploader/FileUploader.vue'
 import BaseTooltip from './tooltip/BaseTooltip.vue'
@@ -105,6 +109,10 @@ export default {
     app.component('ImagePreviewDialog', ImagePreviewDialog)
     app.component('MessageDialog', MessageDialog)
     app.component('SkeletonTable', SkeletonTable)
+    app.component('SkeletonTextItem', SkeletonTextItem)
+    app.component('SkeletonImageTextItem', SkeletonImageTextItem)
+    app.component('SkeletonTextList', SkeletonTextList)
+    app.component('SkeletonImageTextList', SkeletonImageTextList)
     app.component('ImageUploader', ImageUploader)
     app.component('FileUploader', FileUploader)
     app.component('BaseTooltip', BaseTooltip)
