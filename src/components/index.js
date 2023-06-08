@@ -47,6 +47,7 @@ import MessageDialog from './dialog/MessageDialog.vue'
 import SkeletonTable from './skeleton/SkeletonTable.vue'
 import SkeletonTextItem from './skeleton/SkeletonTextItem.vue'
 import SkeletonImageTextItem from './skeleton/SkeletonImageTextItem.vue'
+import SkeletonSquare from './skeleton/SkeletonSquare.vue'
 import SkeletonTextList from './skeleton/SkeletonTextList.vue'
 import SkeletonImageTextList from './skeleton/SkeletonImageTextList.vue'
 import ImageUploader from './uploader/ImageUploader.vue'
@@ -111,6 +112,7 @@ export default {
     app.component('SkeletonTable', SkeletonTable)
     app.component('SkeletonTextItem', SkeletonTextItem)
     app.component('SkeletonImageTextItem', SkeletonImageTextItem)
+    app.component('SkeletonSquare', SkeletonSquare)
     app.component('SkeletonTextList', SkeletonTextList)
     app.component('SkeletonImageTextList', SkeletonImageTextList)
     app.component('ImageUploader', ImageUploader)
