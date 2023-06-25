@@ -40,7 +40,7 @@
 
 <script>
 import { defineComponent, computed, ref } from 'vue-demi'
-import useMessageDialog from '@/use/useMessageDialog'
+import useMessageDialog from '@/hooks/useMessageDialog'
 
 export default defineComponent({
   components: {

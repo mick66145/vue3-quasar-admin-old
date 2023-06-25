@@ -54,7 +54,7 @@ import ForgetPasswordDialog from './components/ForgetPasswordDialog.vue'
 import { defineComponent, ref, reactive, watch } from 'vue-demi'
 import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
-import useCRUD from '@/use/useCRUD'
+import useCRUD from '@/hooks/useCRUD'
 
 export default defineComponent({
   components: {

@@ -8,7 +8,7 @@
 import { MailLogResource } from '@/api'
 import { defineComponent } from 'vue-demi'
 import { MailLog } from '@/class'
-import useDialog from '@/use/useDialog'
+import useDialog from '@/hooks/useDialog'
 
 const mailLogResource = new MailLogResource()
 

@@ -93,9 +93,9 @@ import { defineComponent, ref, toRefs, onMounted } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import { MailinfofoResource } from '@/api'
 import { Mailinfo } from '@/class'
-import useCRUD from '@/use/useCRUD'
-import useGoBack from '@/use/useGoBack'
-import useDeltaConvert from '@/use/useDeltaConvert'
+import useCRUD from '@/hooks/useCRUD'
+import useGoBack from '@/hooks/useGoBack'
+import useDeltaConvert from '@/hooks/useDeltaConvert'
 
 const mailinfofoResource = new MailinfofoResource()
 

@@ -65,8 +65,8 @@ import { defineComponent, reactive, ref, computed } from 'vue-demi'
 import { ImageBlotAlt, MyImageUploader } from './quillModule'
 import isEmpty from 'lodash-es/isEmpty'
 
-import useNotify from '@/use/useNotify'
-import useBatchUpload from '@/use/useBatchUpload'
+import useNotify from '@/hooks/useNotify'
+import useBatchUpload from '@/hooks/useBatchUpload'
 
 export default defineComponent({
   components: {

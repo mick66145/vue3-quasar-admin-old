@@ -57,8 +57,8 @@
 
 import { defineComponent, reactive } from 'vue-demi'
 import { useUser } from '@/stores/user'
-import useCRUD from '@/use/useCRUD'
-import useGoBack from '@/use/useGoBack'
+import useCRUD from '@/hooks/useCRUD'
+import useGoBack from '@/hooks/useGoBack'
 
 export default defineComponent({
   setup () {

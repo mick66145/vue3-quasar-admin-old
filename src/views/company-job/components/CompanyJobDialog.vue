@@ -22,7 +22,7 @@
 import { defineComponent } from 'vue-demi'
 import { CompanyJobResource } from '@/api'
 import { CompanyJob } from '@/class'
-import useDialog from '@/use/useDialog'
+import useDialog from '@/hooks/useDialog'
 
 const companyJobResource = new CompanyJobResource()
 

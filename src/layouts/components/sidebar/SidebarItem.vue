@@ -50,7 +50,7 @@ import path from 'path'
 import { defineComponent, ref, toRefs, computed, onMounted, watch } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import { selectMatchItem } from '@/utils/filter'
-import useEventsBus from '@/use/useEventsBus'
+import useEventsBus from '@/hooks/useEventsBus'
 
 export default defineComponent({
   components: {

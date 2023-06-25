@@ -53,7 +53,7 @@
 import { defineComponent, reactive } from 'vue-demi'
 import { useRouter } from 'vue-router'
 import { useUser } from '@/stores/user'
-import useCRUD from '@/use/useCRUD'
+import useCRUD from '@/hooks/useCRUD'
 
 export default defineComponent({
   setup () {

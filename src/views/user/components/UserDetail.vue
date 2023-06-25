@@ -95,8 +95,8 @@ import { defineComponent, ref, toRefs, watchEffect, onMounted } from 'vue-demi'
 import { User } from '@/class'
 import { useRoute } from 'vue-router'
 import { UserResource, RoleResource, CompanyJobResource } from '@/api'
-import useCRUD from '@/use/useCRUD'
-import useGoBack from '@/use/useGoBack'
+import useCRUD from '@/hooks/useCRUD'
+import useGoBack from '@/hooks/useGoBack'
 
 const userResource = new UserResource()
 const roleResource = new RoleResource()

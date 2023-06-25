@@ -7,7 +7,7 @@ import { usePermission } from '@/stores/permission'
 import { usePlatformAttribute } from '@/stores/platformAttribute'
 import { i18n } from '@/plugins/i18n'
 import getPageTitle from './utils/get-page-title'
-import useLogout from '@/use/useLogout'
+import useLogout from '@/hooks/useLogout'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 

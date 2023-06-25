@@ -52,8 +52,8 @@
 <script>
 import { defineComponent } from 'vue-demi'
 import { useUser } from '@/stores/user'
-import useDialog from '@/use/useDialog'
-import useLogout from '@/use/useLogout'
+import useDialog from '@/hooks/useDialog'
+import useLogout from '@/hooks/useLogout'
 
 export default defineComponent({
   emits: ['save'],

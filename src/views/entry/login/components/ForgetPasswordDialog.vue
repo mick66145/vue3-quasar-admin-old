@@ -32,7 +32,7 @@
 <script>
 import { defineComponent } from 'vue-demi'
 import { useUser } from '@/stores/user'
-import useDialog from '@/use/useDialog'
+import useDialog from '@/hooks/useDialog'
 
 export default defineComponent({
   emits: ['save'],

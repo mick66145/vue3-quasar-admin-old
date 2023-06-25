@@ -39,7 +39,7 @@
 import { defineComponent, reactive } from 'vue-demi'
 import { useApp } from '@/stores/app'
 import { useUser } from '@/stores/user'
-import useLogout from '@/use/useLogout'
+import useLogout from '@/hooks/useLogout'
 
 export default defineComponent({
   setup (props, { emit }) {

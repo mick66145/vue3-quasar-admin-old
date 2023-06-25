@@ -71,9 +71,9 @@
 <script>
 import { UserResource } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
-import useCRUD from '@/use/useCRUD'
-import useVxeServerDataTable from '@/use/useVxeServerDataTable'
-import useMessageDialog from '@/use/useMessageDialog'
+import useCRUD from '@/hooks/useCRUD'
+import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
+import useMessageDialog from '@/hooks/useMessageDialog'
 
 const userResource = new UserResource()
 

@@ -143,8 +143,8 @@
 import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
 import { useRoute } from 'vue-router'
 import { CompanyResource } from '@/api'
-import useCRUD from '@/use/useCRUD'
-import useGoBack from '@/use/useGoBack'
+import useCRUD from '@/hooks/useCRUD'
+import useGoBack from '@/hooks/useGoBack'
 
 const companyResource = new CompanyResource()
 

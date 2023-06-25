@@ -25,7 +25,7 @@
 <script>
 import { defineComponent, ref, computed, toRefs } from 'vue-demi'
 import { i18n } from '@/plugins/i18n'
-import useNotify from '@/use/useNotify'
+import useNotify from '@/hooks/useNotify'
 
 export default defineComponent({
   props: {

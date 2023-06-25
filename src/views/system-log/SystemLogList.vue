@@ -32,8 +32,8 @@
 <script>
 import { SystemResource } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
-import useCRUD from '@/use/useCRUD'
-import useVxeServerDataTable from '@/use/useVxeServerDataTable'
+import useCRUD from '@/hooks/useCRUD'
+import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 
 const systemResource = new SystemResource()
 

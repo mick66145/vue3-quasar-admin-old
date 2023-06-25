@@ -77,8 +77,8 @@ import { useRoute } from 'vue-router'
 import { RoleResource, MenuPermissionResource } from '@/api'
 import { Role } from '@/class'
 import { breadthFirstSearch } from '@/utils/tree'
-import useCRUD from '@/use/useCRUD'
-import useGoBack from '@/use/useGoBack'
+import useCRUD from '@/hooks/useCRUD'
+import useGoBack from '@/hooks/useGoBack'
 import _ from 'lodash-es'
 
 const roleResource = new RoleResource()
