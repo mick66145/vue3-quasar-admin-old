@@ -17,9 +17,6 @@ router.beforeEach(async (to, from, next) => {
   // start progress bar
   NProgress.start()
 
-  // set page title
-  document.title = getPageTitle(to.meta.title ? i18n.global.t(to.meta.title || 'g.system-system-name', to.params.lang) : '')
-
   // determine whether the user has logged in
   const store = useUser()
   const storePermission = usePermission()
@@ -66,7 +63,8 @@ router.beforeEach(async (to, from, next) => {
   }
 })
 
-router.afterEach(() => {
+router.afterEach((to) => {
   // finish progress bar
+  document.title = getPageTitle(to.meta.title ? i18n.global.t(to.meta.title || 'g.system-system-name', to.params.lang) : '')
   NProgress.done()
 })
