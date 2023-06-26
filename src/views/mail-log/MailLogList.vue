@@ -82,6 +82,9 @@ export default defineComponent({
     const dialog = ref()
     const filter = reactive({
       keyword: null,
+      date_range: null,
+      start_date: null,
+      end_date: null,
     })
     const tableFields = ref([
       { title: '寄送日期', field: 'send_datetime', min_width: '130' },
