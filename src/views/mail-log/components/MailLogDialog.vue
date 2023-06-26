@@ -1,5 +1,11 @@
 <template>
-  <base-dialog v-model="isShowDialog" title="信件紀錄詳情 : " @save="onSave" @hide="onHide">
+  <base-dialog
+    v-model="isShowDialog"
+    title="信件紀錄詳情 : "
+    :show-save="false"
+    @save="onSave"
+    @hide="onHide"
+  >
     <span v-html="data.state.content" />
   </base-dialog>
 </template>
