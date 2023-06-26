@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="!isReading">
+    <div v-show="!isReadingList">
       <vxe-table
         ref="dataTable"
         :key="refreshKey"
@@ -30,7 +30,7 @@
         @update:current="onUpdateCurrent"
       />
     </div>
-    <skeleton-table v-if="isReading" />
+    <skeleton-table v-if="isReadingList" />
   </div>
 </template>
 
@@ -64,8 +64,8 @@ export default defineComponent({
     const refreshKey = ref(0)
 
     // computed
-    const isReading = computed(() => {
-      return storeApp.isReading
+    const isReadingList = computed(() => {
+      return storeApp.isReadingList
     })
     const observeCheckboxConfig = computed(() => {
       const config = {
@@ -160,7 +160,7 @@ export default defineComponent({
       refreshKey,
       observeCheckboxConfig,
       observeRowConfig,
-      isReading,
+      isReadingList,
       sort,
       refresh,
       updateFooter,
