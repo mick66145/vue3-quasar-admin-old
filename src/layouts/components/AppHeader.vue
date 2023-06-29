@@ -20,7 +20,7 @@
             :icon="$q.fullscreen.isActive ? 'fullscreen_exit' : 'fullscreen'"
             @click="$q.fullscreen.toggle()"
           /> -->
-        <lang-select />
+        <lang-select v-if="isShow.langSelect" />
         <user-info-item />
       </div>
     </q-toolbar>
@@ -42,6 +42,9 @@ export default defineComponent({
     const storeApp = useApp()
     const storeUser = useUser()
     const userInfo = reactive(storeUser.info)
+    const isShow = reactive({
+      langSelect: false,
+    })
 
     // methods
     const toggle = () => {
@@ -57,6 +60,7 @@ export default defineComponent({
 
     return {
       userInfo,
+      isShow,
       toggle,
       logout,
     }
