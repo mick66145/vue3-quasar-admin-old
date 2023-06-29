@@ -19,24 +19,20 @@
               />
             </div>
             <div v-if="mode==='create'" class="col-xs-12 col-sm-6 col-md-6">
-              <div class="h-24">
-                <input-password
-                  v-model="formData.password"
-                  class="full-width"
-                  label="密碼 *"
-                  placeholder="請輸入密碼"
-                  :rules="[
-                    $rules.required('密碼必填'),
-                    $rules.regex(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)(?!.* ).{8,}$/i,'格式錯誤')
-                  ]"
-                >
-                  <template #hint>
-                    1. 密碼長度可為 8 至 255 個字元長度<br>
-                    2. 密碼必須包含至少一個數字 (0-9) 、一個英文字母 (a-z A-Z) 及一個特殊符號 (()[]{}+-*/?,.:;"'_\|~`!@#$%^&=
-                    ) ，但密碼第一個和最後一個字元不能為空格
-                  </template>
-                </input-password>
-              </div>
+              <input-password
+                v-model="formData.password"
+                class="full-width"
+                label="密碼 *"
+                placeholder="請輸入密碼"
+                :rules="[
+                  $rules.required('密碼必填'),
+                  $rules.regex(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)(?!.* ).{8,}$/i,'格式錯誤')
+                ]"
+              >
+                <template #hint>
+                  密碼需為 8 至 255 個字元長度，包含數字、英文字母和特殊符號。
+                </template>
+              </input-password>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
               <input-text
