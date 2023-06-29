@@ -7,9 +7,7 @@
     <q-item-section avatar>
       <q-avatar>
         <q-btn round flat>
-          <q-avatar size="44px">
-            <img src="https://cdn.quasar.dev/img/avatar4.jpg">
-          </q-avatar>
+          <q-avatar size="44px" icon="fa-solid fa-user" />
           <q-menu
             transition-show="scale"
             transition-hide="scale"
