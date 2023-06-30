@@ -17,7 +17,6 @@
 
     <template #default>
       <q-popup-proxy
-        v-if="show"
         v-model="show"
         class="flex justify-center"
         transition-show="scale"
@@ -31,8 +30,9 @@
           v-model="observeValue"
           :title="dateTitle"
           :subtitle="dateSubtitle"
-          :options="options"
+          :options="observeOptions"
           :locale="locale"
+          @update:modelValue="updateModelValue"
         >
           <div class="row items-center justify-end">
             <q-btn v-close-popup label="Close" color="primary" flat />
@@ -45,7 +45,7 @@
 
 <script>
 import { useVModel } from '@vueuse/core'
-import { defineComponent, ref, computed } from 'vue-demi'
+import { defineComponent, ref, computed, toRefs } from 'vue-demi'
 import { i18n } from '@/plugins/i18n'
 import { useApp } from '@/stores/app'
 export default defineComponent({
@@ -54,6 +54,8 @@ export default defineComponent({
     label: { type: String },
     placeholder: { type: String, default: '年/月/日' },
     options: { type: Array },
+    min: { type: String },
+    max: { type: String },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
@@ -61,6 +63,7 @@ export default defineComponent({
     const store = useApp()
     const inputData = ref()
     const show = ref(false)
+    const { min, max, options } = toRefs(props)
     const observeValue = useVModel(props, 'modelValue', emit)
 
     // computed
@@ -80,6 +83,19 @@ export default defineComponent({
     const dateSubtitle = computed(() => {
       return !observeValue.value ? ' ' : ''
     })
+    const observeOptions = computed(() => {
+      const _options = options.value
+      const dateFn = (date) => {
+        const _min = min.value
+        const _max = max.value
+        if (!_min && !_max) return true
+        if (_min && _max) return date >= _min && date <= _max
+        if (_min) return date >= _min
+        if (_max) return date <= _max
+      }
+      if (_options && _options.length > 0) return _options
+      return dateFn
+    })
 
     // methods
     const showPopup = (isShow) => {
@@ -87,7 +103,9 @@ export default defineComponent({
         show.value = isShow
       }, '200')
     }
-
+    const updateModelValue = (value, reason, details) => {
+      if (value) showPopup(false)
+    }
     const focus = () => {
       showPopup(true)
     }
@@ -100,7 +118,7 @@ export default defineComponent({
       evt?.relatedTarget.parentElement.className.includes('q-date__arrow') ||
       evt?.relatedTarget.className.includes('q-btn--no-uppercase') ||
       evt?.relatedTarget.className.includes('q-btn--round')) {
-        inputData.value.focus()
+        if (!observeValue.value) inputData.value.focus()
       } else {
         showPopup(false)
       }
@@ -113,9 +131,11 @@ export default defineComponent({
       locale,
       dateTitle,
       dateSubtitle,
+      observeOptions,
       showPopup,
       focus,
       blur,
+      updateModelValue,
     }
   },
 })
