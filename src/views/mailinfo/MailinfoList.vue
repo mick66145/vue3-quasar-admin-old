@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import { MailinfofoResource } from '@/api'
+import { MailinfoResource } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 
-const mailinfofoResource = new MailinfofoResource()
+const mailinfoResource = new MailinfoResource()
 
 export default defineComponent({
   setup () {
@@ -72,7 +72,7 @@ export default defineComponent({
     ])
     // methods
     const fetchData = async (payload) => {
-      return await mailinfofoResource.list(payload).then((res) => {
+      return await mailinfoResource.list(payload).then((res) => {
         data.value = []
         data.value = res.list
         total.value = res.total

@@ -2,7 +2,7 @@ import Resource from './resource'
 import request from '@/utils/request'
 import { Mailinfo } from '@/class'
 
-class MailinfofoResource extends Resource {
+class MailinfoResource extends Resource {
   constructor () {
     super('mailinfo')
   }
@@ -48,4 +48,4 @@ class MailinfofoResource extends Resource {
   }
 }
 
-export default MailinfofoResource
+export default MailinfoResource

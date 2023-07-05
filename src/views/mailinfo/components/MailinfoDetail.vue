@@ -46,7 +46,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-6">
-                  <input-text
+                  <input-email
                     v-model="formData.cc"
                     class="full-width"
                     label="副本信箱"
@@ -54,7 +54,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-6">
-                  <input-text
+                  <input-email
                     v-model="formData.bcc"
                     class="full-width"
                     label="密件副本信箱"
@@ -91,13 +91,13 @@
 <script>
 import { defineComponent, ref, toRefs, onMounted } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import { MailinfofoResource } from '@/api'
+import { MailinfoResource } from '@/api'
 import { Mailinfo } from '@/class'
 import useCRUD from '@/hooks/useCRUD'
 import useGoBack from '@/hooks/useGoBack'
 import useDeltaConvert from '@/hooks/useDeltaConvert'
 
-const mailinfofoResource = new MailinfofoResource()
+const mailinfoResource = new MailinfoResource()
 
 export default defineComponent({
   components: {
@@ -110,20 +110,19 @@ export default defineComponent({
     const { mode } = toRefs(props)
     const route = useRoute()
     const formData = ref(new Mailinfo())
-    const categoryId = route.params.categoryId || null
     const id = route.params.id || null
 
     // methods
-    const readFetch = async (categoryId, id, payload) => {
-      return await mailinfofoResource.getAnnouncement(categoryId, id, payload)
+    const readFetch = async (id, payload) => {
+      return await mailinfoResource.get(id, payload)
     }
-    const createFetch = async (categoryId, payload) => {
-      return await mailinfofoResource.postAnnouncement(categoryId, payload)
+    const createFetch = async (payload) => {
+      return await mailinfoResource.post(payload)
     }
-    const updateFetch = async (idObj, payload) => {
-      const { categoryId, id } = idObj
-      return await mailinfofoResource.patchAnnouncement(categoryId, id, payload)
+    const updateFetch = async (id, payload) => {
+      return await mailinfoResource.patch(id, payload)
     }
+
     const onSubmit = async () => {
       form.value.validate().then(async (success) => {
         if (success) {
@@ -131,10 +130,9 @@ export default defineComponent({
           payload.content = payload.content_json ? renderHtml(payload.content_json?.ops || []) : ''
           payload.content_json = JSON.stringify(payload.content_json)
           const urlObj = {
-            create: () => { return callCreateFetch(categoryId, { ...payload }) },
+            create: () => { return callCreateFetch({ ...payload }) },
             edit: () => {
-              const idObj = { categoryId: categoryId, id: id }
-              return callUpdateFetch(idObj, { ...payload })
+              return callUpdateFetch(id, { ...payload })
             },
           }
           const [res, error] = mode.value === 'create' ? await urlObj.create() : await urlObj.edit()
@@ -146,7 +144,7 @@ export default defineComponent({
     // mounted
     onMounted(async () => {
       if (id) {
-        const [res, error] = await callReadFetch(categoryId, id)
+        const [res, error] = await callReadFetch(id)
         formData.value = res
       }
     })
