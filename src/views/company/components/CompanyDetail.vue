@@ -1,147 +1,167 @@
 <template>
   <q-page class="q-pa-lg">
-    <page-header showPrev> 編輯Company </page-header>
-    <q-card class="shadow-7 q-pa-lg">
-      <card-header>
-        公司資訊
-      </card-header>
-      <card-body>
-        <q-form ref="form">
-          <div class="row q-col-gutter-x-md q-col-gutter-y-md">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-              <input-text
-                v-model="formData.name"
-                class="full-width"
-                label="公司名稱 *"
-                :rules="[$rules.required('Company is required')]"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.invoice"
-                class="full-width"
-                label="發票抬頭"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.vatnumber"
-                class="full-width"
-                label="統一編號"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.ceo"
-                class="full-width"
-                label="負責人"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-date
-                v-model="formData.opendate"
-                class="full-width"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.tel"
-                type="tel"
-                class="full-width"
-                label="主要電話"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.tel_ext"
-                class="full-width"
-                label="分機"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.tel_service"
-                type="tel"
-                class="full-width"
-                label="客服電話"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-              <input-text
-                v-model="formData.service_time"
-                class="full-width"
-                label="客服時間"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.phone"
-                class="full-width"
-                label="手機"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-text
-                v-model="formData.fax1"
-                class="full-width"
-                label="傳真1"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-9">
-              <input-email
-                v-model="formData.email"
-                class="full-width"
-                label="Email"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-select
-                v-model="formData.city"
-                class="full-width"
-                :options="cityList"
-                label="縣市"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-              <input-select
-                v-model="formData.area"
-                class="full-width"
-                :options="areaList"
-                label="鄉鎮區"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-2">
-              <input-text
-                v-model="formData.post_code"
-                class="full-width"
-                label="郵遞區號"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-4">
-              <input-text
-                v-model="formData.address"
-                class="full-width"
-                label="地址"
-              />
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-              <input-text
-                v-model="formData.address_en"
-                class="full-width"
-                label="地址(英)"
-              />
-            </div>
-          </div>
-        </q-form>
-      </card-body>
-    </q-card>
+    <page-header showPrev>
+      公司資訊詳情
+    </page-header>
+    <q-form ref="form">
+      <div class="row q-col-gutter-md">
+        <div class="col-12">
+          <q-card class="h-full shadow-7">
+            <card-header>
+              公司資訊
+            </card-header>
+            <card-body class="q-pt-none">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.name"
+                    class="full-width"
+                    label="公司名稱 *"
+                    placeholder="請輸入公司名稱"
+                    :rules="[$rules.required('公司名稱必填')]"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.invoice"
+                    class="full-width"
+                    label="發票抬頭"
+                    placeholder="請輸入發票抬頭"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.vatnumber"
+                    class="full-width"
+                    label="統一編號"
+                    placeholder="請輸入統一編號"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.ceo"
+                    class="full-width"
+                    label="負責人"
+                    placeholder="請輸入負責人"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-date
+                    v-model="formData.opendate"
+                    class="full-width"
+                    label="成立時間"
+                    placeholder="請選擇成立時間"
+                  />
+                </div>
+              </div>
+            </card-body>
+          </q-card>
+        </div>
+        <div class="col-12">
+          <q-card class="h-full shadow-7">
+            <card-header>
+              客服資訊
+            </card-header>
+            <card-body class="q-pt-none">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.tel_service"
+                    type="tel"
+                    class="full-width"
+                    label="客服電話"
+                    placeholder="請輸入客服電話"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.service_time"
+                    class="full-width"
+                    label="客服時間"
+                    placeholder="請輸入客服時間"
+                  />
+                </div>
+              </div>
+            </card-body>
+          </q-card>
+        </div>
+        <div class="col-12">
+          <q-card class="shadow-7">
+            <card-header>
+              聯絡資訊
+            </card-header>
+            <card-body class="q-pt-none">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.tel"
+                    type="tel"
+                    class="full-width"
+                    label="主要電話"
+                    placeholder="請輸入主要電話"
+                  />
+                </div>
+                <div class="col-md-2 col-sm-12">
+                  <input-text
+                    v-model="formData.tel_ext"
+                    class="full-width"
+                    label="分機"
+                    placeholder="請輸入分機"
+                  />
+                </div>
+                <div class="col-md-4 col-sm-12">
+                  <input-text
+                    v-model="formData.fax"
+                    class="full-width"
+                    label="傳真"
+                    placeholder="請輸入傳真"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-text
+                    v-model="formData.phone"
+                    class="full-width"
+                    label="手機"
+                    placeholder="請輸入手機"
+                  />
+                </div>
+                <div class="col-md-6 col-sm-12">
+                  <input-email
+                    v-model="formData.email"
+                    class="full-width"
+                    label="Email"
+                    placeholder="請輸入Email"
+                  />
+                </div>
+                <div class="col-12">
+                  <input-address
+                    v-model="formData.address_obj"
+                    showPostCode
+                    label=""
+                  />
+                </div>
+                <div class="col-12">
+                  <input-text
+                    v-model="formData.address_en"
+                    class="full-width"
+                    label="地址(英)"
+                    placeholder="請輸入地址(英)"
+                  />
+                </div>
+              </div>
+            </card-body>
+          </q-card>
+        </div>
+      </div>
+    </q-form>
   </q-page>
   <fixed-footer go-back-route="/company" @save="onSubmit" />
 </template>
 
 <script>
-import { defineComponent, ref, toRefs, watchEffect } from 'vue-demi'
+import { defineComponent, ref, onMounted, toRefs } from 'vue-demi'
 import { useRoute } from 'vue-router'
+import { Company } from '@/class'
 import { CompanyResource } from '@/api'
 import useCRUD from '@/hooks/useCRUD'
 import useGoBack from '@/hooks/useGoBack'
@@ -156,29 +176,17 @@ export default defineComponent({
     // data
     const { mode } = toRefs(props)
     const route = useRoute()
-    const formData = ref({
-      name: '',
-      invoice: '',
-      vatnumber: '',
-      ceo: '',
-      opendate: '',
-      tel: '',
-      tel_ext: '',
-      tel_service: '',
-      service_time: '',
-      phone: '',
-      fax1: '',
-      email: '',
-      city: '',
-      area: '',
-      post_code: '',
-      address: '',
-      address_en: '',
-    })
-    const cityList = ref(['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'])
-    const areaList = ref(['Google', 'Facebook', 'Twitter', 'Apple', 'Oracle'])
+    const formData = ref(new Company())
     const fallBack = { name: 'CompanyList' }
     const id = route.params.id || null
+
+    // mounted
+    onMounted(async () => {
+      if (id) {
+        const [res] = await callReadFetch(id)
+        formData.value = res
+      }
+    })
 
     // methods
     const readFetch = async (id, payload) => {
@@ -190,20 +198,19 @@ export default defineComponent({
     const updateFetch = async (id, payload) => {
       return await companyResource.patch(id, payload)
     }
-
     const onSubmit = async () => {
       form.value.validate().then(async (success) => {
         if (success) {
-          const payload = { ...formData.value }
-          let res, error
-          if (mode.value === 'edit') {
-            [res, error] = await callUpdateFetch(id, {
-              ...payload,
-            })
-            if (res) goBack()
-          } else if (mode.value === 'create') {
-            [res, error] = await callCreateFetch({ ...payload })
+          const payload = formData.value
+          payload.setAddress()
+          const urlObj = {
+            create: () => { return callCreateFetch({ ...payload }) },
+            edit: () => {
+              return callUpdateFetch(id, { ...payload })
+            },
           }
+          const [res, error] = mode.value === 'create' ? await urlObj.create() : await urlObj.edit()
+          if (res) goBack()
         }
       })
     }
@@ -216,18 +223,9 @@ export default defineComponent({
       updateFetch: updateFetch,
     })
 
-    // watch
-    watchEffect(async () => {
-      if (!id) return
-      const [res, error] = await callReadFetch(id)
-      formData.value = res
-    })
-
     return {
-      formData,
-      cityList,
-      areaList,
       form,
+      formData,
       onSubmit,
     }
   },

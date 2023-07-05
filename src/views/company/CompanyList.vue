@@ -79,7 +79,7 @@ export default defineComponent({
       { title: '公司名稱', field: 'name', min_width: '130' },
       { title: '聯絡電話', field: 'tel', min_width: '130' },
       { title: '客服電話', field: 'tel_service', min_width: '130' },
-      { title: '地址', field: 'address', min_width: '130' },
+      { title: '地址', field: 'address_text', min_width: '130' },
       { title: 'Email', field: 'email', min_width: '130' },
     ])
 
