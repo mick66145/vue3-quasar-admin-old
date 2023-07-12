@@ -39,7 +39,8 @@
     "company-job": "CompanyJob",
     "user-manage": "UserManage",
     "role": "Role",
-    "system-log": "SystemLog"
+    "system-log": "SystemLog",
+    "system-information-manage": "SystemInformationManage"
   },
   "company-job": {
     "title": "CompanyJob"

@@ -78,21 +78,20 @@ export const constantRoutes = [
 export const asyncRoutes = [
   {
     path: '/',
-    group: ['/company', '/mailinfo'],
+    group: ['/mailinfo'],
     groupName: 'first',
     meta: {
-      title: '人員管理',
+      title: 'meun.system-information-manage',
       icon: 'menu_open',
       slug: 'dropdown',
     },
     children: [
-      companyRouter,
       mailinfoRouter,
     ],
   },
   {
     path: '/',
-    group: ['/company-job', '/role', '/user'],
+    group: ['/company-job', '/company', '/role', '/user'],
     groupName: 'first',
     meta: {
       title: 'meun.user-manage',
@@ -100,6 +99,7 @@ export const asyncRoutes = [
       slug: 'dropdown',
     },
     children: [
+      companyRouter,
       companyJobRouter,
       roleRouter,
       userRouter,
