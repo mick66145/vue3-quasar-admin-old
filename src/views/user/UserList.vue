@@ -85,6 +85,7 @@ export default defineComponent({
     })
 
     const tableFields = ref([
+      { title: '帳號', field: 'account', min_width: '130' },
       { title: '姓名', field: 'name', min_width: '130' },
       { title: 'Email', field: 'email', min_width: '130' },
     ])

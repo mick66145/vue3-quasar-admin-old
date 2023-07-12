@@ -53,6 +53,14 @@
               />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
+              <input-company-select
+                v-model="formData.company"
+                class="full-width"
+                label="所屬公司"
+                placeholder="請選擇所屬公司"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
               <input-select
                 v-model="formData.company_job"
                 :options="companyJobList"
@@ -117,6 +125,10 @@ export default defineComponent({
     onMounted(async () => {
       await callRoleListFetch()
       await callCompanyJobListFetch()
+      if (id) {
+        const [res] = await callReadFetch(id)
+        formData.value = res
+      }
     })
 
     // methods

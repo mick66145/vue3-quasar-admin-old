@@ -12,22 +12,22 @@ class User extends Base {
   remark = "";
   role = "";
   company_job = "";
+  company = "";
 
   constructor(obj) {
     super();
-    (obj) && (this.setInit(obj))
-  }
-
-  setInit(obj) {
-    this.id = obj.id
-    this.name = obj.name
-    this.account = obj.account
-    this.password = obj.password
-    this.email = obj.email
-    this.is_enable = obj.is_enable
-    this.remark = obj.remark
-    this.role = obj.role
-    this.company_job = obj.company_job
+    if(obj){
+      this.id = obj?.id
+      this.name = obj?.name
+      this.account = obj?.account
+      this.password = obj?.password
+      this.email = obj?.email
+      this.is_enable = obj?.is_enable
+      this.remark = obj?.remark
+      this.role = obj?.role
+      this.company_job = obj?.company_job
+      this.company = obj?.company
+    }
   }
 }
 export default User
