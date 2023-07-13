@@ -8,6 +8,9 @@ class MenuPermission extends Base {
     childs = []
     permissions = []
 
+    //map欄位
+    allSelectd = false
+
     constructor(obj) {
         super();
         if (obj) {
@@ -22,6 +25,23 @@ class MenuPermission extends Base {
                 return permissionObj
             })
         }
+    }
+    setAllSelectd(){
+        this.allSelectd = this.permissions.every(element=>element.is_active)
+    }
+    setPermission(permissions) {
+        this.permissions.forEach(element => { (permissions.includes(element.id)) && (element.setIsActive(true)) })
+        this.setAllSelectd()
+        if (this.childs.length > 0 )this.childs.forEach(element => { element.setPermission(permissions)})
+    }
+    onSelectAll(value) {
+        this.permissions.forEach(element => { element.setIsActive(value)})
+        this.setAllSelectd()
+        if (this.childs.length > 0 )this.childs.forEach(element => { element.onSelectAll(value)})
+    }
+    everyAllSelectd(){
+        this.setAllSelectd()
+        return this.allSelectd && (this.childs.length === 0 ? true: this.childs.every(element => element.everyAllSelectd()))
     }
 }
 export default MenuPermission;

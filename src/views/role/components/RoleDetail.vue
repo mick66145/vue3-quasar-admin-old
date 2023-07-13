@@ -29,6 +29,7 @@
               權限設定
             </card-header>
             <card-body class="q-pt-none">
+              <input-checkbox v-model="allSelectd" label="全選" @update:modelValue="onSelectAll" />
               <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div v-for="menuPermissionItem in menuPermissionList" :key="menuPermissionItem" class="col-12">
                   <q-card
@@ -44,6 +45,9 @@
                           <span class="h-full col-md-2 col-sm-3 permissions-title ">
                             {{ childItem.name }}
                           </span>
+                          <div class="col-md-2 col-sm-3">
+                            <input-checkbox v-model="childItem.allSelectd" label="全選" @update:modelValue="childItem.onSelectAll(childItem.allSelectd);refreshAllSelectd()" />
+                          </div>
                           <div
                             v-for="permissionItem in childItem.permissions"
                             :key="permissionItem"
@@ -53,6 +57,7 @@
                               v-model="permissionItem.is_active"
                               :label="permissionItem.display_name"
                               :val="permissionItem"
+                              @update:modelValue="refreshAllSelectd"
                             />
                           </div>
                         </div>
@@ -93,22 +98,19 @@ export default defineComponent({
     const { mode } = toRefs(props)
     const route = useRoute()
     const formData = ref(new Role())
+    const allSelectd = ref(false)
     const menuPermissionList = ref([])
-    const permissionsIdList = ref([])
     const id = route.params.id || null
 
     // mounted
     onMounted(async () => {
       await callMenuPermissionListFetch()
       if (id) {
-        const [res, error] = await callReadFetch(id)
+        const [res] = await callReadFetch(id)
+        const permissions = _(res.permissions).map('id').value()
         formData.value = res
-        permissionsIdList.value = _(res.permissions).map('id').value()
-        breadthFirstSearch(menuPermissionList.value, node => {
-          node.permissions.forEach(element => {
-            (permissionsIdList.value.includes(element.id)) && (element.is_active = true)
-          })
-        })
+        menuPermissionList.value.forEach(element => { element.setPermission(permissions) })
+        refreshAllSelectd()
       }
     })
 
@@ -144,10 +146,16 @@ export default defineComponent({
               return callUpdateFetch(id, { ...payload })
             },
           }
-          const [res, error] = mode.value === 'create' ? await urlObj.create() : await urlObj.edit()
+          const [res] = mode.value === 'create' ? await urlObj.create() : await urlObj.edit()
           if (res) goBack()
         }
       })
+    }
+    const onSelectAll = (value) => {
+      menuPermissionList.value.forEach(element => { element.onSelectAll(value) })
+    }
+    const refreshAllSelectd = () => {
+      allSelectd.value = menuPermissionList.value.every(element => element.everyAllSelectd())
     }
 
     // use
@@ -165,8 +173,11 @@ export default defineComponent({
     return {
       form,
       formData,
+      allSelectd,
       menuPermissionList,
       onSubmit,
+      onSelectAll,
+      refreshAllSelectd,
     }
   },
 })

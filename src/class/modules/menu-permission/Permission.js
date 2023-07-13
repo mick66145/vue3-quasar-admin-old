@@ -10,5 +10,8 @@ class Permission extends BasePermission {
             this.is_active = obj?.is_active || false;
         }
     }
+    setIsActive(value){
+        this.is_active = value
+    }
 }
 export default Permission;
