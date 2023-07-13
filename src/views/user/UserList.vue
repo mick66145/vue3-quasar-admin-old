@@ -88,6 +88,8 @@ export default defineComponent({
       { title: '帳號', field: 'account', min_width: '130' },
       { title: '姓名', field: 'name', min_width: '130' },
       { title: 'Email', field: 'email', min_width: '130' },
+      { title: '所屬公司', field: 'company.name', min_width: '130' },
+      { title: '權限群組', field: 'role.name', min_width: '130' },
     ])
 
     // methods
