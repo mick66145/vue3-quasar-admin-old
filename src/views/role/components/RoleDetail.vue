@@ -57,7 +57,7 @@
                               v-model="permissionItem.is_active"
                               :label="permissionItem.display_name"
                               :val="permissionItem"
-                              @update:modelValue="refreshAllSelectd"
+                              @update:modelValue="childItem.refreshAllSelectd();refreshAllSelectd()"
                             />
                           </div>
                         </div>

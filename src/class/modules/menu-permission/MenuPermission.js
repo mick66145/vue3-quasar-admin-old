@@ -40,8 +40,11 @@ class MenuPermission extends Base {
         if (this.childs.length > 0 )this.childs.forEach(element => { element.onSelectAll(value)})
     }
     everyAllSelectd(){
-        this.setAllSelectd()
         return this.allSelectd && (this.childs.length === 0 ? true: this.childs.every(element => element.everyAllSelectd()))
+    }
+    refreshAllSelectd(){
+        this.setAllSelectd()
+        if (this.childs.length > 0 )this.childs.forEach(element => { element.refreshAllSelectd()})
     }
 }
 export default MenuPermission;
