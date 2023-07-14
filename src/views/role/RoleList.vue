@@ -61,13 +61,13 @@
 </template>
 
 <script>
-import { RoleResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 import useMessageDialog from '@/hooks/useMessageDialog'
 
-const roleResource = new RoleResource()
+const roleResource = new baseApiModules.RoleResource()
 
 export default defineComponent({
   setup () {

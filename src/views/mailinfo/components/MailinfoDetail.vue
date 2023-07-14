@@ -91,13 +91,13 @@
 <script>
 import { defineComponent, ref, toRefs, onMounted } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import { MailinfoResource } from '@/api'
-import { Mailinfo } from '@/class'
+import { baseApiModules } from '@/api'
+import { baseModules } from '@/class'
 import useCRUD from '@/hooks/useCRUD'
 import useGoBack from '@/hooks/useGoBack'
 import useDeltaConvert from '@/hooks/useDeltaConvert'
 
-const mailinfoResource = new MailinfoResource()
+const mailinfoResource = new baseApiModules.MailinfoResource()
 
 export default defineComponent({
   components: {
@@ -109,7 +109,7 @@ export default defineComponent({
     // data
     const { mode } = toRefs(props)
     const route = useRoute()
-    const formData = ref(new Mailinfo())
+    const formData = ref(new baseModules.Mailinfo())
     const id = route.params.id || null
 
     // methods

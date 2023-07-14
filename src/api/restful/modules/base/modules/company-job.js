@@ -1,10 +1,10 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { MenuPermission } from '@/class'
+import { baseModules } from '@/class'
 
-class MenuPermissionResource extends Resource {
+class CompanyJobResource extends Resource {
   constructor () {
-    super('menu_permission')
+    super('company_job')
   }
 
   async list (query) {
@@ -15,8 +15,8 @@ class MenuPermissionResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const menuPermissionObj = new MenuPermission(element)
-          return menuPermissionObj
+          const companyJobObj = new baseModules.CompanyJob(element)
+          return companyJobObj
         })
         const { list, meta } = res.data
         if (meta?.pagination) {
@@ -32,6 +32,20 @@ class MenuPermissionResource extends Resource {
       },
       )
   }
+
+  async get (id, query) {
+    return await request({
+      url: `/${this.uri}/${id}`,
+      method: 'get',
+      params: query,
+    }).then(res => res.data)
+      .then(res => {
+        const companyJobObj = new baseModules.CompanyJob({
+          ...res.data,
+        })
+        return companyJobObj
+      })
+  }
 }
 
-export default MenuPermissionResource
+export default CompanyJobResource

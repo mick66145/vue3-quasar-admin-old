@@ -1,22 +1,22 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { City } from '@/class'
+import { baseModules } from '@/class'
 
-class CityResource extends Resource {
+class SystemResource extends Resource {
   constructor () {
-    super('city')
+    super('system')
   }
 
-  async list (query) {
+  async recordLoglist (query) {
     return await request({
-      url: `/${this.uri}`,
+      url: `/${this.uri}/record_log`,
       method: 'get',
       params: query,
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const cityObj = new City(element)
-          return cityObj
+          const systemLogObj = new baseModules.SystemRecordLog(element)
+          return systemLogObj
         })
         const { list, meta } = res.data
         if (meta?.pagination) {
@@ -32,20 +32,6 @@ class CityResource extends Resource {
       },
       )
   }
-
-  async get (id, query) {
-    return await request({
-      url: `/${this.uri}/${id}`,
-      method: 'get',
-      params: query,
-    }).then(res => res.data)
-      .then(res => {
-        const cityObj = new City({
-          ...res.data,
-        })
-        return cityObj
-      })
-  }
 }
 
-export default CityResource
+export default SystemResource

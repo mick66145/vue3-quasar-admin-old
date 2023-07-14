@@ -1,10 +1,10 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { Company } from '@/class'
+import { baseModules } from '@/class'
 
-class CompanyResource extends Resource {
+class UserResource extends Resource {
   constructor () {
-    super('company')
+    super('user')
   }
 
   async list (query) {
@@ -15,8 +15,8 @@ class CompanyResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const companyObj = new Company(element)
-          return companyObj
+          const userObj = new baseModules.User(element)
+          return userObj
         })
         const { list, meta } = res.data
         if (meta?.pagination) {
@@ -40,12 +40,19 @@ class CompanyResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const companyObj = new Company({
+        const userObj = new baseModules.User({
           ...res.data,
         })
-        return companyObj
+        return userObj
       })
+  }
+
+  async resetPassword (id) {
+    return await request({
+      url: `/${this.uri}/${id}/reset_password`,
+      method: 'post',
+    }).then(res => res.data)
   }
 }
 
-export default CompanyResource
+export default UserResource

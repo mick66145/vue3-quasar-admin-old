@@ -1,10 +1,10 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { Mailinfo } from '@/class'
+import { baseModules } from '@/class'
 
-class MailinfoResource extends Resource {
+class MenuPermissionResource extends Resource {
   constructor () {
-    super('mailinfo')
+    super('menu_permission')
   }
 
   async list (query) {
@@ -15,8 +15,8 @@ class MailinfoResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const mailinfoObj = new Mailinfo(element)
-          return mailinfoObj
+          const menuPermissionObj = new baseModules.MenuPermission(element)
+          return menuPermissionObj
         })
         const { list, meta } = res.data
         if (meta?.pagination) {
@@ -32,20 +32,6 @@ class MailinfoResource extends Resource {
       },
       )
   }
-
-  async get (id, query) {
-    return await request({
-      url: `/${this.uri}/${id}`,
-      method: 'get',
-      params: query,
-    }).then(res => res.data)
-      .then(res => {
-        const mailinfoObj = new Mailinfo({
-          ...res.data,
-        })
-        return mailinfoObj
-      })
-  }
 }
 
-export default MailinfoResource
+export default MenuPermissionResource

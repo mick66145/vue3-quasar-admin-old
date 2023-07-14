@@ -1,10 +1,10 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { CompanyJob } from '@/class'
+import { baseModules } from '@/class'
 
-class CompanyJobResource extends Resource {
+class AreaResource extends Resource {
   constructor () {
-    super('company_job')
+    super('area')
   }
 
   async list (query) {
@@ -15,8 +15,8 @@ class CompanyJobResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const companyJobObj = new CompanyJob(element)
-          return companyJobObj
+          const areaObj = new baseModules.Area(element)
+          return areaObj
         })
         const { list, meta } = res.data
         if (meta?.pagination) {
@@ -40,12 +40,12 @@ class CompanyJobResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const companyJobObj = new CompanyJob({
+        const areaObj = new baseModules.Area({
           ...res.data,
         })
-        return companyJobObj
+        return areaObj
       })
   }
 }
 
-export default CompanyJobResource
+export default AreaResource

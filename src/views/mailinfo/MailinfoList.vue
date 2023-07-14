@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import { MailinfoResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 
-const mailinfoResource = new MailinfoResource()
+const mailinfoResource = new baseApiModules.MailinfoResource()
 
 export default defineComponent({
   setup () {

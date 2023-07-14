@@ -1,6 +1,6 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { Role } from '@/class'
+import { baseModules } from '@/class'
 
 class RoleResource extends Resource {
   constructor () {
@@ -15,7 +15,7 @@ class RoleResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const roleObj = new Role(element)
+          const roleObj = new baseModules.Role(element)
           return roleObj
         })
         const { list, meta } = res.data
@@ -40,7 +40,7 @@ class RoleResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const roleObj = new Role({
+        const roleObj = new baseModules.Role({
           ...res.data,
         })
         return roleObj

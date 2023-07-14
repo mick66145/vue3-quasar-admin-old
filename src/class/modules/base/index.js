@@ -1,15 +1,27 @@
+import Company from './modules/Company'
+import CompanyJob from './modules/CompanyJob'
+import User from './modules/User'
+import Role from './modules/Role'
+import City from './modules/City'
+import Area from './modules/Area'
+import SystemRecordLog from './modules/SystemRecordLog'
+import MenuPermission from './modules/menu-permission/MenuPermission'
+import PlatformAttribute from './modules/PlatformAttribute'
+import MailLog from './modules/MailLog'
+import Mailinfo from './modules/Mailinfo'
+
 export const exportBaseModules = () => {
   const modules = {}
-  modules.Company = require('./modules/Company').default
-  modules.CompanyJob = require('./modules/CompanyJob').default
-  modules.User = require('./modules/User').default
-  modules.Role = require('./modules/Role').default
-  modules.City = require('./modules/City').default
-  modules.Area = require('./modules/Area').default
-  modules.SystemRecordLog = require('./modules/SystemRecordLog').default
-  modules.MenuPermission = require('./modules/menu-permission/MenuPermission').default
-  modules.PlatformAttribute = require('./modules/PlatformAttribute').default
-  modules.MailLog = require('./modules/MailLog').default
-  modules.Mailinfo = require('./modules/Mailinfo').default
+  modules.Company = Company
+  modules.CompanyJob = CompanyJob
+  modules.User = User
+  modules.Role = Role
+  modules.City = City
+  modules.Area = Area
+  modules.SystemRecordLog = SystemRecordLog
+  modules.MenuPermission = MenuPermission
+  modules.PlatformAttribute = PlatformAttribute
+  modules.MailLog = MailLog
+  modules.Mailinfo = Mailinfo
   return modules
 }

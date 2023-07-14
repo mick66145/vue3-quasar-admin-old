@@ -61,13 +61,13 @@
 </template>
 
 <script>
-import { CompanyResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 import useMessageDialog from '@/hooks/useMessageDialog'
 
-const companyResource = new CompanyResource()
+const companyResource = new baseApiModules.CompanyResource()
 
 export default defineComponent({
   setup () {

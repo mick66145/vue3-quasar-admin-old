@@ -1,10 +1,10 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { User } from '@/class'
+import { baseModules } from '@/class'
 
-class UserResource extends Resource {
+class MailinfoResource extends Resource {
   constructor () {
-    super('user')
+    super('mailinfo')
   }
 
   async list (query) {
@@ -15,8 +15,8 @@ class UserResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const userObj = new User(element)
-          return userObj
+          const mailinfoObj = new baseModules.Mailinfo(element)
+          return mailinfoObj
         })
         const { list, meta } = res.data
         if (meta?.pagination) {
@@ -40,19 +40,12 @@ class UserResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const userObj = new User({
+        const mailinfoObj = new baseModules.Mailinfo({
           ...res.data,
         })
-        return userObj
+        return mailinfoObj
       })
-  }
-
-  async resetPassword (id) {
-    return await request({
-      url: `/${this.uri}/${id}/reset_password`,
-      method: 'post',
-    }).then(res => res.data)
   }
 }
 
-export default UserResource
+export default MailinfoResource

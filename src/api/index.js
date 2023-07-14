@@ -1,14 +1,3 @@
-export { default as AreaResource } from './restful/area'
-export { default as AuthResource } from './restful/auth'
-export { default as CityResource } from './restful/city'
-export { default as CompanyJobResource } from './restful/company-job'
-export { default as CompanyResource } from './restful/company'
-export { default as FileResource } from './restful/file'
-export { default as RoleResource } from './restful/role'
-export { default as SystemResource } from './restful/system'
-export { default as UserResource } from './restful/user'
-export { default as MenuPermissionResource } from './restful/menu-permission'
-export { default as PlatformAttributeResource } from './restful/platform-attribute'
-export { default as MailLogResource } from './restful/mail-log'
-export { default as MeResource } from './restful/me'
-export { default as MailinfoResource } from './restful/mailinfo'
+import { exportBaseApiModules } from './restful/modules/base'
+
+export const baseApiModules = exportBaseApiModules()
