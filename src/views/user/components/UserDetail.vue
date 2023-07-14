@@ -23,10 +23,11 @@
                 v-model="formData.password"
                 class="full-width"
                 label="密碼 *"
+                autocomplete="off"
                 placeholder="請輸入密碼"
                 :rules="[
                   $rules.required('密碼必填'),
-                  $rules.regex(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)(?!.* ).{8,}$/i,'格式錯誤')
+                  $rules.regex(/^(?=.*\d)(?=.*[a-zA-Z])(?=.*\W)(?!.* ).{8,}$/i,'格式錯誤，密碼需為 8 至 255 個字元長度，包含數字、英文字母和特殊符號')
                 ]"
               >
                 <template #hint>
@@ -47,9 +48,8 @@
               <input-email
                 v-model="formData.email"
                 class="full-width"
-                label="Email *"
+                label="Email"
                 placeholder="請輸入Email"
-                :rules="[$rules.required('Email必填')]"
               />
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
