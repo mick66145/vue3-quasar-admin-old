@@ -23,7 +23,7 @@
                 v-model="formData.password"
                 class="full-width"
                 label="密碼 *"
-                autocomplete="off"
+                autocomplete="new-password"
                 placeholder="請輸入密碼"
                 :rules="[
                   $rules.required('密碼必填'),
