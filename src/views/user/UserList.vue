@@ -110,7 +110,7 @@ export default defineComponent({
     }
 
     const onDelete = async (row) => {
-      const res = await messageDelete({ title: '刪除', message: '確認刪除人員？' })
+      const res = await messageDelete({ title: '刪除', message: '確認刪除帳號？' })
       if (!res) return
       const [delRes] = await callDeleteFetch(row.id)
       if (delRes) {
@@ -120,8 +120,10 @@ export default defineComponent({
     }
 
     const onResetPassword = async (row) => {
-      const [res, error] = await callResetPasswordFetch(row.id)
-      if (res) {
+      const res = await messageConfirm({ title: '重置密碼', message: '確認重置密碼？' })
+      if (!res) return
+      const [resetPasswordRes] = await callResetPasswordFetch(row.id)
+      if (resetPasswordRes) {
         await messageAlert({ title: '重置密碼成功', message: `密碼變更為 : ${res.data.password}` })
       }
     }
@@ -139,7 +141,7 @@ export default defineComponent({
       sessionStorageKey: 'dashboardUserServerDataTable',
       callback: refreshFetch,
     })
-    const { messageAlert, messageDelete } = useMessageDialog()
+    const { messageAlert, messageConfirm, messageDelete } = useMessageDialog()
 
     const { callCreateFetch: callResetPasswordFetch, callReadListFetch, callDeleteFetch } = useCRUD({
       createFetch: resetPasswordFetch,
