@@ -66,12 +66,12 @@
 
 <script>
 import MailLogDialog from './components/MailLogDialog.vue'
-import { MailLogResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 
-const mailLogResource = new MailLogResource()
+const mailLogResource = new baseApiModules.MailLogResource()
 
 export default defineComponent({
   components: {

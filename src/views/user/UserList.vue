@@ -69,13 +69,13 @@
 </template>
 
 <script>
-import { UserResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 import useMessageDialog from '@/hooks/useMessageDialog'
 
-const userResource = new UserResource()
+const userResource = new baseApiModules.UserResource()
 
 export default defineComponent({
   setup () {

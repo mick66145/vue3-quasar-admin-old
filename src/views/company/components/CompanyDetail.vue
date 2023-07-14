@@ -161,12 +161,12 @@
 <script>
 import { defineComponent, ref, onMounted, toRefs } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import { Company } from '@/class'
-import { CompanyResource } from '@/api'
+import { baseModules } from '@/class'
+import { baseApiModules } from '@/api'
 import useCRUD from '@/hooks/useCRUD'
 import useGoBack from '@/hooks/useGoBack'
 
-const companyResource = new CompanyResource()
+const companyResource = new baseApiModules.CompanyResource()
 
 export default defineComponent({
   props: {
@@ -176,7 +176,7 @@ export default defineComponent({
     // data
     const { mode } = toRefs(props)
     const route = useRoute()
-    const formData = ref(new Company())
+    const formData = ref(new baseModules.Company())
     const fallBack = { name: 'CompanyList' }
     const id = route.params.id || null
 

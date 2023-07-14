@@ -1,9 +1,9 @@
 
-import { FileResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { useApp } from '@/stores/app'
 import reduce from 'lodash-es/reduce'
 
-const fileResource = new FileResource()
+const fileResource = new baseApiModules.FileResource()
 export default function useBatchUpload () {
   const batchUpload = async (payload) => {
     const storeApp = useApp()

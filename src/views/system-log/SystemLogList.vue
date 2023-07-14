@@ -30,12 +30,12 @@
 </template>
 
 <script>
-import { SystemResource } from '@/api'
+import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
 import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 
-const systemResource = new SystemResource()
+const systemResource = new baseApiModules.SystemResource()
 
 export default defineComponent({
   setup () {

@@ -20,11 +20,11 @@
 
 <script>
 import { defineComponent } from 'vue-demi'
-import { CompanyJobResource } from '@/api'
-import { CompanyJob } from '@/class'
+import { baseApiModules } from '@/api'
+import { baseModules } from '@/class'
 import useDialog from '@/hooks/useDialog'
 
-const companyJobResource = new CompanyJobResource()
+const companyJobResource = new baseApiModules.CompanyJobResource()
 
 export default defineComponent({
   emits: ['save'],
@@ -49,7 +49,7 @@ export default defineComponent({
 
     // use
     const { form, data, isShowDialog, showDialog, save } = useDialog({
-      formData: new CompanyJob(),
+      formData: new baseModules.CompanyJob(),
       readFetch: readFetch,
       createFetch: createFetch,
       updateFetch: updateFetch,
