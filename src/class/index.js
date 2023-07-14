@@ -1,11 +1,3 @@
-export { default as Company } from './modules/Company'
-export { default as CompanyJob } from './modules/CompanyJob'
-export { default as User } from './modules/User'
-export { default as Role } from './modules/Role'
-export { default as City } from './modules/City'
-export { default as Area } from './modules/Area'
-export { default as SystemRecordLog } from './modules/SystemRecordLog'
-export { default as MenuPermission } from './modules/menu-permission/MenuPermission'
-export { default as PlatformAttribute } from './modules/PlatformAttribute'
-export { default as MailLog } from './modules/MailLog'
-export { default as Mailinfo } from './modules/Mailinfo'
+import { exportBaseModules } from './modules/base'
+
+export const baseModules = exportBaseModules()
