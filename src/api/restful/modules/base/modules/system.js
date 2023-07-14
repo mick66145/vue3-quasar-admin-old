@@ -1,6 +1,6 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { SystemRecordLog } from '@/class'
+import { baseModules } from '@/class'
 
 class SystemResource extends Resource {
   constructor () {
@@ -15,7 +15,7 @@ class SystemResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const systemLogObj = new SystemRecordLog(element)
+          const systemLogObj = new baseModules.SystemRecordLog(element)
           return systemLogObj
         })
         const { list, meta } = res.data

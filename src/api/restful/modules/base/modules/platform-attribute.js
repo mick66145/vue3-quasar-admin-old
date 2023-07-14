@@ -1,6 +1,6 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { PlatformAttribute } from '@/class'
+import { baseModules } from '@/class'
 
 class PlatformAttributeResource extends Resource {
   constructor () {
@@ -14,7 +14,7 @@ class PlatformAttributeResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const platformAttributeObj = new PlatformAttribute({
+        const platformAttributeObj = new baseModules.PlatformAttribute({
           ...res.data,
         })
         return platformAttributeObj

@@ -1,6 +1,6 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { CompanyJob } from '@/class'
+import { baseModules } from '@/class'
 
 class CompanyJobResource extends Resource {
   constructor () {
@@ -15,7 +15,7 @@ class CompanyJobResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const companyJobObj = new CompanyJob(element)
+          const companyJobObj = new baseModules.CompanyJob(element)
           return companyJobObj
         })
         const { list, meta } = res.data
@@ -40,7 +40,7 @@ class CompanyJobResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const companyJobObj = new CompanyJob({
+        const companyJobObj = new baseModules.CompanyJob({
           ...res.data,
         })
         return companyJobObj

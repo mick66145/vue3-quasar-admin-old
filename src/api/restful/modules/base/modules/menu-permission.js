@@ -1,6 +1,6 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { MenuPermission } from '@/class'
+import { baseModules } from '@/class'
 
 class MenuPermissionResource extends Resource {
   constructor () {
@@ -15,7 +15,7 @@ class MenuPermissionResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const menuPermissionObj = new MenuPermission(element)
+          const menuPermissionObj = new baseModules.MenuPermission(element)
           return menuPermissionObj
         })
         const { list, meta } = res.data

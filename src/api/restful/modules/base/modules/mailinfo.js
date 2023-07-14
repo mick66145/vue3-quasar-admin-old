@@ -1,6 +1,6 @@
 import Resource from './resource'
 import request from '@/utils/request'
-import { Mailinfo } from '@/class'
+import { baseModules } from '@/class'
 
 class MailinfoResource extends Resource {
   constructor () {
@@ -15,7 +15,7 @@ class MailinfoResource extends Resource {
     }).then(res => res.data)
       .then(res => {
         res.data.list = [...res.data.list].map((element) => {
-          const mailinfoObj = new Mailinfo(element)
+          const mailinfoObj = new baseModules.Mailinfo(element)
           return mailinfoObj
         })
         const { list, meta } = res.data
@@ -40,7 +40,7 @@ class MailinfoResource extends Resource {
       params: query,
     }).then(res => res.data)
       .then(res => {
-        const mailinfoObj = new Mailinfo({
+        const mailinfoObj = new baseModules.Mailinfo({
           ...res.data,
         })
         return mailinfoObj
