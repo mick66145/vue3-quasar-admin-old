@@ -1,6 +1,7 @@
 import { baseApiModules } from '@/api'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { defineStore } from 'pinia'
+import useLogout from '@/hooks/useLogout'
 
 export const useUser = defineStore({
   id: 'user',
@@ -88,7 +89,16 @@ export const useUser = defineStore({
     },
 
     changePassword (payload) {
-      return this.meResource.changePassword(payload)
+      return new Promise((resolve, reject) => {
+        return this.meResource.changePassword(payload).then(res => {
+          const { resetStore } = useLogout()
+          resetStore()
+          resolve()
+        })
+          .catch(error => {
+            reject(error)
+          })
+      })
     },
 
     logout () {

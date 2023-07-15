@@ -124,7 +124,7 @@ export default defineComponent({
       if (!res) return
       const [resetPasswordRes] = await callResetPasswordFetch(row.id)
       if (resetPasswordRes) {
-        await messageAlert({ title: '重置密碼成功', message: `密碼變更為 : ${res.data.password}` })
+        await messageAlert({ title: '重置密碼成功', message: `密碼變更為 : ${resetPasswordRes.data.password}` })
       }
     }
 
