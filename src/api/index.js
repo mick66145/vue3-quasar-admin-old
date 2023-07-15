@@ -1,3 +1,3 @@
-import { exportBaseApiModules } from './restful/modules/base'
+import { exportBaseApiModules } from './restful/modules/basic-base'
 
 export const baseApiModules = exportBaseApiModules()

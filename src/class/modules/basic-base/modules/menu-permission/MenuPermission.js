@@ -1,4 +1,4 @@
-import Base from '../Base';
+import Base from '@/class/modules/Base'
 import Permission from './Permission';
 class MenuPermission extends Base {
 
