@@ -1,4 +1,4 @@
-import Base from './Base'
+import Base from '@/class/modules/Base'
 import BasePermission from './base/BasePermission';
 import { convertDateTime } from '@/utils/data-convert'
 class Role extends Base {
