@@ -12,16 +12,12 @@
 
     <q-card class="shadow-7">
       <card-body>
-        <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs">
-          <div class="col-md-3 col-xs-12">
-            <input-search
-              v-model="search.keyword"
-              class="full-width"
-              dense
-              @update:modelValue="onChangeFilter"
-            />
-          </div>
-        </div>
+        <company-job-list-search-block
+          v-model="search"
+          class="q-mb-sm"
+          @changeFilter="onChangeFilter"
+          @reset="onReset"
+        />
         <vxe-server-table
           ref="dataTable"
           :data="data"
@@ -62,6 +58,7 @@
 </template>
 
 <script>
+import CompanyJobListSearchBlock from './components/CompanyJobListSearchBlock.vue'
 import CompanyJobDialog from './components/CompanyJobDialog.vue'
 import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
@@ -73,6 +70,7 @@ const companyJobResource = new baseApiModules.CompanyJobResource()
 
 export default defineComponent({
   components: {
+    CompanyJobListSearchBlock,
     CompanyJobDialog,
   },
   setup () {
@@ -115,7 +113,7 @@ export default defineComponent({
       await getDataList({ ...search })
     }
 
-    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort } = useVxeServerDataTable({
+    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort, onReset } = useVxeServerDataTable({
       searchParames: filter,
       sortParames: [{
         field: 'id',
@@ -141,6 +139,7 @@ export default defineComponent({
       onChangePage,
       onChangeFilter,
       OnChangeSort,
+      onReset,
       onDelete,
       showDialog,
       refreshFetch,

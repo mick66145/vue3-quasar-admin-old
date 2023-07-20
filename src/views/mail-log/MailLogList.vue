@@ -6,7 +6,7 @@
 
     <q-card class="shadow-7">
       <card-body>
-        <div class="row q-mb-sm items-center q-col-gutter-x-md q-col-gutter-y-xs">
+        <!-- <div class="row q-mb-sm items-center q-col-gutter-x-md q-col-gutter-y-xs">
           <div class="col-md-5 col-sm-5 col-xs-12">
             <input-date-range
               v-model="search.date_range"
@@ -29,7 +29,13 @@
               @click="onReset"
             />
           </div>
-        </div>
+        </div> -->
+        <mail-log-list-search-block
+          v-model="search"
+          class="q-mb-sm"
+          @changeFilter="onChangeFilter"
+          @reset="onReset"
+        />
         <vxe-server-table
           ref="dataTable"
           :data="data"
@@ -65,6 +71,7 @@
 </template>
 
 <script>
+import MailLogListSearchBlock from './components/MailLogListSearchBlock.vue'
 import MailLogDialog from './components/MailLogDialog.vue'
 import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
@@ -75,6 +82,7 @@ const mailLogResource = new baseApiModules.MailLogResource()
 
 export default defineComponent({
   components: {
+    MailLogListSearchBlock,
     MailLogDialog,
   },
   setup () {
