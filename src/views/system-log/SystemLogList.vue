@@ -6,7 +6,12 @@
 
     <q-card class="shadow-7">
       <card-body>
-        <div class="row q-mb-sm q-col-gutter-x-md q-col-gutter-y-xs" />
+        <system-log-list-search-block
+          v-model="search"
+          class="q-mb-sm"
+          @changeFilter="onChangeFilter"
+          @reset="onReset"
+        />
         <vxe-server-table
           ref="dataTable"
           :data="data"
@@ -30,6 +35,7 @@
 </template>
 
 <script>
+import SystemLogListSearchBlock from './components/SystemLogListSearchBlock.vue'
 import { baseApiModules } from '@/api'
 import { defineComponent, ref, reactive } from 'vue-demi'
 import useCRUD from '@/hooks/useCRUD'
@@ -38,6 +44,9 @@ import useVxeServerDataTable from '@/hooks/useVxeServerDataTable'
 const systemResource = new baseApiModules.SystemResource()
 
 export default defineComponent({
+  components: {
+    SystemLogListSearchBlock,
+  },
   setup () {
     // data
     const filter = reactive({
@@ -64,7 +73,7 @@ export default defineComponent({
       await getDataList({ ...search })
     }
 
-    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort } = useVxeServerDataTable({
+    const { dataTable, search, data, total, onChangePage, onChangeFilter, OnChangeSort, onReset } = useVxeServerDataTable({
       searchParames: filter,
       sortParames: [{
         field: 'id',
@@ -88,6 +97,7 @@ export default defineComponent({
       onChangePage,
       onChangeFilter,
       OnChangeSort,
+      onReset,
     }
   },
 })
