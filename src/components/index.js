@@ -2,6 +2,7 @@ import SvgIcon from './SvgIcon.vue'
 import PageHeader from './PageHeader.vue'
 import CardHeader from './card/CardHeader.vue'
 import CardBody from './card/CardBody.vue'
+import CardSocial from './card/CardSocial.vue'
 import InputText from './form/InputText.vue'
 import InputSelect from './form/InputSelect.vue'
 import InputMultipleSelect from './form/InputMultipleSelect.vue'
@@ -71,6 +72,7 @@ export default {
     app.component('PageHeader', PageHeader)
     app.component('CardHeader', CardHeader)
     app.component('CardBody', CardBody)
+    app.component('CardSocial', CardSocial)
     app.component('InputText', InputText)
     app.component('InputSelect', InputSelect)
     app.component('InputMultipleSelect', InputMultipleSelect)
