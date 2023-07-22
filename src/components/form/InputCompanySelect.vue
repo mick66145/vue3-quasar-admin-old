@@ -1,7 +1,9 @@
 <template>
   <input-select
     v-model="observeValue"
+    :label="label"
     :options="companyList"
+    :placeholder="placeholder"
   />
 </template>
 
@@ -16,6 +18,8 @@ const companyResource = new baseApiModules.CompanyResource()
 export default defineComponent({
   props: {
     modelValue: { type: [String, Object] },
+    label: { type: String, default: '公司' },
+    placeholder: { type: String, default: '請選擇公司' },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
