@@ -9,6 +9,6 @@ export const genderTypeName = {
 }
 
 export const genderList = Object.keys(genderTypeName).map(key => ({
-  name: genderTypeName[key],
+  label: genderTypeName[key],
   value: key,
 }))

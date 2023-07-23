@@ -10,7 +10,7 @@
 <script>
 import { useVModel } from '@vueuse/core'
 import { defineComponent } from 'vue-demi'
-import { genderList } from '@/config/gender'
+import { genderList } from '@/config/config-gender'
 export default defineComponent({
   props: {
     modelValue: { type: [String, Number, null] },
