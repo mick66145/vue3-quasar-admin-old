@@ -28,6 +28,7 @@ import InputBirthday from './form/InputBirthday.vue'
 import InputCompanySelect from './form/InputCompanySelect.vue'
 import InputMultipleCompanySelect from './form/InputMultipleCompanySelect.vue'
 import InputUrl from './form/InputUrl.vue'
+import InputGender from './form/InputGender.vue'
 import BaseButton from './button/BaseButton.vue'
 import AddButton from './button/AddButton.vue'
 import DeleteButton from './button/DeleteButton.vue'
@@ -99,6 +100,7 @@ export default {
     app.component('InputCompanySelect', InputCompanySelect)
     app.component('InputMultipleCompanySelect', InputMultipleCompanySelect)
     app.component('InputUrl', InputUrl)
+    app.component('InputGender', InputGender)
     app.component('BaseButton', BaseButton)
     app.component('AddButton', AddButton)
     app.component('DeleteButton', DeleteButton)
