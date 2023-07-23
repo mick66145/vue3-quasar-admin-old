@@ -3,7 +3,7 @@
     <page-header showPrev>
       公司資訊詳情
     </page-header>
-    <q-form ref="form">
+    <base-form ref="form">
       <div class="row q-col-gutter-md">
         <div class="col-12">
           <q-card class="h-full shadow-7">
@@ -153,7 +153,7 @@
           </q-card>
         </div>
       </div>
-    </q-form>
+    </base-form>
   </q-page>
   <fixed-footer go-back-route="/company" @save="onSubmit" />
 </template>

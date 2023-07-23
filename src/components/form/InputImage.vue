@@ -13,7 +13,7 @@
 
         <!-- ANCHOR 上傳 -->
         <base-dialog v-model="showDialog" title="上傳圖片 : " @show="onOpen" @save="onSave" @cancel="onCancelCopper">
-          <q-form ref="form">
+          <base-form ref="form">
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-12">
                 <q-item>
@@ -51,7 +51,7 @@
                 </q-item>
               </div>
             </div>
-          </q-form>
+          </base-form>
         </base-dialog>
 
         <base-dialog v-model="showCropper" title="裁切圖片 : " @save="onCopper" @cancel="onCancelCopper">

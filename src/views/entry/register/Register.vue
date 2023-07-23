@@ -17,7 +17,7 @@
             </div>
           </q-card-section>
           <q-card-section>
-            <q-form ref="form" class="q-gutter-md">
+            <base-form ref="form" class="q-gutter-md">
               <input-text
                 v-model="formData.account"
                 :label="$t('login.loginForm.account')"
@@ -41,7 +41,7 @@
                 <base-button class="w-full q-mb-md" :label="$t('entry.register.btn.register')" @click.prevent="handleRegister" />
                 <div class="text-center"><router-link class="text-black no-underline" to="/login">返回登入</router-link></div>
               </div>
-            </q-form>
+            </base-form>
           </q-card-section>
         </q-card>
       </q-page>

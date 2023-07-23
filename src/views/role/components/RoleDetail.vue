@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-lg">
     <page-header showPrev>權限詳情</page-header>
-    <q-form ref="form">
+    <base-form ref="form">
       <div class="row q-col-gutter-x-md q-col-gutter-y-md">
         <div class="col-12">
           <q-card class="shadow-7">
@@ -71,7 +71,7 @@
           </q-card>
         </div>
       </div>
-    </q-form>
+    </base-form>
   </q-page>
   <fixed-footer @save="onSubmit" />
 </template>

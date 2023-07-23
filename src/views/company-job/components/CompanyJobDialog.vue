@@ -1,20 +1,18 @@
 <template>
   <base-dialog v-model="isShowDialog" title="職稱詳情 : " @save="onSave" @hide="onHide">
-    <q-form ref="form">
+    <base-form ref="form">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
-          <q-item>
-            <input-text
-              v-model="data.state.name"
-              class="full-width"
-              label="職稱 *"
-              placeholder="請輸入職稱"
-              :rules="[$rules.required('職稱必填')]"
-            />
-          </q-item>
+          <input-text
+            v-model="data.state.name"
+            class="full-width"
+            label="職稱 *"
+            placeholder="請輸入職稱"
+            :rules="[$rules.required('職稱必填')]"
+          />
         </div>
       </div>
-    </q-form>
+    </base-form>
   </base-dialog>
 </template>
 

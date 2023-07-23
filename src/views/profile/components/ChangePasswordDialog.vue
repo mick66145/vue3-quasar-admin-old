@@ -6,7 +6,7 @@
     @save="onSave"
     @hide="onHide"
   >
-    <q-form ref="form">
+    <base-form ref="form">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
           <q-item>
@@ -45,7 +45,7 @@
           </q-item>
         </div>
       </div>
-    </q-form>
+    </base-form>
   </base-dialog>
 </template>
 

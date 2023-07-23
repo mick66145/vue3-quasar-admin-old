@@ -17,7 +17,7 @@
             </div>
           </q-card-section>
           <q-card-section>
-            <q-form ref="form" class="q-gutter-md">
+            <base-form ref="form" class="q-gutter-md">
               <input-text
                 v-model="formData.account"
                 :label="$t('entry.login.loginForm.account')"
@@ -40,7 +40,7 @@
                 <base-button v-if="isShow.forgetPassword" class="text-white w-full q-mb-md" color="black" :label="$t('entry.login.btn.forget-password')" @click.prevent="showDialog({mode:'create'})" />
                 <div v-if="isShow.register" class="text-center">還沒有帳號嗎? <span><router-link class="text-primary no-underline" to="/register">立即註冊</router-link></span></div>
               </div>
-            </q-form>
+            </base-form>
           </q-card-section>
         </q-card>
       </q-page>

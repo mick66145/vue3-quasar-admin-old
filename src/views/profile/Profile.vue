@@ -13,7 +13,7 @@
             </template>
           </card-header>
           <card-body class="q-pt-none">
-            <q-form ref="infoForm">
+            <base-form ref="infoForm">
               <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                   <input-text
@@ -50,7 +50,7 @@
                   />
                 </div>
               </div>
-            </q-form>
+            </base-form>
           </card-body>
         </q-card>
       </div>
@@ -63,7 +63,7 @@
             </template>
           </card-header>
           <card-body class="q-pt-none">
-            <q-form ref="changePasswordForm">
+            <base-form ref="changePasswordForm">
               <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                   <input-password
@@ -106,7 +106,7 @@
                   />
                 </div>
               </div>
-            </q-form>
+            </base-form>
           </card-body>
         </q-card>
       </div>
