@@ -1,5 +1,6 @@
 <template>
   <div class="row items-center q-col-gutter-x-md q-col-gutter-y-xs">
+    <slot name="default" />
     <div v-if="showInputSearch" :class="inputSearchCol">
       <input-search
         v-model="sourceData.keyword"
@@ -8,7 +9,6 @@
         @update:modelValue="onChangeFilter"
       />
     </div>
-    <slot name="default" />
     <div v-if="showResetButton" :class="resetButtonCol">
       <reset-button
         class="w-full"

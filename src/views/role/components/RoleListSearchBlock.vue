@@ -1,20 +1,9 @@
 <template>
-  <div class="row items-center q-col-gutter-x-md q-col-gutter-y-xs">
-    <div class="col-md-3 col-xs-12">
-      <input-search
-        v-model="sourceData.keyword"
-        class="full-width"
-        dense
-        @update:modelValue="onChangeFilter"
-      />
-    </div>
-    <div class="col-md-1 col-sm-3 col-xs-12">
-      <reset-button
-        class="w-full"
-        @click="onReset"
-      />
-    </div>
-  </div>
+  <list-search-block
+    v-model="sourceData"
+    @changeFilter="onChangeFilter"
+    @reset="onReset"
+  />
 </template>
 
 <script>
