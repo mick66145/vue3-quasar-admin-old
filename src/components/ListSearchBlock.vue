@@ -28,7 +28,7 @@ export default defineComponent({
     showInputSearch: { type: Boolean, default: true },
     showResetButton: { type: Boolean, default: true },
     inputSearchCol: { type: String, default: 'col-md-3 col-sm-4 col-xs-12' },
-    resetButtonCol: { type: String, default: 'col-md-1 col-sm-2 col-xs-12' },
+    resetButtonCol: { type: String, default: 'col-lg-1 col-md-2 col-sm-2 col-xs-12' },
   },
   emits: ['reset', 'changeFilter'],
   setup (props, { emit }) {
