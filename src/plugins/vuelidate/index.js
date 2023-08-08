@@ -93,7 +93,10 @@ export const vuelidate = {
     return (val) => val === locator || message
   },
   regex (regex, message = false) {
-    return (val) => regex.test(val) || message
+    return (val) => {
+      if (!val) return true
+      return regex.test(val) || message
+    }
   },
   dayjIsBefore (locator, message = false, format = 'YYYY-MM-DD') {
     return (val) => {
