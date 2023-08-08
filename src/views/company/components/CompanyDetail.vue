@@ -65,9 +65,8 @@
             <card-body class="q-pt-none">
               <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-md-6 col-sm-12">
-                  <input-text
+                  <input-tel
                     v-model="formData.tel_service"
-                    type="tel"
                     class="full-width"
                     label="客服電話"
                     placeholder="請輸入客服電話"
@@ -93,9 +92,8 @@
             <card-body class="q-pt-none">
               <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-md-6 col-sm-12">
-                  <input-text
+                  <input-tel
                     v-model="formData.tel"
-                    type="tel"
                     class="full-width"
                     label="主要電話"
                     placeholder="請輸入主要電話"
