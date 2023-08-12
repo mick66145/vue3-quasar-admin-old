@@ -73,6 +73,7 @@ import VxeServerTable from './VxeServerTable.vue'
 import Calendar from './calendar/Calendar.vue'
 import FileList from './FileList.vue'
 import ListSearchBlock from './ListSearchBlock.vue'
+import ImageGallery from './image-gallery/ImageGallery.vue'
 
 export default {
   install (app) {
@@ -151,5 +152,6 @@ export default {
     app.component('Calendar', Calendar)
     app.component('FileList', FileList)
     app.component('ListSearchBlock', ListSearchBlock)
+    app.component('ImageGallery', ImageGallery)
   },
 }
