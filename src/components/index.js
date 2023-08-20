@@ -31,6 +31,8 @@ import InputMultipleCompanySelect from './form/InputMultipleCompanySelect.vue'
 import InputUrl from './form/InputUrl.vue'
 import InputGender from './form/InputGender.vue'
 import InputTel from './form/InputTel.vue'
+import InputTwPassport from './form/InputTwPassport.vue'
+import InputTwUniformNumber from './form/InputTwUniformNumber.vue'
 import BaseButton from './button/BaseButton.vue'
 import AddButton from './button/AddButton.vue'
 import DeleteButton from './button/DeleteButton.vue'
@@ -110,6 +112,8 @@ export default {
     app.component('InputUrl', InputUrl)
     app.component('InputGender', InputGender)
     app.component('InputTel', InputTel)
+    app.component('InputTwPassport', InputTwPassport)
+    app.component('InputTwUniformNumber', InputTwUniformNumber)
     app.component('BaseButton', BaseButton)
     app.component('AddButton', AddButton)
     app.component('DeleteButton', DeleteButton)
