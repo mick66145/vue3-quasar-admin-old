@@ -3,6 +3,7 @@ import PageHeader from './PageHeader.vue'
 import CardHeader from './card/CardHeader.vue'
 import CardBody from './card/CardBody.vue'
 import CardSocial from './card/CardSocial.vue'
+import CardCategory from './card/CardCategory.vue'
 import BaseForm from './form/BaseForm.vue'
 import InputText from './form/InputText.vue'
 import InputSelect from './form/InputSelect.vue'
@@ -84,6 +85,7 @@ export default {
     app.component('CardHeader', CardHeader)
     app.component('CardBody', CardBody)
     app.component('CardSocial', CardSocial)
+    app.component('CardCategory', CardCategory)
     app.component('BaseForm', BaseForm)
     app.component('InputText', InputText)
     app.component('InputSelect', InputSelect)
