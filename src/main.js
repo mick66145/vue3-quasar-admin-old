@@ -8,6 +8,7 @@ import 'virtual:windi.css'
 import App from './App.vue'
 import router from './router'
 import GlobalComponents from './components'
+import GlobalViewsComponents from './components/views'
 import 'virtual:svg-icons-register'
 
 // plugins
@@ -37,7 +38,7 @@ app.use(quasar)
 app.use(createPinia())
 app.use(router)
 app.use(GlobalComponents)
-
+app.use(GlobalViewsComponents)
 app.use(useDayjs)
 app.use(editor)
 app.use(i18n)
