@@ -57,6 +57,7 @@
     "nprogress": "0.2.0",
     "path-browserify": "^1.0.1",
     "pinia": "^2.0.13",
+    "postcss-nested": "^6.0.1",
     "qs": "^6.11.0",
     "quasar": "^2.10.0",
     "quill-blot-formatter": "^1.0.5",
