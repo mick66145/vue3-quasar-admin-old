@@ -49,7 +49,6 @@ import SidebarLink from './SidebarLink.vue'
 import path from 'path'
 import { defineComponent, ref, toRefs, computed, onMounted, watch } from 'vue-demi'
 import { useRoute } from 'vue-router'
-import { selectMatchItem } from '@/utils/filter'
 import useEventsBus from '@/hooks/useEventsBus'
 
 export default defineComponent({
@@ -116,7 +115,7 @@ export default defineComponent({
     }
     const activeItem = (currentItem) => {
       active.value = item.value.to === currentItem.to
-      open.value = item.value.group ? item.value.group.filter(groupItem => selectMatchItem([currentItem.group], groupItem).length > 0).length > 0 : false
+      open.value = item.value.group ? item.value.group.filter(groupItem => selectMatchSidbarItem([currentItem.group], groupItem).length > 0).length > 0 : false
     }
     const buildActiveItem = (path) => {
       if (!path || path === '/') {
@@ -127,7 +126,7 @@ export default defineComponent({
     }
     const changeActiveHeaderStyle = (currentItem) => {
       activeItem(currentItem)
-      const isGroup = currentItem.group && item.value.group && item.value.group.filter(groupItem => selectMatchItem([currentItem.group], groupItem).length > 0).length > 0
+      const isGroup = currentItem.group && item.value.group && item.value.group.filter(groupItem => selectMatchSidbarItem([currentItem.group], groupItem).length > 0).length > 0
       if (!isGroup) {
         headerClassActive.value = ''
         expandIconClassActive.value = ''
@@ -138,6 +137,16 @@ export default defineComponent({
     }
     const resolvePath = (routePath) => {
       return path.resolve(basePath.value, routePath)
+    }
+    const selectMatchSidbarItem = (lists, keyWord) => {
+      const resArr = []
+      lists.filter(item => {
+        const uri = item.toLowerCase().split('/')
+        const keyWordUri = keyWord.toLowerCase().split('/')[1]
+        uri.filter(uriItem => { if (uriItem === keyWordUri) { resArr.push(item) } return uri })
+        return lists
+      })
+      return resArr
     }
 
     // watch
@@ -153,6 +162,7 @@ export default defineComponent({
       visibleChildren,
       onclick,
       resolvePath,
+      selectMatchSidbarItem,
     }
   },
 })
