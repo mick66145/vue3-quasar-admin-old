@@ -48,6 +48,7 @@ import ConfirmButton from './button/ConfirmButton.vue'
 import CancelButton from './button/CancelButton.vue'
 import DownloadButton from './button/DownloadButton.vue'
 import BaseIconButton from './button/BaseIconButton.vue'
+import AddIconButton from './button/AddIconButton.vue'
 import EditIconButton from './button/EditIconButton.vue'
 import DeleteIconButton from './button/DeleteIconButton.vue'
 import ViewIconButton from './button/ViewIconButton.vue'
@@ -133,6 +134,7 @@ export default {
     app.component('CancelButton', CancelButton)
     app.component('DownloadButton', DownloadButton)
     app.component('BaseIconButton', BaseIconButton)
+    app.component('AddIconButton', AddIconButton)
     app.component('EditIconButton', EditIconButton)
     app.component('DeleteIconButton', DeleteIconButton)
     app.component('ViewIconButton', ViewIconButton)
