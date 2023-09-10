@@ -125,7 +125,6 @@ export default function useCRUD ({
     const res = await reqReadList.execute(0, id, payload)
     if (reqReadList.error.value) {
       storeApp.isReadingList = false
-      console.log(reqReadList.error.value)
       const message = JSON.parse(reqReadList.error.value.request.responseText)?.error?.message || reqReadList.error.value.response.data.message || reqReadList.error.value
       isShowReadListFail && notifyAPIError({ message })
       return [null, reqReadList.error.value]
