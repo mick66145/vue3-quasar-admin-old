@@ -72,6 +72,7 @@ import SkeletonImageTextList from './skeleton/SkeletonImageTextList.vue'
 import ImageUploader from './uploader/ImageUploader.vue'
 import FileUploader from './uploader/FileUploader.vue'
 import BaseTooltip from './tooltip/BaseTooltip.vue'
+import SelectTree from './tree/SelectTree.vue'
 import LangSelect from './LangSelect.vue'
 import ScShadow from './shadow/ScShadow.vue'
 import FixedFooter from './FixedFooter.vue'
@@ -159,6 +160,7 @@ export default {
     app.component('ImageUploader', ImageUploader)
     app.component('FileUploader', FileUploader)
     app.component('BaseTooltip', BaseTooltip)
+    app.component('SelectTree', SelectTree)
     app.component('LangSelect', LangSelect)
     app.component('ScShadow', ScShadow)
     app.component('FixedFooter', FixedFooter)
