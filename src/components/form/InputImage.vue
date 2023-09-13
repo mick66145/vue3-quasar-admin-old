@@ -81,6 +81,7 @@ export default defineComponent({
     accept: { type: String, default: 'image/png, image/jpeg, image/jpg' },
     aspect: { type: Number },
     outlined: { type: Boolean, default: true },
+    useCropper: { type: Boolean, default: true },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
@@ -127,30 +128,25 @@ export default defineComponent({
       const { file, base64 } = fileObj
       tempCropper.value = base64
       tempRaw = file
-      showCropper.value = true
+      if (props.useCropper) {
+        showCropper.value = true
+      } else {
+        setImage(URL.createObjectURL(file), file, base64)
+      }
       imageUpload.value.removeQueuedFiles()
     }
-
     const onCopper = async () => {
       const { canvas } = await cropper.value.getResult()
       const blob = await new Promise((resolve) => canvas.toBlob(resolve, tempRaw.type))
       const base64 = canvas.toDataURL(tempRaw.type)
-
       const file = new File(
         [blob],
         tempRaw.name,
         { type: tempRaw.type },
       )
-
-      state.image = {
-        blobURL: URL.createObjectURL(blob),
-        raw: file,
-        base64: base64,
-      }
-
+      setImage(URL.createObjectURL(blob), file, base64)
       showCropper.value = false
     }
-
     const onOpen = () => {
       state.image = props.modelValue
       if (props.modelValue !== null) {
@@ -159,17 +155,22 @@ export default defineComponent({
         state.title = title
       }
     }
-
     const onSave = () => {
       const { image, alt, title } = state
       observeValue.value = { ...image, alt, title }
       showDialog.value = false
     }
-
     const onCancelCopper = () => {
       tempRaw = null
       tempCropper.value = null
       showCropper.value = false
+    }
+    const setImage = (blobURL, file, base64) => {
+      state.image = {
+        blobURL: blobURL,
+        raw: file,
+        base64: base64,
+      }
     }
 
     return {
