@@ -17,37 +17,33 @@
       @cancel="onCancelCopper"
     >
       <base-form ref="form">
-        <div class="row">
-          <div class="col-xs-12 col-sm-12 col-md-12">
-            <q-item>
-              <div class="h-[275px] w-full" :style="cropperWrapStyle">
-                <image-cropper
-                  ref="cropper"
-                  :source="tempCropper"
-                />
-              </div>
-            </q-item>
-          </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
-            <q-item>
-              <input-text
-                v-model="state.title"
-                class="full-width"
-                label="圖片標題"
-                placeholder="請輸入圖片標題"
+        <div class="row q-col-gutter-y-md">
+          <div class="col-12">
+            <div class="h-[275px] w-full" :style="cropperWrapStyle">
+              <image-cropper
+                v-if="useCropper"
+                ref="cropper"
+                :source="tempCropper"
               />
-            </q-item>
+              <base-image v-else class="w-full" :src="tempCropper" />
+            </div>
           </div>
-          <div class="col-xs-12 col-sm-12 col-md-12">
-            <q-item>
-              <input-text
-                v-model="state.alt"
-                class="full-width"
-                label="圖片描述文字"
-                placeholder="請輸入圖片描述文字"
-                hint="做為圖片替代文字，用來描述圖片內容，當圖片失效時才會顯示"
-              />
-            </q-item>
+          <div class="col-12">
+            <input-text
+              v-model="state.title"
+              class="full-width"
+              label="圖片標題"
+              placeholder="請輸入圖片標題"
+            />
+          </div>
+          <div class="col-12">
+            <input-text
+              v-model="state.alt"
+              class="full-width"
+              label="圖片描述文字"
+              placeholder="請輸入圖片描述文字"
+              hint="做為圖片替代文字，用來描述圖片內容，當圖片失效時才會顯示"
+            />
           </div>
         </div>
       </base-form>
@@ -78,6 +74,7 @@ export default defineComponent({
     placeholder: { type: String, default: '請輸入' },
     readonly: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
+    useCropper: { type: Boolean, default: false },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
@@ -162,13 +159,14 @@ export default defineComponent({
       reader.readAsDataURL(file)
     }
     const onSave = async () => {
-      const { canvas } = await cropper.value.getResult()
-      const blob = await new Promise((resolve) => canvas.toBlob(resolve, tempRaw.type))
-      const file = new File(
-        [blob],
-        tempRaw.name,
-        { type: tempRaw.type },
-      )
+      let blob
+      if (props.useCropper) {
+        const { canvas } = await cropper.value.getResult()
+        blob = await new Promise((resolve) => canvas.toBlob(resolve, tempRaw.type))
+      } else {
+        blob = URL.createObjectURL(tempRaw)
+      }
+      const file = props.useCropper ? new File([blob], tempRaw.name, { type: tempRaw.type }) : tempRaw
       const [uploadRes, uploadErrors] = await batchUpload({ imageObj: { raw: file } })
       if (uploadErrors.value) {
         const message = uploadErrors.value.response.data.message
