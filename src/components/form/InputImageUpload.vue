@@ -46,7 +46,7 @@ export default defineComponent({
     accept: { type: String, default: 'image/png, image/jpeg, image/jpg' },
     aspect: { type: Number },
     outlined: { type: Boolean, default: false },
-    useCropper: { type: Boolean, default: true },
+    useCropper: { type: Boolean, default: false },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
