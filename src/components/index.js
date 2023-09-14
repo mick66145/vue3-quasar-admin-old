@@ -70,6 +70,7 @@ import SkeletonSquare from './skeleton/SkeletonSquare.vue'
 import SkeletonTextList from './skeleton/SkeletonTextList.vue'
 import SkeletonImageTextList from './skeleton/SkeletonImageTextList.vue'
 import ImageUploader from './uploader/ImageUploader.vue'
+import ImageMultipleUploader from './uploader/ImageMultipleUploader.vue'
 import FileUploader from './uploader/FileUploader.vue'
 import BaseTooltip from './tooltip/BaseTooltip.vue'
 import SelectTree from './tree/SelectTree.vue'
@@ -158,6 +159,7 @@ export default {
     app.component('SkeletonTextList', SkeletonTextList)
     app.component('SkeletonImageTextList', SkeletonImageTextList)
     app.component('ImageUploader', ImageUploader)
+    app.component('ImageMultipleUploader', ImageMultipleUploader)
     app.component('FileUploader', FileUploader)
     app.component('BaseTooltip', BaseTooltip)
     app.component('SelectTree', SelectTree)
