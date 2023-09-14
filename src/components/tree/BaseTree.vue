@@ -7,6 +7,7 @@
     :nodes="nodes"
     :node-key="nodeKey"
     :label-key="labelKey"
+    :selected-color="selectedColor"
     :default-expand-all="defaultExpandAll"
     :tick-strategy="tickStrategy"
   />
@@ -21,6 +22,7 @@ export default defineComponent({
     nodes: { type: Array, default () { return [] } },
     nodeKey: { type: String, default: 'id' },
     labelKey: { type: String, default: 'name' },
+    selectedColor: { type: String, default: 'primary' },
     defaultExpandAll: { type: Boolean, default: true },
     tickStrategy: { type: String },
   },

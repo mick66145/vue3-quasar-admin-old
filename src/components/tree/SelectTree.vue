@@ -3,6 +3,7 @@
     ref="tree"
     v-model:selected="observeValue"
     :nodes="nodes"
+    :selected-color="selectedColor"
     :default-expand-all="defaultExpandAll"
   />
 </template>
@@ -19,6 +20,7 @@ export default defineComponent({
   props: {
     modelValue: { type: [Array, Object, String, Number] },
     nodes: { type: Array, default () { return [] } },
+    selectedColor: { type: String },
     defaultExpandAll: { type: Boolean, default: true },
   },
   setup (props, { emit }) {
