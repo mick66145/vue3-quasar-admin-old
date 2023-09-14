@@ -35,7 +35,7 @@
     </div>
 
     <div class="col-md-3 col-sm-4 col-xs-12">
-      <image-uploader
+      <image-multiple-uploader
         ref="imageUpload"
         class="full-width"
         :disable="disable"
@@ -84,19 +84,21 @@ export default defineComponent({
     })
 
     // methods
-    const onFile = async (fileObj) => {
-      const { file, base64 } = fileObj
-      const state = {
-        alt: '',
-        title: '',
-        image: {
-          blobURL: URL.createObjectURL(file),
-          raw: file,
-          base64: base64,
-          filename: '',
-        },
-      }
-      observeValue.value.push(state)
+    const onFile = async (files) => {
+      files.forEach(fileItem => {
+        const { file, base64 } = fileItem
+        const state = {
+          alt: '',
+          title: '',
+          image: {
+            blobURL: URL.createObjectURL(file),
+            raw: file,
+            base64: base64,
+            filename: '',
+          },
+        }
+        observeValue.value.push(state)
+      })
     }
     const onPreview = (item) => {
       dialog.value.showDialog({ data: item })
