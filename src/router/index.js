@@ -124,6 +124,9 @@ export const asyncRoutes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: constantRoutes,
+  scrollBehavior (to, from, savedPosition) {
+    return savedPosition || { left: 0, top: 0 }
+  },
 })
 
 export function addRoutes (routes = [], { parent = '' }) {
