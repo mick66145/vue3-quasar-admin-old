@@ -13,7 +13,7 @@ export default function useWatermark ({
   fontWeight = 100,
   fontColor = '#f5f5f5',
   fontFamily = 'Microsoft JhengHei',
-  monitor = false,
+  monitor = true,
   offsetBottom = 0,
   offsetLeft = 0,
   watermarkWidth = '100vw',
