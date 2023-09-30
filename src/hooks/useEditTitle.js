@@ -1,5 +1,6 @@
 import { computed } from 'vue-demi'
 import { useRoute } from 'vue-router'
+import { i18n } from '@/plugins/i18n'
 
 export const modeTypes = {
   create: 'create',
@@ -8,9 +9,9 @@ export const modeTypes = {
 }
 
 const prefixNames = {
-  [modeTypes.create]: '新增',
-  [modeTypes.edit]: '編輯',
-  [modeTypes.view]: '檢視',
+  [modeTypes.create]: i18n.global.t('g.prefix.add'),
+  [modeTypes.edit]: i18n.global.t('g.prefix.edit'),
+  [modeTypes.view]: i18n.global.t('g.prefix.view'),
 }
 
 export default function useEditTitle (mode) {
@@ -19,7 +20,11 @@ export default function useEditTitle (mode) {
     const metaTitle = route.meta.title
     return `${prefixNames[mode.value]}${metaTitle}`
   })
+  const prefix = computed(() => {
+    return `${prefixNames[mode.value]}`
+  })
   return {
     pageTitle,
+    prefix,
   }
 }

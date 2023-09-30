@@ -18,6 +18,11 @@
     },
     "system": {
       "system-name": "DashBoard Base"
+    },
+    "prefix":{
+      "edit": "編輯",
+      "add": "新增",
+      "view": "查看"
     }
   },
   "login": {

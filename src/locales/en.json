@@ -18,6 +18,11 @@
     },
     "system": {
       "system-name": "DashBoard Base"
+    },
+    "prefix":{
+      "edit": "Edit",
+      "add": "Add",
+      "view": "View"
     }
   },
   "login": {
