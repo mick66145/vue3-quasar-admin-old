@@ -22,7 +22,14 @@
                   @click="onPreview(fileItem)"
                 />
                 <q-icon
-                  v-if="!disable"
+                  v-if="showEdit"
+                  class="q-mr-md"
+                  name="edit"
+                  size="1.75rem"
+                  @click="onEdit(fileItem)"
+                />
+                <q-icon
+                  v-if="showDelete"
                   name="fas fa-solid fa-trash-can"
                   size="1.75rem"
                   @click="onDelete(fileIndex)"
@@ -42,28 +49,35 @@
         @on-file="onFile"
       />
     </div>
-    <image-preview-dialog ref="dialog" />
+
+    <image-edit-dialog ref="editDialog" />
+    <image-preview-dialog ref="previewDialog" />
   </div>
 </template>
 
 <script>
+import ImageEditDialog from './components/ImageEditDialog.vue'
 import { defineComponent, computed, ref } from 'vue-demi'
 import useImgStorage from '@/hooks/useImgStorage'
 import useMessageDialog from '@/hooks/useMessageDialog'
 
 export default defineComponent({
   components: {
+    ImageEditDialog,
   },
   props: {
     modelValue: { type: Array, default () { return [] } },
     accept: { type: String, default: 'image/png, image/jpeg, image/jpg' },
     aspect: { type: Number },
-    disable: { type: Boolean, defalut: false },
+    disable: { type: Boolean, default: false },
+    showEdit: { type: Boolean, default: true },
+    showDelete: { type: Boolean, default: true },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
     // data
-    const dialog = ref()
+    const previewDialog = ref()
+    const editDialog = ref()
     const imageUpload = ref()
 
     // computed
@@ -90,6 +104,7 @@ export default defineComponent({
         const state = {
           alt: '',
           title: '',
+          sequence: 0,
           image: {
             blobURL: URL.createObjectURL(file),
             raw: file,
@@ -101,7 +116,10 @@ export default defineComponent({
       })
     }
     const onPreview = (item) => {
-      dialog.value.showDialog({ data: item })
+      previewDialog.value.showDialog({ data: item })
+    }
+    const onEdit = (item) => {
+      editDialog.value.showDialog({ data: item })
     }
     const onDelete = async (index) => {
       const res = await messageDelete({ title: '刪除', message: '確認刪除？' })
@@ -114,12 +132,14 @@ export default defineComponent({
     const { getImageSrc } = useImgStorage()
 
     return {
-      dialog,
+      previewDialog,
+      editDialog,
       imageUpload,
       observeValue,
       preview,
       onFile,
       onPreview,
+      onEdit,
       onDelete,
     }
   },
