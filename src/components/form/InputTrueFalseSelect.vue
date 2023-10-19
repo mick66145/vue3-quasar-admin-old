@@ -20,7 +20,7 @@ export default defineComponent({
   setup (props, { emit }) {
     // data
     const observeValue = useVModel(props, 'modelValue', emit)
-    const options = ref([{ label: '是', value: 'true' }, { label: '否', value: 'false' }])
+    const options = ref([{ label: '是', value: true }, { label: '否', value: false }])
 
     return {
       observeValue,
