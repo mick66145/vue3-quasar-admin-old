@@ -1,16 +1,21 @@
 <template>
-  <q-tree
-    ref="tree"
-    v-model:ticked="observeValue"
-    v-model:selected="observeValue"
-    v-model:expanded="expanded"
-    :nodes="nodes"
-    :node-key="nodeKey"
-    :label-key="labelKey"
-    :selected-color="selectedColor"
-    :default-expand-all="defaultExpandAll"
-    :tick-strategy="tickStrategy"
-  />
+  <div class="q-gutter-sm">
+    <input-search v-show="useSearch" v-model="search" dense />
+    <q-tree
+      ref="tree"
+      v-model:ticked="observeValue"
+      v-model:selected="observeValue"
+      v-model:expanded="expanded"
+      :nodes="nodes"
+      :node-key="nodeKey"
+      :label-key="labelKey"
+      :selected-color="selectedColor"
+      :default-expand-all="defaultExpandAll"
+      :tick-strategy="tickStrategy"
+      :filter="search"
+      :filter-method="filterFn"
+    />
+  </div>
 </template>
 
 <script>
@@ -24,12 +29,14 @@ export default defineComponent({
     labelKey: { type: String, default: 'name' },
     selectedColor: { type: String, default: 'primary' },
     defaultExpandAll: { type: Boolean, default: true },
+    useSearch: { type: Boolean, default: true },
     tickStrategy: { type: String },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
     // data
     const tree = ref()
+    const search = ref()
     const expanded = ref([])
 
     // computed
@@ -42,12 +49,18 @@ export default defineComponent({
     const expandAll = () => {
       tree.value.expandAll()
     }
+    const filterFn = (node, val) => {
+      const needle = val.toLowerCase()
+      return node[props.labelKey] && node[props.labelKey].toLowerCase().indexOf(needle) > -1
+    }
 
     return {
       tree,
       observeValue,
+      search,
       expanded,
       expandAll,
+      filterFn,
     }
   },
 })
