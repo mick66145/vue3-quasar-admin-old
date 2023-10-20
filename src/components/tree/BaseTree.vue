@@ -4,7 +4,7 @@
     <q-tree
       ref="tree"
       v-model:ticked="observeValue"
-      v-model:selected="observeValue"
+      v-model:selected="observeSelected"
       v-model:expanded="expanded"
       :nodes="nodes"
       :node-key="nodeKey"
@@ -24,6 +24,7 @@ import { defineComponent, ref, computed } from 'vue-demi'
 export default defineComponent({
   props: {
     modelValue: { type: [Array, Object, String, Number] },
+    selected: { type: [Array, Object, String, Number] },
     nodes: { type: Array, default () { return [] } },
     nodeKey: { type: String, default: 'id' },
     labelKey: { type: String, default: 'name' },
@@ -32,7 +33,7 @@ export default defineComponent({
     useSearch: { type: Boolean, default: true },
     tickStrategy: { type: String },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'update:selected'],
   setup (props, { emit }) {
     // data
     const tree = ref()
@@ -43,6 +44,10 @@ export default defineComponent({
     const observeValue = computed({
       get () { return props.modelValue },
       set (value) { emit('update:modelValue', value) },
+    })
+    const observeSelected = computed({
+      get () { return props.selected },
+      set (value) { emit('update:selected', value) },
     })
 
     // methods
@@ -57,6 +62,7 @@ export default defineComponent({
     return {
       tree,
       observeValue,
+      observeSelected,
       search,
       expanded,
       expandAll,
