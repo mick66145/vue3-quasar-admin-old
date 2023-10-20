@@ -5,6 +5,7 @@
     :nodes="nodes"
     :selected-color="selectedColor"
     :default-expand-all="defaultExpandAll"
+    :use-search="useSearch"
   />
 </template>
 
@@ -22,6 +23,7 @@ export default defineComponent({
     nodes: { type: Array, default () { return [] } },
     selectedColor: { type: String },
     defaultExpandAll: { type: Boolean, default: true },
+    useSearch: { type: Boolean, default: true },
   },
   setup (props, { emit }) {
     // data
