@@ -45,7 +45,8 @@
     "user-manage": "UserManage",
     "role": "Role",
     "system-log": "SystemLog",
-    "system-information-manage": "SystemInformationManage"
+    "system-information-manage": "SystemInformationManage",
+    "basic-setting": "BasicSetting"
   },
   "company-job": {
     "title": "CompanyJob"
