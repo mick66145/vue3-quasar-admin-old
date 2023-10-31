@@ -6,7 +6,14 @@
     dense
   >
     <template #control>
-      <q-checkbox v-model="observeValue" :label="label" :val="val">
+      <q-checkbox
+        v-model="observeValue"
+        :label="label"
+        :val="val"
+        :checked-icon="checkedIcon"
+        :unchecked-icon="uncheckedIcon"
+        :left-label="leftLabel"
+      >
         <template v-if="$slots.default" #default>
           <slot name="default" />
         </template>
@@ -24,6 +31,9 @@ export default defineComponent({
     rules: { type: Array },
     label: { type: String },
     val: {},
+    checkedIcon: { type: String },
+    uncheckedIcon: { type: String },
+    leftLabel: { type: Boolean },
   },
   emits: [
     'update:modelValue',
