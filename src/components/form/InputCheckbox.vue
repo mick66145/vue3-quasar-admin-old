@@ -3,7 +3,6 @@
     v-model="observeValue"
     :rules="rules"
     borderless
-    dense
   >
     <template #control>
       <q-checkbox
@@ -13,6 +12,7 @@
         :checked-icon="checkedIcon"
         :unchecked-icon="uncheckedIcon"
         :left-label="leftLabel"
+        dense
       >
         <template v-if="$slots.default" #default>
           <slot name="default" />
