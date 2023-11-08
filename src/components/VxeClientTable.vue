@@ -17,6 +17,9 @@
         :footer-method="footerMethod"
         :checkbox-config="checkboxConfig"
         :tree-config="treeConfig"
+        :header-cell-style="headerCellStyle"
+        :cell-style="cellStyle"
+        :footer-cell-style="footerCellStyle"
         @checkbox-all="onCheckboxAll"
         @checkbox-change="onCheckboxChange"
       >
@@ -49,6 +52,9 @@ export default defineComponent({
     checkboxConfig: { type: Object }, // { labelField:'', checkMethod:({row}), visibleMethod:({row})}
     treeConfig: { type: Object },
     maxHeight: { type: String },
+    headerCellStyle: { type: [String, Number, Object, Array, Boolean] },
+    cellStyle: { type: [String, Number, Object, Array, Boolean] },
+    footerCellStyle: { type: [String, Number, Object, Array, Boolean] },
   },
   emits: ['checkbox-all', 'checkbox-change', 'update:current'],
   setup (props, { emit }) {
