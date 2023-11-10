@@ -100,10 +100,10 @@ export default defineComponent({
       [{ color: [] }, { background: [] }],
       [{ list: 'ordered' }, { list: 'bullet' }],
       [{ align: [] }],
-      ['link', 'image', 'clean'],
+      ['link', 'image', 'video', { table: 'TD' }, 'clean'],
     ]
     const options = {
-      formats: ['align', 'background', 'bold', 'color', 'float', 'font', 'header', 'height', 'image', 'italic', 'link', 'script', 'strike', 'size', 'underline', 'list', 'width', LoadingImage.blotName, ImageBlotAlt.blotName],
+      formats: ['align', 'background', 'bold', 'color', 'float', 'font', 'header', 'height', 'image', 'italic', 'link', 'script', 'strike', 'size', 'underline', 'list', 'width', LoadingImage.blotName, ImageBlotAlt.blotName, 'table', 'video'],
     }
     const state = reactive({
       alt: '',
