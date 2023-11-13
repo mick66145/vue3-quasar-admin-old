@@ -7,6 +7,7 @@ export default function useVxeServerDataTable ({
   sortParames = [], // [{field:string,order:true|false}]
   unSessionStorageParames = [], // [{field:string}]
   sessionStorageKey = 'dashboardVxeServerDataTable',
+  usePageSize = true,
   callback = () => {},
 }) {
   // use
@@ -63,7 +64,7 @@ export default function useVxeServerDataTable ({
       search[key] = value
     }
     search.page = 1
-    search.page_size = 10
+    usePageSize && (search.page_size = 10)
     search.orderby = sortParames.map((item) => `${item.field}:${item.order}`).join(',')
     sort.value = sortParames
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
@@ -79,7 +80,7 @@ export default function useVxeServerDataTable ({
       const sessionStorageObj = {
         search: {
           page: 1,
-          page_size: 10,
+          page_size: usePageSize ? 10 : null,
           orderby: sortParames.map((item) => `${item.field}:${item.order}`).join(','),
         },
         sort: sortParames,

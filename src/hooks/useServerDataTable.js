@@ -6,6 +6,7 @@ export default function useServerDataTable ({
   searchParames = {},
   unSessionStorageParames = [], // [{field:string}]
   sessionStorageKey = 'dashboardServerDataTable',
+  usePageSize = true,
   callback = () => {},
 }) {
   const { setSessionStorage, getSessionStorage } = useSessionStorage()
@@ -20,7 +21,7 @@ export default function useServerDataTable ({
     const sessionStorageObj = {
       search: {
         page: 1,
-        page_size: 10,
+        page_size: usePageSize ? 10 : null,
       },
     }
     setSessionStorage(sessionStorageKey, sessionStorageObj)
@@ -70,7 +71,7 @@ export default function useServerDataTable ({
       search[key] = value
     }
     search.page = 1
-    search.page_size = 10
+    usePageSize && (search.page_size = 10)
     setSessionStorage(sessionStorageKey, { search })
     if (callback && typeof (callback) === 'function') {
       callback()
