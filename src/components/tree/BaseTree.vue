@@ -73,4 +73,8 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+  :deep(.q-tree__node-header) {
+    @apply rounded-full bg-slate-100 px-2;
+  }
+
 </style>
