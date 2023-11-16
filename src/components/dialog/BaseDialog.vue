@@ -74,10 +74,12 @@ export default defineComponent({
     // computed
     const sizeClass = computed(() => {
       switch (props.size) {
-      case 'small':
+      case 'sm':
         return 'w-25rem'
-      case 'medium':
+      case 'md':
         return 'w-30rem'
+      case 'lg':
+        return 'w-50rem !max-w-50rem'
       default:
         return 'w-full'
       }
@@ -124,7 +126,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .q-card {
   .q-dialog-body {
-    @apply max-h-40em;
+    // @apply max-h-40em;
   }
 }
 </style>
