@@ -1,7 +1,7 @@
 <template>
   <input-text
     v-model="observeValue"
-    :label="label"
+    :label="inputLabel"
     type="number"
     :rules="ruleList"
     @clear="clearFn"
@@ -52,15 +52,16 @@ export default defineComponent({
     modelValue: { type: [String, Number], default: 0 },
     rules: { type: Array, default () { return [] } },
     required: { type: Boolean, default: true },
-    min: { type: Number },
-    max: { type: Number },
+    min: { type: [Number, String] },
+    max: { type: [Number, String] },
+    useLabel: { type: Boolean, default: true },
   },
   emits: [
     'update:modelValue',
   ],
   setup (props, { emit }) {
     // data
-    const { label, rules, required, min, max } = toRefs(props)
+    const { label, rules, required, min, max, useLabel } = toRefs(props)
 
     // computed
     const ruleList = computed(() => {
@@ -70,7 +71,6 @@ export default defineComponent({
       max.value && rule.push(vuelidate.maxValue(max.value, `${label.value}必需小於${max.value}`))
       return rule.concat(rules.value)
     })
-
     const observeValue = computed({
       get () {
         return props.modelValue
@@ -83,6 +83,9 @@ export default defineComponent({
         emit('update:modelValue', +value)
       },
     })
+    const inputLabel = computed(() => {
+      return useLabel.value ? label.value : undefined
+    })
 
     const clearFn = (val) => {
       emit('update:modelValue', 0)
@@ -91,6 +94,7 @@ export default defineComponent({
     return {
       observeValue,
       ruleList,
+      inputLabel,
       clearFn,
     }
   },
