@@ -1,7 +1,7 @@
-import * as Quill from 'quill'
+import Quill from 'quill'
 import * as QuillTableUI from 'quill-table-ui'
 import ImageUploader from 'quill-image-uploader'
-import BlotFormatter from 'quill-blot-formatter'
+import ImageResize from 'quill-image-resize-module--fix-imports-error'
 import LoadingImage from 'quill-image-uploader/src/blots/image'
 import './img-alt.css'
 
@@ -89,7 +89,7 @@ class MyImageUploader extends ImageUploader {
 
 Quill.register({ 'modules/tableUI': QuillTableUI.default })
 Quill.register({ 'modules/myImageUploader': MyImageUploader })
-Quill.register('modules/blotFormatter', BlotFormatter)
+Quill.register({ 'modules/imageResize': ImageResize })
 
 export {
   Quill,

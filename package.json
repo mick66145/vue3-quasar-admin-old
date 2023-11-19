@@ -63,6 +63,7 @@
     "quill": "^2.0.0-dev.3",
     "quill-blot-formatter": "^1.0.5",
     "quill-delta-to-html": "^0.12.1",
+    "quill-image-resize-module--fix-imports-error": "^3.0.0",
     "quill-image-uploader": "^1.2.3",
     "quill-table-ui": "^1.0.7",
     "sass": "1.32.12",

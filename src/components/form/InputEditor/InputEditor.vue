@@ -133,7 +133,7 @@ export default defineComponent({
           },
           table: {},
           tableUI: {},
-          blotFormatter: {},
+          imageResize: {},
           myImageUploader: {
             upload,
           },
