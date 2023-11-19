@@ -1,15 +1,6 @@
 <template>
   <div class="input-editor">
-    <vue-editor
-      ref="quill"
-      v-model:content="observeValue"
-      :placeholder="placeholder"
-      theme="snow"
-      :readOnly="disabled"
-      :toolbar="toolbarOptions"
-      :modules="modules"
-      :options="options"
-    />
+    <div id="container" />
     <base-dialog
       v-model="showDialog"
       title="上傳圖片："
@@ -53,14 +44,10 @@
 
 <script>
 import ImageCropper from '@/components/ImageCropper.vue'
-import { useElementBounding, useVModel, watchOnce } from '@vueuse/core'
-import { ImageActions } from '@xeger/quill-image-actions'
-import { ImageFormats } from '@xeger/quill-image-formats'
-import LoadingImage from 'quill-image-uploader/src/blots/image'
-import { defineComponent, reactive, ref, computed } from 'vue-demi'
-import { ImageBlotAlt, MyImageUploader } from './quillModule'
+import { defineComponent, reactive, ref, computed, onMounted } from 'vue-demi'
+import { useElementBounding, watchOnce } from '@vueuse/core'
+import { Quill } from './quillModule'
 import isEmpty from 'lodash-es/isEmpty'
-
 import useNotify from '@/hooks/useNotify'
 import useBatchUpload from '@/hooks/useBatchUpload'
 
@@ -81,36 +68,19 @@ export default defineComponent({
     // data
     let tempRaw = null
     let resolveUpload, rejectUpload
-    const quill = ref()
+    let editor = null
     const tempCropper = ref()
     const cropper = ref(null)
     const cropperBounding = useElementBounding(cropper, {
       immediate: true,
     })
-    const observeValue = useVModel(props, 'modelValue', emit)
-    const toolbarOptions = [
-      [
-        { header: 1 },
-        { header: 2 },
-      ],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ size: ['small', false, 'large', 'huge'] }],
-
-      ['bold', 'italic', 'underline'],
-      [{ color: [] }, { background: [] }],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      [{ align: [] }],
-      ['link', 'image', 'video', { table: 'TD' }, 'clean'],
-    ]
-    const options = {
-      formats: ['align', 'background', 'bold', 'color', 'float', 'font', 'header', 'height', 'image', 'italic', 'link', 'script', 'strike', 'size', 'underline', 'list', 'width', LoadingImage.blotName, ImageBlotAlt.blotName, 'table', 'video'],
-    }
     const state = reactive({
       alt: '',
       title: '',
     })
     const showDialog = ref(false)
 
+    // computed
     const cropperWrapStyle = computed(() => {
       if (!cropper.value) {
         return {
@@ -123,9 +93,62 @@ export default defineComponent({
       }
     })
 
+    // mounted
+    onMounted(async () => {
+      initialize()
+    })
+
     // methods
+    const initialize = () => {
+      editor = new Quill('#container', {
+        theme: 'snow',
+        modules: {
+          toolbar: {
+            container: [
+              [
+                { header: 1 },
+                { header: 2 },
+              ],
+              [{ header: [1, 2, 3, 4, 5, 6, false] }],
+              [{ size: ['small', false, 'large', 'huge'] }],
+              ['bold', 'italic', 'underline'],
+              [{ color: [] }, { background: [] }],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              [{ align: [] }],
+              ['link', 'image', 'video', 'clean'],
+              [
+                { table: 'TD' },
+                { 'table-insert-row': 'TIR' },
+                { 'table-insert-column': 'TIC' },
+                { 'table-delete-row': 'TDR' },
+                { 'table-delete-column': 'TDC' },
+              ],
+            ],
+            handlers: {
+              table: function () {
+                const table = editor.getModule('table')
+                table.insertTable(3, 3)
+              },
+            },
+          },
+          table: {},
+          tableUI: {},
+          blotFormatter: {},
+          myImageUploader: {
+            upload,
+          },
+        },
+        placeholder: '',
+      })
+      editor.on('text-change', function (delta, old, source) {
+        const snowContent = editor.getContents()
+        if (source === 'user') {
+          emit('update:modelValue', snowContent)
+        }
+      })
+    }
     const setContents = () => {
-      quill.value.setContents(props.modelValue, 'user')
+      editor.setContents(props.modelValue, 'user')
     }
     const upload = (file) => {
       console.log('🚀 ~ upload ~ file', file)
@@ -182,49 +205,23 @@ export default defineComponent({
       showDialog.value = false
     }
 
-    // data
-    const modules = [
-      {
-        name: 'ImageActions',
-        module: ImageActions,
-        options: {
-        },
-      },
-      {
-        name: 'ImageFormats',
-        module: ImageFormats,
-        options: {
-        },
-      },
-      {
-        name: 'MyImageUploader',
-        module: MyImageUploader,
-        options: {
-          upload,
-        },
-      },
-    ]
-
     // use
     const { notify, notifyAPIError } = useNotify()
     const { batchUpload } = useBatchUpload()
 
     // watch
     watchOnce(() => props.modelValue, (newV, oldV) => {
-      isEmpty()
+      if (!editor) {
+        return
+      }
       if (!oldV || isEmpty(oldV)) {
         setContents()
       }
     })
 
     return {
-      quill,
       cropper,
       tempCropper,
-      observeValue,
-      toolbarOptions,
-      options,
-      modules,
       state,
       showDialog,
       cropperWrapStyle,
@@ -254,13 +251,12 @@ export default defineComponent({
   .ql-container {
     @apply rounded-b;
     @apply font-sans;
-    @apply overflow-hidden;
 
     height: calc(100% - 50px);
   }
 
   .ql-snow .ql-tooltip {
-    @apply z-100;
+    @apply z-1000;
   }
 }
 </style>

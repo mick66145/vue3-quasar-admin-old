@@ -1,5 +1,8 @@
-import { Quill } from '@vueup/vue-quill'
+import * as Quill from 'quill'
+import * as QuillTableUI from 'quill-table-ui'
 import ImageUploader from 'quill-image-uploader'
+import BlotFormatter from 'quill-blot-formatter'
+import LoadingImage from 'quill-image-uploader/src/blots/image'
 import './img-alt.css'
 
 const EmbedBlot = Quill.import('blots/embed')
@@ -83,4 +86,11 @@ class MyImageUploader extends ImageUploader {
     this.quill.setSelection(range, Quill.sources.USER)
   }
 }
-export { MyImageUploader, ImageBlotAlt }
+
+Quill.register({ 'modules/tableUI': QuillTableUI.default })
+Quill.register({ 'modules/myImageUploader': MyImageUploader })
+Quill.register('modules/blotFormatter', BlotFormatter)
+
+export {
+  Quill,
+}
