@@ -11,7 +11,8 @@
       "reset-password": "ResetPassword",
       "reset": "Reset",
       "view": "View",
-      "dowload": "Dowload"
+      "dowload": "Dowload",
+      "copy": "Copy"
     },
     "dialog": {
       "default-title": "Title"
@@ -19,7 +20,7 @@
     "system": {
       "system-name": "DashBoard Base"
     },
-    "prefix":{
+    "prefix": {
       "edit": "Edit",
       "add": "Add",
       "view": "View"
