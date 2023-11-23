@@ -55,6 +55,7 @@ import EditIconButton from './button/EditIconButton.vue'
 import DeleteIconButton from './button/DeleteIconButton.vue'
 import ViewIconButton from './button/ViewIconButton.vue'
 import CopyIconButton from './button/CopyIconButton.vue'
+import DownloadIconButton from './button/DownloadIconButton.vue'
 import BaseFlatButton from './button/BaseFlatButton.vue'
 import BaseButtonDropdown from './button-dropdown/BaseButtonDropdown.vue'
 import BaseFlatButtonDropdown from './button-dropdown/BaseFlatButtonDropdown.vue'
@@ -146,6 +147,7 @@ export default {
     app.component('DeleteIconButton', DeleteIconButton)
     app.component('ViewIconButton', ViewIconButton)
     app.component('CopyIconButton', CopyIconButton)
+    app.component('DownloadIconButton', DownloadIconButton)
     app.component('BaseFlatButton', BaseFlatButton)
     app.component('BaseButtonDropdown', BaseButtonDropdown)
     app.component('BaseFlatButtonDropdown', BaseFlatButtonDropdown)
