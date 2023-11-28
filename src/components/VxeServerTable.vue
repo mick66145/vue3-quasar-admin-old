@@ -60,9 +60,9 @@ export default defineComponent({
     treeConfig: { type: Object },
     rowConfig: { type: Object },
     maxHeight: { type: Number },
-    headerCellStyle: { type: [String, Number, Object, Array, Boolean] },
-    cellStyle: { type: [String, Number, Object, Array, Boolean] },
-    footerCellStyle: { type: [String, Number, Object, Array, Boolean] },
+    headerCellStyle: { type: [Object, Function] },
+    cellStyle: { type: [Object, Function] },
+    footerCellStyle: { type: [Object, Function] },
   },
   emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current'],
   setup (props, { emit }) {
