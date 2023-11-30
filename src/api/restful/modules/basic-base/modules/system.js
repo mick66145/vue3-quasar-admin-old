@@ -32,6 +32,15 @@ class SystemResource extends Resource {
       },
       )
   }
+
+  async viewCount (query) {
+    return await request({
+      url: `/${this.uri}/viewcount`,
+      method: 'get',
+      params: query,
+    }).then(res => res.data)
+      .then(res => res.data)
+  }
 }
 
 export default SystemResource
