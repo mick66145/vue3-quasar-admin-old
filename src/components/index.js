@@ -40,6 +40,7 @@ import InputCreditCardExpiredDate from './form/InputCreditCardExpiredDate.vue'
 import InputTrueFalseSelect from './form/InputTrueFalseSelect.vue'
 import InputAlpha from './form/InputAlpha.vue'
 import InputAutocomplete from './form/InputAutocomplete.vue'
+import InputUserSelect from './form/InputUserSelect.vue'
 import BaseButton from './button/BaseButton.vue'
 import AddButton from './button/AddButton.vue'
 import DeleteButton from './button/DeleteButton.vue'
@@ -133,6 +134,7 @@ export default {
     app.component('InputTrueFalseSelect', InputTrueFalseSelect)
     app.component('InputAlpha', InputAlpha)
     app.component('InputAutocomplete', InputAutocomplete)
+    app.component('InputUserSelect', InputUserSelect)
     app.component('BaseButton', BaseButton)
     app.component('AddButton', AddButton)
     app.component('DeleteButton', DeleteButton)
