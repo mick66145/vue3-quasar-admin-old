@@ -51,11 +51,12 @@ export default defineConfig({
       },
     },
     screens: {
-      xs: '0px',
-      sm: '600px',
-      md: '1024px',
-      lg: '1440px',
-      xl: '1920px',
+      xs: '0',
+      sm: '576px',
+      md: '768px',
+      lg: '992px',
+      xl: '1200px',
+      '2xl': '1400px',
     },
   },
   plugins: [

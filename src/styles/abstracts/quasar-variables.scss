@@ -21,10 +21,11 @@ $animate-repeat: 1 ;
 
 // Max width at which point
 // current size ends
-$breakpoint-xs: 599px ;
-$breakpoint-sm: 1023px ;
-$breakpoint-md: 1439px ;
-$breakpoint-lg: 1919px ;
+$breakpoint-xs: 575px ;
+$breakpoint-sm: 767px ;
+$breakpoint-md: 991px ;
+$breakpoint-lg: 1199px ;
+$breakpoint-xl: 1399px ;
 $flex-cols: 12 ;
 $flex-gutter-xs: ($space-base * 0.25) ;
 $flex-gutter-sm: ($space-base * 0.5) ;
@@ -47,6 +48,8 @@ $breakpoint-md-max: (map-get($sizes, "lg") - 0.02) ;
 $breakpoint-lg-min: map-get($sizes, "lg") ;
 $breakpoint-lg-max: (map-get($sizes, "xl") - 0.02) ;
 $breakpoint-xl-min: map-get($sizes, "xl") ;
+$breakpoint-xl-max: (map-get($sizes, "2xl") - 0.02) ;
+$breakpoint-2xl-min: map-get($sizes, "2xl") ;
 $h1: (size: 6rem,     line-height: 6rem,     letter-spacing: -0.01562em, weight: 300) ;
 $h2: (size: 3.75rem,  line-height: 3.75rem,  letter-spacing: -0.00833em, weight: 300) ;
 $h3: (size: 3rem,     line-height: 3.125rem, letter-spacing: normal,    weight: 400) ;
