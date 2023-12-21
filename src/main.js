@@ -17,6 +17,7 @@ import vxeTable from '@/plugins/vxe-table'
 import editor from '@/plugins/editor'
 import i18n from '@/plugins/i18n'
 import { useVuelidate } from '@/plugins/vuelidate'
+import vue3PhotoPreview from '@/plugins/vue3-photo-preview'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 import '@/styles/index.scss'
@@ -43,6 +44,7 @@ app.use(useDayjs)
 app.use(editor)
 app.use(i18n)
 app.use(vxeTable)
+app.use(vue3PhotoPreview)
 app.use(useVuelidate)
 app.use(permission)
 app.use(downLoadUrl)
