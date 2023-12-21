@@ -21,7 +21,7 @@
       </template>
     </q-img>
     <skeleton-square v-if="isReading && useSkeleton" />
-    <image-preview-dialog ref="dialog" />
+    <lightbox-dialog ref="dialog" :options="[{src:observeSrc,key:observeSrc,intro:alt}]" />
   </span>
 </template>
 
@@ -75,7 +75,7 @@ export default defineComponent({
 
     const onPreview = () => {
       if (props.preview) {
-        dialog.value.showDialog({ data: { image: { url: observeSrc.value } } })
+        dialog.value.showDialog({ })
       }
     }
     return {

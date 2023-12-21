@@ -67,6 +67,7 @@ import BaseButtonGroup from './button-group/BaseButtonGroup.vue'
 import BaseTabs from './tabs/BaseTabs.vue'
 import BaseDialog from './dialog/BaseDialog.vue'
 import ImagePreviewDialog from './dialog/ImagePreviewDialog.vue'
+import LightboxDialog from './dialog/LightboxDialog.vue'
 import MessageDialog from './dialog/MessageDialog.vue'
 import SkeletonTable from './skeleton/SkeletonTable.vue'
 import SkeletonTextItem from './skeleton/SkeletonTextItem.vue'
@@ -162,6 +163,7 @@ export default {
     app.component('BaseDialog', BaseDialog)
     app.component('ImagePreviewDialog', ImagePreviewDialog)
     app.component('MessageDialog', MessageDialog)
+    app.component('LightboxDialog', LightboxDialog)
     app.component('SkeletonTable', SkeletonTable)
     app.component('SkeletonTextItem', SkeletonTextItem)
     app.component('SkeletonImageTextItem', SkeletonImageTextItem)
