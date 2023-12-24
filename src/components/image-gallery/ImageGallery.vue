@@ -19,7 +19,7 @@
                   class="q-mr-md"
                   name="fas fa-light fa-magnifying-glass-plus"
                   size="1.75rem"
-                  @click="onPreview(fileItem)"
+                  @click="onPreview(fileIndex)"
                 />
                 <q-icon
                   v-if="showEdit"
@@ -51,7 +51,7 @@
     </div>
 
     <image-edit-dialog ref="editDialog" />
-    <image-preview-dialog ref="previewDialog" />
+    <lightbox-dialog ref="previewDialog" :options="lightboxList" />
   </div>
 </template>
 
@@ -96,6 +96,13 @@ export default defineComponent({
       if (base64) return base64
       return getImageSrc({ filename, size: '200x' })
     })
+    const lightboxList = computed(() => {
+      const lightboxList = observeValue.value.map(item => {
+        const src = preview.value(item)
+        return { src: src, key: src, alt: item.alt }
+      })
+      return lightboxList
+    })
 
     // methods
     const onFile = async (files) => {
@@ -115,8 +122,8 @@ export default defineComponent({
         observeValue.value.push(state)
       })
     }
-    const onPreview = (item) => {
-      previewDialog.value.showDialog({ data: item })
+    const onPreview = (index) => {
+      previewDialog.value.showDialog({ slide: index })
     }
     const onEdit = (item) => {
       editDialog.value.showDialog({ data: item })
@@ -137,6 +144,7 @@ export default defineComponent({
       imageUpload,
       observeValue,
       preview,
+      lightboxList,
       onFile,
       onPreview,
       onEdit,
