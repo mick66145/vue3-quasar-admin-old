@@ -3,8 +3,10 @@
     :items="options"
     :visible="isShowDialog"
     :index="slide"
+    :loop="true"
     @clickMask="hideDialog"
     @closeModal="hideDialog"
+    @changeIndex="changeIndex"
   />
 </template>
 
@@ -25,11 +27,17 @@ export default defineComponent({
       slide.value = slideData
       isShowDialog.value = true
     }
+    const changeIndex = (index) => {
+      slide.value = index
+    }
+
+    // use
     const { isShowDialog, hideDialog } = useDialog({})
 
     return {
       slide,
       isShowDialog,
+      changeIndex,
       showDialog,
       hideDialog,
     }
