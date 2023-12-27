@@ -17,6 +17,7 @@
         :footer-method="footerMethod"
         :checkbox-config="checkboxConfig"
         :tree-config="treeConfig"
+        :expand-config="expandConfig"
         :header-cell-style="headerCellStyle"
         :cell-style="cellStyle"
         :footer-cell-style="footerCellStyle"
@@ -33,7 +34,7 @@
         @update:current="OnUpdateCurrent"
       />
     </div>
-    <skeleton-table v-if="isReadingList" />
+    <skeleton-table v-if="isReadingList && showSkeleton" />
   </div>
 </template>
 
@@ -47,10 +48,12 @@ export default defineComponent({
     current: { type: Number, default: 1 },
     showPagination: { type: Boolean, default: true },
     showFooter: { type: Boolean, default: false },
+    showSkeleton: { type: Boolean, default: true },
     footerSpanMethod: { type: Function },
     footerMethod: { type: Function },
     checkboxConfig: { type: Object }, // { labelField:'', checkMethod:({row}), visibleMethod:({row})}
     treeConfig: { type: Object },
+    expandConfig: { type: Object },
     maxHeight: { type: String },
     headerCellStyle: { type: [Object, Function] },
     cellStyle: { type: [Object, Function] },
