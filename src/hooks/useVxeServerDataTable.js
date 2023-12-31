@@ -27,25 +27,19 @@ export default function useVxeServerDataTable ({
   const onChangePage = (page) => {
     search.page = page
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
-    if (callback && typeof (callback) === 'function') {
-      callback()
-    }
+    setCallback()
   }
   const onChangePageSize = (pageSize) => {
     search.page_size = pageSize
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
-    if (callback && typeof (callback) === 'function') {
-      callback()
-    }
+    setCallback()
   }
   const onChangeFilter = () => {
     search.page = 1
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
-    if (callback && typeof (callback) === 'function') {
-      callback()
-    }
+    setCallback()
   }
-  const OnChangeSort = async ({ sortList }) => {
+  const OnChangeSort = ({ sortList }) => {
     search.page = 1
     if (sortList.length > 0) {
       search.orderby = sortList.map((item) => `${item.field}:${item.order}`).join(',')
@@ -55,11 +49,9 @@ export default function useVxeServerDataTable ({
       sort.value = sortParames
     }
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
-    if (callback && typeof (callback) === 'function') {
-      callback()
-    }
+    setCallback()
   }
-  const onReset = async () => {
+  const onReset = () => {
     for (const [key, value] of Object.entries(searchParames)) {
       search[key] = value
     }
@@ -68,9 +60,20 @@ export default function useVxeServerDataTable ({
     search.orderby = sortParames.map((item) => `${item.field}:${item.order}`).join(',')
     sort.value = sortParames
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
-    if (callback && typeof (callback) === 'function') {
-      await callback()
-      dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
+    setCallback()
+    dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
+  }
+  const setCallback = async () => {
+    if (callback && callback instanceof Function) {
+      const callObj = await callback()
+      if (callObj instanceof Object) {
+        const [res] = callObj
+        if (res) {
+          data.value = []
+          data.value = res.list
+          total.value = res.total
+        }
+      }
     }
   }
 
@@ -104,11 +107,8 @@ export default function useVxeServerDataTable ({
     for (const [key, value] of Object.entries(searchParames)) {
       (unSessionStorageParamesField.includes(key)) && (search[key] = value)
     }
-
-    if (callback && typeof (callback) === 'function') {
-      await callback()
-      dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
-    }
+    setCallback()
+    dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
   })
 
   return {
