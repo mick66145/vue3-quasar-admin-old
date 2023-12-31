@@ -3,7 +3,6 @@
     :items="options"
     :visible="isShowDialog"
     :index="slide"
-    :loop="true"
     @clickMask="hideDialog"
     @closeModal="hideDialog"
     @changeIndex="changeIndex"
