@@ -7,7 +7,7 @@ export default function useBatchDownload ({
   payload = null,
   readFetch,
   options = [],
-  urls = [],
+  urls = [], // [{url:string,filename:string}]
   zipName = '壓縮',
 }) {
   const batchDownload = async () => {
@@ -44,14 +44,17 @@ export default function useBatchDownload ({
     const zip = new JSZip()
     const files = zip.folder(zipName)
     const fileList = []
-    for (const [index, url] of Object.entries(urls)) {
+    for (const [index, urlItem] of Object.entries(urls)) {
+      const { url, filename } = urlItem
       const res = await fetch(url)
       if (res) {
         const { headers } = res
         const data = res.blob()
         const contentDisposition = headers.get('content-disposition')
         const fileName = getFileName(contentDisposition)
-        fileList.push({ fileName: fileName, blob: data })
+        const fileType = fileName.substring(fileName.lastIndexOf('.') + 1)
+        const downloadFileName = filename ? `${filename}.${fileType}` : fileName
+        fileList.push({ fileName: downloadFileName, blob: data })
       }
     }
     const groupFileList = groupBy(fileList, 'fileName')
