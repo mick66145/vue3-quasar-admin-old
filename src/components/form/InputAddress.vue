@@ -1,7 +1,7 @@
 <template>
   <label>{{ label }}<span v-if="required" class="text-xl text-negative ml-1">*</span></label>
   <div class="row q-col-gutter-sm">
-    <div :class="cityCol">
+    <div v-if="showCity" :class="cityCol">
       <input-city-select
         ref="inputCity"
         v-model="observeValue.city"
@@ -11,7 +11,7 @@
         @update:modelValue="onChange('city')"
       />
     </div>
-    <div :class="areaCol">
+    <div v-if="showArea" :class="areaCol">
       <input-area-select
         ref="inputArea"
         v-model="observeValue.area"
@@ -22,7 +22,7 @@
         @update:modelValue="onChange('area')"
       />
     </div>
-    <div :class="addressCol">
+    <div v-if="showAddress" :class="addressCol">
       <input-text
         v-model="observeValue.address"
         class="full-width"
@@ -45,6 +45,9 @@ export default defineComponent({
     cityCol: { type: String, default: 'col-6' },
     areaCol: { type: String, default: 'col-6' },
     addressCol: { type: String, default: 'col-12' },
+    showCity: { type: Boolean, default: true },
+    showArea: { type: Boolean, default: true },
+    showAddress: { type: Boolean, default: true },
     showPostCode: { type: Boolean, default: false },
   },
   emits: [
