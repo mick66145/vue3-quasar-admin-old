@@ -139,6 +139,24 @@ export default defineComponent({
       dataTable.value.clearCheckboxRow()
       dataTable.value.clearCheckboxReserve()
     }
+    const getTableData = () => {
+      return dataTable.value.getTableData()
+    }
+    const getFullData = () => {
+      return getTableData().fullData
+    }
+    const insertAt = async (obj, row) => {
+      await dataTable.value.insertAt(obj, row)
+    }
+    const insertAtLast = async (obj) => {
+      insertAt(obj, -1)
+    }
+    const remove = (row) => {
+      dataTable.value.remove(row)
+    }
+    const refreshColumn = () => {
+      dataTable.value.refreshColumn()
+    }
     const onChangeSort = ({
       column,
       property,
@@ -184,6 +202,12 @@ export default defineComponent({
       clearCheckboxRow,
       clearCheckboxReserve,
       clearAllCheckboxRow,
+      getTableData,
+      getFullData,
+      insertAt,
+      insertAtLast,
+      remove,
+      refreshColumn,
       onChangeSort,
       onCheckboxAll,
       onCheckboxChange,

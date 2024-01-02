@@ -11,7 +11,7 @@
         :row-config="{ isHover: true }"
         :data="data"
         :max-height="maxHeight"
-        :sort-config="{ trigger: 'cell'}"
+        :sort-config="{ trigger: 'cell' }"
         :show-footer="showFooter"
         :footer-span-method="footerSpanMethod"
         :footer-method="footerMethod"
@@ -95,6 +95,24 @@ export default defineComponent({
     const clearCheckboxRow = () => {
       return dataTable.value.clearCheckboxRow()
     }
+    const getTableData = () => {
+      return dataTable.value.getTableData()
+    }
+    const getFullData = () => {
+      return getTableData().fullData
+    }
+    const insertAt = async (obj, row) => {
+      await dataTable.value.insertAt(obj, row)
+    }
+    const insertAtLast = async (obj) => {
+      insertAt(obj, -1)
+    }
+    const remove = (row) => {
+      dataTable.value.remove(row)
+    }
+    const refreshColumn = () => {
+      dataTable.value.refreshColumn()
+    }
     const onCheckboxAll = ({ checked }) => {
       emit('checkbox-all', { checked })
     }
@@ -116,6 +134,12 @@ export default defineComponent({
       toggleCheckboxRow,
       setAllCheckboxRow,
       clearCheckboxRow,
+      getTableData,
+      getFullData,
+      insertAt,
+      insertAtLast,
+      remove,
+      refreshColumn,
       onCheckboxAll,
       onCheckboxChange,
       OnUpdateCurrent,
