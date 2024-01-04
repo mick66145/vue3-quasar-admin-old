@@ -63,6 +63,9 @@ export default function useVxeServerDataTable ({
     setCallback()
     dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
   }
+  const onRefresh = () => {
+    setCallback()
+  }
   const setCallback = async () => {
     if (callback && callback instanceof Function) {
       const callObj = await callback()
@@ -121,5 +124,6 @@ export default function useVxeServerDataTable ({
     onChangeFilter,
     OnChangeSort,
     onReset,
+    onRefresh,
   }
 }
