@@ -14,6 +14,8 @@
       :tick-strategy="tickStrategy"
       :filter="search"
       :filter-method="filterFn"
+      no-results-label="無此結果"
+      no-nodes-label="暫無資料"
     />
   </div>
 </template>
