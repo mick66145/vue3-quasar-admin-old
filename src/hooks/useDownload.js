@@ -4,8 +4,9 @@ import useCRUD from '@/hooks/useCRUD'
 export default function useDownload ({
   id = null,
   payload = null,
-  filename = null,
   readFetch,
+  filename = null,
+  url = null,
 }) {
   const download = async () => {
     let res, error
@@ -22,6 +23,19 @@ export default function useDownload ({
       FileSaver.saveAs(data, downloadFileName)
     }
     return [res, error]
+  }
+
+  const downloadByUrl = async () => {
+    const res = await fetch(url)
+    if (res) {
+      const { headers } = res
+      const data = await res.blob()
+      const contentDisposition = headers.get('content-disposition')
+      const fileName = getFileName(contentDisposition)
+      const fileType = fileName.substring(fileName.lastIndexOf('.') + 1)
+      const downloadFileName = filename ? `${filename}.${fileType}` : fileName
+      FileSaver.saveAs(data, downloadFileName)
+    }
   }
 
   const getFileName = (disposition) => {
@@ -51,5 +65,6 @@ export default function useDownload ({
 
   return {
     download,
+    downloadByUrl,
   }
 }
