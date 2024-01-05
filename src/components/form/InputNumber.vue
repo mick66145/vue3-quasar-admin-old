@@ -88,7 +88,7 @@ export default defineComponent({
     })
 
     const clearFn = (val) => {
-      emit('update:modelValue', 0)
+      emit('update:modelValue', required.value ? 0 : null)
     }
 
     return {
