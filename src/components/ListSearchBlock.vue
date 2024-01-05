@@ -6,7 +6,7 @@
         v-model="sourceData.keyword"
         class="full-width"
         dense
-        @update:modelValue="onChangeFilter"
+        @change="onChangeFilter"
       />
     </div>
     <div v-if="showResetButton" :class="resetButtonCol">
