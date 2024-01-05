@@ -3,10 +3,13 @@
   <q-input
     ref="input"
     v-model="observeValue"
+    :label="inputLabel"
     :clearable="clearable"
     :outlined="outlined"
     :placeholder="placeholder"
     :rules="ruleList"
+    @clear="clearFn"
+    @change="changeFn"
   >
     <template v-if="$slots.default" #default>
       <slot name="default" />
@@ -51,18 +54,20 @@ import { vuelidate } from '@/plugins/vuelidate'
 
 export default defineComponent({
   props: {
+    label: { type: String },
     modelValue: { type: [String, Number, Object, null] },
     rules: { type: Array, default () { return [] } },
     clearable: { type: Boolean, default: true },
     outlined: { type: Boolean, default: true },
     placeholder: { type: String, default: '請輸入' },
     maxLength: { type: Number, default: 255 },
+    useLabel: { type: Boolean, default: true },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
     // data
     const input = ref()
-    const { rules, maxLength } = toRefs(props)
+    const { label, rules, useLabel, maxLength } = toRefs(props)
     const observeValue = useVModel(props, 'modelValue', emit)
 
     // computed
@@ -71,15 +76,28 @@ export default defineComponent({
       rule.push(vuelidate.maxLength(maxLength.value, `長度不可超過${maxLength.value}字`))
       return rule.concat(rules.value)
     })
+    const inputLabel = computed(() => {
+      return useLabel.value ? label.value : undefined
+    })
 
+    // methods
     const focus = () => {
       input.value.focus()
+    }
+    const clearFn = (val) => {
+      emit('change')
+    }
+    const changeFn = (val) => {
+      emit('change', val)
     }
     return {
       input,
       observeValue,
       ruleList,
+      inputLabel,
       focus,
+      clearFn,
+      changeFn,
     }
   },
 })
