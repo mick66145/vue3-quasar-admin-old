@@ -21,12 +21,11 @@
   >
     <template #day="{ scope: { timestamp } }">
       <template v-for="event in eventsMap[timestamp.date]" :key="event.id">
-        <div
-          :class="badgeClasses(event, 'day')"
-          class="my-event"
-        >
+        <div :class="badgeClasses(event, 'day')" class="my-event">
           <abbr :title="event.title" class="tooltip">
-            <span class="title q-calendar__ellipsis">{{ event.title + " - " + event.start_time+' ~ '+event.end_time }}</span>
+            <span class="title q-calendar__ellipsis">
+              {{ event.days > 1 ?`${event.title}` : `${event.title} - ${event.start_time}` }}
+            </span>
           </abbr>
         </div>
       </template>
@@ -35,7 +34,7 @@
 </template>
 
 <script>
-import { QCalendarMonth } from '@quasar/quasar-ui-qcalendar/src/index.js'
+import { QCalendarMonth, addToDate, parseTimestamp } from '@quasar/quasar-ui-qcalendar/src/index.js'
 import { defineComponent, ref, computed, toRefs } from 'vue'
 import { useVModel } from '@vueuse/core'
 export default defineComponent({
@@ -44,7 +43,12 @@ export default defineComponent({
   },
   props: {
     modelValue: { type: [String, Number] },
-    event: { type: Array, default () { return [] } },
+    event: {
+      type: Array,
+      default () {
+        return []
+      },
+    },
   },
   setup (props, { emit }) {
     // data
@@ -58,6 +62,17 @@ export default defineComponent({
       if (event.value.length > 0) {
         event.value.forEach((eventItem) => {
           (map[eventItem.date] = map[eventItem.date] || []).push(eventItem)
+          if (eventItem.days !== undefined) {
+            let timestamp = parseTimestamp(eventItem.date)
+            let days = eventItem.days
+            do {
+              timestamp = addToDate(timestamp, { day: 1 })
+              if (!map[timestamp.date]) {
+                map[timestamp.date] = []
+              }
+              map[timestamp.date].push(eventItem)
+            } while (--days > 1)
+          }
         })
       }
       return map
