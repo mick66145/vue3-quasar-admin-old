@@ -35,6 +35,7 @@ import InputTel from './form/InputTel.vue'
 import InputTwPassport from './form/InputTwPassport.vue'
 import InputTwUniformNumber from './form/InputTwUniformNumber.vue'
 import InputFileUpload from './form/InputFileUpload.vue'
+import InputVideoUpload from './form/InputVideoUpload.vue'
 import InputCreditCard from './form/InputCreditCard.vue'
 import InputCreditCardExpiredDate from './form/InputCreditCardExpiredDate.vue'
 import InputTrueFalseSelect from './form/InputTrueFalseSelect.vue'
@@ -130,6 +131,7 @@ export default {
     app.component('InputTwPassport', InputTwPassport)
     app.component('InputTwUniformNumber', InputTwUniformNumber)
     app.component('InputFileUpload', InputFileUpload)
+    app.component('InputVideoUpload', InputVideoUpload)
     app.component('InputCreditCard', InputCreditCard)
     app.component('InputCreditCardExpiredDate', InputCreditCardExpiredDate)
     app.component('InputTrueFalseSelect', InputTrueFalseSelect)
