@@ -87,7 +87,7 @@ import { defineComponent, ref, computed } from 'vue-demi'
 import { selectMatchItem } from '@/utils/filter'
 export default defineComponent({
   props: {
-    modelValue: { type: [String, Number, null, Object] },
+    modelValue: { type: [String, Number, null, Object, Boolean] },
     options: { type: Array, default () { return [] } },
     clearable: { type: Boolean, default: true },
     outlined: { type: Boolean, default: true },
@@ -126,10 +126,10 @@ export default defineComponent({
       observeValue.value = null
     }
     const optionValueFn = (item) => {
-      return item[props.optionValue] ? item[props.optionValue] : item
+      return (item[props.optionValue] !== undefined || null) ? item[props.optionValue] : item
     }
     const optionLabelFn = (item) => {
-      return item[props.optionLabel] ? item[props.optionLabel] : item
+      return (item[props.optionLabel] !== undefined || null) ? item[props.optionLabel] : item
     }
     return {
       observeValue,

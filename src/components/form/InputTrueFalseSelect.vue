@@ -14,7 +14,7 @@ import { defineComponent, ref } from 'vue-demi'
 
 export default defineComponent({
   props: {
-    modelValue: { type: [String, Object] },
+    modelValue: { type: [String, Object, Boolean] },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
