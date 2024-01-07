@@ -10,14 +10,14 @@
     @rejected="onRejected"
   >
     <template #upload-bottom>
-      請上傳 JPG 或 PNG 格式圖片，檔案大小為 {{ maxFileSize/1024000 }}MB。
+      請上傳 JPG 或 PNG 格式圖片，檔案大小為 {{ megabyte }}{{ unit }}。
     </template>
   </base-uploader>
 </template>
 
 <script>
 import BaseUploader from './BaseUploader.vue'
-import { defineComponent, ref } from 'vue-demi'
+import { defineComponent, ref, computed } from 'vue-demi'
 import { readFileAsDataUrl } from '@/utils/blob'
 import useNotify from '@/hooks/useNotify'
 export default defineComponent({
@@ -36,6 +36,14 @@ export default defineComponent({
 
     // data
     const uploader = ref()
+
+    // computed
+    const megabyte = computed(() => {
+      return props.maxFileSize >= 1048576000 ? props.maxFileSize / 1048576000 : props.maxFileSize / 1024000
+    })
+    const unit = computed(() => {
+      return props.maxFileSize >= 1048576000 ? 'GB' : 'MB'
+    })
 
     const removeQueuedFiles = () => {
       uploader.value.removeQueuedFiles()
@@ -65,6 +73,8 @@ export default defineComponent({
 
     return {
       uploader,
+      megabyte,
+      unit,
       removeQueuedFiles,
       onFile,
       onRejected,

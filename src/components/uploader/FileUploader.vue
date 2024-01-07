@@ -8,14 +8,14 @@
     @rejected="onRejected"
   >
     <template #upload-bottom>
-      檔案大小為 {{ maxFileSize/1024000 }}MB。
+      檔案大小為 {{ megabyte }}{{ unit }}。
     </template>
   </base-uploader>
 </template>
 
 <script>
 import BaseUploader from './BaseUploader.vue'
-import { defineComponent, ref } from 'vue-demi'
+import { defineComponent, ref, computed } from 'vue-demi'
 import useNotify from '@/hooks/useNotify'
 export default defineComponent({
   components: {
@@ -23,7 +23,7 @@ export default defineComponent({
   },
   props: {
     accept: { type: String },
-    maxFileSize: { type: Number, default: 2048000 },
+    maxFileSize: { type: Number, default: 10240000 },
     disable: { type: Boolean, default: false },
   },
   emits: ['onFile'],
@@ -33,6 +33,14 @@ export default defineComponent({
     // data
     const uploader = ref()
     const reader = new FileReader()
+
+    // computed
+    const megabyte = computed(() => {
+      return props.maxFileSize >= 1048576000 ? props.maxFileSize / 1048576000 : props.maxFileSize / 1024000
+    })
+    const unit = computed(() => {
+      return props.maxFileSize >= 1048576000 ? 'GB' : 'MB'
+    })
 
     const removeQueuedFiles = () => {
       uploader.value.removeQueuedFiles()
@@ -57,6 +65,8 @@ export default defineComponent({
 
     return {
       uploader,
+      megabyte,
+      unit,
       removeQueuedFiles,
       onFile,
       onRejected,
