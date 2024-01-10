@@ -1,6 +1,23 @@
 <template>
   <div>
     <div v-show="!isReadingList">
+      <div v-if="showAllSelectBlock" class="flex items-center q-mb-sm">
+        <!-- <q-checkbox
+          v-model="allSelectd"
+          :label="`選取(${allCheckboxRecordsCount})`"
+          @update:modelValue="onSelect"
+        /> -->
+        已選取 : {{ allCheckboxRecordsCount }}
+        <base-flat-button
+          label="全選"
+          @click="onSelectAll"
+        />
+        <base-flat-button
+          color="red"
+          label="清除"
+          @click="clearAllCheckboxRow"
+        />
+      </div>
       <vxe-table
         ref="dataTable"
         :key="refreshKey"
@@ -35,7 +52,7 @@
         @update:current="onUpdateCurrent"
       />
     </div>
-    <skeleton-table v-if="isReadingList  && showSkeleton" />
+    <skeleton-table v-if="isReadingList && showSkeleton" />
   </div>
 </template>
 
@@ -56,6 +73,7 @@ export default defineComponent({
     showPagination: { type: Boolean, default: true },
     showFooter: { type: Boolean, default: false },
     showSkeleton: { type: Boolean, default: true },
+    showAllSelectBlock: { type: Boolean, default: false },
     footerSpanMethod: { type: Function },
     footerMethod: { type: Function },
     checkboxConfig: { type: Object }, // { labelField:'', checkMethod:({row}), visibleMethod:({row})}
@@ -67,12 +85,13 @@ export default defineComponent({
     cellStyle: { type: [Object, Function] },
     footerCellStyle: { type: [Object, Function] },
   },
-  emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current'],
+  emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current', 'select-all', 'update:all-checkbox-records'],
   setup (props, { emit }) {
     // data
     const storeApp = useApp()
     const dataTable = ref()
     const refreshKey = ref(0)
+    const allSelectd = ref(false)
 
     // computed
     const isReadingList = computed(() => {
@@ -98,6 +117,10 @@ export default defineComponent({
       })
       return config
     })
+    const allCheckboxRecordsCount = computed(() => {
+      dataTable.value && onUpdateAllCheckboxRecords()
+      return dataTable.value ? getAllCheckboxRecordsCount() : 0
+    })
 
     // methods
     const sort = (item) => {
@@ -112,6 +135,9 @@ export default defineComponent({
     const getCheckboxRecords = () => {
       return dataTable.value.getCheckboxRecords()
     }
+    const getCheckboxRecordsCount = () => {
+      return getCheckboxRecords().length
+    }
     const getCheckboxReserveRecords = () => {
       return dataTable.value.getCheckboxReserveRecords()
     }
@@ -119,6 +145,9 @@ export default defineComponent({
       return dataTable.value
         .getCheckboxReserveRecords()
         .concat(dataTable.value.getCheckboxRecords())
+    }
+    const getAllCheckboxRecordsCount = () => {
+      return getAllCheckboxRecords().length
     }
     const setCheckboxRow = (rows, checked) => {
       return dataTable.value.setCheckboxRow(rows, checked)
@@ -144,6 +173,9 @@ export default defineComponent({
     }
     const getFullData = () => {
       return getTableData().fullData
+    }
+    const getFullDataCount = () => {
+      return getTableData().fullData.length
     }
     const insertAt = async (obj, row) => {
       await dataTable.value.insertAt(obj, row)
@@ -183,12 +215,40 @@ export default defineComponent({
     const onUpdateCurrent = (current) => {
       emit('update:current', current)
     }
+    const onUpdateAllCheckboxRecords = () => {
+      const value = {
+        data: getAllCheckboxRecords(),
+        count: getAllCheckboxRecordsCount(),
+      }
+      emit('update:all-checkbox-records', value)
+    }
+    const onSelectAll = () => {
+      emit('select-all')
+    }
+
+    // 客製化選取checkbbox相關
+    const onSelect = (value, evt) => {
+      value ? setAllCheckboxRow(true) : clearCheckboxRow()
+      setAllSelectdValue()
+    }
+    const setAllSelectdValue = () => {
+      const checkboxRecordsLength = getCheckboxRecordsCount()
+      const fullDataLength = getFullDataCount()
+      allSelectd.value = checkboxRecordsLength === 0 ? false : (checkboxRecordsLength === fullDataLength ? true : null)
+    }
+
+    // watch
+    // watch(() => props.data, (newValue) => {
+    //   setAllSelectdValue()
+    // })
 
     return {
       dataTable,
       refreshKey,
+      allSelectd,
       observeCheckboxConfig,
       observeRowConfig,
+      allCheckboxRecordsCount,
       isReadingList,
       sort,
       refresh,
@@ -204,6 +264,7 @@ export default defineComponent({
       clearAllCheckboxRow,
       getTableData,
       getFullData,
+      getAllCheckboxRecordsCount,
       insertAt,
       insertAtLast,
       remove,
@@ -212,6 +273,7 @@ export default defineComponent({
       onCheckboxAll,
       onCheckboxChange,
       onUpdateCurrent,
+      onSelectAll,
     }
   },
 })
