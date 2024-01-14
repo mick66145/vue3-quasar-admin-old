@@ -9,6 +9,7 @@
     :icon="icon"
     :loading="isLoading"
     :size="size"
+    :disable="observeDisable"
   >
     <slot />
     <template #loading>
@@ -30,17 +31,23 @@ export default defineComponent({
     rounded: { type: Boolean, default: false },
     size: { type: String, default: 'md' },
     useLoading: { type: Boolean, default: true },
+    disable: { type: Boolean, default: false },
   },
   setup (props) {
     // data
     const storeApp = useApp()
 
     const isLoading = computed(() => {
-      return props.useLoading && (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete)
+      return props.useLoading && (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit)
+    })
+
+    const observeDisable = computed(() => {
+      return props.disable || (storeApp.isCreate || storeApp.isUpdate || storeApp.isDelete || storeApp.isSubmit)
     })
 
     return {
       isLoading,
+      observeDisable,
     }
   },
 })

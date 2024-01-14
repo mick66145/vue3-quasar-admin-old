@@ -34,15 +34,5 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
-.slide-fade-enter-active,
-.slide-fade-leave-active {
-  transition: all 0.5s  ease-out;
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(20px);
-  opacity: 0;
-}
+<style lang="postcss" scoped>
 </style>

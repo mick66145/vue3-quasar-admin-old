@@ -16,6 +16,7 @@ export const useApp = defineStore({
     isCreate: false,
     isUpdate: false,
     isDelete: false,
+    isSubmit: false,
   }),
   actions: {
     setLanguage (language) {

@@ -1,5 +1,10 @@
 <template>
-  <q-form ref="form" @submit="onSubmit" @reset="onReset">
+  <q-form
+    ref="form"
+    @submit="onSubmit"
+    @reset="onReset"
+    @validation-success="onValidationSuccess"
+  >
     <template v-if="$slots.default" #default>
       <slot name="default" />
     </template>
@@ -12,7 +17,7 @@ import useNotify from '@/hooks/useNotify'
 
 export default defineComponent({
   props: { },
-  emits: ['submit', 'reset'],
+  emits: ['submit', 'reset', 'validation-success'],
   setup (props, { emit }) {
     // data
     const form = ref()
@@ -36,11 +41,14 @@ export default defineComponent({
     const getValidationComponents = () => {
       return form.value.getValidationComponents()
     }
-    const onSubmit = () => {
-      emit('submit')
+    const onSubmit = (evt) => {
+      emit('submit', evt)
     }
     const onReset = () => {
       emit('reset')
+    }
+    const onValidationSuccess = () => {
+      emit('validation-success')
     }
 
     // use
@@ -54,6 +62,7 @@ export default defineComponent({
       getValidationComponents,
       onSubmit,
       onReset,
+      onValidationSuccess,
     }
   },
 })

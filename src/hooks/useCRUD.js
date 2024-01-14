@@ -52,6 +52,7 @@ export default function useCRUD ({
     if (reqCreate.error.value) {
       storeApp.isLoading = false
       storeApp.isCreate = false
+      storeApp.isSubmit = false
       const message = reqCreate.error.value.response.data.error?.message || reqCreate.error.value.response.data.message || JSON.parse(reqCreate.error.value.request.responseText)?.error?.message || reqCreate.error.value
       isShowCreateFail && notifyAPIError({ message })
       return [null, reqCreate.error.value]
@@ -59,6 +60,7 @@ export default function useCRUD ({
       isShowCreateSuccess && notify({ message: createSuccess, type: 'positive' })
       storeApp.isLoading = false
       storeApp.isCreate = false
+      storeApp.isSubmit = false
       return [res || true, null]
     }
   }
@@ -89,6 +91,7 @@ export default function useCRUD ({
     if (reqUpdate.error.value) {
       storeApp.isLoading = false
       storeApp.isUpdate = false
+      storeApp.isSubmit = false
       const message = reqUpdate.error.value.response.data.error?.message || reqUpdate.error.value.response.data.message || JSON.parse(reqUpdate.error.value.request.responseText)?.error?.message || reqUpdate.error.value
       isShowUpdateFail && notifyAPIError({ message })
       return [null, reqUpdate.error.value]
@@ -96,6 +99,7 @@ export default function useCRUD ({
       isShowUpdateSuccess && notify({ message: updateSuccess, type: 'positive' })
       storeApp.isLoading = false
       storeApp.isUpdate = false
+      storeApp.isSubmit = false
       return [res || true, null]
     }
   }

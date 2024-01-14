@@ -4,7 +4,8 @@ import CardHeader from './card/CardHeader.vue'
 import CardBody from './card/CardBody.vue'
 import CardSocial from './card/CardSocial.vue'
 import CardCategory from './card/CardCategory.vue'
-import BaseForm from './form/BaseForm.vue'
+import BaseForm from './form/form/BaseForm.vue'
+import SubmitForm from './form/form/SubmitForm.vue'
 import InputText from './form/InputText.vue'
 import InputSelect from './form/InputSelect.vue'
 import InputMultipleSelect from './form/InputMultipleSelect.vue'
@@ -101,6 +102,7 @@ export default {
     app.component('CardSocial', CardSocial)
     app.component('CardCategory', CardCategory)
     app.component('BaseForm', BaseForm)
+    app.component('SubmitForm', SubmitForm)
     app.component('InputText', InputText)
     app.component('InputSelect', InputSelect)
     app.component('InputMultipleSelect', InputMultipleSelect)
