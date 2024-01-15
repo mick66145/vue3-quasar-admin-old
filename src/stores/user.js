@@ -115,6 +115,15 @@ export const useUser = defineStore({
       this.clear()
     },
 
+    refreshToken (payload) {
+      return this.authResource.refreshToken(payload)
+        .then(res => {
+          const { data } = res
+          this.setToken(data.token)
+          return res
+        })
+    },
+
     setToken (token) {
       setToken(token)
       this.token = token

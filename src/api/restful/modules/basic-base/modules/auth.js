@@ -44,6 +44,14 @@ class AuthResource extends Resource {
       method: 'post',
     })
   }
+
+  async refreshToken (params) {
+    return await request({
+      url: `/${this.uri}/refresh_token`,
+      method: 'post',
+      data: params,
+    }).then(res => res.data)
+  }
 }
 
 export default AuthResource
