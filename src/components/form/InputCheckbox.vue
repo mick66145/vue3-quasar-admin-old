@@ -7,6 +7,7 @@
     <template #control>
       <q-checkbox
         v-model="observeValue"
+        :class="observeClass"
         :label="label"
         :val="val"
         :checked-icon="checkedIcon"
@@ -24,7 +25,7 @@
 
 <script>
 import { useVModel } from '@vueuse/core'
-import { defineComponent } from 'vue-demi'
+import { defineComponent, computed } from 'vue-demi'
 export default defineComponent({
   props: {
     modelValue: { type: [Boolean, Array], default: false },
@@ -35,14 +36,22 @@ export default defineComponent({
     uncheckedIcon: { type: String },
     leftLabel: { type: Boolean },
     dense: { type: Boolean, default: true },
+    labelColor: { type: String },
   },
   emits: [
     'update:modelValue',
   ],
   setup (props, { emit }) {
+    // data
     const observeValue = useVModel(props, 'modelValue', emit)
+    const observeClass = computed(() => {
+      const classObj = {}
+      props.labelColor && (classObj[`text-${props.labelColor}`] = true)
+      return classObj
+    })
     return {
       observeValue,
+      observeClass,
       emit,
     }
   },
