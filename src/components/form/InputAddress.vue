@@ -1,6 +1,6 @@
 <template>
   <label>{{ label }}<span v-if="required" class="text-xl text-negative ml-1">*</span></label>
-  <div class="row q-col-gutter-sm">
+  <div class="flex-center row q-col-gutter-sm">
     <div v-if="showCity" :class="cityCol">
       <input-city-select
         ref="inputCity"
