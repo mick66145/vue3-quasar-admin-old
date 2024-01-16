@@ -15,6 +15,7 @@
     :option-label="optionLabelFn"
     :option-value="optionValueFn"
     :dense="dense"
+    :lazy-rules="lazyRules"
     @filter="filterFn"
     @clear="clearFn"
   >
@@ -102,6 +103,7 @@ export default defineComponent({
     optionLabel: { type: String, default: 'name' },
     optionValue: { type: String, default: 'id' },
     dense: { type: Boolean, default: true },
+    lazyRules: { type: Boolean, default: true },
   },
   emits: [
     'update:modelValue',

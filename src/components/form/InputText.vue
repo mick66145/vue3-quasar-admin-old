@@ -9,6 +9,7 @@
     :placeholder="placeholder"
     :rules="ruleList"
     :dense="dense"
+    :lazy-rules="lazyRules"
     @clear="clearFn"
     @change="changeFn"
   >
@@ -64,6 +65,7 @@ export default defineComponent({
     maxLength: { type: Number, default: 255 },
     useLabel: { type: Boolean, default: true },
     dense: { type: Boolean, default: true },
+    lazyRules: { type: Boolean, default: true },
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {
