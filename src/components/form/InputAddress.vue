@@ -31,6 +31,7 @@
         placeholder="請輸入地址"
       />
     </div>
+    <slot name="default" />
   </div>
 </template>
 
