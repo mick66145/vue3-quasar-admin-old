@@ -12,7 +12,7 @@
         :checked-icon="checkedIcon"
         :unchecked-icon="uncheckedIcon"
         :left-label="leftLabel"
-        dense
+        :dense="dense"
       >
         <template v-if="$slots.default" #default>
           <slot name="default" />
@@ -34,6 +34,7 @@ export default defineComponent({
     checkedIcon: { type: String },
     uncheckedIcon: { type: String },
     leftLabel: { type: Boolean },
+    dense: { type: Boolean, default: true },
   },
   emits: [
     'update:modelValue',

@@ -13,6 +13,7 @@
     :transition-hide="transitionHide"
     :option-label="optionLabelFn"
     :option-value="optionValueFn"
+    :dense="dense"
     @filter="filterFn"
     @clear="clearFn"
   >
@@ -98,6 +99,7 @@ export default defineComponent({
     transitionHide: { type: String, default: 'scale' },
     optionLabel: { type: String, default: 'name' },
     optionValue: { type: String, default: 'id' },
+    dense: { type: Boolean, default: true },
   },
   emits: [
     'update:modelValue',

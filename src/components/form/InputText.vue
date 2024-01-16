@@ -8,6 +8,7 @@
     :outlined="outlined"
     :placeholder="placeholder"
     :rules="ruleList"
+    :dense="dense"
     @clear="clearFn"
     @change="changeFn"
   >
@@ -62,6 +63,7 @@ export default defineComponent({
     placeholder: { type: String, default: '請輸入' },
     maxLength: { type: Number, default: 255 },
     useLabel: { type: Boolean, default: true },
+    dense: { type: Boolean, default: true },
   },
   emits: ['update:modelValue', 'change'],
   setup (props, { emit }) {

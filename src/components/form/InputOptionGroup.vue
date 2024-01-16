@@ -8,6 +8,7 @@
       :inline="inline"
       :type="type"
       :disable="disable"
+      :dense="dense"
     />
   </div>
 </template>
@@ -24,6 +25,7 @@ export default defineComponent({
     color: { type: String, default: 'primary' },
     type: { type: String },
     disable: { type: Boolean, default: false },
+    dense: { type: Boolean, default: true },
   },
   emits: [
     'update:modelValue',
