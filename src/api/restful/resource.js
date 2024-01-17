@@ -57,6 +57,19 @@ class Resource {
       method: 'delete',
     }).then(res => res.data)
   }
+
+  async selectAll (query) {
+    return await request({
+      url: `/${this.uri}/action/select_all`,
+      method: 'get',
+      params: query,
+    }).then(res => res.data)
+      .then(res => {
+        const { list } = res.data
+        return { list: list }
+      },
+      )
+  }
 }
 
 export { Resource as default }
