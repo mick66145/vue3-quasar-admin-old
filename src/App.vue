@@ -8,11 +8,17 @@ import { defineComponent, onMounted, onBeforeUnmount } from 'vue-demi'
 import { RouterView } from 'vue-router'
 import useWatermark from '@/hooks/useWatermark'
 import useScreen from '@/hooks/useScreen'
+import useLogout from '@/hooks/useLogout'
 
 export default defineComponent({
   setup () {
     // mounted
-    onMounted(() => { show() })
+    onMounted(() => {
+      show()
+      window.addEventListener('beforeunload', function (event) {
+        resetStore()
+      })
+    })
 
     onBeforeUnmount(() => { hide() })
 
@@ -32,6 +38,7 @@ export default defineComponent({
       watermarkWidth: '150px',
       watermarkHeight: '50px',
     })
+    const { resetStore } = useLogout()
 
     return {
       RouterView,
