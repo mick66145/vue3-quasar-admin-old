@@ -11,7 +11,7 @@
               信件資訊
             </card-header>
             <card-body class="q-pt-none">
-              <div class="flex-center row q-col-gutter-x-md q-col-gutter-y-xs">
+              <div class="row q-col-gutter-x-md q-col-gutter-y-xs">
                 <div class="col-12 col-md-6">
                   <input-text
                     v-model="formData.subject"
@@ -27,6 +27,15 @@
                     class="full-width"
                     label="寄件者名稱"
                     placeholder="請輸入寄件者名稱"
+                  />
+                </div>
+                <div class="col-12 col-md-6">
+                  <input-email
+                    v-model="formData.tomail"
+                    class="full-width"
+                    label="收件者信箱"
+                    placeholder="請輸入收件者信箱"
+                    :rules="[$rules.required('收件者信箱必填')]"
                   />
                 </div>
                 <div class="col-12 col-md-6">
@@ -46,7 +55,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-6">
-                  <input-email
+                  <input-text
                     v-model="formData.cc"
                     class="full-width"
                     label="副本信箱"
@@ -54,7 +63,7 @@
                   />
                 </div>
                 <div class="col-12 col-md-6">
-                  <input-email
+                  <input-text
                     v-model="formData.bcc"
                     class="full-width"
                     label="密件副本信箱"

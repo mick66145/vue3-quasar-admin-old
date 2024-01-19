@@ -7,6 +7,7 @@ class Mailinfo extends Base {
   name = "";
   subject = "";
   fromname = "";
+  tomail = "";
   repeatname = "";
   repeatmail = "";
   cc = "";
@@ -21,6 +22,7 @@ class Mailinfo extends Base {
       this.name = obj?.name
       this.subject = obj?.subject
       this.fromname = obj?.fromname
+      this.tomail = obj?.tomail
       this.repeatname = obj?.repeatname
       this.repeatmail = obj?.repeatmail
       this.cc = obj?.cc
