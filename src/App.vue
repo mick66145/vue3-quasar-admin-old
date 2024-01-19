@@ -15,9 +15,9 @@ export default defineComponent({
     // mounted
     onMounted(() => {
       show()
-      window.addEventListener('beforeunload', function (event) {
+      if (performance.navigation.type !== 1) {
         resetStore()
-      })
+      }
     })
 
     onBeforeUnmount(() => { hide() })
