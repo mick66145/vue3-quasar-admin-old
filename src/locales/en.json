@@ -91,5 +91,8 @@
   },
   "operate-log": {
     "title": "OperateLog"
+  },
+  "browser-history-report": {
+    "title": "BrowserHistoryReport"
   }
 }

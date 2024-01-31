@@ -11,6 +11,7 @@ import roleRouter from './modules/role'
 import mailinfoRouter from './modules/mailinfo'
 import systemLogRouter from './modules/system-log'
 import mailLogRouter from './modules/mail-log'
+import browserHistoryRouter from './modules/browser-history'
 import basicSettingRouter from './modules/basic-setting'
 
 export const constantRoutes = [
@@ -109,7 +110,7 @@ export const asyncRoutes = [
   basicSettingRouter,
   {
     path: '/',
-    group: ['/system-log', '/mail-log'],
+    group: ['/system-log', '/mail-log', '/browser-history'],
     groupName: 'first',
     meta: {
       title: 'meun.system-log',
@@ -119,6 +120,7 @@ export const asyncRoutes = [
     children: [
       systemLogRouter,
       mailLogRouter,
+      browserHistoryRouter,
     ],
   },
 ]

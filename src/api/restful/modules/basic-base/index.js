@@ -12,6 +12,7 @@ import platformAttribute from './modules/platform-attribute'
 import mailLog from './modules/mail-log'
 import me from './modules/me'
 import mailinfo from './modules/mailinfo'
+import browserHistory from './modules/browser-history'
 export const exportBaseApiModules = () => {
   const modules = {}
   modules.AreaResource = area
@@ -28,5 +29,6 @@ export const exportBaseApiModules = () => {
   modules.MailLogResource = mailLog
   modules.MeResource = me
   modules.MailinfoResource = mailinfo
+  modules.BrowserHistoryResource = browserHistory
   return modules
 }

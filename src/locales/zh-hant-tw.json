@@ -91,5 +91,8 @@
   },
   "operate-log": {
     "title": "操作紀錄"
+  },
+  "browser-history-report": {
+    "title": "網站訪問量"
   }
 }
