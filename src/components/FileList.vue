@@ -33,6 +33,9 @@
     <file-uploader
       ref="imageUpload"
       class="full-width"
+      :accept="accept"
+      :max-file-size="maxFileSize"
+      :disable="disable"
       @onFile="onFile"
     />
   </div>
@@ -47,6 +50,9 @@ export default defineComponent({
   },
   props: {
     modelValue: { type: Array, default () { return [] } },
+    accept: { type: String },
+    maxFileSize: { type: Number, default: 10240000 },
+    disable: { type: Boolean, default: false },
   },
   emits: ['update:modelValue'],
   setup (props, { emit }) {
