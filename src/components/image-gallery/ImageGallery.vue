@@ -1,45 +1,24 @@
 <template>
   <div class="row q-col-gutter-x-md q-col-gutter-y-md">
-    <div
-      v-for="(fileItem, fileIndex) in observeValue"
-      :key="fileIndex"
-      class="col-md-3 col-sm-4 col-xs-12"
-    >
-      <div class="input-image">
-        <div>
-          <base-image
-            v-if="preview(fileItem)"
-            class="object-cover h-202px w-full transform scale-98"
-            :src="preview(fileItem)"
-          />
-          <span class="input-image-upload-actions">
-            <div class="flex flex-center h-full">
-              <div class="flex-center w-full row">
-                <q-icon
-                  class="q-mr-md"
-                  name="fas fa-light fa-magnifying-glass-plus"
-                  size="1.75rem"
-                  @click="onPreview(fileIndex)"
-                />
-                <q-icon
-                  v-if="showEdit"
-                  class="q-mr-md"
-                  name="edit"
-                  size="1.75rem"
-                  @click="onEdit(fileItem)"
-                />
-                <q-icon
-                  v-if="showDelete"
-                  name="fas fa-solid fa-trash-can"
-                  size="1.75rem"
-                  @click="onDelete(fileIndex)"
-                />
-              </div>
-            </div>
-          </span>
-        </div>
+    <DndProvider :backend="HTML5Backend">
+      <div
+        v-for="(fileItem, fileIndex) in observeValue"
+        :key="fileIndex"
+        class="col-md-3 col-sm-4 col-xs-12"
+      >
+        <image-item
+          v-if="preview(fileItem)"
+          :img-src="preview(fileItem)"
+          :index="fileIndex"
+          :show-edit="showEdit"
+          :show-delete="showDelete"
+          @preview="onPreview"
+          @edit="onEdit"
+          @delete="onDelete"
+          @move="onMove"
+        />
       </div>
-    </div>
+    </DndProvider>
 
     <div class="col-md-3 col-sm-4 col-xs-12">
       <image-multiple-uploader
@@ -56,14 +35,18 @@
 </template>
 
 <script>
+import ImageItem from './components/ImageItem.vue'
 import ImageEditDialog from './components/ImageEditDialog.vue'
 import { defineComponent, computed, ref } from 'vue-demi'
+import { DndProvider } from 'vue3-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import useImgStorage from '@/hooks/useImgStorage'
-import useMessageDialog from '@/hooks/useMessageDialog'
 
 export default defineComponent({
   components: {
+    ImageItem,
     ImageEditDialog,
+    DndProvider,
   },
   props: {
     modelValue: { type: Array, default () { return [] } },
@@ -125,17 +108,19 @@ export default defineComponent({
     const onPreview = (index) => {
       previewDialog.value.showDialog({ slide: index })
     }
-    const onEdit = (item) => {
-      editDialog.value.showDialog({ data: item })
+    const onEdit = (index) => {
+      editDialog.value.showDialog({ data: observeValue.value[index] })
     }
     const onDelete = async (index) => {
-      const res = await messageDelete({ title: '刪除', message: '確認刪除？' })
-      if (!res) return
       observeValue.value.splice(index, 1)
+    }
+    const onMove = ({ dragIndex, hoverIndex }) => {
+      const item = observeValue.value[dragIndex]
+      observeValue.value.splice(dragIndex, 1)
+      observeValue.value.splice(hoverIndex, 0, item)
     }
 
     // use
-    const { messageDelete } = useMessageDialog()
     const { getImageSrc } = useImgStorage()
 
     return {
@@ -149,34 +134,11 @@ export default defineComponent({
       onPreview,
       onEdit,
       onDelete,
+      onMove,
+      HTML5Backend,
     }
   },
 })
 </script>
 
-<style lang="scss" scoped>
-.input-image {
-  @apply h-full w-full;
-  @apply relative;
-  @apply border border-solid border-gray-500;
-
-  .input-image-upload-actions {
-    @apply h-full w-full;
-    @apply top-0 left-0 absolute;
-    @apply text-white;
-    @apply opacity-0;
-
-    &:hover {
-      @apply opacity-100;
-      @apply bg-dark-500/50;
-    }
-
-    &::after {
-      display: inline-block;
-      content: "";
-      height: 100%;
-      vertical-align: middle;
-    }
-  }
-}
-</style>
+<style lang="postcss" scoped></style>
