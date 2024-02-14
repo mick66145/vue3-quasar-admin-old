@@ -4,36 +4,32 @@
     :style="{ opacity }"
     class="input-image"
   >
-    <div>
+    <div class="h-202px">
       <base-image
-        class="object-cover h-202px w-full transform scale-98"
+        class="object-cover w-full transform scale-98"
         :src="imgSrc"
       />
-      <span class="input-image-upload-actions">
-        <div class="flex flex-center h-full">
-          <div class="flex-center w-full row">
-            <q-icon
-              class="q-mr-md"
-              name="fas fa-light fa-magnifying-glass-plus"
-              size="1.75rem"
-              @click="onPreview(index)"
-            />
-            <q-icon
-              v-if="showEdit"
-              class="q-mr-md"
-              name="edit"
-              size="1.75rem"
-              @click="onEdit(index)"
-            />
-            <q-icon
-              v-if="showDelete"
-              name="fas fa-solid fa-trash-can"
-              size="1.75rem"
-              @click="onDelete(index)"
-            />
-          </div>
-        </div>
-      </span>
+      <div class="flex-center row input-image-upload-actions">
+        <q-icon
+          class="q-mr-md"
+          name="fas fa-light fa-magnifying-glass-plus"
+          size="1.75rem"
+          @click="onPreview(index)"
+        />
+        <q-icon
+          v-if="showEdit"
+          class="q-mr-md"
+          name="edit"
+          size="1.75rem"
+          @click="onEdit(index)"
+        />
+        <q-icon
+          v-if="showDelete"
+          name="fas fa-solid fa-trash-can"
+          size="1.75rem"
+          @click="onDelete(index)"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -123,7 +119,6 @@ export default defineComponent({
 
 <style lang="postcss" scoped>
 .input-image {
-  @apply h-full w-full;
   @apply relative;
   @apply border border-solid border-gray-500;
 
