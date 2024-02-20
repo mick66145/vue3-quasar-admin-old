@@ -10,6 +10,8 @@
     :rules="ruleList"
     :dense="dense"
     :lazy-rules="lazyRules"
+    :maxlength="maxlength"
+    :minlength="minlength"
     @clear="clearFn"
     @change="changeFn"
   >
@@ -62,7 +64,8 @@ export default defineComponent({
     clearable: { type: Boolean, default: true },
     outlined: { type: Boolean, default: true },
     placeholder: { type: String, default: '請輸入' },
-    maxLength: { type: Number, default: 255 },
+    maxlength: { type: Number, default: 255 },
+    minlength: { type: Number },
     useLabel: { type: Boolean, default: true },
     dense: { type: Boolean, default: true },
     lazyRules: { type: Boolean, default: true },
@@ -71,13 +74,14 @@ export default defineComponent({
   setup (props, { emit }) {
     // data
     const input = ref()
-    const { label, rules, useLabel, maxLength } = toRefs(props)
+    const { label, rules, useLabel, maxlength, minlength } = toRefs(props)
     const observeValue = useVModel(props, 'modelValue', emit)
 
     // computed
     const ruleList = computed(() => {
       const rule = []
-      rule.push(vuelidate.maxLength(maxLength.value, `長度不可超過${maxLength.value}字`))
+      rule.push(vuelidate.maxLength(maxlength.value, `長度不可超過${maxlength.value}字`))
+      minlength.value && rule.push(vuelidate.minLength(minlength.value, `長度不可少於${minlength.value}字`))
       return rule.concat(rules.value)
     })
     const inputLabel = computed(() => {

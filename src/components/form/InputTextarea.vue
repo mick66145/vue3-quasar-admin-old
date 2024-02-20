@@ -2,7 +2,7 @@
   <input-text
     v-model="observeValue"
     :placeholder="placeholder"
-    :max-length="65536"
+    :maxlength="65536"
     type="textarea"
   />
 </template>
