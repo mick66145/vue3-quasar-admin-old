@@ -1,7 +1,7 @@
 <template>
   <label>{{ label }}<span v-if="required" class="text-xl text-negative ml-1">*</span></label>
-  <div class="flex-center row q-col-gutter-sm">
-    <div v-if="showCity" :class="cityCol">
+  <div class="row q-col-gutter-sm">
+    <div v-if="showCity" :class="observeCityCol">
       <input-city-select
         ref="inputCity"
         v-model="observeValue.city"
@@ -11,7 +11,7 @@
         @update:modelValue="onChange('city')"
       />
     </div>
-    <div v-if="showArea" :class="areaCol">
+    <div v-if="showArea" :class="observeAreaCol">
       <input-area-select
         ref="inputArea"
         v-model="observeValue.area"
@@ -22,11 +22,19 @@
         @update:modelValue="onChange('area')"
       />
     </div>
+    <div v-if="showPostCode && postCodeType ==='text'" :class="postCodeCol">
+      <input-text
+        v-model="observeValue.post_code"
+        class="full-width"
+        readonly
+        placeholder="郵遞區號"
+      />
+    </div>
     <div v-if="showAddress" :class="addressCol">
       <input-text
         v-model="observeValue.address"
         class="full-width"
-        :prefix="showPostCode ? observeValue.post_code :''"
+        :prefix=" (showPostCode && postCodeType ==='prefix') ? observeValue.post_code :''"
         :rules="[required && $rules.required('地址必填')]"
         placeholder="請輸入地址"
       />
@@ -37,19 +45,21 @@
 
 <script>
 import { useVModel } from '@vueuse/core'
-import { defineComponent, ref } from 'vue-demi'
+import { defineComponent, ref, computed, toRefs } from 'vue-demi'
 export default defineComponent({
   props: {
     modelValue: { type: Object },
     label: { type: String, default: '地址' },
     required: { type: Boolean, default: false },
-    cityCol: { type: String, default: 'col-6' },
-    areaCol: { type: String, default: 'col-6' },
+    cityCol: { type: String },
+    areaCol: { type: String },
+    postCodeCol: { type: String, default: 'col-4' },
     addressCol: { type: String, default: 'col-12' },
     showCity: { type: Boolean, default: true },
     showArea: { type: Boolean, default: true },
     showAddress: { type: Boolean, default: true },
     showPostCode: { type: Boolean, default: false },
+    postCodeType: { type: String, default: 'prefix' },
   },
   emits: [
     'update:modelValue',
@@ -58,7 +68,16 @@ export default defineComponent({
     // data
     const inputCity = ref()
     const inputArea = ref()
+    const { cityCol, areaCol, postCodeType } = toRefs(props)
     const observeValue = useVModel(props, 'modelValue', emit)
+
+    // computed
+    const observeCityCol = computed(() => {
+      return cityCol.value ? cityCol.value : (postCodeType.value === 'prefix' ? 'col-6' : 'col-4')
+    })
+    const observeAreaCol = computed(() => {
+      return areaCol.value ? areaCol.value : (postCodeType.value === 'prefix' ? 'col-6' : 'col-4')
+    })
 
     // methods
     const onChange = async (action) => {
@@ -83,6 +102,8 @@ export default defineComponent({
       inputCity,
       inputArea,
       observeValue,
+      observeCityCol,
+      observeAreaCol,
       onChange,
     }
   },
