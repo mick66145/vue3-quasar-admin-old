@@ -1,6 +1,6 @@
 <template>
   <div class="input-editor">
-    <div id="container" />
+    <div :id="id" />
     <base-dialog
       v-model="showDialog"
       title="上傳圖片："
@@ -56,6 +56,7 @@ export default defineComponent({
     ImageCropper,
   },
   props: {
+    id: { type: String, default: 'container' },
     modelValue: { type: [Object, File, String, Number] },
     nativeType: { type: String, default: 'text' },
     placeholder: { type: String, default: '請輸入' },
@@ -100,7 +101,7 @@ export default defineComponent({
 
     // methods
     const initialize = () => {
-      editor = new Quill('#container', {
+      editor = new Quill(`#${props.id}`, {
         theme: 'snow',
         modules: {
           toolbar: {
