@@ -35,6 +35,7 @@
         v-model="observeValue.address"
         class="full-width"
         :prefix=" (showPostCode && postCodeType ==='prefix') ? observeValue.post_code :''"
+        :hint="hint"
         :rules="[required && $rules.required('地址必填')]"
         placeholder="請輸入地址"
       />
@@ -60,6 +61,7 @@ export default defineComponent({
     showAddress: { type: Boolean, default: true },
     showPostCode: { type: Boolean, default: false },
     postCodeType: { type: String, default: 'prefix' },
+    hint: { type: String },
   },
   emits: [
     'update:modelValue',
