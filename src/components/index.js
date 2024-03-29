@@ -33,6 +33,7 @@ import InputMultipleCompanySelect from './form/InputMultipleCompanySelect.vue'
 import InputUrl from './form/InputUrl.vue'
 import InputGender from './form/InputGender.vue'
 import InputTel from './form/InputTel.vue'
+import InputTelCountry from './form/InputTelCountry.vue'
 import InputTwPassport from './form/InputTwPassport.vue'
 import InputTwUniformNumber from './form/InputTwUniformNumber.vue'
 import InputFileUpload from './form/InputFileUpload.vue'
@@ -130,6 +131,7 @@ export default {
     app.component('InputUrl', InputUrl)
     app.component('InputGender', InputGender)
     app.component('InputTel', InputTel)
+    app.component('InputTelCountry', InputTelCountry)
     app.component('InputTwPassport', InputTwPassport)
     app.component('InputTwUniformNumber', InputTwUniformNumber)
     app.component('InputFileUpload', InputFileUpload)
