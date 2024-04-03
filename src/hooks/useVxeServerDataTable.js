@@ -38,6 +38,7 @@ export default function useVxeServerDataTable ({
     search.page = 1
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
     setCallback()
+    dataTable.value && (dataTable.value.clearAllCheckboxRow())
   }
   const OnChangeSort = ({ sortList }) => {
     search.page = 1
@@ -62,6 +63,7 @@ export default function useVxeServerDataTable ({
     setSessionStorage(sessionStorageKey, { search, sort: sort.value })
     setCallback()
     dataTable.value && (sessionStorage.sort.forEach((item) => { dataTable.value.sort(item) }))
+    dataTable.value && (dataTable.value.clearAllCheckboxRow())
   }
   const onRefresh = () => {
     setCallback()
