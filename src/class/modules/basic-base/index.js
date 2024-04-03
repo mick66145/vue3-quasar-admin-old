@@ -9,6 +9,7 @@ import MenuPermission from './modules/menu-permission/MenuPermission'
 import PlatformAttribute from './modules/PlatformAttribute'
 import MailLog from './modules/MailLog'
 import Mailinfo from './modules/Mailinfo'
+import CountryCode from './modules/CountryCode'
 
 export const exportBaseModules = () => {
   const modules = {}
@@ -23,5 +24,6 @@ export const exportBaseModules = () => {
   modules.PlatformAttribute = PlatformAttribute
   modules.MailLog = MailLog
   modules.Mailinfo = Mailinfo
+  modules.CountryCode = CountryCode
   return modules
 }
