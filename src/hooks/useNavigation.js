@@ -18,7 +18,7 @@ export default function useNavigation ({
   const router = useRouter()
 
   const onNavigation = () => {
-    router[replace ? 'replace' : 'push'](to)
+    if (href) { window.open(href, target) } else { router[replace ? 'replace' : 'push'](to) }
   }
 
   return {
