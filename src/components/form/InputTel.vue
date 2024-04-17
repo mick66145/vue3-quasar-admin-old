@@ -1,7 +1,7 @@
 <template>
   <input-text
     v-model="observeValue"
-    :label="label"
+    :label="inputLabel"
     type="tel"
     :rules="ruleList"
   >
@@ -44,7 +44,7 @@
 <script>
 
 import { defineComponent, computed, toRefs } from 'vue-demi'
-import { useVModel } from '@vueuse/core'
+import { useVModel, toReactive } from '@vueuse/core'
 import { vuelidate } from '@/plugins/vuelidate'
 
 export default defineComponent({
@@ -52,6 +52,7 @@ export default defineComponent({
     label: { type: String },
     modelValue: { type: [String, Number], default: 0 },
     rules: { type: Array, default () { return [] } },
+    showLabel: { type: Boolean, default: true },
   },
   emits: [
     'update:modelValue',
@@ -59,6 +60,7 @@ export default defineComponent({
   setup (props, { emit }) {
     // data
     const { rules } = toRefs(props)
+    const { showLabel, label } = toReactive(props)
     const observeValue = useVModel(props, 'modelValue', emit)
 
     // computed
@@ -68,10 +70,14 @@ export default defineComponent({
       ]
       return rule.concat(rules.value)
     })
+    const inputLabel = computed(() => {
+      return showLabel ? label : undefined
+    })
 
     return {
       observeValue,
       ruleList,
+      inputLabel,
     }
   },
 })
