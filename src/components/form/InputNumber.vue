@@ -3,8 +3,11 @@
     v-model="observeValue"
     :label="inputLabel"
     type="number"
+    :min="min"
+    :max="max"
     :rules="ruleList"
     @clear="clearFn"
+    @change="onChange"
   >
     <template v-if="$slots.default" #default>
       <slot name="default" />
@@ -45,6 +48,7 @@
 <script>
 import { defineComponent, computed, toRefs } from 'vue-demi'
 import { vuelidate } from '@/plugins/vuelidate'
+import useNotify from '@/hooks/useNotify'
 
 export default defineComponent({
   props: {
@@ -52,16 +56,17 @@ export default defineComponent({
     modelValue: { type: [String, Number], default: 0 },
     rules: { type: Array, default () { return [] } },
     required: { type: Boolean, default: true },
-    min: { type: [Number, String] },
-    max: { type: [Number, String] },
+    min: { type: [String, Number], default: 0 },
+    max: { type: [String, Number] },
     useLabel: { type: Boolean, default: true },
+    showMaxNotify: { type: Boolean, default: false },
   },
   emits: [
     'update:modelValue',
   ],
   setup (props, { emit }) {
     // data
-    const { label, rules, required, min, max, useLabel } = toRefs(props)
+    const { label, rules, required, min, max, useLabel, showMaxNotify } = toRefs(props)
 
     // computed
     const ruleList = computed(() => {
@@ -90,12 +95,19 @@ export default defineComponent({
     const clearFn = (val) => {
       emit('update:modelValue', required.value ? (min.value ? min.value : 0) : null)
     }
+    const onChange = (val) => {
+      (showMaxNotify.value && max.value && val >= max.value) && customNotify({ message: '已達上限', icon: null, color: 'grey-8' })
+    }
+
+    // use
+    const { customNotify } = useNotify()
 
     return {
       observeValue,
       ruleList,
       inputLabel,
       clearFn,
+      onChange,
     }
   },
 })
