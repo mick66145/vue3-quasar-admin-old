@@ -25,6 +25,7 @@ import '@/styles/index.scss'
 // directive
 import permission from '@/directive/permission'
 import downLoadUrl from '@/directive/download-url'
+import readUrl from '@/directive/read-url'
 
 import './permission'
 
@@ -48,4 +49,5 @@ app.use(vue3PhotoPreview)
 app.use(useVuelidate)
 app.use(permission)
 app.use(downLoadUrl)
+app.use(readUrl)
 app.mount('#app')
