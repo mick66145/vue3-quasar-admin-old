@@ -41,6 +41,7 @@
         @sort-change="onChangeSort"
         @checkbox-all="onCheckboxAll"
         @checkbox-change="onCheckboxChange"
+        @cell-click="onCellClick"
       >
         <slot />
       </vxe-table>
@@ -85,7 +86,7 @@ export default defineComponent({
     cellStyle: { type: [Object, Function] },
     footerCellStyle: { type: [Object, Function] },
   },
-  emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current', 'select-all', 'update:all-checkbox-records'],
+  emits: ['sort-change', 'checkbox-all', 'checkbox-change', 'update:current', 'select-all', 'update:all-checkbox-records','cell-click'],
   setup (props, { emit }) {
     // data
     const storeApp = useApp()
@@ -225,6 +226,9 @@ export default defineComponent({
     const onSelectAll = () => {
       emit('select-all')
     }
+    const onCellClick = ({ row, rowIndex }) => {
+      emit('cell-click',{ row, rowIndex })
+    }
 
     // 客製化選取checkbbox相關
     const onSelect = (value, evt) => {
@@ -274,6 +278,7 @@ export default defineComponent({
       onCheckboxChange,
       onUpdateCurrent,
       onSelectAll,
+      onCellClick,
     }
   },
 })
