@@ -77,8 +77,8 @@
       <slot name="selected-item" />
     </template>
 
-    <template v-if="$slots.option" #option>
-      <slot name="option" />
+    <template v-if="$slots.option" #option="scope">
+      <slot name="option" :scope="scope" />
     </template>
   </q-select>
 </template>
